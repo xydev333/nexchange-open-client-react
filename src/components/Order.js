@@ -3,6 +3,8 @@ import axios from 'axios';
 import moment from 'moment';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
+import config from '../config';
+
 import OrderStatus from './OrderStatus';
 
 class Order extends Component {
@@ -22,8 +24,6 @@ class Order extends Component {
 			receiveAddress: '...'
 
 		};
-
-		this.API_BASE_URL = `https://nexchange.io/en/api/v1`;
 
 		this.getOrderDetails = this.getOrderDetails.bind(this);
 		this.tick = this.tick.bind(this);
@@ -57,7 +57,7 @@ class Order extends Component {
 	}
 
 	getOrderDetails() {
-		axios.get(`${this.API_BASE_URL}/orders/${this.props.match.params.orderRef}`)
+		axios.get(`${config.API_BASE_URL}/orders/${this.props.match.params.orderRef}`)
 			.then((response) => {
 				let data = response.data;
 
@@ -120,14 +120,14 @@ class Order extends Component {
 					    	</div>
 					    </div>
 
-					    <div className="col-xs-12">
+					    <div id="order-payment" className="col-xs-12">
 					    	<div className="box">
 					    		<div className="row">
 					    			<div className="col-xs-12 col-sm-3">
 					    				<img src="https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=bitcoin:1KTFHHwtdNmGrbY5MfWhtswpG9tuxZwwoA?amount=0.0363" />
 					    			</div>
 
-					    			<div className="col-xs-12 col-sm-9">
+					    			<div id="order-payment-details" className="col-xs-12 col-sm-9">
 					    				<h3 className="text-success">Time remaining: {this.state.timeRemaining}</h3>
 
 					    				<h4>Send <b>{this.state.depositAmount} {this.state.depositCoin}</b> to the address<br/>
@@ -145,8 +145,6 @@ class Order extends Component {
 											</button>
 					    				</CopyToClipboard>
 					    			</div>
-
-					    			
 					    		</div>
 
 					    		<div className="row">
