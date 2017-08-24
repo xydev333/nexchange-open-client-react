@@ -17,9 +17,11 @@ class CoinInput extends Component {
 	}
 	
 	onChange(event) {
-		let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
+		let pair = (this.props.type == 'receive' ?
+			`${this.props.selectedCoin.present.receive}${this.props.selectedCoin.present.deposit}` :
+			`${this.props.selectedCoin.present.deposit}${this.props.selectedCoin.present.receive}`);
 
-		if (this.props.price.pair != pair || new moment().diff(this.props.price.lastFetched) > config.PRICE_FETCH_INTERVAL) {
+		if (this.props.price.pair != pair || new moment().diff(this.props.price.lastFetched) > config.PRICE_FETCH_INTERVAL) { // and also price not fetched in last 30secs
 			this.props.fetchPrice({pair: pair, amount: event.target.value, lastEdited: this.props.type});
 		} else {
 			this.props.updateAmounts({amount: event.target.value, lastEdited: this.props.type, price: this.props.price.price});
@@ -27,7 +29,7 @@ class CoinInput extends Component {
 	}
 
 	validateReceiveAmount(value) {
-		let selectedCoin = this.props.selectedCoin['receive'],
+		let selectedCoin = this.props.selectedCoin.present['receive'],
 			minAmount = _.find(this.props.coinsInfo, {ticker: selectedCoin}).min_amount,
 			maxAmount = _.find(this.props.coinsInfo, {ticker: selectedCoin}).max_amount;
 
