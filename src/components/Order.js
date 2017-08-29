@@ -7,7 +7,6 @@ import config from '../config';
 import OrderInitial from './OrderInitial';
 import OrderPayment from './OrderPayment';
 import OrderPaid from './OrderPaid';
-import OrderReleased from './OrderReleased';
 import OrderSuccess from './OrderSuccess';
 import OrderFailure from './OrderFailure';
 import OrderExpired from './OrderExpired';
@@ -81,7 +80,7 @@ class Order extends Component {
 					receiveCoin: data.withdraw_address.currency_code,
 					receiveAddress: data.withdraw_address.address,
 					createdOn: data.created_on,
-					orderStatus: -1, //data.status_name[0][0],
+					orderStatus: data.status_name[0][0],
 					paymentWindow: parseInt(data.payment_window),
 					order: data
 				}, () => {
@@ -117,20 +116,19 @@ class Order extends Component {
 			return <NotFound />;
 
 		let orderDetails = null;
-		if (this.state.expired && this.state.orderStatus == 1)
+		if (this.state.expired)
 			orderDetails = <OrderExpired />;
-		else if (this.state.orderStatus == 1)
+		else if (this.state.orderStatus == 1 ) {
 			orderDetails = <OrderInitial expired={this.state.expired} depositAmount={this.state.depositAmount} depositCoin={this.state.depositCoin} depositAddress={this.state.depositAddress} timeRemaining={this.state.timeRemaining} />;
-		else if (this.state.orderStatus == -1)
-			orderDetails = <OrderPayment orderRef={this.props.match.params.orderRef} order={this.state.order} />;
-		else if (this.state.orderStatus == 2)
-			orderDetails = <OrderPaid orderRef={this.props.match.params.orderRef} order={this.state.order} />;
-		else if (this.state.orderStatus == 3)
-			orderDetails = <OrderReleased orderRef={this.props.match.params.orderRef} order={this.state.order} />;
-		else if (this.state.orderStatus == 4)
+		} else if (this.state.orderStatus == -1) {
+			orderDetails = <OrderPayment orderRef={this.props.match.params.orderRef} order={this.state.order} />
+		} else if (this.state.orderStatus == 2) {
+			orderDetails = <OrderPaid orderRef={this.props.match.params.orderRef} order={this.state.order} />
+		} else if (this.state.orderStatus >= 3) {
 			orderDetails = <OrderSuccess orderRef={this.props.match.params.orderRef} />;
-		else if (this.state.orderStatus == 0 || this.state.orderStatus == -2)
+		} else if (this.state.orderStatus == 0 || this.state.orderStatus == -2) {
 			orderDetails = <OrderFailure orderRef={this.props.match.params.orderRef} />;
+		}
 
 		return (
 			<div id="order">
