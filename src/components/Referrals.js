@@ -20,19 +20,12 @@ class Referrals extends Component {
 	}
 
 	isRef() {
-		let url = window.location.search.substring(1),
-			params = url.split('&');
+		let url = new URL(window.location.href),
+			ref = url.searchParams.get("ref");
 
-		for (let i = 0; i < params.length; i++) {
-			let param = params[i].split('=');
+		if (ref) localStorage.setItem('referral', ref);
 
-			if (param[0] == 'ref') {
-				localStorage.setItem('referral', param[1]);
-				return true;
-			}
-		}
-
-		return false;
+		return ref;
 	}
 
 	redirectRef() {
