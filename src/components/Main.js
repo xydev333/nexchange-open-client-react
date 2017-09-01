@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import scrollToElement from 'scroll-to-element';
 
 import ExchangeWidget from '../components/ExchangeWidget';
-import CoinPrices from '../components/CoinPrices';
 import ErrorAlert from '../components/ErrorAlert';
 
 
@@ -24,7 +23,6 @@ class Main extends Component {
 						</div>
 
 						<ExchangeWidget />
-						<CoinPrices />
 					</div>
 				</div>
 

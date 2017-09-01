@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import onClickOutside from 'react-onclickoutside';
 
 import { selectCoin, fetchPrice, setWallet } from '../actions/index.js';
-
 
 class CoinSelector extends Component {
 
@@ -27,10 +25,6 @@ class CoinSelector extends Component {
 		this.setState({isDropdownVisible: false, selectedCoin: coin});
 
 		ga('send', 'event', 'Order', 'select coin');
-	}
-
-	handleClickOutside(event) {
-		this.setState({isDropdownVisible: false});
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -82,4 +76,4 @@ function mapDispatchToProps(dispatch) {
 	}, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(CoinSelector));
+export default connect(mapStateToProps, mapDispatchToProps)(CoinSelector);

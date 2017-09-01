@@ -6,9 +6,8 @@
 	#order-ref { margin-bottom: 15px; }
 	.box { padding: 15px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; background: #fff;
 		@media (min-width: $screen-sm-min) { margin-bottom: 30px; }
-		
-		h4 { font-size: 15px; }
-		h5, h6 { margin: 0; text-transform: none; }
+
+		h5, h6 { margin: 0; }
 		.coin-icon { position: relative; top: 8px; font-size: 28px; }
 		.text-warning { color: $green; }		
 	}
@@ -18,10 +17,7 @@
 	@media (min-width: $screen-sm-min) { padding: 25px 0;
 		h5 { font-size: 15px; }
 		h6 { font-size: 12px; }
-		.box {
-			h4 { font-size: 18px; }
-			.coin-icon { top: 12px; }
-		}
+		.box .coin-icon { top: 12px; }
 	}
 
 	@media (min-width: $screen-md-min) { padding: 50px 0;
@@ -75,7 +71,7 @@
 }
 
 #order-header {
-	#bookmark-button { font-size: 20px; padding: 0; margin-top: 0; color: $green; }
+	#bookmark-button { font-size: 20px; padding: 0; margin-top: 0; color: #2cb4a0; }
 
 	@media (min-width: $screen-sm-min) {
 		h3 { float: left; }
@@ -85,7 +81,7 @@
 
 #bookmark {
 	.bookmark-text{ font-size: 19px; }
-	.input-group-addon { cursor: pointer; padding-top: 0;
+	.input-group-addon { cursor: pointer; 
 		i { font-size: 18px; }
 	}
 	.form-group { margin-top: 10px; }
@@ -100,7 +96,28 @@
 	}
 }
 
-@include keyframes(color-change) {
+
+@media (min-width: $screen-sm-min) {}
+@media (min-width: $screen-md-min) {}
+@media (min-width: $screen-lg-min) {}
+
+@-webkit-keyframes color-change {
 	from { color: #adadad; }
-	to { color: #fbc02d; } 
+	to { color: #fbc02d; }
+}
+@-moz-keyframes color-change {
+	from { color: #adadad; }
+	to { color: #fbc02d; }
+}
+@-ms-keyframes color-change {
+	from { color: #adadad; }
+	to { color: #fbc02d; }
+}
+@-o-keyframes color-change {
+	from { color: #adadad; }
+	to { color: #fbc02d; }
+}
+@keyframes color-change {
+	from { color: #adadad; }
+	to { color: #fbc02d; }
 }
