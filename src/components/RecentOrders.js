@@ -22,6 +22,8 @@ class OrderStatus extends Component {
 	fetchRecentOrders() {
         axios.get(`${config.API_BASE_URL}/orders/?page=1`)
         	.then(response => {
+        		console.log(response.data)
+
         		let orders = response.data.results;
         		this.setState({orders: orders});
         	})
@@ -42,7 +44,7 @@ class OrderStatus extends Component {
 		let orders = this.state.orders.slice(0,config.RECENT_ORDERS_COUNT).map(order => {
 			return (
 				<div key={order.unique_reference} className="recent-order">
-					<a href={`${config.API_BASE_URL}/orders/${order.unique_reference}?format=json`} target="_blank" className="overlay">Click to view on API</a>
+					<a href={`${config.API_BASE_URL}/orders/${order.unique_reference}`} target="_blank" className="overlay">Click to view on API</a>
 
 					<div className="col-xs-4 coins-container">
 						<div className="coins">
@@ -68,7 +70,7 @@ class OrderStatus extends Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-xs-12">
-							<h3>Recent Orders</h3>
+							<h2>Recent Orders</h2>
 
 							<div className="recent-orders-container">
 								{orders.length < 1 ? (
