@@ -12,13 +12,11 @@
 		position: absolute;
 		right: 0;
 		top: 32px;
-		padding: 10px 0 0 15px;
+		padding: 10px 15px 0;
 		z-index: 1;
 		background: #fff;
 
-		.coin { width: 270px; margin-bottom: 10px; cursor: pointer;
-			i { font-size: 20px; }
-		}
+		.coin { width: 200px; margin-bottom: 10px; cursor: pointer; }
 	}
 
 	.selectedCoin { position: absolute; top: 5px; right: 10px; cursor: pointer; font-size: 18px; font-weight: 700; color: #fff;
