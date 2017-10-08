@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import scrollToElement from 'scroll-to-element';
-import Notify from 'notifyjs';
 
 import '../css/order.scss';
 
@@ -20,9 +18,6 @@ import OrderStatus from '../components/OrderStatus';
 import Bookmark from './Bookmark';
 import NotFound from '../components/NotFound';
 import ReferralTerms from '../components/ReferralTerms';
-import Notifications from '../containers/Notifications';
-import DesktopNotifications from '../containers/DesktopNotifications';
-
 
 const STATUS_CODES = {
 	0: 'CANCELLED',
@@ -34,13 +29,6 @@ const STATUS_CODES = {
 	16: 'COMPLETED'
 }
 
-function onGranted() {
-	console.log('granted');
-}
-
-function onDenied() {
-	console.log('denied');
-}
 
 class Order extends Component {
 	constructor(props) {
@@ -56,7 +44,7 @@ class Order extends Component {
 			receiveAmount: '...',
 			receiveCoin: '...',
 			receiveAddress: '...',
-			orderStatus: null,
+			orderStatus: 1,
 			expired: false,
 			loading: true,
 			paymentWindow: null,
@@ -68,6 +56,7 @@ class Order extends Component {
 
 		this.getOrderDetails = this.getOrderDetails.bind(this);
 		this.tick = this.tick.bind(this);
+		this.trackRefShare = this.trackRefShare.bind(this);
 	}
 
 	componentDidMount() {
@@ -137,6 +126,10 @@ class Order extends Component {
 				this.setState({notFound: true});
 			}
 		});
+	}
+
+	trackRefShare() {
+		ga('send', 'event', 'Referral', 'share', this.props.match.params.orderRef);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -221,11 +214,11 @@ class Order extends Component {
 						    		}
 						    		</div>
 
-						    		{(this.state.order && [12,13,14,15].indexOf(this.state.order.status_name[0][0]) > -1) ?
-						    			<DesktopNotifications order={this.state.order} /> : null
-						    		}
-
-						    		<OrderStatus status={this.state.orderStatus} />
+						    		<div className="row">
+						    			<div className="col-xs-12">
+							    			<OrderStatus status={this.state.orderStatus} />
+						    			</div>
+						    		</div>
 						    	</div>
 						    </div>
 
@@ -235,28 +228,26 @@ class Order extends Component {
 						    		<div className="row">
 						    			<div className="col-xs-12">
 											<h2>Share this unique referral link with your friends to earn some coins!</h2>
-											<h4>Here is your unique referral link: <a href={`${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}`} className="text-green">{config.DOMAIN}/?ref={this.state.order.referral_code[0].code}</a></h4>
+											<h4>Here is your unique referral link: <a href={`${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}`} className="text-green" target="_blank" onClick={this.trackRefShare}>{config.DOMAIN}/?ref={this.state.order.referral_code[0].code}</a></h4>
 											<h4><a href="javascript:void(0)" onClick={() => this.setState({showTermsModal: true})}>Terms & Conditions</a></h4>
 
 											<h4>Share it on social!</h4>
 											
 											<div className="share">
-											    <a href={`https://facebook.com/sharer.php?u=${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}`} target="_blank"><i className="fa fa-facebook-official" aria-hidden="true"></i></a>
-											    <a href={`https://twitter.com/intent/tweet?url=${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}&text=I’m%20using%20Nexchange,%20the%20easiest%20and%20fastest%20cryptocurrency%20exchange!`} target="_blank"><i className=	"fa fa-twitter-square" aria-hidden="true"></i></a>
-											   	<a href={`https://www.linkedin.com/shareArticle?mini=true&url=${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}`} target="_blank"><i className=	"fa fa-linkedin-square" aria-hidden="true"></i></a>
+											    <a href={`https://facebook.com/sharer.php?u=${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}`} target="_blank" onClick={this.trackRefShare}><i className="fa fa-facebook-official" aria-hidden="true"></i></a>
+											    <a href={`https://twitter.com/intent/tweet?url=${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}&text=I’m%20using%20Nexchange,%20the%20easiest%20and%20fastest%20cryptocurrency%20exchange!`} target="_blank" onClick={this.trackRefShare}><i className=	"fa fa-twitter-square" aria-hidden="true"></i></a>
+											   	<a href={`https://www.linkedin.com/shareArticle?mini=true&url=${config.DOMAIN}?ref=${this.state.order.referral_code[0].code}`} target="_blank" onClick={this.trackRefShare}><i className=	"fa fa-linkedin-square" aria-hidden="true"></i></a>
 											</div>
 						    			</div>
 						    		</div>
 						    	</div>
 						    </div> 
 						    : null }
-
-						    {/*<Notifications order={this.state.data} />*/}
 						</div>
 					</div>
 
 					<ReferralTerms show={this.state.showTermsModal} onClose={() => this.setState({showTermsModal: false})} />
-				    <Bookmark show={this.state.showBookmarkModal} onClose={() => this.setState({showBookmarkModal: false})} orderRef={this.props.match.params.orderRef} />
+				    <Bookmark show={this.state.showBookmarkModal} onClose={() => this.setState({showBookmarkModal: false})} />
 				</div>
 			</div>
 		);
