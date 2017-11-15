@@ -35,7 +35,7 @@ class WalletAddress extends Component {
     }
 
     onChange(event) {
-		let address = event.target.value.replace(' ', ''),
+		let address = event.target.value,
 			valid = this.validateWalletAddress(address);
 
 		this.setState({address: address});
