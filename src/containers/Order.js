@@ -7,7 +7,6 @@ import '../css/order.scss';
 import config from '../config';
 
 import OrderInitial from '../components/OrderInitial';
-import OrderInitialFiat from '../components/OrderInitialFiat';
 import OrderPayment from './OrderPayment';
 import OrderPaid from '../components/OrderPaid';
 import OrderPreReleased from '../components/OrderPreReleased';
@@ -121,11 +120,11 @@ class Order extends Component {
 			this.setState({
 				loading: false,
 				depositAmount: parseFloat(data.amount_quote),
-				depositCoin: data.pair.quote.code,
+				depositCoin: data.deposit_address.currency_code,
 				depositCoinName: data.pair.quote.name,
-				depositAddress: (data.deposit_address ? data.deposit_address.address : null),
+				depositAddress: data.deposit_address.address,
 				receiveAmount: parseFloat(data.amount_base),
-				receiveCoin: data.pair.base.code,
+				receiveCoin: data.withdraw_address.currency_code,
 				receiveAddress: data.withdraw_address.address,
 				createdOn: data.created_on,
 				orderStatus: data.status_name[0][0],
@@ -186,13 +185,9 @@ class Order extends Component {
 		let orderDetails = null;
 		if (this.state.expired && STATUS_CODES[this.state.orderStatus] == 'INITIAL')
 			orderDetails = <OrderExpired />;
-		else if (STATUS_CODES[this.state.orderStatus] == 'INITIAL') {
-			if (this.state.depositCoin === 'EUR' || this.state.depositCoin === 'USD') {
-				orderDetails = <OrderInitialFiat expired={this.state.expired} depositAmount={this.state.depositAmount} depositCoin={this.state.depositCoin} depositCoinName={this.state.depositCoinName} depositAddress={this.state.depositAddress}  timeRemaining={this.state.timeRemaining} />;
-			} else {
-				orderDetails = <OrderInitial expired={this.state.expired} depositAmount={this.state.depositAmount} depositCoin={this.state.depositCoin} depositCoinName={this.state.depositCoinName} depositAddress={this.state.depositAddress}  timeRemaining={this.state.timeRemaining} />;
-			}
-		} else if (STATUS_CODES[this.state.orderStatus] == 'PAID_UNCONFIRMED')
+		else if (STATUS_CODES[this.state.orderStatus] == 'INITIAL')
+			orderDetails = <OrderInitial expired={this.state.expired} depositAmount={this.state.depositAmount} depositCoin={this.state.depositCoin} depositCoinName={this.state.depositCoinName} depositAddress={this.state.depositAddress}  timeRemaining={this.state.timeRemaining} />;
+		else if (STATUS_CODES[this.state.orderStatus] == 'PAID_UNCONFIRMED')
 			orderDetails = <OrderPayment orderRef={this.props.match.params.orderRef} order={this.state.order} />;
 		else if (STATUS_CODES[this.state.orderStatus] == 'PAID')
 			orderDetails = <OrderPaid orderRef={this.props.match.params.orderRef} order={this.state.order} />;
