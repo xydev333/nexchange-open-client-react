@@ -4,8 +4,7 @@
 @import "bootstrap/mixins";
 
 
-#order { background: #f8f7f8; 
-	#order-inner { padding: 15px 0 0 0; }
+#order { background: #f8f7f8; padding: 15px 0 0 0;
 	a { color: $green; 
 		&:visited, &:focus { text-decoration: none; }
 		&:hover { text-decoration: underline; }
@@ -24,21 +23,15 @@
 	}
 	#time-remaining { color: #2cb4a0; }
 
-	@media (min-width: $screen-sm-min) {
-		#order-inner { padding: 25px 0; }
+	@media (min-width: $screen-sm-min) { padding: 25px 0;
 		h5 { font-size: 15px; }
 		h6 { font-size: 12px; }
-		.box {
-			h4 { font-size: 18px; }
-			.coin-icon { top: 12px; }
-		}
+		.box h4 { font-size: 18px; }
 	}
 
-	@media (min-width: $screen-md-min) {
-		#order-innner { padding: 50px 0 0 0; }
+	@media (min-width: $screen-md-min) { padding: 50px 0 0 0;
 		h5 { font-size: 17px; }
 		h6 { font-size: 16px; }
-		.box .coin-icon { top: 12px; }
 	}
 }
 
