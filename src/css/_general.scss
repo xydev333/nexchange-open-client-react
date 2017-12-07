@@ -1,11 +1,9 @@
 body, html { height: 100%; background: #f8f7f8; }
-#root { position: relative; min-height: 100%; 
-	@media (min-width: $screen-md-min) { padding-bottom: 105px; }
-}
+#root { position: relative; min-height: 100%; padding-bottom: 65px; }
 
 body { color: #044264; }
 p, a { word-wrap: break-word; }
-p, li { font-size: 19px; line-height: 1.5em; }
+p { font-size: 19px; line-height: 1.5em; }
 h1 { font-size: 34px;
 	@media (min-width: $screen-sm-min) { font-size: 46px; }
 }
@@ -36,15 +34,8 @@ textarea.form-control:focus { outline: none; border-color: none; box-shadow: non
 
 .text-green { color: $green !important; }
 
-input[type='number'] {
-  appearance: textfield;
-  -moz-appearance:textfield;
+.bookmark-input {
+   height: 36px;
+   font-size: 20px;
+   width: 100%;
 }
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']:hover::-webkit-inner-spin-button, 
-input[type='number']:hover::-webkit-outer-spin-button {
--webkit-appearance: none; 
- margin: 0; }
-
-.tooltip-inner { white-space:pre-wrap; }

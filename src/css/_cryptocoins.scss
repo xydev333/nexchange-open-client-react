@@ -1,13 +1,14 @@
 @font-face {
-  font-family: "cryptocoins";
-  src: url('../fonts/cryptocoins/cryptocoins.woff2') format('woff2'),
-    url('../fonts/cryptocoins/cryptocoins.woff') format('woff'),
-    url('../fonts/cryptocoins/cryptocoins.ttf') format('truetype');
+  font-family: "cryptocoins-icons";
+  src: url('../fonts/cryptocoins/cryptocoins-icons.eot');
+  src: url('../fonts/cryptocoins/cryptocoins-icons.eot?#iefix') format('eot'),
+    url('../fonts/cryptocoins/cryptocoins-icons.woff') format('woff'),
+    url('../fonts/cryptocoins/cryptocoins-icons.ttf') format('truetype');
 }
 
 /* .cc:before { */
 [class*="cc-"]::before {
-  font-family: "cryptocoins";
+  font-family: "cryptocoins-icons";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   font-style: normal;
@@ -19,43 +20,35 @@
 }
 
 .cc-ETH-alt:before {
-  content: "\E046";
+  content: "\E040";
 }
 
 .cc-ETH:before {
-  content: "\E047";
+  content: "\E041";
 }
 
 .cc-BTC-alt:before {
-  content: "\E024";
+  content: "\E022";
 }
 
 .cc-BTC:before {
-  content: "\E025";
+  content: "\E023";
 }
 
 .cc-DOGE-alt:before {
-  content: "\E03C";
+  content: "\E038";
 }
 
 .cc-DOGE:before {
-  content: "\E03D";
+  content: "\E039";
 }
 
 .cc-LTC-alt:before {
-  content: "\E07C";
+  content: "\E074";
 }
 
 .cc-LTC:before {
-  content: "\E07D";
-}
-
-.cc-BCH-alt::before {
-  content: "\E017";
-}
-
-.cc-BCH::before {
-  content: "\E018";
+  content: "\E075";
 }
 
 .cc-XVG-alt:before {
@@ -70,26 +63,6 @@
   color: transparent;
 }
 
-.cc-EUR:before {
-  content: "\E075";
-  background-image: url(../img/logos/eur.png); background-position: 50% 50%; background-size: contain; background-repeat: no-repeat;
-  color: transparent;
-}
-
-.cc-USD:before {
-  content: "\E075";
-  background-image: url(../img/logos/usd.png); background-position: 50% 50%; background-size: contain; background-repeat: no-repeat;
-  color: transparent;
-}
-
-.selectedCoin .cc-USD:before {
-  background-image: url(../img/logos/usd-white.png);
-}
-
-.selectedCoin .cc-EUR:before {
-  background-image: url(../img/logos/eur-white.png);
-}
-
 .selectedCoin .cc-XVG-alt:before {
   content: "\E075";
   background-image: url(../img/logos/xvg-white.png); background-position: 50% 50%; background-size: contain; background-repeat: no-repeat;
@@ -102,8 +75,7 @@
   color: transparent;
 }
 
-
-.BTC, .BCH { color: #F7931A; }
+.BTC { color: #F7931A; }
 .LTC { color: #838383; }
 .ETH { color: #282828; }
 .DOGE { color: #BA9F33; }

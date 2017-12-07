@@ -19,10 +19,15 @@ class CoinInput extends Component {
 	onChange(event) {
 		let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
 
-		if (this.props.price.pair != pair || new moment().diff(this.props.price.lastFetched) > config.PRICE_FETCH_INTERVAL)
+		if (event.target.value == '') {
+			event.target.value = '';
+		}
+
+		if (this.props.price.pair != pair || new moment().diff(this.props.price.lastFetched) > config.PRICE_FETCH_INTERVAL) {
 			this.props.fetchPrice({pair: pair, amount: event.target.value, lastEdited: this.props.type});
-		else
+		} else {
 			this.props.updateAmounts({amount: event.target.value, lastEdited: this.props.type, price: this.props.price.price});
+		}
 
 		ga('send', 'event', 'Order', 'change amount');
 	}
@@ -31,7 +36,7 @@ class CoinInput extends Component {
 		let selectedCoin = this.props.selectedCoin['receive'],
 			minAmount = parseFloat(_.find(this.props.coinsInfo, {code: selectedCoin}).minimal_amount);
 
-		value = parseFloat(value);
+		//	maxAmount = _.find(this.props.coinsInfo, {code: selectedCoin}).max_amount;
 
 		if (value < minAmount || isNaN(value)) {
 			this.props.errorAlert({
@@ -39,23 +44,14 @@ class CoinInput extends Component {
 				show: true,
 				type: 'INVALID_AMOUNT'
 			});
-		} else {
-			this.props.errorAlert({show: false, type: 'INVALID_AMOUNT'});
-		}
-	}
+		
+		// } else if (value > maxAmount) {
+		// 	this.props.errorAlert({
+		// 		message: `Receive amount cannot be more than ${maxAmount}`,
+		// 		show: true,
+		// 		type: 'INVALID_AMOUNT'
+		// 	});
 
-	validateDepositAmount(value) {
-		let selectedCoin = this.props.selectedCoin['deposit'],
-			maxAmount = parseFloat(_.find(this.props.coinsInfo, {code: selectedCoin}).maximal_amount);
-
-		value = parseFloat(value);
-
-		if (parseFloat(value) > maxAmount || isNaN(value)) {
-			this.props.errorAlert({
-				message: `Deposit amount for ${selectedCoin} cannot be more than ${maxAmount}`,
-				show: true,
-				type: 'INVALID_AMOUNT'
-			});
 		} else {
 			this.props.errorAlert({show: false, type: 'INVALID_AMOUNT'});
 		}
@@ -65,17 +61,15 @@ class CoinInput extends Component {
 		if (this.props.pair != nextProps.pair)
 			this.props.fetchPrice({pair: nextProps.pair, lastEdited: this.props.amounts.lastEdited, amount: this.props.amounts[this.props.amounts.lastEdited]});
 
-		if (this.props.type == 'receive' && nextProps.amounts.receive != this.props.amounts[this.props.type] && this.props.coinsInfo.length) {
+		if (this.props.type == 'receive' && nextProps.amounts.receive != this.props.amounts[this.props.type] && this.props.coinsInfo.length)
 			this.validateReceiveAmount(nextProps.amounts.receive)
-			this.validateDepositAmount(nextProps.amounts.deposit)
-		}
 	}
 
 	render() {
 		return (
 		  <div className="form-group label-floating has-success is-focused">
 		    <label htmlFor={this.props.type} className="control-label text-green">{this.props.type}</label>
-		    <input type="number" className="form-control coin" id={`coin-input-${this.props.type}`} name={this.props.type} onChange={this.onChange} value={this.props.amounts[this.props.type]} />
+		    <input type="text" className="form-control coin" id={`coin-input-${this.props.type}`} name={this.props.type} onChange={this.onChange} value={this.props.amounts[this.props.type]} />
 
 		    <CoinSelector type={this.props.type} />
 		  </div>

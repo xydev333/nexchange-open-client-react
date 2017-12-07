@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
 import _ from 'lodash';
@@ -22,28 +21,15 @@ class OrderStatus extends Component {
 		this.fetchRecentOrders();
 	}
 
-	fetchRecentOrders(coinsInfo) {
-		if (coinsInfo == null) coinsInfo = this.props.coinsInfo;
-
-		let params = Helpers.urlParams(),
-			depositCurrencies = coinsInfo.filter(coin => coin.is_quote_of_enabled_pair),
-			receiveCurrencies = coinsInfo.filter(coin => coin.is_base_of_enabled_pair);
-
-		if (params && params.hasOwnProperty('test')) {
-			depositCurrencies = coinsInfo.filter(coin => coin.is_quote_of_enabled_pair_for_test);
-			receiveCurrencies = coinsInfo.filter(coin => coin.is_base_of_enabled_pair_for_test);
-		}
-
-		depositCurrencies = depositCurrencies.map(coin => coin.code);
-		receiveCurrencies = receiveCurrencies.map(coin => coin.code);
-
+	fetchRecentOrders() {
         axios.get(`${config.API_BASE_URL}/orders/?page=1`)
         	.then(response => {
         		let orders = response.data.results.filter(order => {
+		        	let params = Helpers.urlParams();
 		        	return (params && params.hasOwnProperty('test')) ? true : (
 		        		order.withdraw_address && order.deposit_address &&
-		        		_.contains(receiveCurrencies, order.withdraw_address.currency_code) &&
-		        		_.contains(depositCurrencies, order.deposit_address.currency_code));
+		        		_.contains(config['ENABLED_COINS'], order.withdraw_address.currency_code) &&
+		        		_.contains(config['ENABLED_COINS'], order.deposit_address.currency_code));
         		});
 
         		this.setState({orders: orders});
@@ -59,12 +45,6 @@ class OrderStatus extends Component {
 
 	componentWillUnmount() {
 		clearTimeout(this.timeout);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if(this.props.coinsInfo.length == 0 && nextProps.coinsInfo.length > 0) {
-			this.fetchRecentOrders(nextProps.coinsInfo);
-		}
 	}
 
 	render() {
@@ -114,11 +94,4 @@ class OrderStatus extends Component {
 	}
 }
 
-
-function mapStateToProps(state) {
-	return {
-		coinsInfo: state.coinsInfo
-	}
-}
-
-export default connect(mapStateToProps)(OrderStatus);
+export default OrderStatus;
