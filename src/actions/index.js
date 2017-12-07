@@ -47,10 +47,14 @@ export function fetchCoinDetails(payload) {
 	        .then(response => {
 	        	if (!response.data.length) return;
 
-	        	let params = Helpers.urlParams();
-	        	let coins = _.filter(response.data, {has_enabled_pairs: true}).filter(coin => {
-	        		return (params && params.hasOwnProperty('test')) ? true : _.contains(config['ENABLED_COINS'], coin.code);
-	        	}); 
+	        	let params = Helpers.urlParams(),
+	        		coins;
+
+	        	if (params && params.hasOwnProperty('test')) {
+					coins = _.filter(response.data, {has_enabled_pairs_for_test: true});
+	        	} else {
+					coins = _.filter(response.data, {has_enabled_pairs: true});
+	        	}
 
 	        	dispatch({type: 'COINS_INFO', payload: coins});
 	        }).catch(error => {
