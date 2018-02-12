@@ -15,15 +15,29 @@ import Trustpilot from '../components/Trustpilot';
 
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
+	componentDidMount() {
+		console.log('HOME');
 
 		this.props.fetchCoinDetails();
+
+		if (this.props.coinsInfo.length) {
+			this.props.fetchPairs(this.props.coinsInfo);
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.coinsInfo.length !== nextProps.coinsInfo.length) {
 			this.props.fetchPairs(nextProps.coinsInfo);
+		}
+
+		if (this.props.coinsInfo.length && nextProps.selectedCoin.deposit) {
+			let depositCoin = _.filter(this.props.coinsInfo, {code: nextProps.selectedCoin.deposit})[0];
+
+			this.props.fetchPrice({
+				pair: `${nextProps.selectedCoin.receive}${nextProps.selectedCoin.deposit}`,
+				lastEdited: 'deposit',
+				amount: parseFloat(depositCoin.minimal_amount)*100
+			});
 		}
 	}
 
