@@ -20,7 +20,6 @@ import Bookmark from '../Bookmark';
 import NotFound from '../../components/NotFound';
 import CoinProcessed from './CoinProcessed';
 import ReferralBox from '../../containers/ReferralBox';
-import RefundAddress from '../../containers/RefundAddress'
 
 import STATUS_CODES from '../../statusCodes';
 
@@ -131,7 +130,7 @@ class Order extends Component {
 		if (this.state.notFound)
 			return <NotFound />;
 
-		let orderInfo = null, orderStatus, refundAddress = null;
+		let orderInfo = null, orderStatus;
 		if (this.state.order) {
 			if (this.state.expired && STATUS_CODES[this.state.order.status_name[0][0]] == 'INITIAL') {
 				orderInfo = <OrderExpired />;
@@ -148,10 +147,6 @@ class Order extends Component {
 						order={this.state.order}
 						timeRemaining={this.state.timeRemaining}
 						{...this.props} />
-
-					if (this.state.order.status_name > 11) {
-						refundAddress = <RefundAddress order={this.state.order} />;
-					}
 				}
 			}
 		}
@@ -182,9 +177,7 @@ class Order extends Component {
 					    	</div>
 					    </div>
 
-							{refundAddress}
-
-					    {this.state.order && <ReferralBox order={this.state.order} />}
+					    {this.state.order ? <ReferralBox order={this.state.order} /> : null }
 					</div>
 				</div>
 
