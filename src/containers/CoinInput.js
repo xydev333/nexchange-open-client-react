@@ -17,8 +17,6 @@ class CoinInput extends PureComponent {
 
 		this.onChange = this.onChange.bind(this);
 		this.fetchAmounts = debounce(700, this.fetchAmounts);
-		this.onFocus = this.onFocus.bind(this);
-		this.onBlur = this.onBlur.bind(this);
 	}
 
 	onChange(event) {
@@ -28,17 +26,9 @@ class CoinInput extends PureComponent {
 		ga('send', 'event', 'Order', 'change amount');
 	}
 
-	onFocus(event) {
-		if (event.target.value === '...') {
-			this.setState({value: ''});
-		}
-	}
-
-	onBlur(event) {
-		if (event.target.value === '') {
-			this.setState({value: '...'});
-		}
-	}
+	printChange(e) {
+  	this.fetchAmounts(e.target.value);
+  }
 
 	fetchAmounts(value) {
 		let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
@@ -69,8 +59,6 @@ class CoinInput extends PureComponent {
 					id={`coin-input-${this.props.type}`}
 					name={this.props.type}
 					onChange={this.onChange.bind(this)}
-					onFocus={this.onFocus.bind(this)}
-					onBlur={this.onBlur.bind(this)}
 					value={this.state.value}
 				/>
 
