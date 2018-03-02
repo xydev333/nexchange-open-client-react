@@ -16,7 +16,6 @@ import './css/index.scss';
 
 import reducers from './reducers';
 import Loadable from 'react-loadable';
-import { unregister } from './registerServiceWorker';
 
 import LoadingComponent from './components/LoadingComponent';
 import Referrals from './components/Referrals';
@@ -35,8 +34,6 @@ const AsyncNotFound = Loadable({
 });
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-
-unregister();
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
