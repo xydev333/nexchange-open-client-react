@@ -22,9 +22,6 @@ class CoinInput extends PureComponent {
 	}
 
 	onChange(event) {
-		const re = /^[0-9.,\b]+$/;
-		if (!re.test(event.target.value) && event.target.value !== '') return;
-
 		this.setState({value: event.target.value});
 		this.fetchAmounts(event.target.value);
 
