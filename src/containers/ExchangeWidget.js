@@ -55,14 +55,10 @@ class ExchangeWidget extends Component {
 			method: 'post',
 			contentType : 'application/json',
 			url: `${config.API_BASE_URL}/orders/`,
-			data: data,
-			headers: {'Authorization': 'Bearer ' + localStorage.token}
+			data: data
 		})
 		.then(response => {
 			this.setState({orderRef: response.data.unique_reference, orderPlaced: true, loading: false});
-			if (response.data.token) {
-			    localStorage.setItem('token', response.data.token);
-			}
 
 			ga('send', 'event', 'Order', 'place order', response.data.unique_reference);
 			qp('track', 'Generic');
