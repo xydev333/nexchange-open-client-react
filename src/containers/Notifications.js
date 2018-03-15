@@ -32,13 +32,8 @@ class Notifications extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		axios({
-			method: 'put',
-			contentType : 'application/json',
-			url: `${config.API_BASE_URL}/users/me/`,
-            data: {email: this.state.email},
-            headers: {'Authorization': 'Bearer ' + localStorage.token}
-		    })
+		axios
+			.put(`${config.API_BASE_URL}/users/me/`)
 			.then(data => {
 				console.log(data.response);
 
