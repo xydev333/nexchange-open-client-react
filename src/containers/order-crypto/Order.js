@@ -10,7 +10,6 @@ import OrderReleased from './OrderReleased';
 
 import OrderSuccess from '../order/OrderSuccess';
 import OrderFailure from '../order/OrderFailure';
-import OrderRefunded from '../order/OrderRefunded';
 
 import STATUS_CODES from '../../statusCodes';
 
@@ -39,11 +38,8 @@ const Order = (props) => {
 		case 'CANCELLED':
 			order = <OrderFailure {...props} />;
 			break;
-		case 'REFUNDED':
-			order = <OrderRefunded {...props} />;
-			break;
 		default:
-			order = <div className="text-center"><h2>Unknown order state, something went wrong</h2></div>;
+			order = <h2>Unknown order state, something went wrong</h2>;
 	}
 
 	return <div id="order-crypto">
