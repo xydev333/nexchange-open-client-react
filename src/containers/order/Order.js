@@ -23,7 +23,6 @@ import ReferralBox from '../../containers/ReferralBox';
 import RefundAddress from '../../containers/RefundAddress'
 
 import Notifications from '../../containers/Notifications';
-
 import STATUS_CODES from '../../statusCodes';
 
 
@@ -146,11 +145,7 @@ class Order extends Component {
 		if (this.state.notFound)
 			return <NotFound />;
 
-<<<<<<< HEAD
 		let orderInfo = null, orderStatus, isCrypto;
-=======
-		let orderInfo = null, orderStatus, refundAddress = null;
->>>>>>> Only show refund address box on status_name > 11
 		if (this.state.order) {
 			isCrypto = this.state.order.pair.quote.is_crypto;
 
