@@ -40,14 +40,18 @@ class Notifications extends Component {
             headers: {'Authorization': 'Bearer ' + localStorage.token}
 		})
 			.then(data => {
+				console.log(data.response);
+
 				this.setState({
 					message: {
 						text: 'Success, you set your email.',
-						error: false
+						error: true
 					}
 				});
 			})
 			.catch(error => {
+				console.log(error.response);
+
 				if (error.response.status === 401) {
 					this.setState({
 						message: {
@@ -76,11 +80,9 @@ class Notifications extends Component {
 				
 							<div className="row">
 								<div className="col-xs-12 col-md-8 col-md-push-2">
-									<form onSubmit={this.handleSubmit}>
-										<h4 className={this.state.message.error ? 'text-danger' : 'text-green'}>
-											{this.state.message.text}
-										</h4>
+									<h4 className={this.state.message.error ? 'text-danger' : 'text-success'}>{this.state.message.text}</h4>
 
+									<form onSubmit={this.handleSubmit}>
 										<div className="form-group">
 											<input
 												type="email"
