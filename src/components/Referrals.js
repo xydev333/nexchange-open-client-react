@@ -7,6 +7,10 @@ import config from '../config';
 
 
 class Referrals extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	componentDidMount() {
 		axios.interceptors.request.use(function (requestConfig) {
 			let referral = (config.REFERRAL_CODE ? config.REFERRAL_CODE : localStorage.getItem('referral'));
@@ -33,7 +37,7 @@ class Referrals extends Component {
 			return this.redirectRef();
 		}
 
-	  return null;
+	    return null;
 	}
 }
 
