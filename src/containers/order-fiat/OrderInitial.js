@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import {Icon} from 'react-fa';
+import CopyToClipboard from 'react-copy-to-clipboard';
+
 
 class OrderInitial extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 	    return (
 	    	<div id="order-payment">

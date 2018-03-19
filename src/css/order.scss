@@ -13,25 +13,19 @@
 	}
 	#order-ref { margin-bottom: 15px; }
 	.box {
+		@media (min-width: $screen-sm-min) { margin-bottom: 30px; }
+		
 		h4 { font-size: 15px; }
 		h5, h6 { margin: 0; text-transform: none; }
-		.coin-icon { position: relative; top: 8px; font-size: 28px;
-			@media (min-width: $screen-sm-min) { top: 9px; }
-			@media (min-width: $screen-md-min) { top: 11px; }
+		h6::before {
+			display: inline-block;
+			content:"\00a0";
+			width: 0;
+			height: 0;
 		}
+		.coin-icon { position: relative; top: 8px; font-size: 28px; }
 		.text-warning { color: $green; }		
-
-		@media (min-width: $screen-sm-min) { margin-bottom: 30px; }
 	}
-
-	&.order-fiat {
-		.box.fiat {
-			h5 { margin-top: 11px; padding-bottom: 7px;
-				@media (min-width: $screen-sm-min) { margin-top: 11px; padding-bottom: 13px; }
-			}
-		}
-	}
-
 	.coin-box { padding-left: 10px;
 		.tooltip-inner { text-align: left; }
 	}
@@ -40,7 +34,6 @@
 		h2 { margin-top: 0; }
 		.explanation { font-size: 16px; margin-top: 15px; }
 	}
-
 
 	@media (min-width: $screen-sm-min) { padding: 25px 0;
 		h5 { font-size: 15px; }
@@ -83,29 +76,6 @@
 	@media (min-width: $screen-sm-min) {
 		h2 { font-size: 30px; }
 	}
-}
-
-#share-referral, #notifications, #refund-box { text-align: center;
-	.box { padding: 20px; }
-	.share { margin-top: 15px; }
-	.fa { font-size: 45px; margin: 0 15px 0 0; color: #d6d6d6; }
-	h2 { margin-top: 0; font-size: 22px;
-		@media (min-width: $screen-sm-min) { font-size: 26px; }
-		@media (min-width: $screen-md-min) { font-size: 34px; }
-	}
-}
-
-#notifications, #refund-box {
-	h4 { width: 120%; }
-}
-
-#notifications, #refund-box {
-	.form-group { margin-top: 10px; }
-	button { width: 100%; margin-bottom: 0; }
-	form { padding-top: 15px;
-		h4 { position: absolute; top: -15px; left: 50%; transform: translate(-50%, 0); }
-	}
-	@media (min-width: $screen-sm-min) { button { width: auto; } }
 }
 
 @include keyframes(color-change) {

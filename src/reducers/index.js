@@ -5,7 +5,6 @@ import CoinsInfoReducer from './reducer_coins_info';
 import PriceFetchReducer from './reducer_price_fetched';
 import WalletReducer from './reducer_wallet';
 import PairsReducer from './reducer_pairs';
-import OrderReducer from './reducer_order';
 
 const rootReducer = combineReducers({
 	error: ErrorReducer,
@@ -13,8 +12,7 @@ const rootReducer = combineReducers({
 	coinsInfo: CoinsInfoReducer,
 	price: PriceFetchReducer,
 	wallet: WalletReducer,
-	pairs: PairsReducer,
-	order: OrderReducer
+	pairs: PairsReducer
 });
 
 export default rootReducer;
