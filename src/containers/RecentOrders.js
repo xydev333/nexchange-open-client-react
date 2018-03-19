@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
-import 'moment/locale/en-gb';
 import _ from 'lodash';
 
 import Helpers from '../helpers';
