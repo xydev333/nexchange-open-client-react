@@ -181,7 +181,8 @@ class Order extends Component {
 					    	</div>
 					    </div>
 
-						{this.state.order && <Notifications order={this.state.order} /> }
+						<Notifications />
+
 					    {this.state.order && <ReferralBox order={this.state.order} /> }
 					</div>
 				</div>

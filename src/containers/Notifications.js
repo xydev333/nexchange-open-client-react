@@ -1,41 +1,31 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import config from '../config';
+
 
 class Notifications extends Component {
 	constructor(props) {
 		super();
 		this.state = {
-			value: '',
+			email: '',
 			message: {
 				text: '',
 				error: false
-			},
-			show: false
+			}
 		};
 
-		this.handleChange = this.handleChange.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	componentDidMount() {
-		axios({
-				method: 'get',
-				contentType : 'application/json',
-				url: `${config.API_BASE_URL}/users/me/orders/${this.props.order.unique_reference}`,
-				headers: {'Authorization': 'Bearer ' + localStorage.token}
-			})
-			.then(data => {
-				this.setState({ show: true });
-			})
-			.catch(error => {
-				this.setState({ show: false });
-			});
-	}
-
-	handleChange(event) {
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.type === 'checkbox' ? target.checked : target.value;
+		const name = target.name;
+	
 		this.setState({
-		  value: event.target.value
+		  [name]: value
 		});
 	}
 
@@ -43,12 +33,12 @@ class Notifications extends Component {
 		event.preventDefault();
 
 		axios({
-				method: 'put',
-				contentType : 'application/json',
-				url: `${config.API_BASE_URL}/users/me/`,
-				data: {email: this.state.value},
-				headers: {'Authorization': 'Bearer ' + localStorage.token}
-			})
+            method: 'put',
+            contentType : 'application/json',
+            url: `${config.API_BASE_URL}/users/me/`,
+            data: {email: this.state.email},
+            headers: {'Authorization': 'Bearer ' + localStorage.token}
+		})
 			.then(data => {
 				this.setState({
 					message: {
@@ -77,10 +67,6 @@ class Notifications extends Component {
 	}
 
 	render() {
-		if (this.state.show === false) {
-			return null;
-		}
-
 		return (
 		    <div id="notifications" className="col-xs-12">
 		    	<div className="box">
@@ -101,12 +87,17 @@ class Notifications extends Component {
 												name="email" 
 												placeholder="Email"
 												className="form-control"
-												onChange={this.handleChange}
-												value={this.state.value}
+												onChange={this.handleInputChange}
+												value={this.state.email}
 												required
 											/>
 											<span className="material-input"></span>
 										</div>
+
+										{/*<div className="form-group">
+											<input type="tel" name="tel" placeholder="Telephone (optional)" className="form-control" />
+											<span className="material-input"></span>
+										</div>*/}
 
 										<button type="submit" className="btn btn-themed btn-lg">Receive notifications</button>
 									</form>
