@@ -3,6 +3,10 @@ import {Icon} from 'react-fa';
 
 
 class OrderExpired extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	componentDidMount() {
 		$('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
 	}
