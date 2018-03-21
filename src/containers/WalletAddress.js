@@ -15,45 +15,34 @@ class WalletAddress extends Component {
 		this.onChange = this.onChange.bind(this);
 	}
 
-  onChange(event) {
-<<<<<<< HEAD
-		let address = event.target.value.replace(new RegExp(/ /g, 'g'), ''),
-			valid = Helpers.validateWalletAddress(address, this.props.selectedCoin.receive,
-				() => {
-					this.props.errorAlert({show: true, message: `${address} is not a valid ${this.props.selectedCoin.receive} address.`});
-				},
-				() => {
-					this.props.errorAlert({show: false});
-				});
-=======
+  	onChange(event) {
 		let address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
 		const valid = Helpers.validateWalletAddress(address, this.props.selectedCoin.receive,
 			() => this.props.errorAlert({show: true, message: `${address} is not a valid ${this.props.selectedCoin.receive} address.`}),
 			() => this.props.errorAlert({show: false}));
->>>>>>> Show refund box only on order status > 11 and if user is authorized.
 
-	this.setState({ address });
+		this.setState({ address });
 
-	this.props.setWallet({
-		address: address,
-		valid: valid,
-		show: true
-	});
-  }
-
-  componentWillMount() {
-  	this.props.setWallet({address: '', valid: false, show: false});
-  }
-
-  componentWillReceiveProps(nextProps) {
-  	if (nextProps.wallet.address != null && (nextProps.wallet.address != this.state.address)) {
-  		this.setState({address: nextProps.wallet.address});
+		this.props.setWallet({
+			address: address,
+			valid: valid,
+			show: true
+		});
   	}
 
-  	if (nextProps.wallet.show && (this.props.wallet.show != nextProps.wallet.show)) {
-  		setTimeout(() => this.nameInput.focus(), 300);
+  	componentWillMount() {
+		this.props.setWallet({address: '', valid: false, show: false});
+	}
+
+  	componentWillReceiveProps(nextProps) {
+		if (nextProps.wallet.address != null && (nextProps.wallet.address != this.state.address)) {
+			this.setState({address: nextProps.wallet.address});
+		}
+
+		if (nextProps.wallet.show && (this.props.wallet.show !== nextProps.wallet.show)) {
+			setTimeout(() => this.nameInput.focus(), 300);
+		}
   	}
-  }
 
 	render() {
 		return (
