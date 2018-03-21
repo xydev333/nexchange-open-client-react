@@ -27,7 +27,8 @@
 	&.order-fiat {
 		.box.fiat {
 			h5 { margin-top: 11px; padding-bottom: 7px;
-				@media (min-width: $screen-sm-min) { margin-top: 11px; padding-bottom: 13px; }
+				@media (min-width: $screen-sm-min) { margin-top: 9px; padding-bottom: 9px; }
+				@media (min-width: $screen-md-min) { margin-top: 12px; padding-bottom: 12px; }
 			}
 		}
 	}
@@ -85,7 +86,7 @@
 	}
 }
 
-#share-referral, #notifications, #refund-box { text-align: center;
+#share-referral, #notifications { text-align: center;
 	.box { padding: 20px; }
 	.share { margin-top: 15px; }
 	.fa { font-size: 45px; margin: 0 15px 0 0; color: #d6d6d6; }
@@ -95,11 +96,7 @@
 	}
 }
 
-#notifications, #refund-box {
-	h4 { width: 120%; }
-}
-
-#notifications, #refund-box {
+#notifications {
 	.form-group { margin-top: 10px; }
 	button { width: 100%; margin-bottom: 0; }
 	form { padding-top: 15px;
