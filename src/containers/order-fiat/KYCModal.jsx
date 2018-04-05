@@ -28,7 +28,7 @@ class KYCModal extends Component {
 
   componentDidMount() {
 		fetchUserEmail(email => {
-			this.setState({ email, emailFetched: true })
+			this.setState({ email })
 		});
   }
 
@@ -162,7 +162,6 @@ class KYCModal extends Component {
                   className="form-control"
                   onChange={this.handleInputChange}
                   value={this.state.email}
-                  disabled={this.state.emailFetched}
                 />
 
 								<i className="fa fa-question-circle"

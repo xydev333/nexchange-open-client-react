@@ -8,7 +8,7 @@ class Notifications extends Component {
 	constructor(props) {
 		super();
 		this.state = {
-			email: '',
+			value: '',
 			message: {
 				text: '',
 				error: false
@@ -35,20 +35,20 @@ class Notifications extends Component {
 		});
 
 		fetchUserEmail(email => {
-			this.setState({ email, emailFetched: true })
+			this.setState({ value: email })
 		});
 	}
 
 	handleChange(event) {
 		this.setState({
-		  email: event.target.value
+		  value: event.target.value
 		});
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
 
-		setUserEmail(this.state.email, () => {
+		setUserEmail(this.state.value, () => {
 			this.setState({
 				message: {
 					text: 'Success, you set your email.',
@@ -99,8 +99,7 @@ class Notifications extends Component {
 												placeholder="Email"
 												className="form-control"
 												onChange={this.handleChange}
-												value={this.state.email}
-												disabled={this.state.emailFetched}
+												value={this.state.value}
 												required
 											/>
 											<span className="material-input"></span>
