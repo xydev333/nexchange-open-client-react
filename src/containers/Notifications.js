@@ -31,7 +31,7 @@ class Notifications extends Component {
 			});
 
 		fetchUserEmail(email => {
-			this.setState({ email })
+			this.setState({ email, emailFetched: email.length > 0 })
 		});
 	}
 
@@ -96,6 +96,7 @@ class Notifications extends Component {
 												className="form-control"
 												onChange={this.handleChange}
 												value={this.state.email}
+												disabled={this.state.emailFetched}
 												required
 											/>
 											<span className="material-input"></span>
