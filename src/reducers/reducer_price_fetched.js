@@ -1,6 +1,4 @@
-import { PRICE_FETCHED } from '../actions/types';
-
-const initialState = {
+let initialState = {
 	deposit: '...',
 	receive: '...',
 	lastEdited: 'deposit'
@@ -8,9 +6,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch(action.type) {
-		case PRICE_FETCHED:
-			return action.payload;
-		default:
-			return state;
+	case 'PRICE_FETCHED':
+		return action.payload;
 	}
+
+	return state
 }

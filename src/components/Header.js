@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Icon } from 'react-fa';
+import { Redirect, Link } from 'react-router-dom';
+import {Icon} from 'react-fa';
+import scrollToElement from 'scroll-to-element';
 
 import FAQ from './FAQ';
 import Support from './Support';
 
-let scrollToElement;
 
 class Header extends Component {
 	constructor(props) {
@@ -18,8 +18,6 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
-		scrollToElement = require('scroll-to-element');
-
 		let hash = window.location.hash;
 		if (hash && hash != '') {
 			hash = hash.replace('#', '');
