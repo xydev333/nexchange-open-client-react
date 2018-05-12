@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 
 import 'expose-loader?$!jquery';
 import 'expose-loader?jQuery!jquery';
@@ -17,7 +16,6 @@ import './css/index.scss';
 
 import reducers from './reducers';
 import Loadable from 'react-loadable';
-import { unregister } from './registerServiceWorker';
 
 import LoadingComponent from './components/LoadingComponent';
 import Referrals from './components/Referrals';
@@ -37,9 +35,8 @@ const AsyncNotFound = Loadable({
   loading: LoadingComponent
 });
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-unregister();
 setAuthToken();
 crispEmailBinding();
 

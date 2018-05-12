@@ -13,8 +13,7 @@ import SubscriptionForm from '../components/SubscriptionForm';
 import PriceComparison from '../containers/PriceComparison';
 import Trustpilot from '../components/Trustpilot';
 
-
-class Home extends Component {
+export class Home extends Component {
 	componentDidMount() {
 		this.props.fetchCoinDetails();
 
@@ -33,7 +32,6 @@ class Home extends Component {
 		return (
 		  <div>
 		    <Hero />
-
 		    <RecentOrders />
 				<Trustpilot />
 				<Testimonials />
