@@ -1,7 +1,6 @@
 {
   "name": "nexchange-open-client-react",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
@@ -43,6 +42,7 @@
     "react-fa": "^5.0.0",
     "react-loadable": "^5.4.0",
     "react-onclickoutside": "^6.7.1",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-stickynode": "^1.4.1",
     "redux-thunk": "^2.2.0",
