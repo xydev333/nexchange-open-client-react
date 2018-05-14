@@ -5,7 +5,6 @@ import MockAdapter from 'axios-mock-adapter';
 import * as types from '../../actions/types';
 import * as actions from '../../actions';
 import mockData from '../__mocks__/order';
-import config from '../../config';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -21,7 +20,7 @@ describe('creates an action to fetch order details', () => {
     const expectedActions = [{ type: types.SET_ORDER, order: mockData }];
     const store = mockStore();
 
-    mock.onGet(`${config.API_BASE_URL}/orders/123ASD/`).reply(200, mockData);
+    mock.onGet('/orders/123ASD/').reply(200, mockData);
 
     await store.dispatch(actions.fetchOrder('123ASD'));
     expect(store.getActions()).toEqual(expectedActions);
@@ -31,7 +30,7 @@ describe('creates an action to fetch order details', () => {
     const expectedActions = [{ type: types.SET_ORDER, order: 404 }];
     const store = mockStore();
 
-    mock.onGet(`${config.API_BASE_URL}/orders/123ASD/`).reply(404);
+    mock.onGet('/orders/123ASD/').reply(404);
 
     await store.dispatch(actions.fetchOrder('123ASD'));
     expect(store.getActions()).toEqual(expectedActions);
@@ -41,7 +40,7 @@ describe('creates an action to fetch order details', () => {
     const expectedActions = [{ type: types.SET_ORDER, order: 429 }];
     const store = mockStore();
 
-    mock.onGet(`${config.API_BASE_URL}/orders/123ASD/`).reply(429);
+    mock.onGet('/orders/123ASD/').reply(429);
 
     await store.dispatch(actions.fetchOrder('123ASD'));
     expect(store.getActions()).toEqual(expectedActions);
