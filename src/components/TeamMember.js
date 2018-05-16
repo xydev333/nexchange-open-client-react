@@ -4,19 +4,16 @@ const TeamMember = props => {
   let social = [];
   if (props.social) {
     for (const key of Object.keys(props.social)) {
-      let className;
-
-      if (key === 'medium' || key === 'quora' || key === 'stack-overflow') {
-        className = `fa fa-${key}`;
-      } else if (key === 'blog') {
-        className = 'fas fa-laptop';
-      } else {
-        className = `fa fa-${key}-square`;
-      }
-
       social.push(
         <a href={props.social[key]} key={key} target="_blank">
-          <i className={className} aria-hidden="true" />
+          <i
+            className={
+              key === 'medium' || key === 'quora'
+                ? `fa fa-${key}`
+                : `fa fa-${key}-square`
+            }
+            aria-hidden="true"
+          />
         </a>
       );
     }

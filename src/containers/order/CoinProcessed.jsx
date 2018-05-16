@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import isFiatOrder from '../../helpers/isFiatOrder';
+import Helpers from '../../helpers';
 
 class CoinProcessed extends Component {
   constructor(props) {
@@ -103,7 +103,8 @@ class CoinProcessed extends Component {
       <div className="col-xs-12 col-sm-6">
         <div
           className={`coin-box box media ${
-            this.props.type === 'Deposit' && isFiatOrder(this.props.order)
+            this.props.type === 'Deposit' &&
+            Helpers.isFiatOrder(this.props.order)
               ? 'fiat'
               : ''
           }`}

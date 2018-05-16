@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import onClickOutside from 'react-onclickoutside';
+import Helpers from '../helpers';
 import _ from 'lodash';
-import urlParams from '../helpers/urlParams';
+
 import {
   selectCoin,
   fetchPrice,
@@ -111,7 +112,7 @@ class CoinSelector extends Component {
 
   renderCoinsDropdown(type) {
     let filteredCoins = this.props.coinsInfo.filter(coin => {
-      let params = urlParams();
+      let params = Helpers.urlParams();
 
       if (params && params.hasOwnProperty('test')) {
         return type.toUpperCase() === 'DEPOSIT'
