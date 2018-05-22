@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { debounce } from 'throttle-debounce';
+import _ from 'lodash';
 import { fetchPrice } from '../actions/index.js';
 import CoinSelector from './CoinSelector';
+import { debounce } from 'throttle-debounce';
 
 class CoinInput extends PureComponent {
   constructor(props) {
@@ -48,7 +49,9 @@ class CoinInput extends PureComponent {
   }
 
   fetchAmounts(value) {
-    let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
+    let pair = `${this.props.selectedCoin.receive}${
+      this.props.selectedCoin.deposit
+    }`;
     let data = {
       pair: pair,
       lastEdited: this.props.type,
@@ -70,13 +73,16 @@ class CoinInput extends PureComponent {
   render() {
     return (
       <div className="col-xs-12 col-sm-6">
-        <form className="form-group label-floating" onSubmit={this.handleSubmit}>
+        <form
+          className="form-group label-floating"
+          onSubmit={this.handleSubmit}
+        >
           <label htmlFor={this.props.type} className="control-label text-green">
             {this.props.type}
           </label>
           <input
             type="text"
-            className="form-control coin amount-input"
+            className="form-control coin"
             id={`coin-input-${this.props.type}`}
             name={this.props.type}
             onChange={this.onChange.bind(this)}
@@ -95,7 +101,20 @@ class CoinInput extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ selectedCoin, price }) => ({ selectedCoin, price });
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchPrice }, dispatch);
+function mapStateToProps(state) {
+  return {
+    selectedCoin: state.selectedCoin,
+    price: state.price,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      fetchPrice: fetchPrice,
+    },
+    dispatch
+  );
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinInput);
