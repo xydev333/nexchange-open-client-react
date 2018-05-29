@@ -5,13 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
-import 'expose-loader?$!jquery';
-import 'expose-loader?jQuery!jquery';
-
-import './js/bootstrap.min.js';
-import './js/material.min.js';
-import './js/material-kit.js';
-
 import './css/index.scss';
 
 import reducers from './reducers';
@@ -29,6 +22,12 @@ import Privacy from './containers/Privacy';
 
 import setAuthToken from './helpers/setAuthToken';
 import crispEmailBinding from './helpers/crispEmailBinding';
+
+window.$ = window.jQuery = require('jquery');
+
+require('./js/bootstrap.min.js');
+require('./js/material.min.js');
+require('./js/material-kit.js');
 
 const AsyncNotFound = Loadable({
   loader: () => import('./components/NotFound'),
@@ -48,11 +47,7 @@ ReactDOM.render(
         <Header />
 
         <Switch>
-          <Route
-            exact
-            path="/terms-and-conditions"
-            component={TermsConditions}
-          />
+          <Route exact path="/terms-and-conditions" component={TermsConditions} />
           <Route exact path="/privacy" component={Privacy} />
           <Route exact path="/order/:orderRef" component={Order} />
           <Route exact path="/" component={Home} />

@@ -52,7 +52,7 @@ class CoinsDropdown extends Component {
           <div className="row coin" key={coin.code} onClick={() => this.props.onClick(coin.code)}>
             <div className="col-xs-4">{coin.code}</div>
             <div className="col-xs-3 text-center">
-              <i className={`cc-${coin.code} ${coin.code}`} />
+              <i className={`cc ${coin.code} ${coin.code}`} />
             </div>
             <div className="col-xs-5 text-capitalize">{coin.name}</div>
           </div>
