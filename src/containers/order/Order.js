@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 
 import { fetchOrder } from '../../actions';
 
+import '../../css/order.scss';
 import isFiatOrder from '../../helpers/isFiatOrder';
 import config from '../../config';
-
-import '../../css/order.scss';
 
 import OrderInfo from './OrderInfo';
 import OrderTop from './OrderTop';
@@ -23,7 +22,10 @@ class Order extends Component {
   constructor(props) {
     super(props);
 
-    if (this.props.order && this.props.match.params.orderRef === this.props.order.unique_reference) {
+    if (
+      this.props.order &&
+      this.props.match.params.orderRef === this.props.order.unique_reference
+    ) {
       this.state = { order: this.props.order };
     } else {
       this.state = {};
@@ -63,7 +65,13 @@ class Order extends Component {
         this.props.order.status_name[0][0] === 11 &&
         nextProps.order.status_name[0][0] === 12
       ) {
-        window.ga('send', 'event', 'Order', 'order paid', nextProps.unique_reference);
+        window.ga(
+          'send',
+          'event',
+          'Order',
+          'order paid',
+          nextProps.unique_reference
+        );
       }
     }
   }
@@ -75,7 +83,12 @@ class Order extends Component {
       return <NotFound />;
     } else if (typeof this.state.order === 'object') {
       return (
-        <div id="order" className={isFiatOrder(this.state.order) ? 'order-fiat' : 'order-crypto'}>
+        <div
+          id="order"
+          className={
+            isFiatOrder(this.state.order) ? 'order-fiat' : 'order-crypto'
+          }
+        >
           <div className="container">
             <OrderTop order={this.state.order} />
 
@@ -86,7 +99,9 @@ class Order extends Component {
               <OrderInfo order={this.state.order} />
               <Notifications order={this.state.order} />
 
-              {!isFiatOrder(this.state.order) && <RefundAddress order={this.state.order} />}
+              {!isFiatOrder(this.state.order) && (
+                <RefundAddress order={this.state.order} />
+              )}
 
               <ReferralBox order={this.state.order} />
             </div>
