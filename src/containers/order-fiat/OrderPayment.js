@@ -21,8 +21,6 @@ class OrderPayment extends Component {
   }
 
   componentDidUpdate() {
-    clearTimeout(this.timeout);
-
     this.timeout = setTimeout(() => {
       this.props.fetchKyc(this.props.order.unique_reference);
     }, config.KYC_DETAILS_FETCH_INTERVAL);
@@ -186,7 +184,4 @@ class OrderPayment extends Component {
 const mapStateToProps = ({ kyc }) => ({ kyc });
 const mapDistachToProps = dispatch => bindActionCreators({ fetchKyc }, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDistachToProps
-)(OrderPayment);
+export default connect(mapStateToProps, mapDistachToProps)(OrderPayment);
