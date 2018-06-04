@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import jsonp from 'jsonp';
 
 const getAjaxUrl = url => url.replace('/post?', '/post-json?');
-const subscribeUrl = 'https://nexchange.us16.list-manage.com/subscribe/post?u=918b60ce5b05d82384c293db0&amp;id=b2af978303';
+const subscribeUrl =
+  'https://nexchange.us16.list-manage.com/subscribe/post?u=918b60ce5b05d82384c293db0&amp;id=b2af978303';
 
 class SubscriptionForm extends React.Component {
   constructor(props, ...args) {
@@ -16,14 +17,20 @@ class SubscriptionForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    if (!this.input.value || this.input.value.length < 5 || this.input.value.indexOf('@') === -1) {
+    if (
+      !this.input.value ||
+      this.input.value.length < 5 ||
+      this.input.value.indexOf('@') === -1
+    ) {
       this.setState({
         status: 'error',
       });
       return;
     }
 
-    const url = getAjaxUrl(subscribeUrl) + `&EMAIL=${encodeURIComponent(this.input.value)}`;
+    const url =
+      getAjaxUrl(subscribeUrl) +
+      `&EMAIL=${encodeURIComponent(this.input.value)}`;
     this.setState(
       {
         status: 'sending',
@@ -84,9 +91,12 @@ class SubscriptionForm extends React.Component {
 
               <div className="col-xs-12 col-sm-3">
                 <button
-                  disabled={this.state.status === 'sending' || this.state.status === 'success'}
+                  disabled={
+                    this.state.status === 'sending' ||
+                    this.state.status === 'success'
+                  }
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn btn-themed"
                   onClick={this.onSubmit}
                 >
                   Subscribe
@@ -96,11 +106,16 @@ class SubscriptionForm extends React.Component {
               <div className="col-xs-12 message">
                 {status === 'success' && (
                   <p className="success">
-                    Almost finished... We need to confirm your email address. To complete the subscription process, please click the link in
+                    Almost finished... We need to confirm your email address. To
+                    complete the subscription process, please click the link in
                     the email we just sent you.
                   </p>
                 )}
-                {status === 'error' && <p className="failure">Something went wrong. Please try again later.</p>}
+                {status === 'error' && (
+                  <p className="failure">
+                    Something went wrong. Please try again later.
+                  </p>
+                )}
               </div>
             </div>
           </form>

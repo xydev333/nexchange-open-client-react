@@ -2,8 +2,11 @@ import React from 'react';
 
 const OrderInitial = props => {
   return (
-    <div id="order-payment" className="row">
-      <div id="order-payment-details" className="col-xs-12 col-ms-6 col-sm-6 col-md-4">
+    <div id="order-payment">
+      <div
+        id="order-payment-details"
+        className="col-xs-12 col-ms-6 col-sm-6 col-md-4"
+      >
         <h3>
           Time remaining:{' '}
           <span id="time-remaining">
@@ -16,8 +19,16 @@ const OrderInitial = props => {
             {parseFloat(props.order.amount_quote)} {props.order.pair.quote.code}
           </b>
         </h4>
-        <a href={props.order.payment_url} target="_blank" className="btn btn-default btn-lg">
-          <i className="fa fa-credit-card" aria-hidden="true" style={{ position: 'relative', left: -13 }} />
+        <a
+          href={props.order.payment_url}
+          target="_blank"
+          className="btn btn-default btn-themed"
+        >
+          <i
+            className="fa fa-credit-card"
+            aria-hidden="true"
+            style={{ position: 'relative', left: -13 }}
+          />
           Pay now
         </a>
       </div>

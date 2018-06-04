@@ -117,7 +117,7 @@ class ExchangeWidget extends Component {
           <div className="col-xs-12 text-center">
             {!this.props.wallet.show ? (
               <button
-                className="btn btn-block btn-primary proceed"
+                className="btn btn-block btn-themed proceed"
                 onClick={this.showWalletAddress}
                 disabled={
                   this.props.error.show && (this.props.error.type === 'INVALID_AMOUNT' || this.props.error.type === 'INVALID_PAIR')
@@ -129,7 +129,7 @@ class ExchangeWidget extends Component {
               </button>
             ) : (
               <button
-                className="btn btn-block btn-primary proceed"
+                className="btn btn-block btn-themed proceed"
                 onClick={this.placeOrder}
                 disabled={this.props.wallet.valid && !this.state.loading ? null : 'disabled'}
               >
@@ -162,7 +162,4 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExchangeWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(ExchangeWidget);

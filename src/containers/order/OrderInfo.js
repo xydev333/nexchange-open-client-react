@@ -61,8 +61,9 @@ const OrderInfo = props => {
   return (
     <div className="col-xs-12">
       <div className="box">
-        {isFiat ? <OrderStatusFiat status={props.order.status_name[0][0]} /> : <OrderStatusCrypto status={props.order.status_name[0][0]} />}
         {order}
+
+        {isFiat ? <OrderStatusFiat status={props.order.status_name[0][0]} /> : <OrderStatusCrypto status={props.order.status_name[0][0]} />}
       </div>
     </div>
   );

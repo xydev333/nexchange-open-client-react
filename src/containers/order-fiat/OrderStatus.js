@@ -20,17 +20,23 @@ class OrderStatus extends Component {
       width = '66.6%';
     } else if (STATUS_CODES[status] === 'PAID_UNCONFIRMED') {
       width = '33.3%';
-    } else if (STATUS_CODES[status] === 'INITIAL') {
-      width = '33.3%';
     }
 
     return (
       <div className="row">
         <div className="col-xs-12">
           <div id="order-status">
+            <hr />
+
             <div
               id="step-one"
-              className={[0, 8].indexOf(status) > -1 ? 'step' : status > 11 ? 'step done' : 'step active'}
+              className={
+                [0, 8].indexOf(status) > -1
+                  ? 'step'
+                  : status > 11
+                    ? 'step done'
+                    : 'step active'
+              }
               data-toggle="tooltip"
               data-placement="top"
               title=""
@@ -42,7 +48,13 @@ class OrderStatus extends Component {
 
             <div
               id="step-two"
-              className={STATUS_CODES[status] === 'PAID_UNCONFIRMED' ? 'step active' : status >= 13 ? 'step done' : 'step'}
+              className={
+                STATUS_CODES[status] === 'PAID_UNCONFIRMED'
+                  ? 'step active'
+                  : status >= 13
+                    ? 'step done'
+                    : 'step'
+              }
               data-toggle="tooltip"
               data-placement="top"
               title=""
@@ -56,7 +68,13 @@ class OrderStatus extends Component {
             <div
               id="step-three"
               className={
-                status == 13 || status == 14 ? 'step active' : status >= 15 ? (status == 15 ? 'step active' : 'step done') : 'step'
+                status == 13 || status == 14
+                  ? 'step active'
+                  : status >= 15
+                    ? status == 15
+                      ? 'step active'
+                      : 'step done'
+                    : 'step'
               }
               data-toggle="tooltip"
               data-placement="top"
@@ -69,7 +87,11 @@ class OrderStatus extends Component {
 
             <div className="progres-container">
               <div className="progress progress-line-info">
-                <div className="progress-bar progress-bar-info" role="progressbar" style={{ width: width }}>
+                <div
+                  className="progress-bar progress-bar-info"
+                  role="progressbar"
+                  style={{ width: width }}
+                >
                   <span className="sr-only">{width} Complete</span>
                 </div>
               </div>
