@@ -1,12 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Home } from '../../components/Home/Home';
+import { Home } from '../../containers/Home';
 
 describe('Home', () => {
   const mockfetchCoinDetails = jest.fn();
   const props = {
     fetchCoinDetails: mockfetchCoinDetails,
-    fetchPairs: mockfetchCoinDetails,
     coinsInfo: [],
   };
   const home = shallow(<Home {...props} />);
@@ -21,6 +20,10 @@ describe('Home', () => {
 
   it('contains a connected RecentOrders component', () => {
     expect(home.find('Connect(RecentOrders)').exists()).toBe(true);
+  });
+
+  it('contains a Trustpilot component', () => {
+    expect(home.find('Trustpilot').exists()).toBe(true);
   });
 
   it('contains a Testimonials component', () => {

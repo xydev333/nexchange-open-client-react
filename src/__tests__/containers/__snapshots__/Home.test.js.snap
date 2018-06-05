@@ -7,7 +7,6 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Home
     coinsInfo={Array []}
     fetchCoinDetails={[Function]}
-    fetchPairs={[Function]}
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -22,17 +21,12 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Hero
-          coinsInfo={Array []}
-          fetchCoinDetails={[Function]}
-          fetchPairs={[Function]}
-/>,
+        <Hero />,
         <Connect(RecentOrders) />,
-        <ICO />,
+        <Trustpilot />,
         <Testimonials />,
         <PriceComparison />,
         <About />,
-        <Team />,
         <SubscriptionForm />,
       ],
     },
@@ -42,37 +36,6 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
-        "props": Object {
-          "coinsInfo": Array [],
-          "fetchCoinDetails": [Function],
-          "fetchPairs": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
         "props": Object {},
         "ref": null,
         "rendered": null,
@@ -91,6 +54,24 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "function",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
         "props": Object {},
         "ref": null,
         "rendered": null,
@@ -124,17 +105,12 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Hero
-            coinsInfo={Array []}
-            fetchCoinDetails={[Function]}
-            fetchPairs={[Function]}
-/>,
+          <Hero />,
           <Connect(RecentOrders) />,
-          <ICO />,
+          <Trustpilot />,
           <Testimonials />,
           <PriceComparison />,
           <About />,
-          <Team />,
           <SubscriptionForm />,
         ],
       },
@@ -144,37 +120,6 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "class",
-          "props": Object {
-            "coinsInfo": Array [],
-            "fetchCoinDetails": [Function],
-            "fetchPairs": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
           "props": Object {},
           "ref": null,
           "rendered": null,
@@ -193,6 +138,24 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
           "props": Object {},
           "ref": null,
           "rendered": null,

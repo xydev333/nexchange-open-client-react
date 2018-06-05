@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
-const sharedConfig = require('./webpack.config.shared.js');
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -51,8 +50,6 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  modules: true,
-                  localIdentName: '[name]__[local]__[hash:base64:5]',
                   importLoaders: 1,
                 },
               },
@@ -80,56 +77,6 @@ module.exports = {
           },
 
           {
-            test: /\.scss$/,
-            include: [path.resolve(__dirname, '../src/css')],
-            use: [
-              {
-                loader: 'style-loader', // creates style nodes from JS strings
-              },
-              {
-                loader: 'css-loader', // translates CSS into CommonJS
-              },
-              {
-                loader: 'sass-loader', // compiles Sass to CSS
-              },
-            ],
-          },
-
-          {
-            test: /\.scss$/,
-            include: [path.resolve(__dirname, '../src/components')],
-            use: [
-              {
-                loader: 'style-loader', // creates style nodes from JS strings
-              },
-              {
-                loader: 'css-loader', // translates CSS into CommonJS
-                options: {
-                  modules: true,
-                  localIdentName: '[name]__[local]__[hash:base64:5]',
-                  importLoaders: 1,
-                },
-              },
-              {
-                loader: 'sass-loader',
-              },
-              {
-                loader: 'sass-resources-loader',
-                options: {
-                  resources: [
-                    path.resolve(__dirname, '../src/css/_variables.scss'),
-                    path.resolve(__dirname, '../src/css/bootstrap/_variables.scss'),
-                    path.resolve(__dirname, '../src/css/material-kit/_variables.scss'),
-                    path.resolve(__dirname, '../src/css/material-kit/_variables_bootstrap.scss'),
-                    path.resolve(__dirname, '../src/css/bootstrap/mixins/_vendor-prefixes.scss'),
-                    path.resolve(__dirname, '../src/css/_mixins.scss'),
-                  ],
-                },
-              },
-            ],
-          },
-
-          {
             test: /\.svg$/,
             exclude: /font-awesome/,
             use: [
@@ -141,6 +88,21 @@ module.exports = {
                 options: {
                   jsx: true, // true outputs JSX tags
                 },
+              },
+            ],
+          },
+
+          {
+            test: /\.scss$/,
+            use: [
+              {
+                loader: 'style-loader', // creates style nodes from JS strings
+              },
+              {
+                loader: 'css-loader', // translates CSS into CommonJS
+              },
+              {
+                loader: 'sass-loader', // compiles Sass to CSS
               },
             ],
           },
@@ -166,8 +128,5 @@ module.exports = {
       // ** STOP ** Are you adding a new loader?
       // Make sure to add the new loader(s) before the "file" loader.
     ],
-  },
-  resolve: {
-    alias: sharedConfig.alias,
   },
 };

@@ -1,10 +1,9 @@
 import axios from 'axios';
 import * as types from './types';
 import _ from 'lodash';
-import config from 'Config';
-import urlParams from 'Utils/urlParams';
-import preparePairs from 'Utils/preparePairs';
-import i18n from '../i18n';
+import config from '../config';
+import urlParams from '../helpers/urlParams';
+import preparePairs from '../helpers/preparePairs';
 
 export const errorAlert = payload => ({
   type: types.ERROR_ALERT,
@@ -16,14 +15,16 @@ export const setWallet = payload => ({
   payload,
 });
 
-export const selectCoin = selectedCoins => (dispatch, getState) => {
-  dispatch({
-    type: types.COIN_SELECTED,
-    payload: {
-      selectedCoins,
-      pairs: getState().pairs,
-    },
-  });
+export const selectCoin = payload => dispatch => {
+  dispatch({ type: types.COIN_SELECTED, payload });
+
+  dispatch(
+    setWallet({
+      address: '',
+      valid: false,
+      show: false,
+    })
+  );
 };
 
 export const fetchCoinDetails = payload => dispatch => {
@@ -57,145 +58,112 @@ export const fetchCoinDetails = payload => dispatch => {
 };
 
 export const fetchPrice = payload => dispatch => {
-  const pair = payload.pair;
-  const lastEdited = payload.lastEdited;
+  let url = `${config.API_BASE_URL}/get_price/${payload.pair}/?`;
 
-  return new Promise(async (resolve, reject) => {
-    const makeRequest = url => {
-      return axios
-        .get(url)
-        .then(res => {
-          return res.data;
-        })
-        .catch(err => {
-          throw err;
-        });
-    };
+  if (payload.deposit) {
+    url += `amount_quote=${payload.deposit}`;
+  } else if (payload.receive) {
+    url += `amount_base=${payload.receive}`;
+  }
 
-    const setValidValues = amounts => {
-      const data = { pair };
+  const request = axios.get(url);
 
-      data['deposit'] = parseFloat(amounts.amount_quote);
-      data['receive'] = parseFloat(amounts.amount_base);
-      data['lastEdited'] = lastEdited;
+  return request
+    .then(response => {
+      let data = {
+        pair: payload.pair,
+      };
+
+      if ('receive' in payload) {
+        data['deposit'] = response.data.amount_quote;
+        data['receive'] = payload.receive;
+        data['lastEdited'] = 'receive';
+      } else if ('deposit' in payload) {
+        data['deposit'] = payload.deposit;
+        data['receive'] = response.data.amount_base;
+        data['lastEdited'] = 'deposit';
+      } else {
+        data['deposit'] = response.data.amount_quote;
+        data['receive'] = response.data.amount_base;
+        data['lastEdited'] = payload.lastEdited;
+      }
 
       dispatch({ type: types.PRICE_FETCHED, payload: data });
-      dispatch(errorAlert({ show: false, type: types.INVALID_AMOUNT }));
 
-      resolve();
-    };
-
-    const setFaultyValues = err => {
-      let data = { pair };
-
-      window.ga('send', 'event', {
-        eventCategory: 'Amount input',
-        eventAction: 'Amount too high/low error',
+      dispatch({
+        type: types.ERROR_ALERT,
+        payload: {
+          show: false,
+          type: types.INVALID_AMOUNT,
+        },
       });
+    })
+    .catch(error => {
+      let data = { pair: payload.pair };
 
       if ('receive' in payload) {
         data['deposit'] = '...';
-        data['receive'] = parseFloat(payload.receive);
+        data['receive'] = payload.receive;
         data['lastEdited'] = 'receive';
       } else if ('deposit' in payload) {
-        data['deposit'] = parseFloat(payload.deposit);
+        data['deposit'] = payload.deposit;
         data['receive'] = '...';
         data['lastEdited'] = 'deposit';
       }
 
       dispatch({ type: types.PRICE_FETCHED, payload: data });
 
-      if (err.response && err.response.data) {
+      if (error.response && error.response.data) {
         dispatch(
           errorAlert({
-            message: err.response.data.detail,
+            message: error.response.data.detail,
             show: true,
             type: types.INVALID_AMOUNT,
           })
         );
-      } else {
-        dispatch(errorAlert({ show: false, type: types.INVALID_AMOUNT }));
       }
-
-      reject();
-    };
-
-    try {
-      let url = `${config.API_BASE_URL}/get_price/${pair}/?`;
-      url += payload.deposit ? `amount_quote=${payload.deposit}` : `amount_base=${payload.receive}`;
-
-      const amounts = await makeRequest(url);
-      setValidValues(amounts);
-    } catch (err) {
-      window.ga('send', 'event', {
-        eventCategory: 'Coin selector',
-        eventAction: 'Fetch default amounts',
-      });
-
-      if (payload.coinSelector) {
-        let url = `${config.API_BASE_URL}/get_price/${pair}/`;
-        const amounts = await makeRequest(url);
-        setValidValues(amounts);
-      } else {
-        setFaultyValues(err);
-      }
-    }
-  });
+    });
 };
 
-export const fetchPairs = () => {
+export const fetchPairs = payload => {
   const url = `${config.API_BASE_URL}/pair/`;
   const request = axios.get(url);
 
-  return dispatch => {
+  return (dispatch, getState) => {
     request
-      .then(async response => {
+      .then(response => {
         if (!response.data.length) return;
 
-        const params = urlParams();
-        const pairs = response.data.filter(pair => {
-          if (params && params.hasOwnProperty('test')) {
-            return !pair.disabled;
-          } else {
-            return !pair.disabled && !pair.test_mode;
-          }
-        });
-        const processedPairs = preparePairs(pairs);
+        const pairs = preparePairs(response.data);
 
-        dispatch({ type: types.PAIRS_FETCHED, payload: processedPairs });
+        dispatch({ type: types.PAIRS_FETCHED, payload: pairs });
 
         let depositCoin, receiveCoin;
-        const coinsFromUrlParams = () => {
-          return new Promise((resolve, reject) => {
-            axios
-              .get(`${config.API_BASE_URL}/pair/${params['pair']}`)
-              .then(res => resolve(res.data))
-              .catch(err => reject(err));
-          });
-        };
 
-        const pickRandomPair = async () => {
-          const pair = pairs[Math.floor(Math.random() * pairs.length)];
-          depositCoin = pair.quote;
-          receiveCoin = pair.base;
+        const pickRandomReceiveCoin = coins => {
+          let objKeys = Object.keys(coins),
+            randomCoin = objKeys[Math.floor(Math.random() * objKeys.length)];
+
+          return randomCoin;
         };
 
         // Picks random deposit and receive coins.
-        const pickCoins = async () => {
-          // Checks if url has params. If yes then update accordingly and if no then pick random coins.
-          if (params && params.hasOwnProperty('pair')) {
-            try {
-              const pair = await coinsFromUrlParams(params);
-              depositCoin = pair.quote;
-              receiveCoin = pair.base;
-            } catch (err) {
-              console.log('Error:', err);
-            }
-          } else {
-            pickRandomPair();
+        const pickRandomCoins = coins => {
+          depositCoin = coins[Math.floor(Math.random() * coins.length)].code;
+          receiveCoin = pickRandomReceiveCoin(pairs[depositCoin]);
+
+          // If pair is invalid, try again until valid
+          if (
+            !_.filter(coins, {
+              code: receiveCoin,
+              is_base_of_enabled_pair: true,
+            }).length ||
+            pairs[depositCoin][receiveCoin] === false
+          ) {
+            pickRandomCoins(coins);
           }
         };
-        await pickCoins();
+        pickRandomCoins(payload);
 
         dispatch(
           selectCoin({
@@ -270,13 +238,13 @@ export const setUserEmail = email => async dispatch => {
         type: types.SET_EMAIL_AND_MESSAGE,
         value: res.data.email,
         message: {
-          text: i18n.t('notify.successmail'),
+          text: 'Success, you set your email.',
           error: false,
         },
       });
     })
     .catch(error => {
-      let errorMessage = i18n.t('generalterms.formfailed');
+      let errorMessage = 'Something went wrong. Try again later.';
 
       if (error.response && error.response.data && error.response.data.email.length && error.response.data.email[0]) {
         errorMessage = error.response.data.email[0];
