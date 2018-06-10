@@ -4,6 +4,7 @@ import _ from 'lodash';
 import config from '../config';
 import urlParams from '../helpers/urlParams';
 import preparePairs from '../helpers/preparePairs';
+import i18n from '../i18n';
 
 export const errorAlert = payload => ({
   type: types.ERROR_ALERT,
@@ -149,31 +150,18 @@ export const fetchPairs = payload => {
 
         // Picks random deposit and receive coins.
         const pickRandomCoins = coins => {
-          // Checks if url has params. If yes then update accordingly and if no then pick random coins.
-          let params = urlParams();
-          if (params && params.hasOwnProperty('pair')){
-            $.ajax({
-              url: `${config.API_BASE_URL}/pair/${params['pair']}/?format=json`,
-              type: "GET",
-              async: false,
-              success: function(data) {
-                depositCoin = data.quote;
-                receiveCoin = data.base;
-              }
-            });
-          }
+          depositCoin = coins[Math.floor(Math.random() * coins.length)].code;
+          receiveCoin = pickRandomReceiveCoin(pairs[depositCoin]);
 
           // If pair is invalid, try again until valid
-          while (
+          if (
             !_.filter(coins, {
               code: receiveCoin,
               is_base_of_enabled_pair: true,
             }).length ||
             pairs[depositCoin][receiveCoin] === false
           ) {
-            // Picks random deposit and receive coins.
-            depositCoin = coins[Math.floor(Math.random() * coins.length)].code;
-            receiveCoin = pickRandomReceiveCoin(pairs[depositCoin]);
+            pickRandomCoins(coins);
           }
         };
         pickRandomCoins(payload);
@@ -251,13 +239,13 @@ export const setUserEmail = email => async dispatch => {
         type: types.SET_EMAIL_AND_MESSAGE,
         value: res.data.email,
         message: {
-          text: 'Success, you set your email.',
+          text: i18n.t('notify.successmail'),
           error: false,
         },
       });
     })
     .catch(error => {
-      let errorMessage = 'Something went wrong. Try again later.';
+      let errorMessage = i18n.t('generalterms.formfailed');
 
       if (error.response && error.response.data && error.response.data.email.length && error.response.data.email[0]) {
         errorMessage = error.response.data.email[0];
