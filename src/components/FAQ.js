@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { I18n, Trans } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import QuestionAnswer from './QuestionAnswer';
 
@@ -22,10 +21,7 @@ class FAQ extends Component {
 
   render() {
     return (
-      <I18n ns="translations">
-      {
-        (t, { i18n }) => (
-      <Modal show={this.state.show} onHide={this.props.onClose} >
+      <Modal show={this.state.show} onHide={this.props.onClose}>
         <div id="faq" className="modal-content">
           <div className="modal-header">
             <button
@@ -41,7 +37,7 @@ class FAQ extends Component {
 
           <div className="modal-body">
             <QuestionAnswer
-              id="ques1"
+              question="Who are you?"
               answer={
                 <div>
                   <p>
@@ -68,7 +64,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques2"
+              question="What do you do?"
               answer={
                 <div>
                   <p>
@@ -90,7 +86,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques3"
+              question="What is your fee?"
               answer={
                 <p>
                   Our service fee is 0.5%. There are no hidden fees here: the
@@ -101,7 +97,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques4"
+              question="How long does the exchange process take?"
               answer={
                 <p>
                   Initiating a transaction doesn’t take more than a couple of
@@ -114,7 +110,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques5"
+              question="How does it work?"
               answer={
                 <div>
                   <p>Here is how you use the exchange:</p>
@@ -165,7 +161,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques6"
+              question="Do you collect any private information?"
               answer={
                 <p>
                   We do not collect or store any private information about you.
@@ -175,7 +171,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques7"
+              question="Are you using a third-party exchange or API?"
               answer={
                 <p>
                   No, our solution is completely independant. We use our
@@ -210,7 +206,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques8"
+              question="How do I track my order?"
               answer={
                 <div>
                   <p>Every order has a unique id like this:</p>
@@ -234,7 +230,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques9"
+              question="How do referrals work?"
               answer={
                 <div>
                   <p>
@@ -271,7 +267,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques10"
+              question="I see a 15-minute timer on my order window, what happens when it runs out?"
               answer={
                 <div>
                   <p>
@@ -299,7 +295,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques11"
+              question="Do you have any promotions running at the moment?"
               answer={
                 <div>
                   <p>
@@ -320,7 +316,7 @@ class FAQ extends Component {
             />
 
             <QuestionAnswer
-              id="ques12"
+              question="Do I need a wallet? How do I get one?"
               answer={
                 <div>
                   <p>
@@ -365,9 +361,6 @@ class FAQ extends Component {
           </div>
         </div>
       </Modal>
-          )
-        }
-      </I18n>
     );
   }
 }

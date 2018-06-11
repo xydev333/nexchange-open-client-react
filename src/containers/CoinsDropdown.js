@@ -3,7 +3,6 @@ import _ from 'lodash';
 import urlParams from '../helpers/urlParams';
 import Fuse from 'fuse.js';
 import '../css/_coins-dropdown.scss';
-import { I18n } from 'react-i18next';
 
 class CoinsDropdown extends Component {
   constructor(props) {
@@ -62,13 +61,11 @@ class CoinsDropdown extends Component {
 
   renderSearch = () => {
     return (
-    <I18n ns="translations">
-     {(t) => (
       <form className="coins-search" onSubmit={this.handleSubmit}>
         <i class="fa fa-search" aria-hidden="true" />
         <input
           type="text"
-          placeholder={t('generalterms.search')}
+          placeholder="Search"
           ref={input => (this.searchInput = input)}
           onChange={this.handleChange}
           value={this.state.value}
@@ -77,8 +74,6 @@ class CoinsDropdown extends Component {
           clear
         </i>
       </form>
-      )}
-	 </I18n>
     );
   };
 

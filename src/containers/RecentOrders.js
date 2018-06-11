@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { I18n } from 'react-i18next';
 import axios from 'axios';
-import moment from 'moment/min/moment-with-locales.min.js';
+import moment from 'moment';
 import 'moment/locale/en-gb';
 import _ from 'lodash';
 
@@ -68,11 +67,9 @@ class RecentOrders extends Component {
   render() {
     let orders = this.state.orders.slice(0, config.RECENT_ORDERS_COUNT).map(order => {
       return (
-	  <I18n ns="translations">
-		{(t, { i18n }) => (
         <div key={order.unique_reference} className="recent-order">
           <a href={`${config.API_BASE_URL}/orders/${order.unique_reference}`} target="_blank" className="overlay">
-            {t('recentorders.2')}
+            Click to view on API
           </a>
 
           <div className="col-xs-4 coins-container">
@@ -91,28 +88,24 @@ class RecentOrders extends Component {
           </div>
 
           <div className="col-xs-4 created-on">
-            <p>{new moment(order.created_on).locale(`${i18n.language}`).fromNow()}</p>
+            <p>{new moment(order.created_on).fromNow()}</p>
           </div>
         </div>
-		)}</I18n>
       );
     });
 
     return (
-	<I18n ns="translations">
-	{(t) => (
       <div id="recent-orders">
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h2>{t('recentorders.1')}</h2>
+              <h2>Recent Orders</h2>
 
               <div className="recent-orders-container">{orders.length < 1 ? <LoadingComponent isLoading={true} /> : orders}</div>
             </div>
           </div>
         </div>
       </div>
-	)}</I18n>
     );
   }
 }

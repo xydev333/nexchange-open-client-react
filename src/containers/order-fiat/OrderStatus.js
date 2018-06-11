@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { I18n } from 'react-i18next';
 import STATUS_CODES from '../../statusCodes';
 
 class OrderStatus extends Component {
@@ -26,8 +25,6 @@ class OrderStatus extends Component {
     }
 
     return (
-      <I18n ns="translations">
-      {(t) => (
       <div className="row">
         <div className="col-xs-12">
           <div id="order-status">
@@ -37,10 +34,10 @@ class OrderStatus extends Component {
               data-toggle="tooltip"
               data-placement="top"
               title=""
-              data-original-title={t('order.fiat.status.12')}
+              data-original-title="In this step we are waiting for your deposit."
             >
               <span className="glyphicon glyphicon-save" aria-hidden="true" />
-              <h4>{t('order.status1')}</h4>
+              <h4>1. Awaiting deposit</h4>
             </div>
 
             <div
@@ -49,38 +46,37 @@ class OrderStatus extends Component {
               data-toggle="tooltip"
               data-placement="top"
               title=""
-              data-original-title={t('order.fiat.status.14')}>
+              data-original-title="We have received your funds and are now waiting
+                for proof of residence and government issued ID verification."
             >
               <span className="glyphicon glyphicon-user" aria-hidden="true" />
-              <h4>{t('order.status2')}</h4>
+              <h4>2. Awaiting verification</h4>
             </div>
 
             <div
               id="step-three"
               className={
-                status === 13 || status === 14 ? 'step active' : status >= 15 ? (status === 15 ? 'step active' : 'step done') : 'step'
+                status == 13 || status == 14 ? 'step active' : status >= 15 ? (status == 15 ? 'step active' : 'step done') : 'step'
               }
               data-toggle="tooltip"
               data-placement="top"
               title=""
-              data-original-title={t('order.fiat.status.14')}>
+              data-original-title="We got the funds and now have transferred our funds to you."
             >
               <span className="glyphicon glyphicon-ok" aria-hidden="true" />
-              <h4>{t('order.status31')}</h4>
+              <h4>3. All done</h4>
             </div>
 
             <div className="progres-container">
               <div className="progress progress-line-info">
                 <div className="progress-bar progress-bar-info" role="progressbar" style={{ width: width }}>
-                  <span className="sr-only">{width} {t('order.complete')}</span>
+                  <span className="sr-only">{width} Complete</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      )}
-      </I18n>
     );
   }
 }

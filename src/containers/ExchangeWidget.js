@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { I18n } from 'react-i18next';
-import i18n from '../i18n';
 import axios from 'axios';
 import config from '../config';
 
@@ -73,15 +71,19 @@ class ExchangeWidget extends Component {
         window.qp('track', 'Generic');
       })
       .catch(error => {
+        console.log('Error:', error);
+
         let message =
           error.response && error.response.data.non_field_errors && error.response.data.non_field_errors.length
             ? error.response.data.non_field_errors[0]
-            : `${i18n.t('subscription.5')}`;
+            : 'Something went wrong. Please try again later.';
+
         this.props.errorAlert({
           message: message,
           show: true,
           type: 'PLACE_ORDER',
         });
+
         this.setState({ orderPlaced: false, loading: false });
       });
   }
@@ -97,9 +99,7 @@ class ExchangeWidget extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if ($('#exchange-widget [data-toggle="tooltip"]').attr('aria-describedby')) {
       let tooltipId = $('#exchange-widget [data-toggle="tooltip"]').attr('aria-describedby');
-      $(`#${tooltipId} .tooltip-inner`).html(
-          `${i18n.t('exchangewidget.fees')} ${nextProps.amounts.deposit * 0.005} ${nextProps.selectedCoin.deposit}.`
-      );
+      $(`#${tooltipId} .tooltip-inner`).html(`The fee amounts to ${nextProps.amounts.deposit * 0.005} ${nextProps.selectedCoin.deposit}.`);
     }
 
     if (this.props.wallet.show && nextProps.error.type === 'INVALID_AMOUNT' && nextProps.error.show !== false) {
@@ -118,8 +118,6 @@ class ExchangeWidget extends Component {
 
           <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
 
-        <I18n ns="translations">
-         {(t) => (
           <div className="col-xs-12 text-center">
             {!this.props.wallet.show ? (
               <button
@@ -131,7 +129,7 @@ class ExchangeWidget extends Component {
                     : null
                 }
               >
-                {t('exchangewidget.1')}
+                Get Started !
               </button>
             ) : (
               <button
@@ -139,13 +137,11 @@ class ExchangeWidget extends Component {
                 onClick={this.placeOrder}
                 disabled={this.props.wallet.valid && !this.state.loading ? null : 'disabled'}
               >
-                {t('exchangewidget.2')}
+                Confirm & Place Order
                 {this.state.loading ? <i className="fa fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
               </button>
             )}
           </div>
-			)}
-		  </I18n>
         </div>
       </div>
     );

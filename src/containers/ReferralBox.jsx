@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { I18n } from 'react-i18next';
 import config from '../config';
 import ReferralTerms from '../components/ReferralTerms';
 import Box from '../components/Box';
@@ -15,14 +14,12 @@ class ReferralBox extends Component {
 
   render() {
     return (
-	  <I18n ns="translations">
-		{(t) => (
       <Box id="share-referral">
         <h2>
-          {t('referral.1')}
+          Share this unique referral link with your friends to earn some coins!
         </h2>
         <h4>
-          {t('referral.2')}:{' '}
+          Here is your unique referral link:{' '}
           <a
             href={`${config.DOMAIN}?ref=${
               this.props.order.referral_code[0].code
@@ -39,11 +36,11 @@ class ReferralBox extends Component {
             href="javascript:void(0)"
             onClick={() => this.setState({ showTermsModal: true })}
           >
-            {t('referral.3')}
+            Terms & Conditions
           </a>
         </h4>
 
-        <h4>{t('referral.a')}</h4>
+        <h4>Share it on social!</h4>
 
         <div className="share">
           <a
@@ -58,7 +55,7 @@ class ReferralBox extends Component {
           <a
             href={`https://twitter.com/intent/tweet?url=${config.DOMAIN}?ref=${
               this.props.order.referral_code[0].code
-            }&text=${t('referral.twitter')}`}
+            }&text=I’m%20using%20Nexchange,%20the%20easiest%20and%20fastest%20cryptocurrency%20exchange!`}
             target="_blank"
             onClick={this.trackRefShare}
           >
@@ -80,7 +77,6 @@ class ReferralBox extends Component {
           onClose={() => this.setState({ showTermsModal: false })}
         />
       </Box>
-	 )}</I18n>
     );
   }
 }

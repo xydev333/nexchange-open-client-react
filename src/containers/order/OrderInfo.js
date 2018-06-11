@@ -21,9 +21,6 @@ import OrderStatusCrypto from '../order-crypto/OrderStatus';
 import STATUS_CODES from '../../statusCodes';
 import isFiatOrder from '../../helpers/isFiatOrder';
 
-import { I18n } from 'react-i18next';
-
-
 const OrderInfo = props => {
   const isFiat = isFiatOrder(props.order);
   let order;
@@ -55,12 +52,9 @@ const OrderInfo = props => {
       break;
     default:
       order = (
-	  <I18n ns="translations">
-	  {(t) => (
         <div className="text-center">
-          <h2>{t('order.error')}</h2>
+          <h2>Unknown order state, something went wrong</h2>
         </div>
-	  )}</I18n>
       );
   }
 

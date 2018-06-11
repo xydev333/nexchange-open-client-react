@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { I18n } from 'react-i18next';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -85,21 +84,19 @@ class Support extends Component {
 
   render() {
     return (
-     <I18n ns="translations">
-	  {(t) => (
       <Modal id="support" show={this.state.show} onHide={this.close}>
         <div className="modal-content">
           <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this.close}>
               <i className="material-icons">clear</i>
             </button>
-            <h4 className="modal-title">{t('support.1')}</h4>
+            <h4 className="modal-title">Support</h4>
           </div>
 
           <div className="modal-body">
             <div className="row">
               <div className="col-xs-12 col-sm-6">
-                <h3>{t('support.2')}</h3>
+                <h3>Phone</h3>
                 <p onClick={() => ga('send', 'event', 'General', 'click support number')}>
                   +442081442192<br />
                   +16464612858 (US)
@@ -107,7 +104,7 @@ class Support extends Component {
               </div>
 
               <div className="col-xs-12 col-sm-6">
-                <h3>{t('support.3')}</h3>
+                <h3>Email</h3>
                 <p>
                   <a href="mailto:support@nexchange.io">support@nexchange.io</a>
                 </p>
@@ -116,10 +113,10 @@ class Support extends Component {
 
             <form id="support-form" onSubmit={this.handleSubmit}>
               {this.state.success === true ? (
-                <h4 className="text-success">{t('generalterms.formsucess')}</h4>
+                <h4 className="text-success">Your form has been successfully submitted. We'll get back to you shortly!</h4>
               ) : null}
               {this.state.success === false ? (
-                <h4 className="text-danger">{t('generalterms.formfailed')}</h4>
+                <h4 className="text-danger">Something went wrong during the form submission, please try again later.</h4>
               ) : null}
 
               {this.state.showForm ? (
@@ -129,7 +126,7 @@ class Support extends Component {
                       type="name"
                       name="name"
                       className="form-control"
-                      placeholder={t('support.4')}
+                      placeholder="Name"
                       onChange={this.handleInputChange}
                       value={this.state.name}
                       required
@@ -141,7 +138,7 @@ class Support extends Component {
                       type="telephone"
                       name="telephone"
                       className="form-control"
-                      placeholder={t('support.5')}
+                      placeholder="Telephone"
                       onChange={this.handleInputChange}
                       value={this.state.telephone}
                     />
@@ -152,7 +149,7 @@ class Support extends Component {
                       type="email"
                       name="email"
                       className="form-control"
-                      placeholder={t('support.3')}
+                      placeholder="Email"
                       onChange={this.handleInputChange}
                       value={this.state.email}
                       disabled={this.state.emailFetched}
@@ -165,7 +162,7 @@ class Support extends Component {
                       type="text"
                       name="subject"
                       className="form-control"
-                      placeholder={t('support.7')}
+                      placeholder="Subject"
                       onChange={this.handleInputChange}
                       value={this.state.subject}
                     />
@@ -174,7 +171,7 @@ class Support extends Component {
                   <textarea
                     name="message"
                     className="form-control"
-                    placeholder={t('support.4')}
+                    placeholder="Message"
                     rows="2"
                     onChange={this.handleInputChange}
                     value={this.state.message}
@@ -182,7 +179,7 @@ class Support extends Component {
                   />
 
                   <button type="submit" className="btn btn-themed btn-md" disabled={this.state.loading ? 'disabled' : null}>
-                    {t('support.8')}
+                    Send
                     {this.state.loading ? <i className="fa fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
                   </button>
 
@@ -193,7 +190,7 @@ class Support extends Component {
                     onClick={this.close}
                     style={{ float: 'right', padding: '15px 0 0 0' }}
                   >
-                    {t('support.9')}
+                    Close
                   </button>
                 </div>
               ) : (
@@ -204,15 +201,13 @@ class Support extends Component {
                   onClick={this.close}
                   style={{ padding: '0' }}
                 >
-                  {t('support.9')}
+                  Close
                 </button>
               )}
             </form>
           </div>
         </div>
       </Modal>
-      )}
-     </I18n>
     );
   }
 }

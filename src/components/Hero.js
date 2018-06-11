@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { I18n, Trans } from 'react-i18next';
 
 import ExchangeWidget from '../containers/ExchangeWidget';
 import CoinPrices from '../containers/CoinPrices';
@@ -14,22 +13,18 @@ class Hero extends Component {
 
   render() {
     return (
-	<I18n ns="translations">
-	{(t) => (
-	<div id="hero">
-		<ErrorAlert />
+      <div id="hero">
+        <ErrorAlert />
 
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
               <div className="brand">
-                <h1>{t('hero.1')}</h1>
-				<Trans i18nKey="hero.2"> 
+                <h1>Exchange Cryptocurrencies</h1>
                 <h2>
                   Simple. <span className="text-green">Secure</span>.
                   Transparent.
                 </h2>
-				</Trans>
               </div>
             </div>
 
@@ -44,8 +39,6 @@ class Hero extends Component {
           <span className="arrow-3" aria-hidden="true" />
         </div>
       </div>
-	)}
-	</I18n>
     );
   }
 }
