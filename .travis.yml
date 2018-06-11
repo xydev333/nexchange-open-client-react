@@ -3,12 +3,7 @@ node_js:
   - 6
 cache:
   directories:
-    - ~/.npm
     - node_modules
-install:
-  - npm install
-before_script:
-  - npm start -- --silent &
 script:
-  - npm run test
-  - npm run cypress:run
+  - npm run build
+  - npm test

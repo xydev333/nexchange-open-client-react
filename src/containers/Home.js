@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { fetchCoinDetails, fetchPairs } from '../actions';
+import { fetchCoinDetails } from '../actions';
 
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -10,56 +10,34 @@ import Testimonials from '../components/Testimonials';
 import RecentOrders from '../containers/RecentOrders';
 import SubscriptionForm from '../components/SubscriptionForm';
 import PriceComparison from '../containers/PriceComparison';
-import Trustpilot from '../components/Trustpilot';
 
-export class Home extends Component {
-  componentDidMount() {
-    this.props.fetchCoinDetails();
 
-    if (this.props.coinsInfo.length) {
-      this.props.fetchPairs(this.props.coinsInfo);
-    }
-  }
+class Home extends Component {
+	constructor(props) {
+		super(props);
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.coinsInfo.length !== nextProps.coinsInfo.length) {
-      this.props.fetchPairs(nextProps.coinsInfo);
-    }
-  }
+		this.props.fetchCoinDetails();
+	}
 
-  render() {
-    return (
-      <div>
-        <Hero />
-        <RecentOrders />
-        <Trustpilot />
-        <Testimonials />
-        <PriceComparison />
-        <About />
-        <SubscriptionForm />
-      </div>
-    );
-  }
+	render() {
+		return (
+		  <div>
+		    <Hero />
+		    <RecentOrders />
+		    <Testimonials />
+		    <PriceComparison />
+		    <About />
+		    <SubscriptionForm />
+		  </div>
+		);
+	}
 }
 
-function mapStateToProps(state) {
-  return {
-    coinsInfo: state.coinsInfo,
-    selectedCoin: state.selectedCoin,
-  };
-}
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      fetchCoinDetails: fetchCoinDetails,
-      fetchPairs: fetchPairs,
-    },
-    dispatch
-  );
+	return bindActionCreators({
+		fetchCoinDetails: fetchCoinDetails,
+	}, dispatch)
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(null, mapDispatchToProps)(Home);

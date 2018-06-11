@@ -1,16 +1,8 @@
-import { PRICE_FETCHED } from '../actions/types';
+export default (state = null, action) => {
+	switch(action.type) {
+	case 'PRICE_FETCHED':
+		return action.payload;
+	}
 
-const initialState = {
-  deposit: '...',
-  receive: '...',
-  lastEdited: 'deposit',
-};
-
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case PRICE_FETCHED:
-      return action.payload;
-    default:
-      return state;
-  }
-};
+	return state
+}

@@ -4,58 +4,54 @@ import axios from 'axios';
 
 import config from '../config';
 
+
 class Referrals extends Component {
-  componentDidMount() {
-    axios.interceptors.request.use(
-      function(requestConfig) {
-        let referral = config.REFERRAL_CODE
-          ? config.REFERRAL_CODE
-          : localStorage.getItem('referral');
-        if (
-          referral &&
-          config.url &&
-          config.url.indexOf(config.API_BASE_URL) > -1
-        ) {
-          requestConfig.headers['x-referral-token'] = referral;
-        }
+	constructor(props) {
+		super(props);
+	}
 
-        return requestConfig;
-      },
-      function(error) {
-        return Promise.reject(error);
-      }
-    );
-  }
+	componentDidMount() {
+		axios.interceptors.request.use(function (requestConfig) {
+			let referral = (config.REFERRAL_CODE ? config.REFERRAL_CODE : localStorage.getItem('referral'));
+		    if (referral && config.url && config.url.indexOf(config.API_BASE_URL) > -1) {
+			    requestConfig.headers['x-referral-token'] = referral;
+			}
 
-  isRef() {
-    let url = window.location.search.substring(1),
-      params = url.split('&');
+		    return requestConfig;
+		  }, function (error) {
+		    return Promise.reject(error);
+		  });
+	}
 
-    for (let i = 0; i < params.length; i++) {
-      let param = params[i].split('=');
+	isRef() {
+		let url = window.location.search.substring(1),
+			params = url.split('&');
 
-      if (param[0] === 'ref') {
-        localStorage.setItem('referral', param[1]);
-        return true;
-      }
-    }
+		for (let i = 0; i < params.length; i++) {
+			let param = params[i].split('=');
 
-    return false;
-  }
+			if (param[0] == 'ref') {
+				localStorage.setItem('referral', param[1]);
+				return true;
+			}
+		}
 
-  redirectRef() {
-    let urlWithoutRef =
-      window.location.pathname + window.location.search + window.location.hash;
-    urlWithoutRef = urlWithoutRef.substring(0, urlWithoutRef.indexOf('?'));
+		return false;
+	}
 
-    return <Redirect to={urlWithoutRef} />;
-  }
+	redirectRef() {
+		let urlWithoutRef = window.location.pathname + window.location.search + window.location.hash;
+		urlWithoutRef = urlWithoutRef.substring(0, urlWithoutRef.indexOf('?'));
 
-  render() {
-    if (this.isRef()) return this.redirectRef();
+		return <Redirect to={urlWithoutRef} />
+	}
 
-    return null;
-  }
+	render() {
+		if (this.isRef())
+			return this.redirectRef();
+
+	    return null;
+	}
 }
 
 export default Referrals;

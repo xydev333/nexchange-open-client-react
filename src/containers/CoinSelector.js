@@ -2,107 +2,101 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import onClickOutside from 'react-onclickoutside';
-import { selectCoin, fetchPrice, setWallet, errorAlert } from '../actions/index.js';
-import CoinsDropdown from './CoinsDropdown';
-import '../css/_coin-selector.scss';
-require('react-fa');
+import Helpers from '../helpers';
+
+import { selectCoin, fetchPrice, setWallet } from '../actions/index.js';
+
 
 class CoinSelector extends Component {
-  state = {
-    isDropdownVisible: false,
-    selectedCoin: null,
-  };
+	constructor(props) {
+		super(props);
+		this.state = {
+			isDropdownVisible: false
+		}
 
-  selectCoin = coin => {
-    this.props.selectCoin({
-      ...this.props.selectedCoin,
-      [this.props.type]: coin,
-      lastSelected: this.props.type,
-    });
+    	this.selectCoin = this.selectCoin.bind(this);
+	}
 
-    this.setState({ isDropdownVisible: false });
-    ga('send', 'event', 'Order', 'select coin');
-  };
+	selectCoin(coin) {
+		this.props.selectCoin(Object.assign({}, this.props.selectedCoin, {[this.props.type]: coin}));
 
-  handleClickOutside = event => {
-    this.setState({ isDropdownVisible: false });
-  };
+		setTimeout(() => {
+			this.props.fetchPrice({pair: `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`, lastEdited: this.props.amounts.lastEdited, amount: this.props.amounts[this.props.amounts.lastEdited]});
+		}, 300);
 
-  calculateDepositAmount = coin => {
-    return ['EUR', 'GBP', 'USD'].indexOf(coin.name) > -1 ? 100 : parseFloat(coin.minimal_amount) * 100;
-  };
+		this.setState({isDropdownVisible: false, selectedCoin: coin});
 
-  handleClick = code => {
-    this.selectCoin(code);
-    this.props.onSelect();
-  };
+		ga('send', 'event', 'Order', 'select coin');
+	}
 
-  UNSAFE_componentWillReceiveProps = nextProps => {
-    // This condition means that we have selected default currency pairs
-    // and now need to fetch price.
-    if (this.props.selectedCoin.deposit === null && nextProps.selectedCoin.deposit && nextProps.type === 'deposit') {
-      this.props.fetchPrice({
-        pair: `${nextProps.selectedCoin.receive}${nextProps.selectedCoin.deposit}`,
-        lastEdited: 'deposit',
-      });
-    }
+	handleClickOutside(event) {
+		this.setState({isDropdownVisible: false});
+	}
 
-    // This condition means that selected coin has been changed and price
-    // needs to be refetched.
-    if (
-      this.props.selectedCoin[this.props.type] !== nextProps.selectedCoin[this.props.type] &&
-      ((this.props.type === 'deposit' && nextProps.selectedCoin.lastSelected === 'deposit') ||
-        (this.props.type === 'receive' && nextProps.selectedCoin.lastSelected === 'receive'))
-    ) {
-      this.props.fetchPrice({
-        pair: `${nextProps.selectedCoin.receive}${nextProps.selectedCoin.deposit}`,
-        lastEdited: nextProps.selectedCoin.lastSelected,
-      });
-    }
+	componentWillReceiveProps(nextProps) {
+		this.setState({selectedCoin: this.props.selectedCoin[this.props.type]});
+	}
 
-    // Check if pair is valid. If not, show error.
-    if (
-      nextProps.selectedCoin.deposit &&
-      nextProps.selectedCoin.receive &&
-      !this.props.pairs[nextProps.selectedCoin.deposit][nextProps.selectedCoin.receive]
-    ) {
-      const validPairs = Object.keys(this.props.pairs[nextProps.selectedCoin.deposit])
-        .map(coin => coin)
-        .filter(coin => this.props.pairs[nextProps.selectedCoin.deposit][coin] === true)
-        .join(', ');
+	render() {
+		let selectedCoin = this.props.selectedCoin[this.props.type],
+			filteredCoins = this.props.coinsInfo.filter(coin => {
+	        	let params = Helpers.urlParams();
 
-      this.props.errorAlert({
-        message: `You cannot buy ${nextProps.selectedCoin.receive} with ${nextProps.selectedCoin.deposit}. Try ${validPairs}.`,
-        show: true,
-        type: 'INVALID_PAIR',
-      });
-    }
-  };
+	        	if (params && params.hasOwnProperty('test')) {
+					if (this.props.type.toUpperCase() == 'DEPOSIT') {
+						return coin.is_quote_of_enabled_pair_for_test;
+					} else if (this.props.type.toUpperCase() == 'RECEIVE') {
+						return coin.is_base_of_enabled_pair_for_test;
+					}
+	        	} else {
+					if (this.props.type.toUpperCase() == 'DEPOSIT') {
+						return coin.is_quote_of_enabled_pair;
+					} else if (this.props.type.toUpperCase() == 'RECEIVE') {
+						return coin.is_base_of_enabled_pair;
+					}
+	        	}
+			}),
+			coins = filteredCoins.map(coin => {
+				return (
+					<div className="row coin" key={coin.code} onClick={() => this.selectCoin(coin.code)}>
+						<div className="col-xs-4">{coin.code}</div>
+						<div className="col-xs-3 text-center">
+							<i className={`cc-${coin.code} ${coin.code}`}></i>
+						</div>
+						<div className="col-xs-5 text-capitalize">{coin.name}</div>
+					</div>
+				);
+			});
 
-  render() {
-    const type = this.props.type;
-    const selectedCoin = this.props.selectedCoin[type];
+		return (
+			<div>
+				<div className="selectedCoin" onClick={() => this.setState({isDropdownVisible: !this.state.isDropdownVisible})}>
+					<span>{selectedCoin}</span>
+					<i className={`coin-icon cc-${selectedCoin}`}></i>
+					<i className="fa fa-angle-down"></i>
+				</div>
 
-    if (!selectedCoin) return null;
-
-    return (
-      <div>
-        <div
-          className={`selectedCoin selectedCoin-${type}`}
-          onClick={() => this.setState({ isDropdownVisible: !this.state.isDropdownVisible })}
-        >
-          <span>{selectedCoin}</span>
-          <i className={`coin-icon cc ${selectedCoin}`} />
-          <i className="fa fa-angle-down" />
-        </div>
-
-        {this.state.isDropdownVisible && <CoinsDropdown type={type} onClick={this.handleClick} coinsInfo={this.props.coinsInfo} />}
-      </div>
-    );
-  }
+				{this.state.isDropdownVisible ? <div className="coin-currency-dropdown">{coins}</div> : null}
+			</div>
+		);
+	}
 }
 
-const mapStateToProps = ({ selectedCoin, coinsInfo, pairs, price }) => ({ selectedCoin, coinsInfo, pairs, price });
-const mapDispatchToProps = dispatch => bindActionCreators({ selectCoin, fetchPrice, setWallet, errorAlert }, dispatch);
+
+function mapStateToProps(state) {
+	return {
+		selectedCoin: state.selectedCoin,
+		coinsInfo: state.coinsInfo,
+		amounts: state.amounts,
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({
+		selectCoin: selectCoin,
+		fetchPrice: fetchPrice,
+		setWallet: setWallet,
+	}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(CoinSelector));
