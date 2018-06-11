@@ -1,5 +1,3 @@
-
-
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
@@ -68,10 +66,7 @@ module.exports = {
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
-    devtoolModuleFilenameTemplate: info =>
-      path
-        .relative(paths.appSrc, info.absoluteResourcePath)
-        .replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -90,7 +85,6 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -121,7 +115,6 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -149,7 +142,6 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
               compact: true,
             },
           },
@@ -182,6 +174,8 @@ module.exports = {
                       options: {
                         importLoaders: 1,
                         minimize: true,
+                        modules: true,
+                        localIdentName: '[name]__[local]__[hash:base64:5]',
                         sourceMap: shouldUseSourceMap,
                       },
                     },
@@ -214,14 +208,34 @@ module.exports = {
           },
 
           {
+            test: /\.svg$/,
+            exclude: /font-awesome/,
+            use: [
+              {
+                loader: 'babel-loader',
+              },
+              {
+                loader: 'react-svg-loader',
+                options: {
+                  jsx: true, // true outputs JSX tags
+                },
+              },
+            ],
+          },
+
+          {
             test: /\.scss$/,
-            use: [{
-              loader: "style-loader" // creates style nodes from JS strings
-            }, {
-              loader: "css-loader" // translates CSS into CommonJS
-            }, {
-              loader: "sass-loader" // compiles Sass to CSS
-            }]
+            use: [
+              {
+                loader: 'style-loader', // creates style nodes from JS strings
+              },
+              {
+                loader: 'css-loader', // translates CSS into CommonJS
+              },
+              {
+                loader: 'sass-loader', // compiles Sass to CSS
+              },
+            ],
           },
 
           // "file" loader makes sure assets end up in the `build` folder.
