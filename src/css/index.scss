@@ -3,7 +3,10 @@
 
 @import 'bootstrap';
 @import 'material-kit';
+@import 'fonts';
+
 @import 'cryptocoins';
+@import 'cryptocoins-custom';
 
 @import 'general';
 @import 'header';
@@ -18,4 +21,5 @@
 @import 'coin-prices';
 @import 'subscription-form';
 @import 'price-comparison';
+@import 'terms';
 @import 'footer';

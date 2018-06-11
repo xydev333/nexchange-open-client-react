@@ -1,92 +1,263 @@
 import axios from 'axios';
-import moment from 'moment';
+import * as types from './types';
 import _ from 'lodash';
 import config from '../config';
-import Helpers from '../helpers';
+import urlParams from '../helpers/urlParams';
+import preparePairs from '../helpers/preparePairs';
+import i18n from '../i18n';
 
+export const errorAlert = payload => ({
+  type: types.ERROR_ALERT,
+  payload,
+});
 
-export function errorAlert(payload) {
-	return {
-		type: 'ERROR_ALERT',
-		payload: payload
-	}
-}
+export const setWallet = payload => ({
+  type: types.SET_WALLET,
+  payload,
+});
 
-export function setWallet(payload) {
-	return {
-		type: 'SET_WALLET',
-		payload: payload
-	}
-}
+export const selectCoin = payload => dispatch => {
+  dispatch({ type: types.COIN_SELECTED, payload });
 
-export function selectCoin(payload) {
-	return (dispatch, getState) => {
-		dispatch({ type: 'COIN_SELECTED', payload: payload });
+  dispatch(
+    setWallet({
+      address: '',
+      valid: false,
+      show: false,
+    })
+  );
+};
 
-    	dispatch({type: 'SET_WALLET', payload: {
-    		address: '',
-    		valid: false,
-    		show: false
-    	}});
-	}
-}
+export const fetchCoinDetails = payload => dispatch => {
+  const url = `${config.API_BASE_URL}/currency/`;
+  const request = axios.get(url);
+  const isWhiteLabel = config.REFERRAL_CODE && config.REFERRAL_CODE.length > 0;
 
-export function updateAmounts(payload) {
-	return {
-		type: 'UPDATE_AMOUNTS',
-		payload: payload
-	}
-}
+  return request
+    .then(response => {
+      if (!response.data.length) return;
 
-export function fetchCoinDetails(payload) {
-	const url = `${config.API_BASE_URL}/currency/`;
-	const request = axios.get(url);
+      const params = urlParams();
+      let coins;
 
-    return (dispatch, getState) => {
-        request
-	        .then(response => {
-	        	if (!response.data.length) return;
+      if (params && params.hasOwnProperty('test')) {
+        coins = _.filter(response.data, { has_enabled_pairs_for_test: true });
+      } else if (isWhiteLabel) {
+        coins = _.filter(response.data, {
+          has_enabled_pairs: true,
+          is_crypto: true,
+        });
+      } else {
+        coins = _.filter(response.data, { has_enabled_pairs: true });
+      }
 
-	        	let params = Helpers.urlParams(),
-	        		coins;
+      dispatch({ type: types.COINS_INFO, payload: coins });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 
-	        	if (params && params.hasOwnProperty('test')) {
-					coins = _.filter(response.data, {has_enabled_pairs_for_test: true});
-	        	} else {
-					coins = _.filter(response.data, {has_enabled_pairs: true});
-	        	}
+export const fetchPrice = payload => dispatch => {
+  let url = `${config.API_BASE_URL}/get_price/${payload.pair}/?`;
 
-	        	dispatch({type: 'COINS_INFO', payload: coins});
-	        }).catch(error => {
-	        	console.log(error);
-	        });    
-    };
-}
+  if (payload.deposit) {
+    url += `amount_quote=${payload.deposit}`;
+  } else if (payload.receive) {
+    url += `amount_base=${payload.receive}`;
+  }
 
-export function fetchPrice(payload) {
-	const url = `${config.API_BASE_URL}/price/${payload.pair}/latest/`;
-	const request = axios.get(url);
+  const request = axios.get(url);
 
-    return (dispatch, getState) => {
-        request
-	        .then(response => {
-	        	if (!response.data.length) return;
+  return request
+    .then(response => {
+      let data = {
+        pair: payload.pair,
+      };
 
-	        	dispatch({type: 'PRICE_FETCHED', payload: {
-	        		price: response.data[0].ticker.ask,
-	        		pair: payload.pair,
-	        		lastFetched: new moment(),
-	        	}});
+      if ('receive' in payload) {
+        data['deposit'] = response.data.amount_quote;
+        data['receive'] = payload.receive;
+        data['lastEdited'] = 'receive';
+      } else if ('deposit' in payload) {
+        data['deposit'] = payload.deposit;
+        data['receive'] = response.data.amount_base;
+        data['lastEdited'] = 'deposit';
+      } else {
+        data['deposit'] = response.data.amount_quote;
+        data['receive'] = response.data.amount_base;
+        data['lastEdited'] = payload.lastEdited;
+      }
 
-	        	if (payload.amount) {
-		        	dispatch({type: 'UPDATE_AMOUNTS', payload: {
-		        		price: response.data[0].ticker.ask,
-		        		amount: payload.amount,
-		        		lastEdited: payload.lastEdited,
-		        	}});
-	        	}
-	        }).catch(error => {
-	        	console.log(error);
-	        });    
-    };
-}
+      dispatch({ type: types.PRICE_FETCHED, payload: data });
+
+      dispatch({
+        type: types.ERROR_ALERT,
+        payload: {
+          show: false,
+          type: types.INVALID_AMOUNT,
+        },
+      });
+    })
+    .catch(error => {
+      let data = { pair: payload.pair };
+
+      if ('receive' in payload) {
+        data['deposit'] = '...';
+        data['receive'] = payload.receive;
+        data['lastEdited'] = 'receive';
+      } else if ('deposit' in payload) {
+        data['deposit'] = payload.deposit;
+        data['receive'] = '...';
+        data['lastEdited'] = 'deposit';
+      }
+
+      dispatch({ type: types.PRICE_FETCHED, payload: data });
+
+      if (error.response && error.response.data) {
+        dispatch(
+          errorAlert({
+            message: error.response.data.detail,
+            show: true,
+            type: types.INVALID_AMOUNT,
+          })
+        );
+      }
+    });
+};
+
+export const fetchPairs = payload => {
+  const url = `${config.API_BASE_URL}/pair/`;
+  const request = axios.get(url);
+
+  return (dispatch, getState) => {
+    request
+      .then(response => {
+        if (!response.data.length) return;
+
+        const pairs = preparePairs(response.data);
+
+        dispatch({ type: types.PAIRS_FETCHED, payload: pairs });
+
+        let depositCoin, receiveCoin;
+
+        const pickRandomReceiveCoin = coins => {
+          let objKeys = Object.keys(coins),
+            randomCoin = objKeys[Math.floor(Math.random() * objKeys.length)];
+
+          return randomCoin;
+        };
+
+        // Picks random deposit and receive coins.
+        const pickRandomCoins = coins => {
+          depositCoin = coins[Math.floor(Math.random() * coins.length)].code;
+          receiveCoin = pickRandomReceiveCoin(pairs[depositCoin]);
+
+          // If pair is invalid, try again until valid
+          if (
+            !_.filter(coins, {
+              code: receiveCoin,
+              is_base_of_enabled_pair: true,
+            }).length ||
+            pairs[depositCoin][receiveCoin] === false
+          ) {
+            pickRandomCoins(coins);
+          }
+        };
+        pickRandomCoins(payload);
+
+        dispatch(
+          selectCoin({
+            deposit: depositCoin,
+            receive: receiveCoin,
+            prev: {
+              deposit: depositCoin,
+              receive: receiveCoin,
+            },
+            lastSelected: 'deposit',
+          })
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const setOrder = order => ({
+  type: types.SET_ORDER,
+  order,
+});
+
+export const fetchOrder = orderId => async dispatch => {
+  const url = `${config.API_BASE_URL}/orders/${orderId}/`;
+  const request = axios.get(url);
+
+  return request
+    .then(res => {
+      const order = res.data;
+      dispatch(setOrder(order));
+    })
+    .catch(error => {
+      if (error.response && error.response.status === 429) {
+        dispatch(setOrder(429));
+      } else if (error.response) {
+        dispatch(setOrder(404));
+      }
+    });
+};
+
+export const fetchKyc = orderId => async dispatch => {
+  const url = `${config.API_BASE_URL}/kyc/${orderId}/`;
+  const request = axios.get(url);
+
+  return request.then(res => dispatch({ type: types.SET_KYC, kyc: res.data })).catch(error => {});
+};
+
+export const fetchUserEmail = () => async dispatch => {
+  if (!localStorage.token) return;
+
+  const url = `${config.API_BASE_URL}/users/me/`;
+  const request = axios.get(url);
+
+  return request.then(res => dispatch({ type: types.SET_EMAIL, value: res.data.email }));
+};
+
+export const setUserEmail = email => async dispatch => {
+  if (!localStorage.token) return;
+
+  const url = `${config.API_BASE_URL}/users/me/`;
+  const request = axios.put(url, { email });
+
+  return request
+    .then(res => {
+      if (!window.$crisp.get('user:email')) {
+        window.$crisp.push(['set', 'user:email', [email]]);
+      }
+
+      dispatch({
+        type: types.SET_EMAIL_AND_MESSAGE,
+        value: res.data.email,
+        message: {
+          text: i18n.t('notify.successmail'),
+          error: false,
+        },
+      });
+    })
+    .catch(error => {
+      let errorMessage = i18n.t('generalterms.formfailed');
+
+      if (error.response && error.response.data && error.response.data.email.length && error.response.data.email[0]) {
+        errorMessage = error.response.data.email[0];
+      }
+
+      dispatch({
+        type: types.SET_EMAIL_AND_MESSAGE,
+        value: '',
+        message: {
+          text: errorMessage,
+          error: true,
+        },
+      });
+    });
+};

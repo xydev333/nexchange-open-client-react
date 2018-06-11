@@ -4,146 +4,252 @@ import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import config from '../config';
 
-import { errorAlert, updateAmounts, fetchPrice } from '../actions/index.js';
-
+import { fetchPrice } from '../actions/index.js';
 
 class CoinPrices extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			rates: {
-				btceth: null,
-				btcltc: null,
-				dogebtc: null,
-				ethltc: null,
-				dogeeth: null,
-				dogeltc: null,
-			},
-			change: {
-				btceth: null,
-				btcltc: null,
-				dogebtc: null,
-				ethltc: null,
-				dogeeth: null,
-				dogeltc: null,
-			}
-		}
+    this.state = {
+      rates: {
+        ethbtc: null,
+        ltcbtc: null,
+        bdgbtc: null,
+        btcdoge: null,
+        ltceth: null,
+        dogeeth: null,
+        ltcdoge: null,
+        btcusd: null,
+        ltcusd: null,
+        ethusd: null,
+      },
+      change: {
+        ethbtc: null,
+        bdgbtc: null,
+        ltcbtc: null,
+        btcdoge: null,
+        ltceth: null,
+        dogeeth: null,
+        ltcdoge: null,
+        btcusd: null,
+        ltcusd: null,
+        ethusd: null,
+      },
+    };
 
-		this.fetchPrice = this.fetchPrice.bind(this);
-		this.fetchPrices = this.fetchPrices.bind(this);
-	}
+    this.fetchPrice = this.fetchPrice.bind(this);
+    this.fetchPrices = this.fetchPrices.bind(this);
+  }
 
-	componentDidMount() {
-		this.fetchPrices();
-	}
+  componentDidMount() {
+    this.fetchPrices();
+  }
 
-	fetchPrices() {
-		this.fetchPrice('btceth');
-		this.fetchPrice('btcltc');
-		this.fetchPrice('dogebtc');
-		this.fetchPrice('ethltc');
-		this.fetchPrice('dogeeth');
-		this.fetchPrice('dogeltc');
+  fetchPrices() {
+    this.fetchPrice('ethbtc');
+    this.fetchPrice('bdgbtc');
+    this.fetchPrice('ltcbtc');
+    this.fetchPrice('btcdoge');
+    this.fetchPrice('ltceth');
+    this.fetchPrice('ltcdoge');
+    this.fetchPrice('btcusd');
+    this.fetchPrice('ltcusd');
+    this.fetchPrice('ethusd');
 
-		this.timeout = setTimeout(() => {
-			this.fetchPrices();
-		}, config.PRICE_FETCH_INTERVAL);
-	}
+    this.timeout = setTimeout(() => {
+      this.fetchPrices();
+    }, config.PRICE_FETCH_INTERVAL);
+  }
 
-	fetchPrice(pair) {
-		const url = `${config.API_BASE_URL}/price/${pair}/latest/`;
+  fetchPrice(pair) {
+    const url = `${config.API_BASE_URL}/price/${pair}/latest/`;
 
-		axios.get(url)
-	        .then(response => {
-	        	if (!response.data.length) return;
+    axios
+      .get(url)
+      .then(response => {
+        if (!response.data.length) return;
 
-	        	let rates = this.state.rates,
-	        		rate = 1 / parseFloat(response.data[0].ticker.ask);
-	        		
-	        	if (rates[pair] != null) {
-	        		let change = this.state.change;
+        let rates = this.state.rates,
+          rate = parseFloat(response.data[0].ticker.ask);
 
-	        		if (rate > rates[pair]) change[pair] = 'up';
-	        		else if (rate < rates[pair]) change[pair] = 'down';
+        if (rates[pair] != null) {
+          let change = this.state.change;
 
-	        		this.setState({change});
+          if (rate > rates[pair]) change[pair] = 'up';
+          else if (rate < rates[pair]) change[pair] = 'down';
 
-	        		if (pair.toLowerCase() == `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`.toLowerCase())
-						this.props.updateAmounts({amount: this.props.amounts[this.props.amounts.lastEdited], lastEdited: this.props.amounts.lastEdited, price: parseFloat(response.data[0].ticker.ask)});
+          this.setState({ change });
 
-	        		setTimeout(() => {
-	        			let change = this.state.change;
+          setTimeout(() => {
+            let change = this.state.change;
 
-	        			change[pair] = '';
-	        			this.setState({change});
-	        		}, 3000);
-	        	}
+            change[pair] = '';
+            this.setState({ change });
+          }, 3000);
+        }
 
-	        	rates[pair] = rate;
-	        	this.setState({rates});
-	        }).catch(error => {
-	        	console.log(error);
-	        });  
-	}
+        rates[pair] = rate;
+        this.setState({ rates });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
-	componentWillUnmount() {
-		clearTimeout(this.timeout);
-	}
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
 
-	render() {
-	    return (
-			<div className="col-xs-12 text-center">
-					<div id="coin-prices">
-						<div className={`coin-price ${this.state.change['btceth']}`} ref={el => { this.btceth = el; }}>
-							<h5>ETH/BTC</h5>
-							<h6>{this.state.rates.btceth ? this.state.rates.btceth.toFixed(5) : '...'}</h6>
-						</div>
+  render() {
+    return (
+      <div className="col-xs-12 text-center">
+        <div id="coin-prices">
+          <div
+            className={`coin-price ${this.state.change['ethbtc']}`}
+            ref={el => {
+              this.ethbtc = el;
+            }}
+          >
+            <h5>ETH/BTC</h5>
+            <h6>
+              {this.state.rates.ethbtc
+                ? this.state.rates.ethbtc.toFixed(5)
+                : '...'}
+            </h6>
+          </div>
 
-						<div className={`coin-price ${this.state.change['btcltc']}`} ref={el => { this.btcltc = el; }}>
-							<h5>LTC/BTC</h5>
-							<h6>{this.state.rates.btcltc ? this.state.rates.btcltc.toFixed(5) : '...'}</h6>
-						</div>
+          <div
+            className={`coin-price ${this.state.change['bdgbtc']}`}
+            ref={el => {
+              this.ethbtc = el;
+            }}
+          >
+            <h5>BDG/BTC</h5>
+            <h6>
+              {this.state.rates.bdgbtc
+                ? this.state.rates.bdgbtc.toFixed(6)
+                : '...'}
+            </h6>
+          </div>
 
-						<div className={`coin-price ${this.state.change['dogebtc']}`} ref={el => { this.dogebtc = el; }}>
-							<h5>BTC/DOGE</h5>
-							<h6>{this.state.rates.dogebtc ? this.state.rates.dogebtc.toFixed(1) : '...'}</h6>
-						</div>
+          <div
+            className={`coin-price ${this.state.change['ltcbtc']}`}
+            ref={el => {
+              this.ltcbtc = el;
+            }}
+          >
+            <h5>LTC/BTC</h5>
+            <h6>
+              {this.state.rates.ltcbtc
+                ? this.state.rates.ltcbtc.toFixed(5)
+                : '...'}
+            </h6>
+          </div>
 
-						<div className={`coin-price ${this.state.change['ethltc']}`} ref={el => { this.ethltc = el; }}>
-							<h5>LTC/ETH</h5>
-							<h6>{this.state.rates.ethltc ? this.state.rates.ethltc.toFixed(5) : '...'}</h6>
-						</div>
+          <div
+            className={`coin-price ${this.state.change['btcdoge']}`}
+            ref={el => {
+              this.btcdoge = el;
+            }}
+          >
+            <h5>BTC/DOGE</h5>
+            <h6>
+              {this.state.rates.btcdoge
+                ? this.state.rates.btcdoge.toFixed(1)
+                : '...'}
+            </h6>
+          </div>
 
-						<div className={`coin-price ${this.state.change['dogeeth']}`} ref={el => { this.dogeeth = el; }}>
-							<h5>ETH/DOGE</h5>
-							<h6>{this.state.rates.dogeeth ? this.state.rates.dogeeth.toFixed(1) : '...'}</h6>
-						</div>
+          <div
+            className={`coin-price ${this.state.change['ltceth']}`}
+            ref={el => {
+              this.ltceth = el;
+            }}
+          >
+            <h5>LTC/ETH</h5>
+            <h6>
+              {this.state.rates.ltceth
+                ? this.state.rates.ltceth.toFixed(5)
+                : '...'}
+            </h6>
+          </div>
 
-						<div className={`coin-price ${this.state.change['dogeltc']}`} ref={el => { this.dogeltc = el; }}>
-							<h5>LTC/DOGE</h5>
-							<h6>{this.state.rates.dogeltc ? this.state.rates.dogeltc.toFixed(1) : '...'}</h6>
-						</div>
-					</div>
-				</div>
-	    );
-	}
+          <div
+            className={`coin-price ${this.state.change['ltcdoge']}`}
+            ref={el => {
+              this.ltcdoge = el;
+            }}
+          >
+            <h5>LTC/DOGE</h5>
+            <h6>
+              {this.state.rates.ltcdoge
+                ? this.state.rates.ltcdoge.toFixed(1)
+                : '...'}
+            </h6>
+          </div>
+
+          <div
+            className={`coin-price ${this.state.change['btcusd']}`}
+            ref={el => {
+              this.btcusd = el;
+            }}
+          >
+            <h5>BTC/USD</h5>
+            <h6>
+              {this.state.rates.btcusd
+                ? this.state.rates.btcusd.toFixed(5)
+                : '...'}
+            </h6>
+          </div>
+
+          <div
+            className={`coin-price ${this.state.change['ltcusd']}`}
+            ref={el => {
+              this.ltcusd = el;
+            }}
+          >
+            <h5>LTC/USD</h5>
+            <h6>
+              {this.state.rates.ltcusd
+                ? this.state.rates.ltcusd.toFixed(5)
+                : '...'}
+            </h6>
+          </div>
+
+          <div
+            className={`coin-price ${this.state.change['ethusd']}`}
+            ref={el => {
+              this.ethusd = el;
+            }}
+          >
+            <h5>ETH/USD</h5>
+            <h6>
+              {this.state.rates.ethusd
+                ? this.state.rates.ethusd.toFixed(5)
+                : '...'}
+            </h6>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-
 function mapStateToProps(state) {
-	return {
-		selectedCoin: state.selectedCoin,
-		amounts: state.amounts,
-		price: state.price,
-	}
+  return {
+    selectedCoin: state.selectedCoin,
+    amounts: state.amounts,
+    price: state.price,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		updateAmounts: updateAmounts,
-		fetchPrice: fetchPrice,
-	}, dispatch)
+  return bindActionCreators(
+    {
+      fetchPrice: fetchPrice,
+    },
+    dispatch
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinPrices);

@@ -1,98 +1,110 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import _ from 'lodash';
-import axios from 'axios';
-import moment from 'moment'
-
-import config from '../config';
-import { errorAlert, updateAmounts, fetchPrice } from '../actions/index.js';
+import { I18n } from 'react-i18next';
+import { debounce } from 'throttle-debounce';
+import { fetchPrice } from '../actions/index.js';
 import CoinSelector from './CoinSelector';
 
+class CoinInput extends PureComponent {
+  constructor(props) {
+    super(props);
 
-class CoinInput extends Component {
-	constructor(props) {
-		super(props);
-		this.onChange = this.onChange.bind(this);
-	}
-	
-	onChange(event) {
-		let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
+    this.state = {
+      value: '...',
+    };
 
-		if (event.target.value == '') {
-			event.target.value = '';
-		}
+    this.fetchAmounts = debounce(450, this.fetchAmounts);
+  }
 
-		if (this.props.price.pair != pair || new moment().diff(this.props.price.lastFetched) > config.PRICE_FETCH_INTERVAL) {
-			this.props.fetchPrice({pair: pair, amount: event.target.value, lastEdited: this.props.type});
-		} else {
-			this.props.updateAmounts({amount: event.target.value, lastEdited: this.props.type, price: this.props.price.price});
-		}
+  onChange = event => {
+    let { value } = event.target;
+    const re = /^[0-9.,\b]+$/;
+    if (!re.test(value) && value !== '') return;
 
-		ga('send', 'event', 'Order', 'change amount');
-	}
+    value = value.replace(/,/g, '.');
+    this.setState({ value });
+    this.fetchAmounts(value);
 
-	validateReceiveAmount(value) {
-		let selectedCoin = this.props.selectedCoin['receive'],
-			minAmount = parseFloat(_.find(this.props.coinsInfo, {code: selectedCoin}).minimal_amount);
+    ga('send', 'event', 'Order', 'change amount');
+  };
 
-		//	maxAmount = _.find(this.props.coinsInfo, {code: selectedCoin}).max_amount;
+  onFocus = event => {
+    if (event.target.value === '...') {
+      this.setState({ value: '' });
+    }
+  };
 
-		if (value < minAmount || isNaN(value)) {
-			this.props.errorAlert({
-				message: `Receive amount for ${selectedCoin} cannot be less than ${minAmount}`,
-				show: true,
-				type: 'INVALID_AMOUNT'
-			});
-		
-		// } else if (value > maxAmount) {
-		// 	this.props.errorAlert({
-		// 		message: `Receive amount cannot be more than ${maxAmount}`,
-		// 		show: true,
-		// 		type: 'INVALID_AMOUNT'
-		// 	});
+  onBlur = event => {
+    if (event.target.value === '') {
+      this.setState({ value: '...' });
+    }
+  };
 
-		} else {
-			this.props.errorAlert({show: false, type: 'INVALID_AMOUNT'});
-		}
-	}
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit();
+  };
 
-	componentWillReceiveProps(nextProps) {
-		if (this.props.pair != nextProps.pair)
-			this.props.fetchPrice({pair: nextProps.pair, lastEdited: this.props.amounts.lastEdited, amount: this.props.amounts[this.props.amounts.lastEdited]});
+  fetchAmounts = value => {
+    let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
+    let data = {
+      pair: pair,
+      lastEdited: this.props.type,
+    };
 
-		if (this.props.type == 'receive' && nextProps.amounts.receive != this.props.amounts[this.props.type] && this.props.coinsInfo.length)
-			this.validateReceiveAmount(nextProps.amounts.receive)
-	}
+    data[this.props.type] = value;
+    this.props.fetchPrice(data);
+  };
 
-	render() {
-		return (
-		  <div className="form-group label-floating has-success is-focused">
-		    <label htmlFor={this.props.type} className="control-label text-green">{this.props.type}</label>
-		    <input type="number" className="form-control coin" id={`coin-input-${this.props.type}`} name={this.props.type} onChange={this.onChange} value={this.props.amounts[this.props.type]} />
+  focus = () => {
+    this.nameInput.focus();
+  };
 
-		    <CoinSelector type={this.props.type} />
-		  </div>
-		);
-	}
+  UNSAFE_componentWillReceiveProps = nextProps => {
+    if (nextProps.type === 'receive') {
+      this.setState({ value: nextProps.price.receive });
+    } else if (nextProps.type === 'deposit') {
+      this.setState({ value: nextProps.price.deposit });
+    }
+  };
+
+  render() {
+    return (
+	<I18n ns="translations">
+	{(t) => (
+      <div className="col-xs-12 col-sm-6">
+        <form className="form-group label-floating" onSubmit={this.handleSubmit}>
+          <label htmlFor={this.props.type} className="control-label text-green">
+            {t('order.'+this.props.type)}
+          </label>
+          <input
+            type="text"
+            className="form-control coin amount-input"
+            id={`coin-input-${this.props.type}`}
+            name={this.props.type}
+            onChange={this.onChange}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            value={this.state.value}
+            ref={input => {
+              this.nameInput = input;
+            }}
+          />
+
+          <CoinSelector type={this.props.type} onSelect={this.focus} />
+        </form>
+      </div>
+	)}
+	</I18n>
+    );
+  }
 }
 
+const mapStateToProps = ({ selectedCoin, price }) => ({ selectedCoin, price });
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchPrice }, dispatch);
 
-function mapStateToProps(state) {
-	return {
-		selectedCoin: state.selectedCoin,
-		coinsInfo: state.coinsInfo,
-		amounts: state.amounts,
-		price: state.price,
-	}
-}
-
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		errorAlert: errorAlert,
-		updateAmounts: updateAmounts,
-		fetchPrice: fetchPrice,
-	}, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CoinInput);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoinInput);

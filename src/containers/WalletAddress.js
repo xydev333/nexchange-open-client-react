@@ -1,91 +1,113 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { I18n, Interpolate } from 'react-i18next';
 import { errorAlert, setWallet } from '../actions/index.js';
-
+import validateWalletAddress from '../helpers/validateWalletAddress';
+import i18n from '../i18n';
 
 class WalletAddress extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = { address: '' }
-		this.onChange = this.onChange.bind(this);
-	}
+    this.state = { address: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    validateWalletAddress(address) {
-        let rules = {
-            BTC: /^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/,
-            LTC: /^L[1-9A-Za-z]{25,34}$/,
-            ETH: /^0x[0-9a-fA-F]{40}$/,
-            DOGE: /^D{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}$/,
-            XVG: /^D{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}$/,
-            BCH: /^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/
-        };
+  handleChange(event) {
+    let address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
+    const valid = validateWalletAddress(
+      address,
+      this.props.selectedCoin.receive,
+      () =>
+        this.props.errorAlert({
+          show: true,
+          message: `${address} ${i18n.t('error.novalid')} ${
+            this.props.selectedCoin.receive
+          } ${i18n.t('generalterms.address')}.`,
+        }),
+      () => this.props.errorAlert({ show: false })
+    );
 
-        let coin = this.props.selectedCoin.receive,
-        	isValid = rules[coin].test(address);
+    this.setState({ address });
 
-        if (!isValid) 
-        	this.props.errorAlert({show: true, message: `${address} is not a valid ${this.props.selectedCoin.receive} address.`});
-        else
-        	this.props.errorAlert({show: false});
+    this.props.setWallet({
+      address: address,
+      valid: valid,
+      show: true,
+    });
+  }
 
-        return isValid;
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit();
+  }
+
+  UNSAFE_componentWillMount() {
+    this.props.setWallet({ address: '', valid: false, show: false });
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.wallet.address != null &&
+      nextProps.wallet.address !== this.state.address
+    ) {
+      this.setState({ address: nextProps.wallet.address });
     }
+  }
 
-    onChange(event) {
-		let address = event.target.value.replace(' ', ''),
-			valid = this.validateWalletAddress(address);
+  render() {
+    return (
+	<I18n ns="translations">
+	{(t) => (
+      <div
+        id="wallet-address"
+        className={this.props.wallet.show ? 'col-xs-12 active' : 'col-xs-12'}
+      >
+        <form
+          className="form-group label-floating has-warning"
+          onSubmit={this.handleSubmit}
+        >
+          <label htmlFor="withdraw-addr" className="control-label text-green">
+            <Interpolate i18nKey="generalterms.youraddress" selectedCoin={this.props.selectedCoin.receive} />
+            {/* 
+             =>
+               Your selectedCoin Address
+            */}
+          </label>
 
-		this.setState({address: address});
-
-		this.props.setWallet({
-			address: address,
-			valid: valid,
-			show: true
-		});
-    }
-
-    componentWillMount() {
-    	this.props.setWallet({address: '', valid: false, show: false});
-    }
-
-    componentWillReceiveProps(nextProps) {
-    	if (nextProps.wallet.address != null && (nextProps.wallet.address != this.state.address)) {
-    		this.setState({address: nextProps.wallet.address});
-    	}
-
-    	if (nextProps.wallet.show && (this.props.wallet.show != nextProps.wallet.show)) {
-    		setTimeout(() => this.nameInput.focus(), 300);
-    	}
-    }
-
-	render() {
-		return (
-			<div id="wallet-address" className={this.props.wallet.show ? 'col-xs-12 active' : 'col-xs-12'}>
-				<div className="form-group label-floating has-warning">
-					<label htmlFor="withdraw-addr" className="control-label text-green">Your {this.props.selectedCoin.receive} Address</label>
-					<input type="text" ref={input => { this.nameInput = input; }} className="form-control addr" id="withdraw-addr" onChange={this.onChange} value={this.state.address} />
-				</div>
-			</div>
-		);
-	}
+          <input
+            type="text"
+            ref={this.props.inputRef}
+            className="form-control addr"
+            id="withdraw-addr"
+            onChange={this.handleChange}
+            value={this.state.address}
+          />
+        </form>
+      </div>
+	)}
+	</I18n>
+    );
+  }
 }
 
-
 function mapStateToProps(state) {
-	return {
-		selectedCoin: state.selectedCoin,
-		wallet: state.wallet,
-	}
+  return {
+    selectedCoin: state.selectedCoin,
+    wallet: state.wallet,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({
-		errorAlert: errorAlert,
-		setWallet: setWallet,
-	}, dispatch)
+  return bindActionCreators(
+    {
+      errorAlert: errorAlert,
+      setWallet: setWallet,
+    },
+    dispatch
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletAddress);
