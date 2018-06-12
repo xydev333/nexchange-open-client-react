@@ -16,21 +16,25 @@ describe('Order creation', function() {
       response: orderFiat,
     });
 
-    cy.visit('http://localhost:3000?pair=BTCETH');
+    cy.visit('http://localhost:3000');
 
-    cy.get('.selectedCoin-deposit')
+    cy
+      .get('.selectedCoin-deposit')
       .find('i.fa-angle-down')
       .click();
 
-    cy.get('.coin-currency-dropdown')
+    cy
+      .get('.coin-currency-dropdown')
       .contains('EUR')
       .click();
 
-    cy.get('.selectedCoin-receive')
+    cy
+      .get('.selectedCoin-receive')
       .find('i.fa-angle-down')
       .click();
 
-    cy.get('.coin-currency-dropdown')
+    cy
+      .get('.coin-currency-dropdown')
       .contains('XVG')
       .click();
 
@@ -54,19 +58,23 @@ describe('Order creation', function() {
       response: orderCrypto,
     });
 
-    cy.visit('http://localhost:3000?pair=BTCETH');
+    cy.visit('http://localhost:3000');
 
-    cy.get('.selectedCoin-deposit')
+    cy
+      .get('.selectedCoin-deposit')
       .find('i.fa-angle-down')
       .click();
-    cy.get('.coin-currency-dropdown')
+    cy
+      .get('.coin-currency-dropdown')
       .contains('BTC')
       .click();
 
-    cy.get('.selectedCoin-receive')
+    cy
+      .get('.selectedCoin-receive')
       .find('i.fa-angle-down')
       .click();
-    cy.get('.coin-currency-dropdown')
+    cy
+      .get('.coin-currency-dropdown')
       .contains('XVG')
       .click();
 

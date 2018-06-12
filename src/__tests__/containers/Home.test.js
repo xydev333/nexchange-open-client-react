@@ -6,7 +6,6 @@ describe('Home', () => {
   const mockfetchCoinDetails = jest.fn();
   const props = {
     fetchCoinDetails: mockfetchCoinDetails,
-    fetchPairs: mockfetchCoinDetails,
     coinsInfo: [],
   };
   const home = shallow(<Home {...props} />);
