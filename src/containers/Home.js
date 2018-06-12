@@ -15,7 +15,16 @@ import Trustpilot from '../components/Trustpilot';
 export class Home extends Component {
   componentDidMount() {
     this.props.fetchCoinDetails();
-    this.props.fetchPairs();
+
+    if (this.props.coinsInfo.length) {
+      this.props.fetchPairs(this.props.coinsInfo);
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (this.props.coinsInfo.length !== nextProps.coinsInfo.length) {
+      this.props.fetchPairs(nextProps.coinsInfo);
+    }
   }
 
   render() {
