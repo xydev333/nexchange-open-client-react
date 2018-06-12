@@ -1,7 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TeamMember from '../components/Home/About/TeamMember/TeamMember';
+import TeamMember from '../components/TeamMember';
 import '../css/index.scss';
+require('react-fa');
 
 storiesOf('Team', module)
   .addDecorator(story => (
