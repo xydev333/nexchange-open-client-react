@@ -1,12 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Home } from '../../components/Home/Home';
+import { Home } from '../../containers/Home';
 
 describe('Home', () => {
   const mockfetchCoinDetails = jest.fn();
   const props = {
     fetchCoinDetails: mockfetchCoinDetails,
-    fetchPairs: mockfetchCoinDetails,
     coinsInfo: [],
   };
   const home = shallow(<Home {...props} />);

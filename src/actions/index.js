@@ -1,9 +1,10 @@
 import axios from 'axios';
 import * as types from './types';
 import _ from 'lodash';
-import config from 'Config';
-import urlParams from 'Utils/urlParams';
-import preparePairs from 'Utils/preparePairs';
+import config from '../config';
+import urlParams from '../helpers/urlParams';
+import preparePairs from '../helpers/preparePairs';
+import i18n from '../i18n';
 
 export const errorAlert = payload => ({
   type: types.ERROR_ALERT,
@@ -125,52 +126,45 @@ export const fetchPrice = payload => dispatch => {
     });
 };
 
-export const fetchPairs = () => {
+export const fetchPairs = payload => {
   const url = `${config.API_BASE_URL}/pair/`;
   const request = axios.get(url);
 
   return (dispatch, getState) => {
     request
-      .then(async response => {
+      .then(response => {
         if (!response.data.length) return;
 
-        const pairs = response.data.filter(pair => !pair.disabled);
-        const processedPairs = preparePairs(pairs);
-        dispatch({ type: types.PAIRS_FETCHED, payload: processedPairs });
+        const pairs = preparePairs(response.data);
+
+        dispatch({ type: types.PAIRS_FETCHED, payload: pairs });
 
         let depositCoin, receiveCoin;
-        const coinsFromUrlParams = params => {
-          return new Promise((resolve, reject) => {
-            axios
-              .get(`${config.API_BASE_URL}/pair/${params['pair']}`)
-              .then(res => resolve(res.data))
-              .catch(err => reject(err));
-          });
-        };
 
-        const pickRandomPair = async () => {
-          const pair = pairs[Math.floor(Math.random() * pairs.length)];
-          depositCoin = pair.quote;
-          receiveCoin = pair.base;
+        const pickRandomReceiveCoin = coins => {
+          let objKeys = Object.keys(coins),
+            randomCoin = objKeys[Math.floor(Math.random() * objKeys.length)];
+
+          return randomCoin;
         };
 
         // Picks random deposit and receive coins.
-        const pickCoins = async () => {
-          // Checks if url has params. If yes then update accordingly and if no then pick random coins.
-          const params = urlParams();
-          if (params && params.hasOwnProperty('pair')) {
-            try {
-              const pair = await coinsFromUrlParams(params);
-              depositCoin = pair.quote;
-              receiveCoin = pair.base;
-            } catch (err) {
-              console.log('Error:', err);
-            }
-          } else {
-            pickRandomPair();
+        const pickRandomCoins = coins => {
+          depositCoin = coins[Math.floor(Math.random() * coins.length)].code;
+          receiveCoin = pickRandomReceiveCoin(pairs[depositCoin]);
+
+          // If pair is invalid, try again until valid
+          if (
+            !_.filter(coins, {
+              code: receiveCoin,
+              is_base_of_enabled_pair: true,
+            }).length ||
+            pairs[depositCoin][receiveCoin] === false
+          ) {
+            pickRandomCoins(coins);
           }
         };
-        await pickCoins();
+        pickRandomCoins(payload);
 
         dispatch(
           selectCoin({
@@ -245,13 +239,13 @@ export const setUserEmail = email => async dispatch => {
         type: types.SET_EMAIL_AND_MESSAGE,
         value: res.data.email,
         message: {
-          text: 'Success, you set your email.',
+          text: i18n.t('notify.successmail'),
           error: false,
         },
       });
     })
     .catch(error => {
-      let errorMessage = 'Something went wrong. Try again later.';
+      let errorMessage = i18n.t('generalterms.formfailed');
 
       if (error.response && error.response.data && error.response.data.email.length && error.response.data.email[0]) {
         errorMessage = error.response.data.email[0];
