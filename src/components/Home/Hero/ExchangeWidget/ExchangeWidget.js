@@ -141,8 +141,6 @@ class ExchangeWidget extends Component {
                 {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
               </button>
             )}
-
-            <p id="fee-info">The indicated price is final, all fees are included.</p>
           </div>
         </div>
       </div>
