@@ -120,7 +120,18 @@ class FAQ extends Component {
 
             <QuestionAnswer
               question="Do you collect any private information?"
-              answer={<p>We do not collect or store any private information about you. The process is completely anonymous.</p>}
+              answer={
+                <p>
+                  For cryptocurrency only exchange orders , We do not collect or store any private information about you. The process is
+                  completely anonymous. For FIAT (USD,GBP,EUR etc) orders we do a strict compliance according to best KYC/AML standards out
+                  there.{' '}
+                </p>
+              }
+            />
+
+            <QuestionAnswer
+              question="What is the procedure to 'Get Verified' for FIAT to Cryptocurrency Exchange orders?"
+              answer={<img src="/img/verification.png" alt="Verification" />}
             />
 
             <QuestionAnswer
