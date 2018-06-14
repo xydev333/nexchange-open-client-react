@@ -3,13 +3,11 @@ import _ from 'lodash';
 import Fuse from 'fuse.js';
 import cx from 'classnames';
 import urlParams from 'Utils/urlParams';
+import debounce from 'Utils/debounce';
 import styles from './CoinsDropdown.css';
 
 class CoinsDropdown extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
-  }
+  state = { value: '' };
 
   componentDidMount = () => {
     this.searchInput.focus();
@@ -31,6 +29,15 @@ class CoinsDropdown extends Component {
     this.setState({ value: '' });
   };
 
+  trackEvent = debounce(coinSearched => {
+    window.ga('send', {
+      hitType: 'event',
+      eventCategory: 'Coins dropdown search',
+      eventAction: this.props.type,
+      eventValue: coinSearched,
+    });
+  }, 300);
+
   searchCoins = coins => {
     if (!this.state.value) return coins;
 
@@ -39,6 +46,8 @@ class CoinsDropdown extends Component {
       threshold: 0.2,
       keys: ['code', 'name'],
     });
+
+    this.trackEvent(this.state.value);
 
     return fuse.search(this.state.value);
   };
