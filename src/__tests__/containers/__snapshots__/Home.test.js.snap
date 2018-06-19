@@ -22,11 +22,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Hero
-          coinsInfo={Array []}
-          fetchCoinDetails={[Function]}
-          fetchPairs={[Function]}
-/>,
+        <Hero />,
         <Connect(RecentOrders) />,
         <Testimonials />,
         <PriceComparison />,
@@ -40,11 +36,7 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
-        "props": Object {
-          "coinsInfo": Array [],
-          "fetchCoinDetails": [Function],
-          "fetchPairs": [Function],
-        },
+        "props": Object {},
         "ref": null,
         "rendered": null,
         "type": [Function],
@@ -104,11 +96,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Hero
-            coinsInfo={Array []}
-            fetchCoinDetails={[Function]}
-            fetchPairs={[Function]}
-/>,
+          <Hero />,
           <Connect(RecentOrders) />,
           <Testimonials />,
           <PriceComparison />,
@@ -122,11 +110,7 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "class",
-          "props": Object {
-            "coinsInfo": Array [],
-            "fetchCoinDetails": [Function],
-            "fetchPairs": [Function],
-          },
+          "props": Object {},
           "ref": null,
           "rendered": null,
           "type": [Function],
