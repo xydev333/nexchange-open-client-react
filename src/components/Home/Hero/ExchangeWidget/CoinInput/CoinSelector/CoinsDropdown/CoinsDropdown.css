@@ -9,7 +9,7 @@
   transition: all 100ms linear;
   position: absolute;
   right: 0;
-  top: 61px;
+  top: 32px;
   z-index: 500;
   background: #fff;
 }
