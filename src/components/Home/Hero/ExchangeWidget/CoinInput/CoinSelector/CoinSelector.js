@@ -52,21 +52,9 @@ class CoinSelector extends Component {
       });
     }
 
-    // Check if pair is valid. If not, show error.
-    if (nextDepositCoin && nextReceiveCoin && this.props.pairs[nextDepositCoin] && !this.props.pairs[nextDepositCoin][nextReceiveCoin]) {
-      const validPairs = Object.keys(this.props.pairs[nextDepositCoin])
-        .map(coin => coin)
-        .filter(coin => this.props.pairs[nextDepositCoin][coin] === true)
-        .join(', ');
-
-      this.props.errorAlert({
-        message: `You cannot buy ${nextReceiveCoin} with ${nextDepositCoin}. Try ${validPairs}.`,
-        show: true,
-        type: 'INVALID_PAIR',
-      });
-      // This condition means that selected coin has been changed and price
-      // needs to be refetched.
-    } else if (
+    // This condition means that selected coin has been changed and price
+    // needs to be refetched.
+    if (
       currentDepositCoin !== null &&
       this.props.selectedCoin[type] !== nextProps.selectedCoin[type] &&
       ((type === 'deposit' && lastSelected === 'deposit') || (type === 'receive' && lastSelected === 'receive'))
@@ -84,6 +72,20 @@ class CoinSelector extends Component {
       }
 
       this.props.fetchPrice(data);
+    }
+
+    // Check if pair is valid. If not, show error.
+    if (nextDepositCoin && nextReceiveCoin && !this.props.pairs[nextDepositCoin][nextReceiveCoin]) {
+      const validPairs = Object.keys(this.props.pairs[nextDepositCoin])
+        .map(coin => coin)
+        .filter(coin => this.props.pairs[nextDepositCoin][coin] === true)
+        .join(', ');
+
+      this.props.errorAlert({
+        message: `You cannot buy ${nextReceiveCoin} with ${nextDepositCoin}. Try ${validPairs}.`,
+        show: true,
+        type: 'INVALID_PAIR',
+      });
     }
   };
 
