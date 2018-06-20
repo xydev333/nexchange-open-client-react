@@ -11,7 +11,7 @@ class OrderPaymentTemplate extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ showKYCModal: this.props.showInitial });
-    }, 5000);
+    }, 1000);
   }
 
   render() {
@@ -24,9 +24,9 @@ class OrderPaymentTemplate extends Component {
         {this.props.children}
         {user_visible_comment &&
           (!is_verified || out_of_limit) && (
-            <h3 className={styles.subtitle} style={{ marginBottom: 5 }}>
+            <p>
               <b>Reason for rejection:</b> {user_visible_comment}
-            </h3>
+            </p>
           )}
 
         {this.props.buttonText && (
