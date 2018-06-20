@@ -38,7 +38,6 @@ class CoinSelector extends Component {
 
   UNSAFE_componentWillReceiveProps = nextProps => {
     const lastSelected = nextProps.selectedCoin.lastSelected;
-    const lastEditedPrice = nextProps.price.lastEdited;
     const currentDepositCoin = this.props.selectedCoin.deposit;
     const nextReceiveCoin = nextProps.selectedCoin.receive;
     const nextDepositCoin = nextProps.selectedCoin.deposit;
@@ -78,13 +77,13 @@ class CoinSelector extends Component {
     ) {
       const data = {
         pair: `${nextReceiveCoin}${nextDepositCoin}`,
-        lastEdited: lastEditedPrice,
+        lastEdited: lastSelected,
         coinSelector: true,
       };
 
-      if (lastEditedPrice === 'deposit') {
+      if (lastSelected === 'deposit') {
         data['deposit'] = nextProps.price.deposit;
-      } else if (lastEditedPrice === 'receive') {
+      } else if (lastSelected === 'receive') {
         data['receive'] = nextProps.price.receive;
       }
 
