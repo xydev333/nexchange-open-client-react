@@ -1,30 +1,30 @@
 import React from 'react';
 import TeamMember from './TeamMember/TeamMember';
+import { I18n, Trans } from 'react-i18next';
 
 const About = () => (
+<I18n ns="translations">
+{(t) => (
   <div id="about">
     <div className="container">
       <div className="row">
         <div className="col-xs-12">
-          <h2>About Us</h2>
+          <h2>{t('about.title')}</h2>
 
           <p>
-            N.exchange is a fast, reliable and fully transparent cryptocurrency exchange built by crypto enthusiasts, for crypto
-            enthusiasts.
+            {t('about.1')}
           </p>
-          <p>We are a group of multi-national, multi-disciplinary cryptocurrency professionals.</p>
+          <p>{t('about.2')}</p>
           <p>
-            Our team came together to make this platform after seeing firsthand the need for a fast and reliable exchange on the crypto
-            market.
+            {t('about.3')}
           </p>
           <p>
-            We pride ourselves on total transparency: Everything is viewable through our API, starting from order lists and ending with our
-            coin reserves.{' '}
+            {t('about.4')}
           </p>
           <p>
-            N.exchange is built on several core values that guide our team in our day to day operations. Among them are complete
-            transparency, a strive to help make cryptocurrency as accessible as possible, and a passion for open source.
+            {t('about.5')}
           </p>
+          <Trans i18nKey="about.6">
           <p>
             To support our mission of making crypto accessible to everyone, we’ve made our{' '}
             <b>
@@ -33,19 +33,15 @@ const About = () => (
               </a>
             </b>.
           </p>
+          </Trans>
 
           <div id="team-members" className="row">
             <TeamMember
               id="oleg"
               name="Oleg Belousov"
               country="IL"
-              fullCountryName="Israel"
-              description={
-                <p>
-                  Multidisciplinary coder. Aspiring innovator with a deep passion for open source and making the world better, step by step,
-                  every single day.
-                </p>
-              }
+              fullCountryName={t('about.israel')}
+              description={t('about.oleg')}
               social={{
                 linkedin: 'https://www.linkedin.com/in/oleg-belousov-b4112145/',
                 twitter: 'https://twitter.com/iooleg',
@@ -58,8 +54,8 @@ const About = () => (
               id="sarunas"
               name="Šarūnas Ažna"
               country="LT"
-              fullCountryName="Lithuania"
-              description={<p>Backend developer and physicist. Animation fan, cryptocurrencies enthusiast and plays the saxophone.</p>}
+              fullCountryName={t('about.lithuania')}
+              description={t('about.sarunas')}
               social={{
                 linkedin: 'https://www.linkedin.com/in/%C5%A1ar%C5%ABnas-a%C5%BEna-102220b2/',
                 github: 'https://github.com/SarunasAzna',
@@ -70,8 +66,8 @@ const About = () => (
               id="karolis"
               name="Karolis Ramanauskas"
               country="LT"
-              fullCountryName="Lithuania"
-              description={<p>Full-stack developer. Entrepreneur by heart. Enjoys bringing products to life through code.</p>}
+              fullCountryName={t('about.lithuania')}
+              description={t('about.karolis')}
               social={{
                 linkedin: 'https://www.linkedin.com/in/karolisram/',
                 github: 'https://github.com/superkarolis/',
@@ -101,12 +97,8 @@ const About = () => (
               id="justas"
               name="Justas Ažna"
               country="LT"
-              fullCountryName="Lithuania"
-              description={
-                <p>
-                  DevOps orchestrator. Shuffling Docker, Swarm & Kubernetes. Proponent for micro-component design and seamless scalability.
-                </p>
-              }
+              fullCountryName={t('about.lithuania')}
+              description={t('about.justas')}
               social={{
                 linkedin: 'https://www.linkedin.com/in/justasazna/',
                 github: 'https://github.com/reederz',
@@ -117,13 +109,8 @@ const About = () => (
               id="paulina"
               name="Paulina Bagińska"
               country="PL"
-              fullCountryName="Poland"
-              description={
-                <p>
-                  Product management magician. Loves to build and improve product usability. Blockchain novice. Women in tech supporter and
-                  recreational weight lifter.
-                </p>
-              }
+              fullCountryName={t('about.poland')}
+              description={t('about.paulina')}
               social={{
                 linkedin: 'https://www.linkedin.com/in/baginskapaulina/',
                 twitter: 'https://twitter.com/PaulinaBGGC',
@@ -134,11 +121,10 @@ const About = () => (
               id="cyrus"
               name="Cyrus Ghazanfar"
               country="US"
-              fullCountryName="United States"
+              fullCountryName={t('about.US')}
               description={
                 <p>
-                  Cornell University MEng, Computer Science.<br />
-                  Passionate about programming, astronomy and decentralised and distributed systems.
+                  {t('about.cyrus')}
                 </p>
               }
               social={{
@@ -151,8 +137,9 @@ const About = () => (
 
             <TeamMember
               id="you"
-              name="You?"
+              name={t('about.you')}
               description={
+                <Trans i18nKey="about.youdesc">
                 <div>
                   <p>
                     We are actively hiring for the N.exchange dream team. We are especially on the lookout for talented developers,
@@ -162,6 +149,7 @@ const About = () => (
                     Drop us a line at <a href="mailto:careers@n.exchange">careers@n.exchange</a>.
                   </p>
                 </div>
+                </Trans>
               }
             />
           </div>
@@ -169,6 +157,8 @@ const About = () => (
       </div>
     </div>
   </div>
+)}
+</I18n>
 );
 
 export default About;

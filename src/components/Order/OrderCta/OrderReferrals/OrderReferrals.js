@@ -4,6 +4,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import OrderReferralTerms from './OrderReferralTerms/OrderReferralTerms';
 import Man from './images/man.png';
 import styles from '../OrderCta.scss';
+import { I18n } from 'react-i18next';
 
 class OrderReferrals extends Component {
   state = {
@@ -30,6 +31,8 @@ class OrderReferrals extends Component {
 
   renderForm() {
     return (
+    <I18n ns="translations">
+     {(t) => (
       <div>
         <div className={styles['form-group']}>
           <CopyToClipboard text={this.state.link} onCopy={() => this.triggerCopyTooltip()}>
@@ -45,7 +48,7 @@ class OrderReferrals extends Component {
 
           <CopyToClipboard text={this.state.link} onCopy={() => this.triggerCopyTooltip()}>
             <button id="copy-to-clipboard-link" type="button" className={`btn btn-primary ${styles.btn}`}>
-              Copy link
+              {t('referral.copylink')}
             </button>
           </CopyToClipboard>
 
@@ -59,7 +62,7 @@ class OrderReferrals extends Component {
                 className={styles.link}
                 href={`https://twitter.com/intent/tweet?url=${
                   this.state.link
-                }&text=I’m%20using%20N.exchange,%20the%20easiest%20and%20fastest%20cryptocurrency%20exchange!`}
+                }&text=${t('referral.twitter')}`}
                 target="_blank"
               >
                 <i className="fab fa-twitter" aria-hidden="true" />
@@ -71,33 +74,39 @@ class OrderReferrals extends Component {
           </h4>
         </div>
       </div>
+      )}
+	 </I18n>
     );
   }
 
   render() {
     return (
+    <I18n ns="translations">
+     {(t) => (
       <div className="col-xs-12">
         <div className={`box ${styles.container}`}>
           <div className="row">
             <div className="col-xs-12 visible-xs text-center">
-              <img className={styles.img} src={Man} alt="Get notified" />
+              <img className={styles.img} src={Man} alt={t('notify.alt')} />
             </div>
 
             <div className={`col-xs-12 col-sm-7 ${styles.text}`}>
               <h2 className={styles.title}>
-                By the way, if you want you can share this unique referral link with your friends to earn some coins!
+                {t('referral.affiliate')}
               </h2>
               {this.renderForm()}
             </div>
 
             <div className="col-ms-2 col-sm-5 hidden-xs text-center">
-              <img className={styles.img} src={Man} alt="Get notified" />
+              <img className={styles.img} src={Man} alt={t('notify.alt')} />
             </div>
           </div>
         </div>
 
         <OrderReferralTerms show={this.state.showTermsModal} onClose={() => this.setState({ showTermsModal: false })} />
       </div>
+      )}
+	 </I18n>     
     );
   }
 }

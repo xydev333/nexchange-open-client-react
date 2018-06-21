@@ -4,8 +4,16 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
+import './i18n';
+
+import './css/index.scss';
+
+import 'expose-loader?$!jquery';
+import 'expose-loader?jQuery!jquery';
+
 
 import Referrals from 'Components/Referrals/Referrals';
+import Header from 'Components/Header/Header';
 import Footer from 'Components/Footer/Footer';
 import NotFound from 'Components/NotFound/NotFound';
 
@@ -35,6 +43,7 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Referrals />
+        <Header />
 
         <Switch>
           <Route exact path="/terms-and-conditions" component={TermsConditions} />
