@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import GetNotified from './images/get-notified.png';
 import styles from '../OrderCta.scss';
-import { I18n } from 'react-i18next';
 
 class OrderNotifications extends Component {
   renderForm() {
     return (
-    <I18n ns="translations">
-     {(t) => (
       <form onSubmit={this.props.handleSubmit}>
         <div className={styles['form-group']}>
           <input
             type="email"
             name="email"
-            placeholder={t('notify.email')}
+            placeholder="Enter your e-mail address"
             onChange={this.props.handleChange}
             value={this.props.email}
             disabled={this.props.emailFetched}
@@ -21,41 +18,35 @@ class OrderNotifications extends Component {
           />
 
           <button type="submit" className={`btn btn-primary ${styles.btn}`} disabled={this.props.emailFetched}>
-            {t('generalterms.submit')}
+            Submit
           </button>
 
           {this.props.message.text && <h4 className={styles.message}>{this.props.message.text}</h4>}
         </div>
       </form>
-      )}
-	 </I18n>
     );
   }
 
   render() {
     return (
-    <I18n ns="translations">
-     {(t) => (
       <div className="col-xs-12">
         <div className={`box ${styles.container}`}>
           <div className="row">
             <div className="col-xs-12 visible-xs text-center">
-              <img className={styles.img} src={GetNotified} alt={t('notify.alt')} />
+              <img className={styles.img} src={GetNotified} alt="Get notified" />
             </div>
 
             <div className={`col-xs-12 col-sm-7 ${styles.text}`}>
-              <h2 className={styles.title}>{t('notify.explanation')}</h2>
+              <h2 className={styles.title}>If you would like to be notified about your order please enter your e-mail address below.</h2>
               {this.renderForm()}
             </div>
 
             <div className="col-ms-2 col-sm-5 hidden-xs text-center">
-              <img className={styles.img} src={GetNotified} alt={t('notify.alt')} />
+              <img className={styles.img} src={GetNotified} alt="Get notified" />
             </div>
           </div>
         </div>
       </div>
-      )}
-	 </I18n>
     );
   }
 }

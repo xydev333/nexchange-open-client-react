@@ -6,7 +6,6 @@ import { setUserEmail } from 'Actions';
 import OrderNotifications from './OrderNotifications/OrderNotifications';
 import OrderReferrals from './OrderReferrals/OrderReferrals';
 import config from 'Config';
-import { I18n } from 'react-i18next';
 
 class OrderCta extends Component {
   state = {
@@ -64,8 +63,6 @@ class OrderCta extends Component {
 
   render() {
     return (
-    <I18n ns="translations">
-    {(t) => (        
       <div>
         {!this.props.email.value &&
           this.state.show && (
@@ -80,8 +77,6 @@ class OrderCta extends Component {
 
         {this.props.email.value && this.state.show && <OrderReferrals order={this.props.order} />}
       </div>
-	 )}
-	</I18n>
     );
   }
 }

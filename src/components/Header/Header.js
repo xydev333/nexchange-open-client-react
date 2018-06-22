@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { I18n } from 'react-i18next';
 
 import FAQ from './FAQ/FAQ';
 import Support from './Support/Support';
-import LanguagePicker from './LanguagePicker/LanguagePicker'
+
+import styles from './Header.scss';
 
 let scrollToElement;
 
@@ -32,9 +32,7 @@ class Header extends Component {
 
   render() {
     return (
-	<I18n ns="translations">
-	{(t, { i18n }) => (
-      <div id="header">
+      <div className={styles.header}>
         <div className="container">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -45,8 +43,8 @@ class Header extends Component {
             </button>
 
             <Link to="/">
-              <div className="logo-container">
-                <img src="/img/logo.svg" alt="Logo" />
+              <div className={styles['logo-container']}>
+                <img src="/img/logo-white.svg" alt="Logo" />
               </div>
             </Link>
           </div>
@@ -54,45 +52,43 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="navigation-index">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a className="link" href="/#about" onClick={() => scrollToElement('#about')}>
-                  {t('header.about')}
+                <a className={styles.link} href="/#about" onClick={() => scrollToElement('#about')}>
+                  About
                 </a>
               </li>
 
               <li>
-                <a className="link" href="javascript:void(0)" onClick={() => this.setState({ showFaqModal: true })}>
-                  {t('header.faq')}
+                <a className={styles.link} href="javascript:void(0)" onClick={() => this.setState({ showFaqModal: true })}>
+                  FAQ
                 </a>
               </li>
 
               <li>
                 <a
-                  className="link hidden-sm"
+                  className={`${styles.link} hidden-sm`}
                   href="http://docs.nexchange2.apiary.io/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => ga('send', 'event', 'General', 'api docs click')}
                 >
-                  {t('header.apidocs')}
+                  API Docs
                 </a>
               </li>
 
               <li>
-                <a className="link" href="/#compare" onClick={() => scrollToElement('#compare')}>
-                  {t('header.compare')}
+                <a className={styles.link} href="/#compare" onClick={() => scrollToElement('#compare')}>
+                  Rates
                 </a>
               </li>
 
               <li>
-                <a className="link" href="javascript:void(0)" onClick={() => this.setState({ showSupportModal: true })}>
-                  {t('header.support')}
+                <a className={styles.link} href="javascript:void(0)" onClick={() => this.setState({ showSupportModal: true })}>
+                  Support
                 </a>
               </li>
 
-			  <LanguagePicker screenType="large"/>
-
-              <li id="ico-link">
-                <a href="https://n.exchange/ico" className="btn btn-block btn-primary">
+              <li className={styles['ico-link']}>
+                <a href="https://n.exchange/ico" className={`${styles.btn} btn btn-block btn-primary`}>
                   ICO
                 </a>
               </li>
@@ -113,7 +109,6 @@ class Header extends Component {
                 <a href="/telegram" target="_blank" rel="noopener noreferrer" className="link btn btn-simple btn-just-icon visible-xs">
                   <i className="fab fa-telegram" aria-hidden="true" />
                 </a>
-                <LanguagePicker screenType="small" />
               </li>
 
               <li className="visible-sm visible-md visible-lg social-desktop">
@@ -125,7 +120,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title={t('header.twitter')}
+                  data-original-title="Follow us on Twitter"
                 >
                   <i className="fab fa-twitter" aria-hidden="true" />
                 </a>
@@ -140,7 +135,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title={t('header.facebook')}
+                  data-original-title="Like us on Facebook"
                 >
                   <i className="fab fa-facebook-f" aria-hidden="true" />
                 </a>
@@ -155,7 +150,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title={t('header.slack')}
+                  data-original-title="Join us on Slack"
                 >
                   <i className="fab fa-slack-hash" aria-hidden="true" />
                 </a>
@@ -170,7 +165,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title={t('header.telegram')}
+                  data-original-title="Join us on Telegram"
                 >
                   <i className="fab fa-telegram" aria-hidden="true" />
                 </a>
@@ -182,8 +177,6 @@ class Header extends Component {
           <Support show={this.state.showSupportModal} onClose={() => this.setState({ showSupportModal: false })} />
         </div>
       </div>
-	)}
-	</I18n>
     );
   }
 }

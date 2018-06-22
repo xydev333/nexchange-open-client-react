@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import config from 'Config';
 import validateWalletAddress from 'Utils/validateWalletAddress';
-import { I18n } from 'react-i18next';
-import i18n from '../../../i18n';
 
 class OrderRefundAddress extends Component {
   constructor(props) {
@@ -44,9 +42,7 @@ class OrderRefundAddress extends Component {
         () => {
           this.setState({
             message: {
-              text: `${address} ${i18n.t('error.novalid')} ${
-                this.props.order.pair.quote.code
-              } ${i18n.t('exchangewidget.4')}`,
+              text: `${address} is not a valid ${this.props.order.pair.quote.code} address`,
               error: 'error',
             },
           });
@@ -82,7 +78,7 @@ class OrderRefundAddress extends Component {
       .then(data => {
         this.setState({
           message: {
-            text: i18n.t('refund.7'),
+            text: 'Success, you set a refund address.',
             error: false,
           },
         });
@@ -90,7 +86,7 @@ class OrderRefundAddress extends Component {
       .catch(error => {
         this.setState({
           message: {
-            text: i18n.t('refund.8'),
+            text: 'Something went wrong. Try again later.',
             error: true,
           },
         });
@@ -103,10 +99,8 @@ class OrderRefundAddress extends Component {
     }
 
     return (
-     <I18n ns="translations">
-	 {(t) => (
       <div>
-        <h2>{t('refund.10')}</h2>
+        <h2>Refund address</h2>
 
         <div className="row">
           <div className="col-xs-12 col-md-8 col-md-push-2">
@@ -117,7 +111,7 @@ class OrderRefundAddress extends Component {
                 <input
                   type="text"
                   name="refund-address"
-                  placeholder={t('refund.11')}
+                  placeholder="Refund address"
                   className="form-control"
                   value={this.state.address}
                   onChange={this.handleChange}
@@ -126,14 +120,12 @@ class OrderRefundAddress extends Component {
               </div>
 
               <button type="submit" className="btn btn-themed btn-lg" disabled={this.state.disabled}>
-                {t('refund.9')}
+                Set refund address
               </button>
             </form>
           </div>
         </div>
       </div>
-	 )}
-	 </I18n>
     );
   }
 }

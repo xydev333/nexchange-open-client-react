@@ -5,7 +5,6 @@ import cx from 'classnames';
 import urlParams from 'Utils/urlParams';
 import debounce from 'Utils/debounce';
 import styles from './CoinsDropdown.css';
-import { I18n } from 'react-i18next';
 
 class CoinsDropdown extends Component {
   state = { value: '' };
@@ -72,13 +71,11 @@ class CoinsDropdown extends Component {
 
   renderSearch = () => {
     return (
-    <I18n ns="translations">
-     {(t) => (
       <form className={styles['coins-search']} onSubmit={this.handleSubmit}>
         <i className="fas fa-search" aria-hidden="true" />
         <input
           type="text"
-          placeholder={t('generalterms.search')}
+          placeholder="Search"
           ref={input => (this.searchInput = input)}
           onChange={this.handleChange}
           value={this.state.value}
@@ -87,8 +84,6 @@ class CoinsDropdown extends Component {
           clear
         </i>
       </form>
-      )}
-	 </I18n>
     );
   };
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DesktopNotifications from './DesktopNotifications/DesktopNotifications';
-import { I18n } from 'react-i18next';
 import styles from '../../OrderState.scss';
 
 class OrderPaymentTemplate extends Component {
@@ -20,15 +19,13 @@ class OrderPaymentTemplate extends Component {
     const { user_visible_comment, is_verified, out_of_limit } = this.props.kyc;
 
     return (
-    <I18n ns="translations">
-    {(t) => (
       <div className={styles.container}>
         {this.props.title}
         {this.props.children}
         {user_visible_comment &&
           (!is_verified || out_of_limit) && (
             <h3 className={styles.subtitle} style={{ marginBottom: 5 }}>
-              <b>{t('order.fiat.status.reject')}:</b> {user_visible_comment}
+              <b>Reason for rejection:</b> {user_visible_comment}
             </h3>
           )}
 
@@ -59,8 +56,6 @@ class OrderPaymentTemplate extends Component {
           />
         )}
       </div>
-    )}
-    </I18n>
     );
   }
 }

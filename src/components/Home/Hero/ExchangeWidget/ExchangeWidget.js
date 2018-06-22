@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { I18n } from 'react-i18next';
-import i18n from '../../../../i18n';
 import axios from 'axios';
 import config from 'Config';
 
@@ -12,6 +10,8 @@ import { bindCrispEmail } from 'Utils/crispEmailBinding';
 
 import CoinInput from './CoinInput/CoinInput';
 import WalletAddress from './WalletAddress/WalletAddress';
+
+import styles from './ExchangeWidget.scss';
 
 class ExchangeWidget extends Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class ExchangeWidget extends Component {
         let message =
           error.response && error.response.data.non_field_errors && error.response.data.non_field_errors.length
             ? error.response.data.non_field_errors[0]
-            : `${i18n.t('subscription.5')}`;
+            : 'Something went wrong. Please try again later.';
 
         this.props.errorAlert({
           message: message,
@@ -103,14 +103,12 @@ class ExchangeWidget extends Component {
 
     return (
       <div className="col-xs-12">
-        <div id="exchange-widget">
+        <div className={styles.container}>
           <CoinInput type="deposit" onSubmit={this.showWalletAddress} />
           <CoinInput type="receive" onSubmit={this.showWalletAddress} />
 
           <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
 
-        <I18n ns="translations">
-         {(t) => (
           <div className="col-xs-12 text-center">
             {!this.props.wallet.show ? (
               <button
@@ -122,7 +120,7 @@ class ExchangeWidget extends Component {
                     : null
                 }
               >
-                {t('exchangewidget.1')}
+                Get Started !
               </button>
             ) : (
               <button
@@ -130,15 +128,13 @@ class ExchangeWidget extends Component {
                 onClick={this.placeOrder}
                 disabled={this.props.wallet.valid && !this.state.loading ? null : 'disabled'}
               >
-                {t('exchangewidget.2')}
+                Confirm & Place Order
                 {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
               </button>
             )}
 
-            <p id="fee-info">{t('order.feeinfo')}</p>
+            <p id="fee-info">The indicated price is final, all fees are included.</p>
           </div>
-			)}
-		  </I18n>
         </div>
       </div>
     );

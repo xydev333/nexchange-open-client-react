@@ -1,29 +1,27 @@
 import React from 'react';
-import { I18n } from 'react-i18next';
 
 const RefundCancellation = props => {
   return (
     <div className="container">
       <div className="row">
-	  <I18n ns="translations">
-	  {(t) => ( 
         <div className="col-xs-12">
-          <h2>{t('refund.title')}</h2>
+          <h2>Refund Policy</h2>
 
           <p>
-            {t('refund.1')}
+            We will refund the value of the purchased currency by the rate
+            quoted by our API at the time the currency reaches our account.
           </p>
-          <p>{t('refund.2')}</p>
+          <p>No partial refunds are available.</p>
           <p>
-            {t('refund.3')}
+            The maximal refund amount is 100% of the amount quoted at the time
+            of purchase.
           </p>
           <p>
-            {t('refund.4')}{' '}
-            <a href="mailto:support@n.exchange">support@n.exchange</a>
+            Get in touch at{' '}
+            <a href="mailto:support@n.exchange">support@n.exchange</a> for
+            more information.
           </p>
         </div>
-	  )}
-	  </I18n>
       </div>
     </div>
   );

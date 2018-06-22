@@ -1,6 +1,5 @@
 import React from 'react';
 import jsonp from 'jsonp';
-import { I18n } from 'react-i18next';
 
 const getAjaxUrl = url => url.replace('/post?', '/post-json?');
 const subscribeUrl = 'https://nexchange.us16.list-manage.com/subscribe/post?u=918b60ce5b05d82384c293db0&amp;id=b2af978303';
@@ -62,12 +61,9 @@ class SubscriptionForm extends React.Component {
     const { status } = this.state;
 
     return (
-	<I18n ns="translations">
-		{
-		(t) => (
       <div id="subscription-form">
         <div className="container text-center">
-          <h2>{t('subscription.1')}</h2>
+          <h2>Get in touch</h2>
 
           <form action={action} method="post" noValidate>
             <div id="subscription-form-inner">
@@ -77,7 +73,7 @@ class SubscriptionForm extends React.Component {
                     ref={node => (this.input = node)}
                     type="email"
                     name="EMAIL"
-                    placeholder={t('subscription.2')}
+                    placeholder="Enter your email to receive updates about N.exchange"
                     className="form-control"
                     required
                   />
@@ -92,24 +88,23 @@ class SubscriptionForm extends React.Component {
                   className="btn btn-primary"
                   onClick={this.onSubmit}
                 >
-                  {t('subscription.3')}
+                  Subscribe
                 </button>
               </div>
 
               <div className="col-xs-12 message">
                 {status === 'success' && (
                   <p className="success">
-                    {t('subscription.4')}
+                    Almost finished... We need to confirm your email address. To complete the subscription process, please click the link in
+                    the email we just sent you.
                   </p>
                 )}
-                {status === 'error' && <p className="failure">{t('subscription.5')}</p>}
+                {status === 'error' && <p className="failure">Something went wrong. Please try again later.</p>}
               </div>
             </div>
           </form>
         </div>
       </div>
-	 )}
-	</I18n>
     );
   }
 }

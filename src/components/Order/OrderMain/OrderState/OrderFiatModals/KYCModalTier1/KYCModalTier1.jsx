@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import config from 'Config';
-import i18n from '../../../../../../i18n';
-import { I18n } from 'react-i18next';
 
 class KYCModal extends Component {
   constructor(props) {
@@ -14,8 +12,8 @@ class KYCModal extends Component {
       filesReady: false,
       selfie: '',
       residenceProof: '',
-      title: i18n.t('order.fiat.kyc.3'),
-      buttonText: i18n.t('order.fiat.kyc.4'),
+      title: 'Get verified',
+      buttonText: 'Upload file(s)',
       titleClass: '',
       message: '',
     };
@@ -41,9 +39,9 @@ class KYCModal extends Component {
     this.setState({
       filesReady: false,
       selfie: '',
-      title: i18n.t('order.fiat.kyc.3'),
+      title: 'Get verified',
       titleClass: '',
-      buttonText: i18n.t('order.fiat.kyc.4'),
+      buttonText: 'Upload file(s)',
       message: '',
     });
   }
@@ -52,9 +50,9 @@ class KYCModal extends Component {
     event.preventDefault();
 
     this.setState({
-      title: i18n.t('order.fiat.kyc.uploading'),
+      title: 'Uploading...',
       titleClass: 'warning',
-      buttonText: i18n.t('order.fiat.kyc.uploading'),
+      buttonText: 'Uploading...',
       filesReady: false,
     });
 
@@ -76,9 +74,9 @@ class KYCModal extends Component {
       })
       .then(response => {
         this.setState({
-          title: i18n.t('order.fiat.kyc.status7'),
+          title: 'Verification documents uploaded!',
           titleClass: 'green',
-          buttonText: i18n.t('order.fiat.kyc.5'),
+          buttonText: 'Uploaded',
           filesReady: false,
         });
 
@@ -88,9 +86,9 @@ class KYCModal extends Component {
       })
       .catch(error => {
         this.setState({
-          title: i18n.t('order.fiat.kyc.status8'),
+          title: 'Something went wrong, please try resubmitting',
           titleClass: 'danger',
-          buttonText: i18n.t('order.fiat.kyc.4'),
+          buttonText: 'Upload file(s)',
         });
       });
   }
@@ -117,8 +115,6 @@ class KYCModal extends Component {
 
   render() {
     return (
-    <I18n ns="translations">
-    {(t) => (
       <Modal id="kyc-modal" show={this.state.show} onHide={this.close}>
         <div className="modal-content">
           <div className="modal-header">
@@ -128,7 +124,8 @@ class KYCModal extends Component {
             <h4 className={`modal-title text-${this.state.titleClass}`}>{this.state.title}</h4>
             <h5 style={{ marginBottom: 0 }}>
               <b>
-                {t('order.fiat.tier.explanation')}
+                This is a one-time process, once verified you’ll be able to complete future purchases instantly until current verification
+                tier limits are reached.
               </b>
             </h5>
           </div>
@@ -137,9 +134,10 @@ class KYCModal extends Component {
             <form onSubmit={this.handleSubmit}>
               {this.props.kyc.selfie_document_status !== 'APPROVED' && (
                 <div style={{ marginBottom: 45 }}>
-                  <h2>{t('order.fiat.tier.selfie')}</h2>
+                  <h2>Selfie</h2>
                   <small>
-                    {t('order.fiat.tier.selfieexplanation')}
+                    i.e. you have to make a selfie of yourself with a provided credit card in your hands, identity card, plus a paper with
+                    today's date and 'N.exchange'. You may hide middle digits of the credit card.
                   </small>
                   <input type="file" name="selfie" id="selfie" onChange={this.handleInputChange} accept="image/*" />
                 </div>
@@ -148,7 +146,7 @@ class KYCModal extends Component {
               <textarea
                 name="message"
                 className="form-control"
-                placeholder={t('order.fiat.kyc.msg')}
+                placeholder="Message (optional)"
                 rows="2"
                 onChange={this.handleInputChange}
                 value={this.state.message}
@@ -157,7 +155,7 @@ class KYCModal extends Component {
 
               <button type="submit" className="btn btn-themed btn-md" disabled={this.state.filesReady ? null : 'disabled'}>
                 <i
-                  className="fas fa-file"
+                  className="far fa-file"
                   aria-hidden="true"
                   style={{
                     position: 'relative',
@@ -172,8 +170,6 @@ class KYCModal extends Component {
           </div>
         </div>
       </Modal>
-      )}
-      </I18n>
     );
   }
 }
