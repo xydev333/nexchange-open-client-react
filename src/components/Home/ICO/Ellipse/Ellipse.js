@@ -17,12 +17,8 @@ class Ellipse extends Component {
       left: 200 * (Math.random() > 0.5 ? -1 : 1),
     });
 
-    this.timeout = setTimeout(this.updatePos, Math.random() * (2500 - 1500) + 1500);
+    setTimeout(this.updatePos, Math.random() * (2500 - 1500) + 1500);
   };
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
 
   render() {
     return (

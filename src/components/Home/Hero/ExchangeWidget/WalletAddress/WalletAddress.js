@@ -14,37 +14,26 @@ class WalletAddress extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  validate = (address, receiveCoin) => {
-    if (address === '' || !receiveCoin) {
-      this.props.setWallet({
-        address,
-        valid: false,
-      });
-
-      return this.props.errorAlert({ show: false });
-    }
-
+  handleChange(event) {
+    let address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
     const valid = validateWalletAddress(
       address,
-      receiveCoin,
+      this.props.selectedCoin.receive,
       () =>
         this.props.errorAlert({
           show: true,
-          message: `${address} is not a valid ${receiveCoin} address.`,
+          message: `${address} is not a valid ${this.props.selectedCoin.receive} address.`,
         }),
       () => this.props.errorAlert({ show: false })
     );
 
-    this.props.setWallet({
-      address,
-      valid,
-    });
-  };
-
-  handleChange(event) {
-    const address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
     this.setState({ address });
-    this.validate(address, this.props.selectedCoin.receive);
+
+    this.props.setWallet({
+      address: address,
+      valid: valid,
+      show: true,
+    });
   }
 
   handleSubmit(event) {
@@ -52,9 +41,13 @@ class WalletAddress extends Component {
     this.props.onSubmit();
   }
 
+  UNSAFE_componentWillMount() {
+    this.props.setWallet({ address: '', valid: false, show: false });
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedCoin.receive !== this.props.selectedCoin.receive) {
-      this.validate(this.state.address, nextProps.selectedCoin.receive);
+    if (nextProps.wallet.address !== null && nextProps.wallet.address !== this.state.address) {
+      this.setState({ address: nextProps.wallet.address });
     }
   }
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import { mount, shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import ExchangeWidget from './ExchangeWidget.js';
 
