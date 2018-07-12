@@ -10,9 +10,7 @@ class CoinsDropdown extends Component {
   state = { value: '' };
 
   componentDidMount = () => {
-    if (this.searchInput) {
-      this.searchInput.focus();
-    }
+    this.searchInput.focus();
   };
 
   handleChange = event => {
@@ -93,7 +91,7 @@ class CoinsDropdown extends Component {
     return (
       <div className={styles['coins-list']}>
         {this.getCoins().map(coin => (
-          <div data-test={coin.code} className={`row coin ${styles.coin}`} key={coin.code} onClick={() => this.props.onClick(coin.code)}>
+          <div className={`row coin ${styles.coin}`} key={coin.code} onClick={() => this.props.onClick(coin.code)}>
             <div className="col-xs-3 text-center">
               <i className={`cc ${coin.code} ${coin.code}`} />
             </div>
