@@ -837,7 +837,6 @@ ShallowWrapper {
       "children": Array [
         <form
           className="coins-search"
-          data-test="search-form"
           onSubmit={[Function]}
 >
           <i
@@ -845,7 +844,6 @@ ShallowWrapper {
                     className="search fas fa-search"
           />
           <input
-                    data-test="search"
                     onChange={[Function]}
                     placeholder="Search"
                     type="text"
@@ -853,7 +851,6 @@ ShallowWrapper {
           />
           <i
                     className="material-icons clear"
-                    data-test="clear"
                     onClick={[Function]}
           >
                     clear
@@ -1488,7 +1485,6 @@ ShallowWrapper {
               className="search fas fa-search"
 />,
             <input
-              data-test="search"
               onChange={[Function]}
               placeholder="Search"
               type="text"
@@ -1496,14 +1492,12 @@ ShallowWrapper {
 />,
             <i
               className="material-icons clear"
-              data-test="clear"
               onClick={[Function]}
 >
               clear
 </i>,
           ],
           "className": "coins-search",
-          "data-test": "search-form",
           "onSubmit": [Function],
         },
         "ref": null,
@@ -1525,7 +1519,6 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "data-test": "search",
               "onChange": [Function],
               "placeholder": "Search",
               "type": "text",
@@ -1542,7 +1535,6 @@ ShallowWrapper {
             "props": Object {
               "children": "clear",
               "className": "material-icons clear",
-              "data-test": "clear",
               "onClick": [Function],
             },
             "ref": null,
@@ -4812,7 +4804,6 @@ ShallowWrapper {
         "children": Array [
           <form
             className="coins-search"
-            data-test="search-form"
             onSubmit={[Function]}
 >
             <i
@@ -4820,7 +4811,6 @@ ShallowWrapper {
                         className="search fas fa-search"
             />
             <input
-                        data-test="search"
                         onChange={[Function]}
                         placeholder="Search"
                         type="text"
@@ -4828,7 +4818,6 @@ ShallowWrapper {
             />
             <i
                         className="material-icons clear"
-                        data-test="clear"
                         onClick={[Function]}
             >
                         clear
@@ -5463,7 +5452,6 @@ ShallowWrapper {
                 className="search fas fa-search"
 />,
               <input
-                data-test="search"
                 onChange={[Function]}
                 placeholder="Search"
                 type="text"
@@ -5471,14 +5459,12 @@ ShallowWrapper {
 />,
               <i
                 className="material-icons clear"
-                data-test="clear"
                 onClick={[Function]}
 >
                 clear
 </i>,
             ],
             "className": "coins-search",
-            "data-test": "search-form",
             "onSubmit": [Function],
           },
           "ref": null,
@@ -5500,7 +5486,6 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "data-test": "search",
                 "onChange": [Function],
                 "placeholder": "Search",
                 "type": "text",
@@ -5517,7 +5502,6 @@ ShallowWrapper {
               "props": Object {
                 "children": "clear",
                 "className": "material-icons clear",
-                "data-test": "clear",
                 "onClick": [Function],
               },
               "ref": null,
@@ -9626,7 +9610,6 @@ ShallowWrapper {
       "children": Array [
         <form
           className="coins-search"
-          data-test="search-form"
           onSubmit={[Function]}
 >
           <i
@@ -9634,7 +9617,6 @@ ShallowWrapper {
                     className="search fas fa-search"
           />
           <input
-                    data-test="search"
                     onChange={[Function]}
                     placeholder="Search"
                     type="text"
@@ -9642,7 +9624,6 @@ ShallowWrapper {
           />
           <i
                     className="material-icons clear"
-                    data-test="clear"
                     onClick={[Function]}
           >
                     clear
@@ -10074,7 +10055,6 @@ ShallowWrapper {
               className="search fas fa-search"
 />,
             <input
-              data-test="search"
               onChange={[Function]}
               placeholder="Search"
               type="text"
@@ -10082,14 +10062,12 @@ ShallowWrapper {
 />,
             <i
               className="material-icons clear"
-              data-test="clear"
               onClick={[Function]}
 >
               clear
 </i>,
           ],
           "className": "coins-search",
-          "data-test": "search-form",
           "onSubmit": [Function],
         },
         "ref": null,
@@ -10111,7 +10089,6 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "data-test": "search",
               "onChange": [Function],
               "placeholder": "Search",
               "type": "text",
@@ -10128,7 +10105,6 @@ ShallowWrapper {
             "props": Object {
               "children": "clear",
               "className": "material-icons clear",
-              "data-test": "clear",
               "onClick": [Function],
             },
             "ref": null,
@@ -12320,7 +12296,6 @@ ShallowWrapper {
         "children": Array [
           <form
             className="coins-search"
-            data-test="search-form"
             onSubmit={[Function]}
 >
             <i
@@ -12328,7 +12303,6 @@ ShallowWrapper {
                         className="search fas fa-search"
             />
             <input
-                        data-test="search"
                         onChange={[Function]}
                         placeholder="Search"
                         type="text"
@@ -12336,7 +12310,6 @@ ShallowWrapper {
             />
             <i
                         className="material-icons clear"
-                        data-test="clear"
                         onClick={[Function]}
             >
                         clear
@@ -12768,7 +12741,6 @@ ShallowWrapper {
                 className="search fas fa-search"
 />,
               <input
-                data-test="search"
                 onChange={[Function]}
                 placeholder="Search"
                 type="text"
@@ -12776,14 +12748,12 @@ ShallowWrapper {
 />,
               <i
                 className="material-icons clear"
-                data-test="clear"
                 onClick={[Function]}
 >
                 clear
 </i>,
             ],
             "className": "coins-search",
-            "data-test": "search-form",
             "onSubmit": [Function],
           },
           "ref": null,
@@ -12805,7 +12775,6 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "data-test": "search",
                 "onChange": [Function],
                 "placeholder": "Search",
                 "type": "text",
@@ -12822,7 +12791,6 @@ ShallowWrapper {
               "props": Object {
                 "children": "clear",
                 "className": "material-icons clear",
-                "data-test": "clear",
                 "onClick": [Function],
               },
               "ref": null,

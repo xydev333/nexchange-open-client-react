@@ -3,9 +3,13 @@ import { Modal } from 'react-bootstrap';
 import QuestionAnswer from './QuestionAnswer/QuestionAnswer';
 
 class FAQ extends Component {
-  state = {
-    show: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      show: false,
+    };
+  }
 
   componentDidUpdate() {
     if (this.state.show !== this.props.show) {

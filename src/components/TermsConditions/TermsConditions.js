@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TermsConditions = () => {
+const TermsConditions = props => {
   return (
     <div className="container">
       <div className="row">

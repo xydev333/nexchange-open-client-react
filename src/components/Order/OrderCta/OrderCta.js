@@ -20,10 +20,10 @@ class OrderCta extends Component {
   componentDidMount() {
     axios
       .get(`${config.API_BASE_URL}/users/me/orders/${this.props.order.unique_reference}`)
-      .then(() => {
+      .then(data => {
         this.setState({ show: true });
       })
-      .catch(() => {
+      .catch(error => {
         this.setState({ show: false });
       });
 

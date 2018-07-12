@@ -15,14 +15,17 @@ export const setWallet = payload => ({
   payload,
 });
 
-export const selectCoin = selectedCoins => ({
-  type: types.COIN_SELECTED,
-  payload: {
-    selectedCoins,
-  },
-});
+export const selectCoin = selectedCoins => (dispatch, getState) => {
+  dispatch({
+    type: types.COIN_SELECTED,
+    payload: {
+      selectedCoins,
+      pairs: getState().pairs,
+    },
+  });
+};
 
-export const fetchCoinDetails = () => dispatch => {
+export const fetchCoinDetails = payload => dispatch => {
   const url = `${config.API_BASE_URL}/currency/`;
   const request = axios.get(url);
   const isWhiteLabel = config.REFERRAL_CODE && config.REFERRAL_CODE.length > 0;
@@ -84,12 +87,10 @@ export const fetchPrice = payload => dispatch => {
     const setFaultyValues = err => {
       let data = { pair };
 
-      if (window.ga) {
-        window.ga('send', 'event', {
-          eventCategory: 'Amount input',
-          eventAction: 'Amount too high/low error',
-        });
-      }
+      window.ga('send', 'event', {
+        eventCategory: 'Amount input',
+        eventAction: 'Amount too high/low error',
+      });
 
       if ('receive' in payload) {
         data['deposit'] = '...';
@@ -125,17 +126,14 @@ export const fetchPrice = payload => dispatch => {
       const amounts = await makeRequest(url);
       setValidValues(amounts);
     } catch (err) {
-      if (window.ga) {
-        window.ga('send', 'event', {
-          eventCategory: 'Coin selector',
-          eventAction: 'Fetch default amounts',
-        });
-      }
+      window.ga('send', 'event', {
+        eventCategory: 'Coin selector',
+        eventAction: 'Fetch default amounts',
+      });
 
       if (payload.coinSelector) {
-        const url = `${config.API_BASE_URL}/get_price/${pair}/`;
+        let url = `${config.API_BASE_URL}/get_price/${pair}/`;
         const amounts = await makeRequest(url);
-
         setValidValues(amounts);
       } else {
         setFaultyValues(err);
@@ -144,74 +142,76 @@ export const fetchPrice = payload => dispatch => {
   });
 };
 
-export const fetchPairs = () => dispatch => {
+export const fetchPairs = () => {
   const url = `${config.API_BASE_URL}/pair/`;
   const request = axios.get(url);
 
-  return request
-    .then(async response => {
-      if (!response.data.length) return;
+  return dispatch => {
+    request
+      .then(async response => {
+        if (!response.data.length) return;
 
-      const params = urlParams();
-      const pairs = response.data.filter(pair => {
-        if (params && params.hasOwnProperty('test')) {
-          return !pair.disabled;
-        } else {
-          return !pair.disabled && !pair.test_mode;
-        }
-      });
-      const processedPairs = preparePairs(pairs);
-
-      dispatch({ type: types.PAIRS_FETCHED, payload: processedPairs });
-
-      let depositCoin, receiveCoin;
-      const coinsFromUrlParams = () => {
-        return new Promise((resolve, reject) => {
-          axios
-            .get(`${config.API_BASE_URL}/pair/${params['pair']}`)
-            .then(res => resolve(res.data))
-            .catch(err => reject(err));
-        });
-      };
-
-      const pickRandomPair = async () => {
-        const pair = pairs[Math.floor(Math.random() * pairs.length)];
-        depositCoin = pair.quote;
-        receiveCoin = pair.base;
-      };
-
-      // Picks random deposit and receive coins.
-      const pickCoins = async () => {
-        // Checks if url has params. If yes then update accordingly and if no then pick random coins.
-        if (params && params.hasOwnProperty('pair')) {
-          try {
-            const pair = await coinsFromUrlParams(params);
-            depositCoin = pair.quote;
-            receiveCoin = pair.base;
-          } catch (err) {
-            console.log('Error:', err);
+        const params = urlParams();
+        const pairs = response.data.filter(pair => {
+          if (params && params.hasOwnProperty('test')) {
+            return !pair.disabled;
+          } else {
+            return !pair.disabled && !pair.test_mode;
           }
-        } else {
-          pickRandomPair();
-        }
-      };
-      await pickCoins();
+        });
+        const processedPairs = preparePairs(pairs);
 
-      dispatch(
-        selectCoin({
-          deposit: depositCoin,
-          receive: receiveCoin,
-          prev: {
+        dispatch({ type: types.PAIRS_FETCHED, payload: processedPairs });
+
+        let depositCoin, receiveCoin;
+        const coinsFromUrlParams = () => {
+          return new Promise((resolve, reject) => {
+            axios
+              .get(`${config.API_BASE_URL}/pair/${params['pair']}`)
+              .then(res => resolve(res.data))
+              .catch(err => reject(err));
+          });
+        };
+
+        const pickRandomPair = async () => {
+          const pair = pairs[Math.floor(Math.random() * pairs.length)];
+          depositCoin = pair.quote;
+          receiveCoin = pair.base;
+        };
+
+        // Picks random deposit and receive coins.
+        const pickCoins = async () => {
+          // Checks if url has params. If yes then update accordingly and if no then pick random coins.
+          if (params && params.hasOwnProperty('pair')) {
+            try {
+              const pair = await coinsFromUrlParams(params);
+              depositCoin = pair.quote;
+              receiveCoin = pair.base;
+            } catch (err) {
+              console.log('Error:', err);
+            }
+          } else {
+            pickRandomPair();
+          }
+        };
+        await pickCoins();
+
+        dispatch(
+          selectCoin({
             deposit: depositCoin,
             receive: receiveCoin,
-          },
-          lastSelected: 'deposit',
-        })
-      );
-    })
-    .catch(error => {
-      console.log(error);
-    });
+            prev: {
+              deposit: depositCoin,
+              receive: receiveCoin,
+            },
+            lastSelected: 'deposit',
+          })
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 };
 
 export const setOrder = order => ({

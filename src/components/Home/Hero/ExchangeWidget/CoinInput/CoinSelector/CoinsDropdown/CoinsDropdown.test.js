@@ -16,7 +16,7 @@ describe('CoinsDropdown', () => {
     expect(wrapShallowReceive).toMatchSnapshot();
   });
 
-  it('dropdown contains correct coins (deposit)', () => {
+  it('deposit dropdown contains correct coins', () => {
     for (const coin of coinsInfo) {
       if (coin.is_quote_of_enabled_pair) {
         expect(wrapShallowDeposit.find(`[data-test="${coin.code}"]`).length).toEqual(1);
@@ -26,7 +26,7 @@ describe('CoinsDropdown', () => {
     }
   });
 
-  it('dropdown contains correct coins (receive)', () => {
+  it('receive dropdown contains correct coins', () => {
     for (const coin of coinsInfo) {
       if (coin.is_base_of_enabled_pair) {
         expect(wrapShallowReceive.find(`[data-test="${coin.code}"]`).length).toEqual(1);
@@ -34,54 +34,5 @@ describe('CoinsDropdown', () => {
         expect(wrapShallowReceive.find(`[data-test="${coin.code}"]`).length).toEqual(0);
       }
     }
-  });
-
-  it('search input gets correct value after typing and filters coins (deposit)', () => {
-    let input = wrapShallowDeposit.find(`[data-test="search"]`);
-
-    input.simulate('change', {
-      target: { value: 'bit' },
-    });
-
-    input = wrapShallowDeposit.find(`[data-test="search"]`);
-
-    expect(wrapShallowDeposit.state().value).toEqual('bit');
-    expect(input.props().value).toEqual('bit');
-
-    expect(wrapShallowDeposit.find(`[data-test="BTC"]`).length).toEqual(1);
-    expect(wrapShallowDeposit.find(`[data-test="BCH"]`).length).toEqual(1);
-    expect(wrapShallowDeposit.find(`.coin`).length).toEqual(2);
-  });
-
-  it('search input gets correct value after typing and filters coins (receive)', () => {
-    let input = wrapShallowReceive.find(`[data-test="search"]`);
-
-    input.simulate('change', {
-      target: { value: 'bit' },
-    });
-
-    input = wrapShallowReceive.find(`[data-test="search"]`);
-
-    expect(wrapShallowReceive.state().value).toEqual('bit');
-    expect(input.props().value).toEqual('bit');
-
-    expect(wrapShallowReceive.find(`[data-test="BTC"]`).length).toEqual(1);
-    expect(wrapShallowReceive.find(`[data-test="BCH"]`).length).toEqual(1);
-    expect(wrapShallowReceive.find(`[data-test="BDG"]`).length).toEqual(1);
-    expect(wrapShallowReceive.find(`.coin`).length).toEqual(3);
-  });
-
-  it('search input gets emptied on clear', () => {
-    let input = wrapShallowReceive.find('[data-test="search"]');
-
-    input.simulate('change', {
-      target: { value: 'bit' },
-    });
-
-    wrapShallowReceive.find('[data-test="clear"]').simulate('click');
-    input = wrapShallowReceive.find('[data-test="search"]');
-
-    expect(wrapShallowReceive.state().value).toEqual('');
-    expect(input.props().value).toEqual('');
   });
 });

@@ -13,6 +13,7 @@ import NotFound from 'Components/NotFound/NotFound';
 import OrderLoading from './OrderLoading/OrderLoading';
 import OrderCoinsProcessed from './OrderCoinsProcessed/OrderCoinsProcessed';
 import OrderCta from './OrderCta/OrderCta';
+import OrderRefundAddress from './OrderRefundAddress/OrderRefundAddress';
 
 import styles from './Order.scss';
 
