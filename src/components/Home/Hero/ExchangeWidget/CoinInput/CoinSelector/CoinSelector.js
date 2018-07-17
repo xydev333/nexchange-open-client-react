@@ -20,7 +20,7 @@ class CoinSelector extends Component {
     });
 
     this.setState({ isDropdownVisible: false });
-    if (window.ga) window.ga('send', 'event', 'Order', 'select coin');
+    ga('send', 'event', 'Order', 'select coin');
   };
 
   calculateDepositAmount = coin => {
@@ -57,18 +57,27 @@ class CoinSelector extends Component {
     if (
       nextDepositCoin &&
       nextReceiveCoin &&
-      (this.props.pairs && (!this.props.pairs[nextDepositCoin] || !this.props.pairs[nextDepositCoin][nextReceiveCoin]))
+      this.props.pairs &&
+      (!this.props.pairs[nextDepositCoin] || !this.props.pairs[nextDepositCoin][nextReceiveCoin])
     ) {
-      const validPairs = Object.keys(this.props.pairs[nextDepositCoin])
-        .map(coin => coin)
-        .filter(coin => this.props.pairs[nextDepositCoin][coin] === true)
-        .join(', ');
+      if (!this.props.pairs[nextDepositCoin]) {
+        this.props.errorAlert({
+          message: `You cannot use ${nextDepositCoin} as deposit coin. Please try another one.`,
+          show: true,
+          type: 'INVALID_PAIR',
+        });
+      } else if (!this.props.pairs[nextDepositCoin][nextReceiveCoin]) {
+        const validPairs = Object.keys(this.props.pairs[nextDepositCoin])
+          .map(coin => coin)
+          .filter(coin => this.props.pairs[nextDepositCoin][coin] === true)
+          .join(', ');
 
-      this.props.errorAlert({
-        message: `You cannot buy ${nextReceiveCoin} with ${nextDepositCoin}. Try ${validPairs}.`,
-        show: true,
-        type: 'INVALID_PAIR',
-      });
+        this.props.errorAlert({
+          message: `You cannot buy ${nextReceiveCoin} with ${nextDepositCoin}. Try ${validPairs}.`,
+          show: true,
+          type: 'INVALID_PAIR',
+        });
+      }
       // This condition means that selected coin has been changed and price
       // needs to be refetched.
     } else if (
@@ -102,13 +111,10 @@ class CoinSelector extends Component {
       <div>
         <div
           className={`selectedCoin-${type} ${styles['selected-coin']}`}
-          data-test="selector"
           onClick={() => this.setState({ isDropdownVisible: !this.state.isDropdownVisible })}
         >
           <i className={`${styles['coin-icon']} cc ${selectedCoin}`} />
-          <span className={styles.span} data-test="selected">
-            {selectedCoin}
-          </span>
+          <span className={styles.span}>{selectedCoin}</span>
           <div className={styles.carret} />
         </div>
 
@@ -125,8 +131,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(onClickOutside(CoinSelector));
-
-export const CoinSelectorTesting = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CoinSelector);

@@ -13,7 +13,6 @@
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "classnames": "^2.2.5",
-    "clipboard-copy": "^2.0.0",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
@@ -105,8 +104,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}",
-      "!**/js/**"
+      "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
@@ -132,9 +130,6 @@
       "^Actions(.*)$": "<rootDir>/src/actions$1",
       "^StatusCodes": "<rootDir>/src/statusCodes.js",
       "^Img(.*)$": "<rootDir>/src/img$1",
-      "^Js(.*)$": "<rootDir>/src/js$1",
-      "^Mocks(.*)$": "<rootDir>/src/__mocks__$1",
-      "^Reducers(.*)$": "<rootDir>/src/reducers$1",
       "^.+\\.(css|scss)$": "identity-obj-proxy"
     },
     "moduleFileExtensions": [

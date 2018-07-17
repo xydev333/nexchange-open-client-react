@@ -15,16 +15,17 @@ export const setWallet = payload => ({
   payload,
 });
 
-export const selectCoin = selectedCoins => dispatch => {
+export const selectCoin = selectedCoins => (dispatch, getState) => {
   dispatch({
     type: types.COIN_SELECTED,
     payload: {
       selectedCoins,
+      pairs: getState().pairs,
     },
   });
 };
 
-export const fetchCoinDetails = () => dispatch => {
+export const fetchCoinDetails = payload => dispatch => {
   const url = `${config.API_BASE_URL}/currency/`;
   const request = axios.get(url);
   const isWhiteLabel = config.REFERRAL_CODE && config.REFERRAL_CODE.length > 0;
@@ -86,12 +87,10 @@ export const fetchPrice = payload => dispatch => {
     const setFaultyValues = err => {
       let data = { pair };
 
-      if (window.ga) {
-        window.ga('send', 'event', {
-          eventCategory: 'Amount input',
-          eventAction: 'Amount too high/low error',
-        });
-      }
+      window.ga('send', 'event', {
+        eventCategory: 'Amount input',
+        eventAction: 'Amount too high/low error',
+      });
 
       if ('receive' in payload) {
         data['deposit'] = '...';
@@ -127,12 +126,10 @@ export const fetchPrice = payload => dispatch => {
       const amounts = await makeRequest(url);
       setValidValues(amounts);
     } catch (err) {
-      if (window.ga) {
-        window.ga('send', 'event', {
-          eventCategory: 'Coin selector',
-          eventAction: 'Fetch default amounts',
-        });
-      }
+      window.ga('send', 'event', {
+        eventCategory: 'Coin selector',
+        eventAction: 'Fetch default amounts',
+      });
 
       if (payload.coinSelector) {
         let url = `${config.API_BASE_URL}/get_price/${pair}/`;
