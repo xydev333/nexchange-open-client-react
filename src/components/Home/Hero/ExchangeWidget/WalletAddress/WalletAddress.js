@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { errorAlert, setWallet } from 'Actions/index.js';
 import validateWalletAddress from 'Utils/validateWalletAddress';
 import styles from './WalletAddress.scss';
+import { I18n, Interpolate } from 'react-i18next';
+import i18n from '../../../../../i18n';
 
 class WalletAddress extends Component {
   constructor(props) {
@@ -30,7 +32,9 @@ class WalletAddress extends Component {
       () =>
         this.props.errorAlert({
           show: true,
-          message: `${address} is not a valid ${receiveCoin} address.`,
+          message: `${address} ${i18n.t('error.novalid')} ${
+            this.props.selectedCoin.receive
+          } ${i18n.t('generalterms.address')}.`,
         }),
       () => this.props.errorAlert({ show: false })
     );
@@ -60,6 +64,8 @@ class WalletAddress extends Component {
 
   render() {
     return (
+	<I18n ns="translations">
+	{(t) => (
       <div className="col-xs-12 active">
         <form className="form-group" onSubmit={this.handleSubmit}>
           <input
@@ -69,10 +75,12 @@ class WalletAddress extends Component {
             id="withdraw-addr"
             onChange={this.handleChange}
             value={this.state.address}
-            placeholder={`Enter your ${this.props.selectedCoin.receive ? this.props.selectedCoin.receive : '...'} wallet address`}
+            placeholder={t('order.enteraddress')}
           />
         </form>
       </div>
+	)}
+	</I18n>
     );
   }
 }

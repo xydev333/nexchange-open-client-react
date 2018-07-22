@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { I18n } from 'react-i18next';
 
 import FAQ from './FAQ/FAQ';
 import Support from './Support/Support';
+import LanguagePicker from './LanguagePicker/LanguagePicker'
 
 import styles from './Header.scss';
+
+let scrollToElement;
 
 class Header extends Component {
   state = {
@@ -13,26 +17,22 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    /* istanbul ignore next */
-    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    scrollToElement = require('scroll-to-element');
 
-    /* istanbul ignore next */
-    if (window.location.hash && isChrome) {
-      /* istanbul ignore next */
-      setTimeout(function() {
-        const hash = window.location.hash;
-        window.location.hash = '';
-        window.location.hash = hash;
-      }, 2000);
+    let hash = window.location.hash;
+    if (hash && hash !== '') {
+      hash = hash.replace('#', '');
+
+      let el = document.getElementById(hash);
+      if (el) el.scrollIntoView();
     }
   }
 
-  closeFaqModal = () => this.setState({ showFaqModal: false });
-  closeSupportModal = () => this.setState({ showSupportModal: false });
-
   render() {
     return (
-      <div className={`${styles.header} ${window.location.pathname === '/' ? styles.home : ''}`} data-test="header">
+	<I18n ns="translations">
+	{(t, { i18n }) => (
+      <div className={`${styles.header} ${window.location.pathname === '/' ? styles.home : ''}`}>
         <div className="container">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -44,11 +44,7 @@ class Header extends Component {
 
             <Link to="/">
               <div className={styles['logo-container']}>
-                {window.location.pathname === '/' ? (
-                  <img src="/img/logo-white.svg" alt="Logo" data-test="logo" />
-                ) : (
-                  <img src="/img/logo.svg" alt="Logo" data-test="logo" />
-                )}
+                {window.location.pathname === '/' ? <img src="/img/logo-white.svg" alt="Logo" /> : <img src="/img/logo.svg" alt="Logo" />}
               </div>
             </Link>
           </div>
@@ -56,8 +52,8 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="navigation-index">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a className={styles.link} href="/#about">
-                  About
+                <a className={styles.link} href="/#about" onClick={() => scrollToElement('#about')}>
+                  {t('header.about')}
                 </a>
               </li>
 
@@ -69,9 +65,8 @@ class Header extends Component {
                     window.ga('send', 'event', 'FAQ', 'open');
                     this.setState({ showFaqModal: true });
                   }}
-                  data-test="faq-btn"
                 >
-                  FAQ
+                  {t('header.faq')}
                 </a>
               </li>
 
@@ -82,26 +77,20 @@ class Header extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => ga('send', 'event', 'General', 'api docs click')}
-                  data-test="api-link"
                 >
-                  API Docs
+                  {t('header.apidocs')}
                 </a>
               </li>
 
               <li>
-                <a className={styles.link} href="/#compare" data-test="compare-link">
-                  Rates
+                <a className={styles.link} href="/#compare" onClick={() => scrollToElement('#compare')}>
+                  {t('header.compare')}
                 </a>
               </li>
 
               <li>
-                <a
-                  className={styles.link}
-                  href="javascript:void(0)"
-                  onClick={() => this.setState({ showSupportModal: true })}
-                  data-test="support-btn"
-                >
-                  Support
+                <a className={styles.link} href="javascript:void(0)" onClick={() => this.setState({ showSupportModal: true })}>
+                  {t('header.support')}
                 </a>
               </li>
 
@@ -117,11 +106,12 @@ class Header extends Component {
                   }}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-test="ico-link"
                 >
-                  JOIN OUR ICO
+                  {t('header.ico')}
                 </a>
               </li>
+
+              <LanguagePicker screenType="large" />
 
               <li id="social-mobile">
                 <a
@@ -159,6 +149,7 @@ class Header extends Component {
                 >
                   <i className="fab fa-telegram" aria-hidden="true" />
                 </a>
+                <LanguagePicker screenType="small" />
               </li>
 
               <li className="visible-sm visible-md visible-lg social-desktop">
@@ -170,7 +161,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title="Follow us on Twitter"
+                  data-original-title={t('header.twitter')}
                 >
                   <i className="fab fa-twitter" aria-hidden="true" />
                 </a>
@@ -185,7 +176,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title="Like us on Facebook"
+                  data-original-title={t('header.facebook')}
                 >
                   <i className="fab fa-facebook-f" aria-hidden="true" />
                 </a>
@@ -200,7 +191,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title="Join us on Slack"
+                  data-original-title={t('header.slack')}
                 >
                   <i className="fab fa-slack-hash" aria-hidden="true" />
                 </a>
@@ -215,7 +206,7 @@ class Header extends Component {
                   rel="tooltip"
                   title=""
                   data-placement="bottom"
-                  data-original-title="Join us on Telegram"
+                  data-original-title={t('header.telegram')}
                 >
                   <i className="fab fa-telegram" aria-hidden="true" />
                 </a>
@@ -223,10 +214,12 @@ class Header extends Component {
             </ul>
           </div>
 
-          <FAQ show={this.state.showFaqModal} onClose={this.closeFaqModal} />
-          <Support show={this.state.showSupportModal} onClose={this.closeSupportModal} />
+          <FAQ show={this.state.showFaqModal} onClose={() => this.setState({ showFaqModal: false })} />
+          <Support show={this.state.showSupportModal} onClose={() => this.setState({ showSupportModal: false })} />
         </div>
       </div>
+	)}
+	</I18n>
     );
   }
 }

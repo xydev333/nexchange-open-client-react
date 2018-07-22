@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { I18n } from 'react-i18next';
 import axios from 'axios';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales.min.js';
 import 'moment/locale/en-gb';
 import _ from 'lodash';
 
@@ -10,7 +11,6 @@ import config from 'Config';
 
 import LoadingComponent from './LoadingComponent/LoadingComponent';
 import styles from './RecentOrders.scss';
-import arrow from 'Img/arrow-right-2.svg';
 
 class RecentOrders extends Component {
   state = {
@@ -63,10 +63,12 @@ class RecentOrders extends Component {
   render() {
     let orders = this.state.orders.slice(0, config.RECENT_ORDERS_COUNT).map(order => {
       return (
+	  <I18n ns="translations">
+		{(t, { i18n }) => (
         <div key={order.unique_reference} className={styles.row}>
           <div className={`${styles.col} col col-xs-2 col-ms-3`}>
             <div className={styles.middle}>
-              <p className={styles.ago}>{new moment(order.created_on).fromNow()}</p>
+              <p className={styles.ago}>{new moment(order.created_on).locale(`${i18n.language}`).fromNow()}</p>
             </div>
           </div>
 
@@ -101,25 +103,30 @@ class RecentOrders extends Component {
           <div className={`${styles.col} col col-xs-3 col-ms-2`}>
             <div className={styles.middle}>
               <a href={`${config.API_BASE_URL}/orders/${order.unique_reference}`} target="_blank" className={styles.btn}>
-                View on API
+                {t('recentorders.3')}
               </a>
             </div>
           </div>
         </div>
+		)}</I18n>
       );
     });
 
     return (
+	<I18n ns="translations">
+	{(t) => (
       <div className={styles.container}>
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="title">Recent Orders</h2>
+              <h2 className="title">{t('recentorders.1')}</h2>
+
               <div className="recent-orders-container">{orders.length < 1 ? <LoadingComponent isLoading={true} /> : orders}</div>
             </div>
           </div>
         </div>
       </div>
+	)}</I18n>
     );
   }
 }
