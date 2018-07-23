@@ -32,9 +32,7 @@ class WalletAddress extends Component {
       () =>
         this.props.errorAlert({
           show: true,
-          message: `${address} ${i18n.t('error.novalid')} ${
-            this.props.selectedCoin.receive
-          } ${i18n.t('generalterms.address')}.`,
+          message: `${address} ${i18n.t('error.novalid')} ${this.props.selectedCoin.receive} ${i18n.t('generalterms.address')}.`,
         }),
       () => this.props.errorAlert({ show: false })
     );
@@ -65,30 +63,23 @@ class WalletAddress extends Component {
   render() {
     let coin = this.props.selectedCoin.receive ? this.props.selectedCoin.receive : '...';
     return (
-	<I18n ns="translations">
-	{(t) => (
-      <div className="col-xs-12 active">
-        <form className="form-group" onSubmit={this.handleSubmit}>
-          <label htmlFor="withdraw-addr" className="control-label text-green">
-            <Interpolate i18nKey="generalterms.youraddress" selectedCoin={coin} />
-            {/* 
-             =>
-               Your selectedCoin Address
-            */}
-          </label>
-        
-          <input
-            type="text"
-            ref={this.props.inputRef}
-            className={`form-control ${styles.input}`}
-            id="withdraw-addr"
-            onChange={this.handleChange}
-            value={this.state.address}
-          />
-        </form>
-      </div>
-	)}
-	</I18n>
+      <I18n ns="translations">
+        {t => (
+          <div className="col-xs-12 active">
+            <form className="form-group" onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                ref={this.props.inputRef}
+                className={`form-control ${styles.input}`}
+                id="withdraw-addr"
+                onChange={this.handleChange}
+                value={this.state.address}
+                placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
+              />
+            </form>
+          </div>
+        )}
+      </I18n>
     );
   }
 }

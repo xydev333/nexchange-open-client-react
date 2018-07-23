@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from 'Config';
 import validateWalletAddress from 'Utils/validateWalletAddress';
 import { I18n } from 'react-i18next';
-import i18n from '../i18n';
+import i18n from '../../../i18n';
 
 class OrderRefundAddress extends Component {
   constructor(props) {
@@ -25,10 +25,10 @@ class OrderRefundAddress extends Component {
   componentDidMount() {
     axios
       .get(`${config.API_BASE_URL}/users/me/orders/${this.props.order.unique_reference}`)
-      .then(data => {
+      .then(() => {
         this.setState({ show: true });
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({ show: false });
       });
   }

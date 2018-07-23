@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
+// import CopyToClipboard from 'react-copy-to-clipboard';
 import isFiatOrder from 'Utils/isFiatOrder';
 import styles from './OrderCoinProcessed.scss';
-import i18n from '../../i18n';
+import i18n from '../../../../i18n';
 import { I18n } from 'react-i18next';
+
+import copy from 'clipboard-copy';
 
 class OrderCoinProcessed extends Component {
   state = { order: this.props.order };
@@ -18,21 +20,25 @@ class OrderCoinProcessed extends Component {
     });
   }
 
-  triggerCopyTooltip() {
-    $('#copy-address-to-clipboard').tooltip({
-      trigger: 'click',
-      placement: 'top',
-    });
+  triggerCopyTooltip = () => {
+    if (process.env.NODE_ENV !== 'test') {
+      $('#copy-address-to-clipboard').tooltip({
+        trigger: 'click',
+        placement: 'top',
+      });
 
-    $('#copy-address-to-clipboard')
-      .tooltip('hide')
-      .attr('data-original-title', 'Address copied!')
-      .tooltip('show');
+      $('#copy-address-to-clipboard')
+        .tooltip('hide')
+        .attr('data-original-title', 'Address copied!')
+        .tooltip('show');
 
-    setTimeout(() => {
-      $('#copy-address-to-clipboard').tooltip('destroy');
-    }, 1000);
-  }
+      setTimeout(() => {
+        $('#copy-address-to-clipboard').tooltip('destroy');
+      }, 1000);
+
+      copy(this.props.order.deposit_address.address);
+    }
+  };
 
   prepareState = props => {
     if (props.type === 'Deposit') {
@@ -115,9 +121,12 @@ class OrderCoinProcessed extends Component {
 
               {this.props.type === 'Deposit' &&
                 !isFiatOrder(this.props.order) && (
-                  <CopyToClipboard text={this.props.order.deposit_address.address} onCopy={() => this.triggerCopyTooltip()}>
-                    <i id="copy-address-to-clipboard" className={`${styles.copy} fas fa-copy`} />
-                  </CopyToClipboard>
+                  <i
+                    id="copy-address-to-clipboard"
+                    className={`${styles.copy} fas fa-copy`}
+                    data-test="copy-address"
+                    onClick={() => this.triggerCopyTooltip()}
+                  />
                 )}
             </div>
           </div>

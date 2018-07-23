@@ -21,7 +21,7 @@ class CoinSelector extends Component {
     });
 
     this.setState({ isDropdownVisible: false });
-    ga('send', 'event', 'Order', 'select coin');
+    if (window.ga) window.ga('send', 'event', 'Order', 'select coin');
   };
 
   calculateDepositAmount = coin => {
@@ -73,13 +73,13 @@ class CoinSelector extends Component {
           .filter(coin => this.props.pairs[nextDepositCoin][coin] === true)
           .join(', ');
 
-      this.props.errorAlert({
-        message:  `${i18n.t('error.invalidpair')} 
+        this.props.errorAlert({
+          message: `${i18n.t('error.invalidpair')} 
         ${nextReceiveCoin} ${i18n.t('error.with')} ${nextDepositCoin}. ${i18n.t('error.try')} ${validPairs}.`,
-        show: true,
-        type: 'INVALID_PAIR',
-      });
-     }
+          show: true,
+          type: 'INVALID_PAIR',
+        });
+      }
       // This condition means that selected coin has been changed and price
       // needs to be refetched.
     } else if (
@@ -113,10 +113,13 @@ class CoinSelector extends Component {
       <div>
         <div
           className={`selectedCoin-${type} ${styles['selected-coin']}`}
+          data-test="selector"
           onClick={() => this.setState({ isDropdownVisible: !this.state.isDropdownVisible })}
         >
           <i className={`${styles['coin-icon']} cc ${selectedCoin}`} />
-          <span className={styles.span}>{selectedCoin}</span>
+          <span className={styles.span} data-test="selected">
+            {selectedCoin}
+          </span>
           <div className={styles.carret} />
         </div>
 
@@ -133,3 +136,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(onClickOutside(CoinSelector));
+
+export const CoinSelectorTesting = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoinSelector);

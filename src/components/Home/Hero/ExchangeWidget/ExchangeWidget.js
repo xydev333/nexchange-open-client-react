@@ -119,23 +119,23 @@ class ExchangeWidget extends Component {
                 <CoinInput type="receive" onSubmit={this.showWalletAddress} />
                 <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
 
-				<I18n ns="translations">
-				 {(t) => (
-                <div className={styles.submit}>
-                  <p className={styles.info}>{t('order.feeinfo')}</p>
+                <I18n ns="translations">
+                  {t => (
+                    <div className={styles.submit}>
+                      <p className={styles.info}>{t('order.feeinfo')}</p>
 
-                  <button
-                    className={`${styles.btn} ${
-                      this.props.wallet.valid && !this.state.loading ? null : 'disabled'
-                    } btn btn-block btn-primary proceed `}
-                    onClick={this.placeOrder}
-                  >
-                    {t('exchangewidget.2')}
-                    {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
-                  </button>
-                </div>
-				)}
-			  </I18n>
+                      <button
+                        className={`${styles.btn} ${
+                          this.props.wallet.valid && !this.state.loading ? null : 'disabled'
+                        } btn btn-block btn-primary proceed `}
+                        onClick={this.placeOrder}
+                      >
+                        {t('exchangewidget.2')}
+                        {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
+                      </button>
+                    </div>
+                  )}
+                </I18n>
               </div>
             </div>
           </div>

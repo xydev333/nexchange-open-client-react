@@ -69,32 +69,32 @@ class CoinInput extends PureComponent {
 
   render() {
     return (
-	<I18n ns="translations">
-	{(t) => (
-      <div className="col-xs-12 col-sm-6">
-        <form className="form-group" onSubmit={this.handleSubmit}>
-          <label htmlFor={this.props.type} className={styles.label}>
-            {t('order.'+this.props.type)}
-          </label>
-          <input
-            type="text"
-            className={`form-control ${styles.input}`}
-            id={`coin-input-${this.props.type}`}
-            name={this.props.type}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            value={this.state.value}
-            ref={input => {
-              this.nameInput = input;
-            }}
-          />
-        </form>
+      <I18n ns="translations">
+        {t => (
+          <div className="col-xs-12 col-sm-6">
+            <form className="form-group" onSubmit={this.handleSubmit}>
+              <label htmlFor={this.props.type} className={styles.label}>
+                {t('order.' + this.props.type)}
+              </label>
+              <input
+                type="text"
+                className={`form-control ${styles.input}`}
+                id={`coin-input-${this.props.type}`}
+                name={this.props.type}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+                value={this.state.value}
+                ref={input => {
+                  this.nameInput = input;
+                }}
+              />
+            </form>
 
-        <CoinSelector type={this.props.type} onSelect={this.focus} />
-      </div>
-	)}
-	</I18n>
+            <CoinSelector type={this.props.type} onSelect={this.focus} />
+          </div>
+        )}
+      </I18n>
     );
   }
 }
