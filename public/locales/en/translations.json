@@ -29,7 +29,9 @@
   "exchangewidget": {
     "1": "GET STARTED",
     "2": "Confirm & Place Order",
-    "3": "Current fee is 0.5%"
+    "3": "Current fee is 0.5%",
+    "min": "Min amount",
+    "max": "Max amount"
   },
   "recentorders": {
     "1": "Recent Orders",
@@ -330,7 +332,7 @@
     "alt": "Get notified",
     "kycupdate": "KYC status updated for order",
     "email": "Enter your e-mail address",
-    "explanation": "If you would like to be notified about your order please enter your e-mail address below."
+    "explanation": "Add your email to join our referral program & get notified about the status of your transactions"
   },
   "referral": {
     "1": "Share this unique referral link with your friends to earn some coins!",
