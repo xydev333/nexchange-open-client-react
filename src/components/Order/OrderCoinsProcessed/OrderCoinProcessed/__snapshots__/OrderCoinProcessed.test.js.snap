@@ -22,7 +22,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="box box fiat "
+        className="box box fiat"
 >
         <div
                 className="media-left"
@@ -69,7 +69,7 @@ ShallowWrapper {
                 </div>
         </div>
 </div>,
-      "className": "col-xs-12 col-sm-6 col-sm-6 ",
+      "className": "col-xs-12 col-sm-6 col-sm-6 null",
     },
     "ref": null,
     "rendered": Object {
@@ -123,7 +123,7 @@ ShallowWrapper {
             </div>
 </div>,
         ],
-        "className": "box box fiat ",
+        "className": "box box fiat",
       },
       "ref": null,
       "rendered": Array [
@@ -190,7 +190,6 @@ ShallowWrapper {
                                 <h6 />
                 </div>
 </div>,
-              false,
             ],
             "className": "media-right",
           },
@@ -319,7 +318,6 @@ order.fee:
               ],
               "type": "div",
             },
-            false,
           ],
           "type": "div",
         },
@@ -335,7 +333,7 @@ order.fee:
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="box box fiat "
+          className="box box fiat"
 >
           <div
                     className="media-left"
@@ -382,7 +380,7 @@ order.fee:
                     </div>
           </div>
 </div>,
-        "className": "col-xs-12 col-sm-6 col-sm-6 ",
+        "className": "col-xs-12 col-sm-6 col-sm-6 null",
       },
       "ref": null,
       "rendered": Object {
@@ -436,7 +434,7 @@ order.fee:
               </div>
 </div>,
           ],
-          "className": "box box fiat ",
+          "className": "box box fiat",
         },
         "ref": null,
         "rendered": Array [
@@ -503,7 +501,6 @@ order.fee:
                                     <h6 />
                   </div>
 </div>,
-                false,
               ],
               "className": "media-right",
             },
@@ -632,7 +629,6 @@ order.fee:
                 ],
                 "type": "div",
               },
-              false,
             ],
             "type": "div",
           },
@@ -674,7 +670,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="box box  "
+        className="box box "
 >
         <div
                 className="media-left"
@@ -773,7 +769,7 @@ ShallowWrapper {
             </div>
 </div>,
         ],
-        "className": "box box  ",
+        "className": "box box ",
       },
       "ref": null,
       "rendered": Array [
@@ -839,7 +835,6 @@ ShallowWrapper {
                                 </h6>
                 </div>
 </div>,
-              false,
             ],
             "className": "media-right",
           },
@@ -966,7 +961,6 @@ ShallowWrapper {
               ],
               "type": "div",
             },
-            false,
           ],
           "type": "div",
         },
@@ -982,7 +976,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="box box  "
+          className="box box "
 >
           <div
                     className="media-left"
@@ -1081,7 +1075,7 @@ ShallowWrapper {
               </div>
 </div>,
           ],
-          "className": "box box  ",
+          "className": "box box ",
         },
         "ref": null,
         "rendered": Array [
@@ -1147,7 +1141,6 @@ ShallowWrapper {
                                     </h6>
                   </div>
 </div>,
-                false,
               ],
               "className": "media-right",
             },
@@ -1274,7 +1267,6 @@ ShallowWrapper {
                 ],
                 "type": "div",
               },
-              false,
             ],
             "type": "div",
           },
@@ -1316,7 +1308,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="box box  crypto"
+        className="box box "
 >
         <div
                 className="media-left"
@@ -1366,23 +1358,9 @@ ShallowWrapper {
                                 onClick={[Function]}
                         />
                 </div>
-                <div
-                        className="minmax"
-                >
-                        <p>
-                                exchangewidget.min
-                                : 
-                                ...
-                        </p>
-                        <p>
-                                exchangewidget.max
-                                : 
-                                ...
-                        </p>
-                </div>
         </div>
 </div>,
-      "className": "col-xs-12 col-sm-6 col-sm-6 ",
+      "className": "col-xs-12 col-sm-6 col-sm-6 null",
     },
     "ref": null,
     "rendered": Object {
@@ -1439,23 +1417,9 @@ ShallowWrapper {
                                     onClick={[Function]}
                         />
             </div>
-            <div
-                        className="minmax"
-            >
-                        <p>
-                                    exchangewidget.min
-                                    : 
-                                    ...
-                        </p>
-                        <p>
-                                    exchangewidget.max
-                                    : 
-                                    ...
-                        </p>
-            </div>
 </div>,
         ],
-        "className": "box box  crypto",
+        "className": "box box ",
       },
       "ref": null,
       "rendered": Array [
@@ -1526,20 +1490,6 @@ ShallowWrapper {
                                 id="copy-address-to-clipboard"
                                 onClick={[Function]}
                 />
-</div>,
-              <div
-                className="minmax"
->
-                <p>
-                                exchangewidget.min
-                                : 
-                                ...
-                </p>
-                <p>
-                                exchangewidget.max
-                                : 
-                                ...
-                </p>
 </div>,
             ],
             "className": "media-right",
@@ -1685,68 +1635,6 @@ ShallowWrapper {
               ],
               "type": "div",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <p>
-                    exchangewidget.min
-                    : 
-                    ...
-</p>,
-                  <p>
-                    exchangewidget.max
-                    : 
-                    ...
-</p>,
-                ],
-                "className": "minmax",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      "exchangewidget.min",
-                      ": ",
-                      "...",
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    "exchangewidget.min",
-                    ": ",
-                    "...",
-                  ],
-                  "type": "p",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      "exchangewidget.max",
-                      ": ",
-                      "...",
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    "exchangewidget.max",
-                    ": ",
-                    "...",
-                  ],
-                  "type": "p",
-                },
-              ],
-              "type": "div",
-            },
           ],
           "type": "div",
         },
@@ -1762,7 +1650,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="box box  crypto"
+          className="box box "
 >
           <div
                     className="media-left"
@@ -1812,23 +1700,9 @@ ShallowWrapper {
                                         onClick={[Function]}
                               />
                     </div>
-                    <div
-                              className="minmax"
-                    >
-                              <p>
-                                        exchangewidget.min
-                                        : 
-                                        ...
-                              </p>
-                              <p>
-                                        exchangewidget.max
-                                        : 
-                                        ...
-                              </p>
-                    </div>
           </div>
 </div>,
-        "className": "col-xs-12 col-sm-6 col-sm-6 ",
+        "className": "col-xs-12 col-sm-6 col-sm-6 null",
       },
       "ref": null,
       "rendered": Object {
@@ -1885,23 +1759,9 @@ ShallowWrapper {
                                           onClick={[Function]}
                             />
               </div>
-              <div
-                            className="minmax"
-              >
-                            <p>
-                                          exchangewidget.min
-                                          : 
-                                          ...
-                            </p>
-                            <p>
-                                          exchangewidget.max
-                                          : 
-                                          ...
-                            </p>
-              </div>
 </div>,
           ],
-          "className": "box box  crypto",
+          "className": "box box ",
         },
         "ref": null,
         "rendered": Array [
@@ -1972,20 +1832,6 @@ ShallowWrapper {
                                     id="copy-address-to-clipboard"
                                     onClick={[Function]}
                   />
-</div>,
-                <div
-                  className="minmax"
->
-                  <p>
-                                    exchangewidget.min
-                                    : 
-                                    ...
-                  </p>
-                  <p>
-                                    exchangewidget.max
-                                    : 
-                                    ...
-                  </p>
 </div>,
               ],
               "className": "media-right",
@@ -2127,68 +1973,6 @@ ShallowWrapper {
                     "ref": null,
                     "rendered": null,
                     "type": "i",
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <p>
-                      exchangewidget.min
-                      : 
-                      ...
-</p>,
-                    <p>
-                      exchangewidget.max
-                      : 
-                      ...
-</p>,
-                  ],
-                  "className": "minmax",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        "exchangewidget.min",
-                        ": ",
-                        "...",
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      "exchangewidget.min",
-                      ": ",
-                      "...",
-                    ],
-                    "type": "p",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        "exchangewidget.max",
-                        ": ",
-                        "...",
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      "exchangewidget.max",
-                      ": ",
-                      "...",
-                    ],
-                    "type": "p",
                   },
                 ],
                 "type": "div",
@@ -2350,7 +2134,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="box box  crypto"
+        className="box box "
 >
         <div
                 className="media-left"
@@ -2400,23 +2184,9 @@ ShallowWrapper {
                                 onClick={[Function]}
                         />
                 </div>
-                <div
-                        className="minmax"
-                >
-                        <p>
-                                exchangewidget.min
-                                : 
-                                ...
-                        </p>
-                        <p>
-                                exchangewidget.max
-                                : 
-                                ...
-                        </p>
-                </div>
         </div>
 </div>,
-      "className": "col-xs-12 col-sm-6 col-sm-6 ",
+      "className": "col-xs-12 col-sm-6 col-sm-6 null",
     },
     "ref": null,
     "rendered": Object {
@@ -2473,23 +2243,9 @@ ShallowWrapper {
                                     onClick={[Function]}
                         />
             </div>
-            <div
-                        className="minmax"
-            >
-                        <p>
-                                    exchangewidget.min
-                                    : 
-                                    ...
-                        </p>
-                        <p>
-                                    exchangewidget.max
-                                    : 
-                                    ...
-                        </p>
-            </div>
 </div>,
         ],
-        "className": "box box  crypto",
+        "className": "box box ",
       },
       "ref": null,
       "rendered": Array [
@@ -2560,20 +2316,6 @@ ShallowWrapper {
                                 id="copy-address-to-clipboard"
                                 onClick={[Function]}
                 />
-</div>,
-              <div
-                className="minmax"
->
-                <p>
-                                exchangewidget.min
-                                : 
-                                ...
-                </p>
-                <p>
-                                exchangewidget.max
-                                : 
-                                ...
-                </p>
 </div>,
             ],
             "className": "media-right",
@@ -2719,68 +2461,6 @@ ShallowWrapper {
               ],
               "type": "div",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <p>
-                    exchangewidget.min
-                    : 
-                    ...
-</p>,
-                  <p>
-                    exchangewidget.max
-                    : 
-                    ...
-</p>,
-                ],
-                "className": "minmax",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      "exchangewidget.min",
-                      ": ",
-                      "...",
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    "exchangewidget.min",
-                    ": ",
-                    "...",
-                  ],
-                  "type": "p",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      "exchangewidget.max",
-                      ": ",
-                      "...",
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    "exchangewidget.max",
-                    ": ",
-                    "...",
-                  ],
-                  "type": "p",
-                },
-              ],
-              "type": "div",
-            },
           ],
           "type": "div",
         },
@@ -2796,7 +2476,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="box box  crypto"
+          className="box box "
 >
           <div
                     className="media-left"
@@ -2846,23 +2526,9 @@ ShallowWrapper {
                                         onClick={[Function]}
                               />
                     </div>
-                    <div
-                              className="minmax"
-                    >
-                              <p>
-                                        exchangewidget.min
-                                        : 
-                                        ...
-                              </p>
-                              <p>
-                                        exchangewidget.max
-                                        : 
-                                        ...
-                              </p>
-                    </div>
           </div>
 </div>,
-        "className": "col-xs-12 col-sm-6 col-sm-6 ",
+        "className": "col-xs-12 col-sm-6 col-sm-6 null",
       },
       "ref": null,
       "rendered": Object {
@@ -2919,23 +2585,9 @@ ShallowWrapper {
                                           onClick={[Function]}
                             />
               </div>
-              <div
-                            className="minmax"
-              >
-                            <p>
-                                          exchangewidget.min
-                                          : 
-                                          ...
-                            </p>
-                            <p>
-                                          exchangewidget.max
-                                          : 
-                                          ...
-                            </p>
-              </div>
 </div>,
           ],
-          "className": "box box  crypto",
+          "className": "box box ",
         },
         "ref": null,
         "rendered": Array [
@@ -3006,20 +2658,6 @@ ShallowWrapper {
                                     id="copy-address-to-clipboard"
                                     onClick={[Function]}
                   />
-</div>,
-                <div
-                  className="minmax"
->
-                  <p>
-                                    exchangewidget.min
-                                    : 
-                                    ...
-                  </p>
-                  <p>
-                                    exchangewidget.max
-                                    : 
-                                    ...
-                  </p>
 </div>,
               ],
               "className": "media-right",
@@ -3165,68 +2803,6 @@ ShallowWrapper {
                 ],
                 "type": "div",
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <p>
-                      exchangewidget.min
-                      : 
-                      ...
-</p>,
-                    <p>
-                      exchangewidget.max
-                      : 
-                      ...
-</p>,
-                  ],
-                  "className": "minmax",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        "exchangewidget.min",
-                        ": ",
-                        "...",
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      "exchangewidget.min",
-                      ": ",
-                      "...",
-                    ],
-                    "type": "p",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        "exchangewidget.max",
-                        ": ",
-                        "...",
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      "exchangewidget.max",
-                      ": ",
-                      "...",
-                    ],
-                    "type": "p",
-                  },
-                ],
-                "type": "div",
-              },
             ],
             "type": "div",
           },
@@ -3268,7 +2844,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="box box  "
+        className="box box "
 >
         <div
                 className="media-left"
@@ -3373,7 +2949,7 @@ ShallowWrapper {
             </div>
 </div>,
         ],
-        "className": "box box  ",
+        "className": "box box ",
       },
       "ref": null,
       "rendered": Array [
@@ -3442,7 +3018,6 @@ ShallowWrapper {
                                 </h6>
                 </div>
 </div>,
-              false,
             ],
             "className": "media-right",
           },
@@ -3575,7 +3150,6 @@ order.fee:
               ],
               "type": "div",
             },
-            false,
           ],
           "type": "div",
         },
@@ -3591,7 +3165,7 @@ order.fee:
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="box box  "
+          className="box box "
 >
           <div
                     className="media-left"
@@ -3696,7 +3270,7 @@ order.fee:
               </div>
 </div>,
           ],
-          "className": "box box  ",
+          "className": "box box ",
         },
         "ref": null,
         "rendered": Array [
@@ -3765,7 +3339,6 @@ order.fee:
                                     </h6>
                   </div>
 </div>,
-                false,
               ],
               "className": "media-right",
             },
@@ -3898,7 +3471,6 @@ order.fee:
                 ],
                 "type": "div",
               },
-              false,
             ],
             "type": "div",
           },
@@ -4056,7 +3628,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="box box  "
+        className="box box "
 >
         <div
                 className="media-left"
@@ -4161,7 +3733,7 @@ ShallowWrapper {
             </div>
 </div>,
         ],
-        "className": "box box  ",
+        "className": "box box ",
       },
       "ref": null,
       "rendered": Array [
@@ -4230,7 +3802,6 @@ ShallowWrapper {
                                 </h6>
                 </div>
 </div>,
-              false,
             ],
             "className": "media-right",
           },
@@ -4363,7 +3934,6 @@ order.fee:
               ],
               "type": "div",
             },
-            false,
           ],
           "type": "div",
         },
@@ -4379,7 +3949,7 @@ order.fee:
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="box box  "
+          className="box box "
 >
           <div
                     className="media-left"
@@ -4484,7 +4054,7 @@ order.fee:
               </div>
 </div>,
           ],
-          "className": "box box  ",
+          "className": "box box ",
         },
         "ref": null,
         "rendered": Array [
@@ -4553,7 +4123,6 @@ order.fee:
                                     </h6>
                   </div>
 </div>,
-                false,
               ],
               "className": "media-right",
             },
@@ -4686,7 +4255,6 @@ order.fee:
                 ],
                 "type": "div",
               },
-              false,
             ],
             "type": "div",
           },
