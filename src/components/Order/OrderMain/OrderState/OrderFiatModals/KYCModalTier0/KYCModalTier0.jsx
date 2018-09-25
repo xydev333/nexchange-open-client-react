@@ -168,12 +168,7 @@ class KYCModal extends Component {
             </h5>
           </div>
 
-            <div className="modal-body">
-            {this.props.kyc.identity_token && (
-                <iframe src={`https://ui.idenfy.com/?iframe=true&authToken=${this.props.kyc.identity_token}`} width="100%" height="600" allow="camera"></iframe>
-            )}
-
-{/*
+          <div className="modal-body">
             <form onSubmit={this.handleSubmit}>
               {this.props.kyc.id_document_status !== 'APPROVED' && (
                 <div>
@@ -244,7 +239,6 @@ class KYCModal extends Component {
                 {this.state.buttonText}
               </button>
             </form>
-            */}
           </div>
         </div>
       </Modal>
