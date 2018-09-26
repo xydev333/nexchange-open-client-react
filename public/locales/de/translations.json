@@ -6,9 +6,6 @@
     "email": "Email",
     "address": "Adresse",
     "youraddress": "Geben Sie Ihre {{selectedCoin}} Adresse ein",
-    "destinationtag": "Destination tag",
-    "paymentid": "Payment id",
-    "memo": "Memo",
     "search": "Suchen",
     "submit": "Bestätigen"
   },
