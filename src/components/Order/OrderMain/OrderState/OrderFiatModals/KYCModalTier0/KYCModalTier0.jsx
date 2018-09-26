@@ -168,16 +168,8 @@ class KYCModal extends Component {
             </h5>
           </div>
 
-            <div className="modal-body">
-            {this.props.kyc.identity_token && (
-                <div>
-                    <h2>{t('order.fiat.kyc.1')}</h2>
-                    <iframe src={`https://ui.idenfy.com/?iframe=true&authToken=${this.props.kyc.identity_token}`} width="100%" height="600" allow="camera" frameborder="0"></iframe>
-                </div>
-            )}
-
+          <div className="modal-body">
             <form onSubmit={this.handleSubmit}>
-                {/*
               {this.props.kyc.id_document_status !== 'APPROVED' && (
                 <div>
                   <h2>{t('order.fiat.kyc.1')}</h2>
@@ -185,16 +177,15 @@ class KYCModal extends Component {
                   <input type="file" name="governmentID" id="governmentID" onChange={this.handleInputChange} accept="image/*" />
                 </div>
               )}
-                */}
 
               {this.props.kyc.residence_document_status !== 'APPROVED' && (
                 <div>
                   <h2>{t('order.fiat.kyc.2')}</h2>
                   <small>
-                      <div dangerouslySetInnerHTML={{__html: t('order.fiat.kyc.21')}} />
+                    {t('order.fiat.kyc.21')}
                   </small>
                   <small>
-                      <div dangerouslySetInnerHTML={{__html: t('order.fiat.kyc.22')}} />
+                    {t('order.fiat.kyc.22')}
                   </small>
                   <input type="file" name="residenceProof" id="residenceProof" onChange={this.handleInputChange} accept="image/*" />
                 </div>
