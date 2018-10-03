@@ -6,9 +6,6 @@
     "email": "Email",
     "address": "Adresse",
     "youraddress": "Geben Sie Ihre {{selectedCoin}} Adresse ein",
-    "destinationtag": "Destination tag",
-    "paymentid": "Payment id",
-    "memo": "Memo",
     "search": "Suchen",
     "submit": "Bestätigen"
   },
@@ -164,8 +161,7 @@
   },
   "order": {
     "enteraddress": "Geben Sie Ihre Wallet-Adresse ein",
-    "copyaddress": "Adresse der Wallet kopiert!",
-    "copyaddressid": "{{addressIdType}} kopiert!",
+    "copy": "Adresse der Wallet kopiert!",
     "reference": "Auftrag Referenz",
     "api": "Details Ihres Auftrages in unsere API",
     "blockchain": "Sehen Sie Ihre  Auftragsdetails in der Blockchain ein",
