@@ -191,12 +191,13 @@ class KYCModal extends Component {
 
             <div className="modal-body">
             { ! this.state.idApproved && this.props.kyc.identity_token && this.props.kyc.id_document_status !== 'APPROVED' && (
-                <div hidden={! this.props.kyc.identity_token && this.state.idApproved}>
+                <div>
+                    <h2>{t('order.fiat.kyc.1')}</h2>
                     <iframe src={`https://ui.idenfy.com/?iframe=true&authToken=${this.props.kyc.identity_token}`} width="100%" height="600" allow="camera" frameBorder="0" title="idenfy" id="idenfy"></iframe>
                 </div>
             )}
 
-            <form onSubmit={this.handleSubmit} hidden={this.props.kyc.identity_token && ! this.state.idApproved}>
+            <form onSubmit={this.handleSubmit}>
               { !this.state.idApproved &&
               (!this.props.kyc.identity_token || this.state.showManualId) && this.props.kyc.id_document_status !== 'APPROVED' && (
                 <div>
