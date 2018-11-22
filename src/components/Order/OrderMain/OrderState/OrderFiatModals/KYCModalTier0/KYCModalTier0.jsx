@@ -201,12 +201,11 @@ class KYCModal extends Component {
               (!this.props.kyc.identity_token || this.state.showManualId) && this.props.kyc.id_document_status !== 'APPROVED' && (
                 <div>
                   <h2>{t('order.fiat.kyc.1')}</h2>
-                  <small>{t('order.fiat.kyc.govSelfieDesc')}</small>
+                  <small>{t('order.fiat.kyc.11')}</small>
                   <input type="file" name="governmentID" id="governmentID" onChange={this.handleInputChange} accept="image/*" />
                 </div>
               )}
 
-              {/*
               {this.props.kyc.residence_document_status !== 'APPROVED' && (
                 <div>
                   <h2>{t('order.fiat.kyc.2')}</h2>
@@ -219,7 +218,6 @@ class KYCModal extends Component {
                   <input type="file" name="residenceProof" id="residenceProof" onChange={this.handleInputChange} accept="image/*" />
                 </div>
               )}
-              */}
 
               <div className="form-group">
                 <input
