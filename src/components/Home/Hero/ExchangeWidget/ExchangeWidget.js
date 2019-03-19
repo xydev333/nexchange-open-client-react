@@ -11,7 +11,6 @@ import { setWallet, errorAlert, setOrder } from 'Actions/index.js';
 import { bindCrispEmail } from 'Utils/crispEmailBinding';
 
 import CoinInput from './CoinInput/CoinInput';
-import CoinSwitch from './CoinSwitch/CoinSwitch';
 import WalletAddress from './WalletAddress/WalletAddress';
 
 import styles from './ExchangeWidget.scss';
@@ -117,7 +116,6 @@ class ExchangeWidget extends Component {
                 <div className="col-xs-12">
                   <div className={styles.widget}>
                     <CoinInput type="deposit" onSubmit={this.showWalletAddress} />
-                    <CoinSwitch />
                     <CoinInput type="receive" onSubmit={this.showWalletAddress} />
 
                     <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
