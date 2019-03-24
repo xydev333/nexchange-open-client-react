@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  border-radius: 4px;
+  background-color: $grey;
+  z-index: 1;
+
+  .entry {
+    padding: 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+}
