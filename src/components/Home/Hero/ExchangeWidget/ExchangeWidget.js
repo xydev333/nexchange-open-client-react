@@ -84,23 +84,6 @@ class ExchangeWidget extends Component {
         bindCrispEmail(this.props.store);
 
         window.ga('send', 'event', 'Order', 'place order', response.data.unique_reference);
-
-        //Store order history in local storage
-        let newOrder = {
-            base: this.props.selectedCoin.deposit,
-            quote: this.props.selectedCoin.receive,
-            withdraw_address: this.props.wallet.address,
-            created_at: new Date()
-        }
-        let orderHistory = localStorage['orderHistory'];
-        if(!orderHistory){
-          orderHistory = [newOrder];
-        }
-        else {
-          orderHistory = JSON.parse(orderHistory);
-          orderHistory.push(newOrder);
-        }
-        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
       })
       .catch(error => {
         console.log('Error:', error);
@@ -116,6 +99,19 @@ class ExchangeWidget extends Component {
 
         this.setState({ orderPlaced: false, loading: false });
       });
+
+      //Store address in local storage
+      let addressHitory = localStorage[`${this.props.selectedCoin.receive}addressHistory`];
+      if(!addressHitory){
+        addressHitory = this.props.wallet.address;
+      }
+      else {
+        let addressHitoryArray = addressHitory.split(',');
+        if(addressHitoryArray.indexOf(this.props.wallet.address) === -1){
+          addressHitory = addressHitoryArray.concat([this.props.wallet.address]).join(',');
+        }
+      }
+      localStorage.setItem(`${this.props.selectedCoin.receive}addressHistory`, addressHitory);
   }
 
   focusWalletAddress() {
@@ -137,12 +133,13 @@ class ExchangeWidget extends Component {
                     <CoinSwitch />
                     <CoinInput type="receive" onSubmit={this.showWalletAddress} />
 
-                    <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
+                    <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} button={this.button} />
                     <div className={styles.submit}>
                       <p className={styles.info}>{t('order.feeinfo')}</p>
 
                       {/* eslint max-len: ["error", { "code": 200 }] */}
-                      <button className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `} onClick={this.placeOrder}>
+                      <button ref={ref => {this.button = ref}}
+                        className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `} onClick={this.placeOrder}>
                         {t('exchangewidget.2')}
                         {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
                       </button>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { errorAlert, setWallet, selectCoin } from 'Actions/index.js';
+import { errorAlert, setWallet } from 'Actions/index.js';
 import validateWalletAddress from 'Utils/validateWalletAddress';
 import AddressHistory from './AddressHistory/AddressHistory';
 import styles from './WalletAddress.scss';
@@ -15,13 +15,12 @@ class WalletAddress extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { address: '', firstLoad: true , orderHistory: []};
+    this.state = { address: '', firstLoad: true , addressHistory: []};
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setAddress = this.setAddress.bind(this);
-    this.setCoin = this.setCoin.bind(this);
   }
 
   validate = (address, receiveCoin) => {
@@ -58,20 +57,17 @@ class WalletAddress extends Component {
   }
 
   handleFocus(event) {
-    let orderHistory = localStorage['orderHistory'];
-    try {
-      orderHistory = orderHistory ? JSON.parse(orderHistory).reverse() : [];
-    } catch (e) {
-      orderHistory = [];
-    }
+    const receiveCoin = this.props.selectedCoin.receive;
+    const addressHistory = localStorage[`${receiveCoin}addressHistory`] ?
+                           localStorage[`${receiveCoin}addressHistory`].split(",").reverse().slice(0, 5) : [];
     this.setState({
-      orderHistory: orderHistory
+      addressHistory
     });
   }
 
   handleBlur(event) {
     this.setState({
-      orderHistory: []
+      addressHistory: []
     });
   }
 
@@ -94,6 +90,7 @@ class WalletAddress extends Component {
         const simulatedEvent ={target: {value: params['withdraw_address'].toString()}};
         this.handleChange(simulatedEvent);
         this.setState({firstLoad: false});
+        this.props.button.focus();
       }
   }
 
@@ -101,13 +98,6 @@ class WalletAddress extends Component {
     const simulatedEvent ={target: {value: address}};
     this.handleChange(simulatedEvent);
     this.props.button.focus();
-  }
-
-  setCoin(coin) {
-    this.props.selectCoin({
-      ...this.props.selectedCoin,
-      ['receive']: coin,
-    }, this.props.pairs);
   }
 
   render() {
@@ -129,7 +119,7 @@ class WalletAddress extends Component {
                 autoComplete="off"
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
-              <AddressHistory history={this.state.orderHistory} setAddress={this.setAddress} setCoin={this.setCoin} />
+              <AddressHistory history={this.state.addressHistory} setAddress={this.setAddress} />
             </form>
           </div>
         )}
@@ -138,8 +128,8 @@ class WalletAddress extends Component {
   }
 }
 
-const mapStateToProps = ({ selectedCoin, wallet, pairs }) => ({ selectedCoin, wallet, pairs });
-const mapDispatchToProps = dispatch => bindActionCreators({ errorAlert, setWallet, selectCoin}, dispatch);
+const mapStateToProps = ({ selectedCoin, wallet }) => ({ selectedCoin, wallet });
+const mapDispatchToProps = dispatch => bindActionCreators({ errorAlert, setWallet }, dispatch);
 
 export default connect(
   mapStateToProps,
