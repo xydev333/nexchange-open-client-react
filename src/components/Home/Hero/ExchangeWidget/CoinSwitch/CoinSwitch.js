@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import onClickOutside from 'react-onclickoutside';
 import { selectCoin, fetchPrice, errorAlert } from 'Actions/index.js';
 import styles from './CoinSwitch.scss';
 
@@ -25,7 +26,7 @@ class CoinSwitch extends Component {
       receive,
     });
 
-    window.gtag('event', 'Switched coins', {event_category: 'Order', event_label: `${deposit} - ${receive}`});
+    if (window.ga) window.ga('send', 'event', 'Order', 'switched coins');
   };
 
   handleClick = () => {
@@ -56,3 +57,10 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CoinSwitch);
+
+// export const CoinSelectorTesting = translate()(
+//   connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+//   )(CoinSelector)
+// );

@@ -81,7 +81,7 @@ class Header extends Component {
                       className={styles.link}
                       href="javascript:void(0)"
                       onClick={() => {
-                        window.gtag('event', 'FAQs open', {event_category: 'FAQ', event_label: ``});
+                        window.ga('send', 'event', 'FAQ', 'open');
                         this.setState({ showFaqModal: true });
                       }}
                       data-test="faq-btn"
@@ -96,7 +96,7 @@ class Header extends Component {
                       href="http://docs.nexchange2.apiary.io/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => window.gtag('event', 'API open', {event_category: 'API', event_label: ``})}
+                      onClick={() => ga('send', 'event', 'General', 'api docs click')}
                       data-test="api-link"
                     >
                       {t('header.apidocs')}
@@ -125,8 +125,10 @@ class Header extends Component {
                       href="https://n.exchange/ico"
                       className={`${styles.btn} btn btn-block btn-primary`}
                       onClick={() => {
-                        window.gtag('event', 'ICO open', {event_category: 'ICO', event_label: ``});
-
+                        window.ga('send', 'event', {
+                          eventCategory: 'ICO open',
+                          eventAction: 'Open from header',
+                        });
                       }}
                       target="_blank"
                       rel="noopener noreferrer"

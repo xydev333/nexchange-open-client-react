@@ -31,7 +31,10 @@ const ICO = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
-                    window.gtag('event', 'ICO open from widget', {event_category: 'ICO', event_label: ``});
+                    window.ga('send', 'event', {
+                      eventCategory: 'ICO open',
+                      eventAction: 'Open from widget',
+                    });
                   }}
                 >
                   {t('ico.action')}

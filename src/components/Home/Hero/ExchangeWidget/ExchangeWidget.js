@@ -36,7 +36,10 @@ class ExchangeWidget extends Component {
   placeOrder() {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
-        window.gtag('event', 'Place order with empty wallet address', {event_category: 'Order', event_label: ``});
+        window.ga('send', 'event', {
+          eventCategory: 'Order',
+          eventAction: 'Place order with empty wallet address',
+        });
 
         this.props.errorAlert({
           show: true,
@@ -80,7 +83,7 @@ class ExchangeWidget extends Component {
 
         bindCrispEmail(this.props.store);
 
-        window.gtag('event', 'Place order', {event_category: 'Order', event_label: `${response.data.unique_reference}`});
+        window.ga('send', 'event', 'Order', 'place order', response.data.unique_reference);
 
         //Store order history in local storage
         let newOrder = {
@@ -139,8 +142,8 @@ class ExchangeWidget extends Component {
                       <p className={styles.info}>{t('order.feeinfo')}</p>
 
                       {/* eslint max-len: ["error", { "code": 200 }] */}
-                      <button ref={ref => {this.button = ref}}
-                        className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `} onClick={this.placeOrder}>
+                      <button className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
+                      onClick={this.placeOrder} ref={(el) => { this.button = el; }} >
                         {t('exchangewidget.2')}
                         {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
                       </button>

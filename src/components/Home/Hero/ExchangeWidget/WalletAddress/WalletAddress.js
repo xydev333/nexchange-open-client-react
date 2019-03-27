@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { errorAlert, setWallet, selectCoin } from 'Actions/index.js';
+import { errorAlert, setWallet, selectCoin, fetchPrice } from 'Actions/index.js';
 import validateWalletAddress from 'Utils/validateWalletAddress';
 import AddressHistory from './AddressHistory/AddressHistory';
 import styles from './WalletAddress.scss';
@@ -94,7 +94,6 @@ class WalletAddress extends Component {
         const simulatedEvent ={target: {value: params['withdraw_address'].toString()}};
         this.handleChange(simulatedEvent);
         this.setState({firstLoad: false});
-        this.props.button.focus();
       }
   }
 
@@ -105,10 +104,21 @@ class WalletAddress extends Component {
   }
 
   setCoin(coin) {
+    //Select coin
     this.props.selectCoin({
       ...this.props.selectedCoin,
       ['receive']: coin,
     }, this.props.pairs);
+
+    //Update quote value
+    const pair = `${coin}${this.props.selectedCoin.deposit}`;
+    const data = {
+      pair,
+      lastEdited: 'receive',
+    };
+
+    data['receive'] = coin;
+    this.props.fetchPrice(data);
   }
 
   render() {
@@ -140,7 +150,7 @@ class WalletAddress extends Component {
 }
 
 const mapStateToProps = ({ selectedCoin, wallet, pairs }) => ({ selectedCoin, wallet, pairs });
-const mapDispatchToProps = dispatch => bindActionCreators({ errorAlert, setWallet, selectCoin}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ errorAlert, setWallet, selectCoin, fetchPrice }, dispatch);
 
 export default connect(
   mapStateToProps,
