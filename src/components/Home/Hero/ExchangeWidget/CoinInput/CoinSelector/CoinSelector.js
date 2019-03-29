@@ -26,7 +26,7 @@ class CoinSelector extends Component {
     }, this.props.pairs);
 
     this.setState({ isDropdownVisible: false });
-    window.gtag('event', 'Select coin', {event_category: 'Order', event_label: `${this.props.type} - ${coin}`});
+    if (window.ga) window.ga('send', 'event', 'Order', 'select coin');
   };
 
   calculateDepositAmount = coin => {
