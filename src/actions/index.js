@@ -133,13 +133,7 @@ export const fetchPrice = payload => dispatch => {
         data['max_amount_base'] = parseFloat(err.response.data.max_amount_base);
       }
 
-      /* istanbul ignore next */
-      if (window.ga) {
-        window.ga('send', 'event', {
-          eventCategory: 'Amount input',
-          eventAction: 'Amount too high/low error',
-        });
-      }
+      window.gtag('event', 'Change amount', {event_category: 'Amount Input', event_label: `Amount too high/low error`});
 
       if ('receive' in payload) {
         data['deposit'] = '...';
@@ -181,13 +175,7 @@ export const fetchPrice = payload => dispatch => {
       const amounts = await makeRequest(url);
       setValidValues(amounts);
     } catch (err) {
-      /* istanbul ignore next */
-      if (window.ga) {
-        window.ga('send', 'event', {
-          eventCategory: 'Coin selector',
-          eventAction: 'Fetch default amounts',
-        });
-      }
+      window.gtag('event', 'Fetch default amounts', {event_category: 'Coin Selector', event_label: ``});
 
       if (payload.coinSelector) {
         const url = `${config.API_BASE_URL}/get_price/${pair}/`;
@@ -230,7 +218,10 @@ export const fetchPairs = () => dispatch => {
           axios
             .get(`${config.API_BASE_URL}/pair/${params['pair']}/`)
             .then(res => resolve(res.data))
-            .catch( /* istanbul ignore next */ err => reject(err));
+            .catch( /* istanbul ignore next */ err => console.log(err))
+            .then(function(){
+              resolve(pickRandomPair());
+              });;
         });
       };
 
@@ -246,8 +237,10 @@ export const fetchPairs = () => dispatch => {
         if (params && params.hasOwnProperty('pair')) {
           try {
             const pair = await coinsFromUrlParams(params);
-            depositCoin = pair.quote;
-            receiveCoin = pair.base;
+            if(pair){
+              depositCoin = pair.quote;
+              receiveCoin = pair.base;
+            }
           } catch (err) {
             /* istanbul ignore next */
             console.log('Error:', err);
