@@ -35,10 +35,10 @@ class CoinInput extends PureComponent {
     this.setState({ value });
     this.fetchAmounts(value);
 
-    ga('send', 'event', 'Order', 'change amount');
+    window.gtag('event', 'Change amount', {event_category: 'Order', event_label: ``});
   };
 
-  assignMinMaxValue = value => {
+  setValue = value => {
     const simulatedEvent ={target: {value: value.toString()}};
     this.handleChange(simulatedEvent);
   };
@@ -63,7 +63,11 @@ class CoinInput extends PureComponent {
   }, 600);
 
   focus = () => {
-    this.nameInput.focus();
+    if (this.props.type === 'receive') {
+      this.props.walletInput.focus();
+    } else {
+      this.nameInput.focus();
+    }
   };
 
   UNSAFE_componentWillReceiveProps = nextProps => {
@@ -109,7 +113,7 @@ class CoinInput extends PureComponent {
               min={this.props.type === 'deposit' ? this.props.price.min_amount_quote : this.props.price.min_amount_base}
               max={this.props.type === 'deposit' ? this.props.price.max_amount_quote : this.props.price.max_amount_base}
               amount={this.props.type === 'deposit' ? this.props.price.deposit : this.props.price.receive}
-              assignMinMaxValue={this.assignMinMaxValue}
+              setValue={this.setValue}
             />
           </div>
         )}
