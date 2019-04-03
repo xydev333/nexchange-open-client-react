@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import { I18n, Trans } from 'react-i18next';
 
 import ExchangeWidget from './ExchangeWidget/ExchangeWidget';
+import OrderBookWidget from './OrderBookWidget/OrderBookWidget';
 import CoinPrices from './CoinPrices/CoinPrices';
 import ErrorAlert from './ErrorAlert/ErrorAlert';
 
 import styles from './Hero.scss';
 
 class Hero extends Component {
+  constructor(props){
+    super();
+    
+    this.state = {
+      orderBookActive: true,
+    };
+  }
+
+  toggleMode() {
+    this.setState({orderBookActive: !this.state.orderBookActive});
+  }
+
   render() {
     return (
       <I18n ns="translations">
@@ -28,7 +41,12 @@ class Hero extends Component {
                   </div>
                 </div>
 
-                <ExchangeWidget store={this.props.store} />
+                <div>
+                  <a className={`clickable`} onClick={() => this.toggleMode()}>Change Mode</a>
+                  { this.state.orderBookActive
+                    ? <OrderBookWidget store={this.props.store} />
+                    : <ExchangeWidget store={this.props.store} /> }
+                </div>
               </div>
             </div>
 
