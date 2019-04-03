@@ -35,7 +35,7 @@ class CoinInput extends PureComponent {
     this.setState({ value });
     this.fetchAmounts(value);
 
-    window.gtag('event', 'Change amount', {event_category: 'Order', event_label: ``});
+    ga('send', 'event', 'Order', 'change amount');
   };
 
   setValue = value => {

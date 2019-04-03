@@ -18,8 +18,6 @@ class AddressHistory extends Component {
   handleClick(depositCoin, receiveCoin, address) {
     this.props.setCoin(depositCoin, receiveCoin);
     this.props.setAddress(address);
-
-    window.gtag('event', 'Set Address', {event_category: 'Order History', event_label: `${coin} - ${address}`});
   }
 
   orderClick(event, orderId) {
@@ -38,6 +36,10 @@ class AddressHistory extends Component {
   }
 
   render() {
+    if(_.isEmpty(this.props.history)) {
+      return null;
+    }
+
     return (
       <I18n ns="translations">
         {(t, { i18n }) => (

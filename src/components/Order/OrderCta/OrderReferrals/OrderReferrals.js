@@ -38,8 +38,11 @@ class OrderReferrals extends Component {
               <CopyToClipboard
                 text={this.state.link}
                 onCopy={() => {
-                  /* eslint max-len: ["error", { "code": 200 }] */
-                  window.gtag('event', 'Link click body', {event_category: 'Referrals', event_label: `${this.props.order.pair.base.name}`});
+                  window.ga('send', 'event', {
+                    eventCategory: 'Referrals',
+                    eventAction: 'Link click body',
+                    eventValue: this.props.order.pair.base.name,
+                  });
                   this.triggerCopyTooltip();
                 }}
               >
@@ -50,8 +53,11 @@ class OrderReferrals extends Component {
                   title="Click to copy!"
                   onFocus={e => e.target.blur()}
                   onMouseEnter={() => {
-                    /* eslint max-len: ["error", { "code": 200 }] */
-                    window.gtag('event', 'Link hover body', {event_category: 'Referrals', event_label: `${this.props.order.pair.base.name}`});
+                    window.ga('send', 'event', {
+                      eventCategory: 'Referrals',
+                      eventAction: 'Link hover body',
+                      eventValue: this.props.order.pair.base.name,
+                    });
                   }}
                   required
                 />
@@ -60,8 +66,11 @@ class OrderReferrals extends Component {
               <CopyToClipboard
                 text={this.state.link}
                 onCopy={() => {
-                  /* eslint max-len: ["error", { "code": 200 }] */
-                  window.gtag('event', 'Link click button', {event_category: 'Referrals', event_label: `${this.props.order.pair.base.name}`});
+                  window.ga('send', 'event', {
+                    eventCategory: 'Referrals',
+                    eventAction: 'Link click button',
+                    eventValue: this.props.order.pair.base.name,
+                  });
                   this.triggerCopyTooltip();
                 }}
               >
@@ -70,7 +79,11 @@ class OrderReferrals extends Component {
                   type="button"
                   className={`btn btn-primary ${styles.btn}`}
                   onMouseEnter={() => {
-                    window.gtag('event', 'Link hover link', {event_category: 'Referrals', event_label: `${this.props.order.pair.base.name}`});
+                    window.ga('send', 'event', {
+                      eventCategory: 'Referrals',
+                      eventAction: 'Link hover link',
+                      eventValue: this.props.order.pair.base.name,
+                    });
                   }}
                 >
                   {t('referral.copylink')}
@@ -85,7 +98,11 @@ class OrderReferrals extends Component {
                     href={`https://facebook.com/sharer.php?u=${this.state.link}`}
                     target="_blank"
                     onClick={() => {
-                      window.gtag('event', 'Social click', {event_category: 'Referrals', event_label: `Facebook`});
+                      window.ga('send', 'event', {
+                        eventCategory: 'Referrals',
+                        eventAction: 'Social click',
+                        eventValue: 'facebook',
+                      });
                     }}
                   >
                     <i className="fab fa-facebook-f" aria-hidden="true" />
@@ -95,7 +112,11 @@ class OrderReferrals extends Component {
                     href={`https://twitter.com/intent/tweet?url=${this.state.link}&text=${t('referral.twitter')}`}
                     target="_blank"
                     onClick={() => {
-                      window.gtag('event', 'Social click', {event_category: 'Referrals', event_label: `Twitter`});
+                      window.ga('send', 'event', {
+                        eventCategory: 'Referrals',
+                        eventAction: 'Social click',
+                        eventValue: 'twitter',
+                      });
                     }}
                   >
                     <i className="fab fa-twitter" aria-hidden="true" />
@@ -105,7 +126,11 @@ class OrderReferrals extends Component {
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=${this.state.link}`}
                     target="_blank"
                     onClick={() => {
-                      window.gtag('event', 'Social click', {event_category: 'Referrals', event_label: `LinkedIn`});
+                      window.ga('send', 'event', {
+                        eventCategory: 'Referrals',
+                        eventAction: 'Social click',
+                        eventValue: 'linkedin',
+                      });
                     }}
                   >
                     <i className="fab fa-linkedin-in" aria-hidden="true" />
