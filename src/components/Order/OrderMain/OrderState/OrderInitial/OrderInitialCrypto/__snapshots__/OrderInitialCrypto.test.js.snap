@@ -246,7 +246,6 @@ ShallowWrapper {
 >
                   0x6ce146d0431079fe70dffee5fb15ba687d7f9ae7
 </b>,
-                null,
               ],
             },
             "ref": null,
@@ -298,7 +297,6 @@ ShallowWrapper {
                 "rendered": "0x6ce146d0431079fe70dffee5fb15ba687d7f9ae7",
                 "type": "b",
               },
-              null,
             ],
             "type": "h4",
           },
@@ -574,7 +572,6 @@ ShallowWrapper {
 >
                     0x6ce146d0431079fe70dffee5fb15ba687d7f9ae7
 </b>,
-                  null,
                 ],
               },
               "ref": null,
@@ -626,7 +623,6 @@ ShallowWrapper {
                   "rendered": "0x6ce146d0431079fe70dffee5fb15ba687d7f9ae7",
                   "type": "b",
                 },
-                null,
               ],
               "type": "h4",
             },
