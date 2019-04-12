@@ -16,15 +16,15 @@ class FAQ extends Component {
 
     this.faqs = [];
     this.state = {
-      loading: true,
+      show: false,
       searchText: '',
       filteredQuestionsIds: Array(FAQ_COUNT).fill().map((e,i)=>i+1)
     };
 
   }
-  
-  componentWillMount() {
-    window.gtag('event', 'FAQs open', {event_category: 'FAQ', event_label: ``});
+
+  componentDidMount() {
+
   }
 
   showQuestion(id) {
@@ -32,7 +32,7 @@ class FAQ extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.loading) {
+    if (this.state.show !== this.props.show) {
       //Populate local FAQ Array
       const faqIdArray = Array(FAQ_COUNT).fill().map((e,i)=>i+1);
       let faqs = [];
@@ -48,7 +48,7 @@ class FAQ extends Component {
 
       //Show modal
       this.setState({
-        loading: false,
+        show: this.props.show,
       });
     }
   }
@@ -94,14 +94,15 @@ class FAQ extends Component {
     return (
       <I18n ns="translations">
         {t => (
-          <div className={styles.container}>
-              <div className="col-xs-12">
-                <div className={styles.brand}>
-                  <h1>{t('faq.heading1')}</h1>
-                  <h2>{t('faq.heading2')}</h2>
-                </div>
-              </div>   
-              <div className={`col-xs-10 ${styles.faqs}`}>
+          <Modal show={this.state.show} onHide={this.props.onClose}>
+            <div id="faq" className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this.props.onClose}>
+                  <i className="material-icons">clear</i>
+                </button>
+              </div>
+
+              <div className="modal-body">
                 <form className="form-group" onSubmit={this.handleSubmit}>
                   <div className={`${styles.input}`}>
                     <i className={`fas fa-search`}></i>
@@ -114,8 +115,7 @@ class FAQ extends Component {
                       placeholder={t('faq.inputplaceholder')}
                     />
                   </div>
-                  </form>
-                <div id='faq.list' className={styles.list}>
+                </form>
                 {this.showQuestion(1) ?
                   <QuestionAnswer
                   id="ques1"
@@ -394,9 +394,9 @@ class FAQ extends Component {
                     </div>
                   }
                 /> : null}
-                </div>
-                </div>
               </div>
+            </div>
+          </Modal>
         )}
       </I18n>
     );
