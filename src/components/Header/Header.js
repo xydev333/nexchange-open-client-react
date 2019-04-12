@@ -76,7 +76,7 @@ class Header extends Component {
               <div className="collapse navbar-collapse" id="navigation-index">
                 <ul className="nav navbar-nav navbar-right">
                   <li>
-                    <a className={styles.link} href="#" onClick={() => { this.scrollTo("#about"); }} >
+                    <a className={styles.link} href="/#about" onClick={() => { this.scrollTo("#about"); }} >
                       {t('header.about')}
                     </a>
                   </li>
@@ -105,7 +105,7 @@ class Header extends Component {
                   </li>
 
                   <li>
-                    <a className={styles.link} href="/#compare" data-test="compare-link">
+                    <a className={styles.link}  href="#" onClick={() => { this.scrollTo("#compare"); }} data-test="compare-link">
                       {t('header.compare')}
                     </a>
                   </li>
