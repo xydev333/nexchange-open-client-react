@@ -7,9 +7,6 @@ import * as types from './types';
 import {
   errorAlert,
   setWallet,
-  setDestinationTag,
-  setPaymentId,
-  setMemo,
   selectCoin,
   fetchCoinDetails,
   fetchPrice,
@@ -63,48 +60,16 @@ describe('actions', () => {
     expect(setWallet('payload')).toEqual(expectedAction);
   });
 
-  it('setDestinationTag', () => {
-    const payload = 'payload';
-    const expectedAction = {
-      type: types.SET_DESTINATION_TAG,
-      payload,
-    };
-
-    expect(setDestinationTag('payload')).toEqual(expectedAction);
-  });
-
-  it('setPaymentId', () => {
-    const payload = 'payload';
-    const expectedAction = {
-      type: types.SET_PAYMENT_ID,
-      payload,
-    };
-
-    expect(setPaymentId('payload')).toEqual(expectedAction);
-  });
-
-  it('setMemo', () => {
-    const payload = 'payload';
-    const expectedAction = {
-      type: types.SET_MEMO,
-      payload,
-    };
-
-    expect(setMemo('payload')).toEqual(expectedAction);
-  });
-
   it('selectCoin', () => {
     const payload = 'payload';
-    const pairs = 'pairs';
     const expectedAction = {
       type: types.COIN_SELECTED,
       payload: {
         selectedCoins: payload,
-        pairs: pairs
       },
     };
 
-    expect(selectCoin('payload','pairs')).toEqual(expectedAction);
+    expect(selectCoin('payload')).toEqual(expectedAction);
   });
 
   it('setOrder', () => {
@@ -201,10 +166,6 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/ETHBTC/?amount_base=undefined').reply(200, mockData);
     const expectedActions = [
       {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
-      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -216,7 +177,11 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      }
+      },
+      {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -245,10 +210,6 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/XVGBTC/').reply(200, mockData);
     const expectedActions = [
       {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
-      {
         type: types.FETCHING_PRICE,
       },
       {
@@ -263,6 +224,10 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
+      },
+      {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
       },
     ];
 
@@ -293,10 +258,6 @@ describe('actions', () => {
 
     const expectedActions = [
       {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
-      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -308,7 +269,11 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      }
+      },
+      {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -338,10 +303,6 @@ describe('actions', () => {
 
     const expectedActions = [
       {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
-      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -353,7 +314,11 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'receive',
         },
-      }
+      },
+      {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -380,14 +345,6 @@ describe('actions', () => {
 
     const expectedActions = [
       {
-        type: types.ERROR_ALERT,
-        payload: {
-          message: mockData.detail,
-          show: true,
-          type: 'INVALID_AMOUNT',
-        },
-      },
-      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -398,6 +355,14 @@ describe('actions', () => {
           min_amount_base: mockData.min_amount_base,
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
+        },
+      },
+      {
+        type: types.ERROR_ALERT,
+        payload: {
+          message: mockData.detail,
+          show: true,
+          type: 'INVALID_AMOUNT',
         },
       },
     ];

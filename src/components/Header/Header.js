@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { I18n } from 'react-i18next';
 import ScrollToElement from 'scroll-to-element';
 
+
+import FAQ from './FAQ/FAQ';
 import Support from './Support/Support';
 import LanguagePicker from './LanguagePicker/LanguagePicker';
 
@@ -10,15 +12,10 @@ import LanguagePicker from './LanguagePicker/LanguagePicker';
 import styles from './Header.scss';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showSupportModal: false,
-    };
-  
-    this.closeNavbar = this.closeNavbar.bind(this);
-  }
+  state = {
+    showFaqModal: false,
+    showSupportModal: false,
+  };
 
   componentDidMount() {
     /* istanbul ignore next */
@@ -35,35 +32,22 @@ class Header extends Component {
     }
   }
 
+  closeFaqModal = () => this.setState({ showFaqModal: false });
   closeSupportModal = () => this.setState({ showSupportModal: false });
 
-  closeNavbar = () => {
-      $('.navbar-collapse').collapse('hide');
-  }
-
-  componentDidUpdate(){
-    if(window.location.hash) {
-      ScrollToElement(`${window.location.hash}`,{
-        offset: 0,
-        ease: 'linear',
-        duration: 1000
-      });
-   }
-  }
-
-  isHomeHeader = () => {
-    if (window.location.pathname === '/' || window.location.pathname.indexOf('/faqs') != -1) {
-      return true;
-    }
-    return false;
+  scrollTo = (element) => {
+    ScrollToElement(element,{
+      offset: 0,
+      ease: 'linear',
+      duration: 1000
+    });
   }
 
   render() {
-    const isHomeHeader = this.isHomeHeader();
     return (
       <I18n ns="translations">
         {(t, { i18n }) => (
-          <div className={`${styles.header} ${ isHomeHeader ? styles.home : ''}`} data-test="header">
+          <div className={`${styles.header} ${window.location.pathname === '/' ? styles.home : ''}`} data-test="header">
             <div className="container">
               <div className="navbar-header">
                 <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -75,7 +59,7 @@ class Header extends Component {
 
                 <Link to="/">
                   <div className={styles['logo-container']}>
-                    {isHomeHeader ? (
+                    {window.location.pathname === '/' ? (
                       <img src="/img/logo-white.svg" alt="Logo" data-test="logo" />
                     ) : (
                       <img src="/img/logo.svg" alt="Logo" data-test="logo" />
@@ -87,15 +71,23 @@ class Header extends Component {
               <div className="collapse navbar-collapse" id="navigation-index">
                 <ul className="nav navbar-nav navbar-right">
                   <li>
-                    <Link onClick={() => this.closeNavbar()} to="/#about" className={styles.link}>
-                        {t('header.about')}
-                    </Link>
+                    <a className={styles.link} href="#" onClick={() => { this.scrollTo("#about"); }} >
+                      {t('header.about')}
+                    </a>
                   </li>
 
                   <li>
-                   <Link onClick={() => this.closeNavbar()} to="/faqs" className={styles.link} data-test="faq-btn">
-                        {t('header.faq')}
-                    </Link>
+                    <a
+                      className={styles.link}
+                      href="javascript:void(0)"
+                      onClick={() => {
+                        window.ga('send', 'event', 'FAQ', 'open');
+                        this.setState({ showFaqModal: true });
+                      }}
+                      data-test="faq-btn"
+                    >
+                      {t('header.faq')}
+                    </a>
                   </li>
 
                   <li>
@@ -104,7 +96,7 @@ class Header extends Component {
                       href="http://docs.nexchange2.apiary.io/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => window.gtag('event', 'API open', {event_category: 'API', event_label: ``})}
+                      onClick={() => ga('send', 'event', 'General', 'api docs click')}
                       data-test="api-link"
                     >
                       {t('header.apidocs')}
@@ -112,19 +104,20 @@ class Header extends Component {
                   </li>
 
                   <li>
-                    <Link onClick={() => this.closeNavbar()} to="/#compare" className={styles.link} data-test="compare-link">
-                        {t('header.compare')}
-                    </Link>
+                    <a className={styles.link} href="/#compare" data-test="compare-link">
+                      {t('header.compare')}
+                    </a>
                   </li>
 
                   <li>
-                    <Link 
-                      onClick={() => { this.closeNavbar();this.setState({ showSupportModal: true });}} 
+                    <a
                       className={styles.link}
-                      to='#'
-                      data-test="support-btn">
-                        {t('header.support')}
-                    </Link>
+                      href="javascript:void(0)"
+                      onClick={() => this.setState({ showSupportModal: true })}
+                      data-test="support-btn"
+                    >
+                      {t('header.support')}
+                    </a>
                   </li>
 
                   <li className={styles['ico-link']}>
@@ -132,8 +125,10 @@ class Header extends Component {
                       href="https://n.exchange/ico"
                       className={`${styles.btn} btn btn-block btn-primary`}
                       onClick={() => {
-                        window.gtag('event', 'ICO open', {event_category: 'ICO', event_label: ``});
-
+                        window.ga('send', 'event', {
+                          eventCategory: 'ICO open',
+                          eventAction: 'Open from header',
+                        });
                       }}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -245,6 +240,7 @@ class Header extends Component {
                 </ul>
               </div>
 
+              <FAQ show={this.state.showFaqModal} onClose={this.closeFaqModal} />
               <Support show={this.state.showSupportModal} onClose={this.closeSupportModal} />
             </div>
           </div>

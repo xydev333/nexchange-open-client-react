@@ -50,7 +50,6 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
 module.exports = {
-  mode: 'production',
   // Don't attempt to continue if there are any errors.
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
@@ -258,7 +257,7 @@ module.exports = {
 
           {
             test: /\.svg$/,
-            exclude: [/font-awesome/, /ellipse/, /price-up/, /price-down/, /carret-down/, /arrow-right-2/, /get-notified/, /switch/],
+            exclude: [/font-awesome/, /ellipse/, /price-up/, /price-down/, /carret-down/, /arrow-right-2/, /get-notified/],
             use: [
               {
                 loader: 'babel-loader',
@@ -316,7 +315,7 @@ module.exports = {
         minifyURLs: true,
       },
     }),
-    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
+    new InterpolateHtmlPlugin(env.raw),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -374,20 +373,18 @@ module.exports = {
     minimizer: [
       // we specify a custom UglifyJsPlugin here to get source maps in production
       new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          comparisons: false,
-          cache: true,
-          parallel: true,
-          compress: false,
-          ecma: 6,
-          mangle: true,
-          output: {
-            comments: false,
-            // Turned on because emoji and regex is not minified properly using default
-            // https://github.com/facebookincubator/create-react-app/issues/2488
-            ascii_only: true,
-          },
+        warnings: false,
+        comparisons: false,
+        cache: true,
+        parallel: true,
+        compress: false,
+        ecma: 6,
+        mangle: true,
+        output: {
+          comments: false,
+          // Turned on because emoji and regex is not minified properly using default
+          // https://github.com/facebookincubator/create-react-app/issues/2488
+          ascii_only: true,
         },
         sourceMap: shouldUseSourceMap
       })

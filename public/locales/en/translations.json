@@ -5,9 +5,6 @@
     "email": "Email (required to notify you about your order)",
     "address": "address",
     "youraddress": "Enter your {{selectedCoin}} wallet address",
-    "destinationtag": "Destination tag",
-    "paymentid": "Payment id",
-    "memo": "Memo",
     "search": "Search",
     "submit": "Submit"
   },
@@ -125,11 +122,6 @@
     "presale": "Pre-sale starts in"
   },
   "faq": {
-    "heading1": "Frequently Asked Questions",
-    "heading2": "Do you have something in mind?",
-    "inputplaceholder": "What are you looking for?",
-    "notfound": "We did not find what you were looking for",
-    "openticket": "Open support ticket",
     "ques1": "Who are you?",
     "ques2": "What do you do?",
     "ques3": "What is your fee?",
@@ -214,8 +206,7 @@
   },
   "order": {
     "enteraddress": "Enter your wallet address",
-    "copyaddress": "Wallet address copied!",
-    "copyaddressid": "{{addressIdType}} copied!",
+    "copy": "Wallet adress copied!",
     "reference": "Order Reference",
     "api": "See your order details on our API",
     "repeat": "Repeat order",
@@ -427,7 +418,5 @@
     "try": "Try",
     "novalid": "is no valid",
     "providevalid": "Please put valid"
-  },
-  "viewmore": "view more",
-  "to": "to"
+  }
 }
