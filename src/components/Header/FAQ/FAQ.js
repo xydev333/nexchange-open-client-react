@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { I18n, Trans } from 'react-i18next';
+import { Modal } from 'react-bootstrap';
 import Fuse from 'fuse.js';
 import debounce from 'Utils/debounce';
 import i18n from 'Src/i18n';
 
 import QuestionAnswer from './QuestionAnswer/QuestionAnswer';
-import Support from '../Header/Support/Support';
 import styles from './FAQ.scss';
-
 
 const FAQ_COUNT = 14;
 
@@ -17,30 +16,23 @@ class FAQ extends Component {
 
     this.faqs = [];
     this.state = {
-      loading: true,
+      show: false,
       searchText: '',
-      filteredQuestionsIds: Array(FAQ_COUNT).fill().map((e,i)=>i+1),
-      showSupportModal: false,
-      subject: '',
+      filteredQuestionsIds: Array(FAQ_COUNT).fill().map((e,i)=>i+1)
     };
 
   }
-  
-  UNSAFE_componentWillMount() {
-    window.gtag('event', 'FAQs open', {event_category: 'FAQ', event_label: ``});
+
+  componentDidMount() {
+
   }
 
   showQuestion(id) {
-    return this.state.filteredQuestionsIds.indexOf(id) !== -1;
+    return this.state.filteredQuestionsIds.indexOf(id) != -1;
   }
 
-  closeSupportModal = () => this.setState({ showSupportModal: false });
-  openSupportModal = (subject) => {
-    this.setState({ showSupportModal: true, subject });
-  }
-  
   componentDidUpdate() {
-    if (this.state.loading) {
+    if (this.state.show !== this.props.show) {
       //Populate local FAQ Array
       const faqIdArray = Array(FAQ_COUNT).fill().map((e,i)=>i+1);
       let faqs = [];
@@ -56,7 +48,7 @@ class FAQ extends Component {
 
       //Show modal
       this.setState({
-        loading: false,
+        show: this.props.show,
       });
     }
   }
@@ -102,14 +94,15 @@ class FAQ extends Component {
     return (
       <I18n ns="translations">
         {t => (
-          <div className={styles.container}>
-              <div className="col-xs-12">
-                <div className={styles.brand}>
-                  <h1>{t('faq.heading1')}</h1>
-                  <h2>{t('faq.heading2')}</h2>
-                </div>
-              </div>   
-              <div className={`col-xs-11 ${styles.faqs}`}>
+          <Modal show={this.state.show} onHide={this.props.onClose}>
+            <div id="faq" className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-hidden="true" onClick={this.props.onClose}>
+                  <i className="material-icons">clear</i>
+                </button>
+              </div>
+
+              <div className="modal-body">
                 <form className="form-group" onSubmit={this.handleSubmit}>
                   <div className={`${styles.input}`}>
                     <i className={`fas fa-search`}></i>
@@ -122,12 +115,10 @@ class FAQ extends Component {
                       placeholder={t('faq.inputplaceholder')}
                     />
                   </div>
-                  </form>
-                <div id='faq.list' className={styles.list}>
+                </form>
                 {this.showQuestion(1) ?
                   <QuestionAnswer
                   id="ques1"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <Trans i18nKey="faq.ans1">
                       <div>
@@ -152,7 +143,6 @@ class FAQ extends Component {
                 {this.showQuestion(2) ?
                   <QuestionAnswer
                   id="ques2"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans2">
@@ -172,7 +162,6 @@ class FAQ extends Component {
                 {this.showQuestion(3) ?
                   <QuestionAnswer
                   id="ques3"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <Trans i18nKey="faq.ans3">
                       <p>
@@ -186,7 +175,6 @@ class FAQ extends Component {
                 {this.showQuestion(4) ?
                   <QuestionAnswer
                   id="ques4"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <Trans i18nKey="faq.ans4">
                       <p>
@@ -201,7 +189,6 @@ class FAQ extends Component {
                 {this.showQuestion(5) ?
                   <QuestionAnswer
                   id="ques5"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans5">
@@ -237,7 +224,6 @@ class FAQ extends Component {
                 {this.showQuestion(6) ?
                   <QuestionAnswer
                   id="ques6"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <Trans i18nKey="faq.ans6">
                       <p>
@@ -255,7 +241,6 @@ class FAQ extends Component {
                 {this.showQuestion(8) ?
                   <QuestionAnswer
                   id="ques8"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <Trans i18nKey="faq.ans8">
                       <p>No, our solution is completely independant. We use our internal coin reserves to provide liquidity.</p>
@@ -266,7 +251,6 @@ class FAQ extends Component {
                 {this.showQuestion(9) ?
                   <QuestionAnswer
                   id="ques9"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans9">
@@ -288,7 +272,6 @@ class FAQ extends Component {
                 {this.showQuestion(10) ?
                   <QuestionAnswer
                   id="ques10"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans10">
@@ -308,7 +291,6 @@ class FAQ extends Component {
                 {this.showQuestion(11) ?
                   <QuestionAnswer
                   id="ques11"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans11">
@@ -339,7 +321,6 @@ class FAQ extends Component {
                 {this.showQuestion(12) ?
                   <QuestionAnswer
                   id="ques12"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans12">
@@ -364,7 +345,6 @@ class FAQ extends Component {
                 {this.showQuestion(13) ?
                   <QuestionAnswer
                   id="ques13"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans13">
@@ -384,7 +364,6 @@ class FAQ extends Component {
                 {this.showQuestion(14) ?
                   <QuestionAnswer
                   id="ques14"
-                  openSupportModal={this.openSupportModal}
                   answer={
                     <div>
                       <Trans i18nKey="faq.ans14">
@@ -415,10 +394,9 @@ class FAQ extends Component {
                     </div>
                   }
                 /> : null}
-                </div>
-                </div>
-                <Support show={this.state.showSupportModal} onClose={this.closeSupportModal} subject={this.state.subject} />
               </div>
+            </div>
+          </Modal>
         )}
       </I18n>
     );
