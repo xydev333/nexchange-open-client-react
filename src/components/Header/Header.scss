@@ -52,20 +52,13 @@
     padding: 30px 15px;
   }
 
-  .link {
-    @media (min-width: $screen-sm-min) {
-      color: #fff;
-    }
-    a {
-      @media (min-width: $screen-sm-min) {
-        color: #fff;
-      }
-      @media (max-width: $screen-sm-min) {
-        color: #000;
-      }
-    }
+  .link.link.link.link {
     &:hover {
       text-decoration: underline;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      color: #fff;
     }
   }
 
@@ -125,7 +118,6 @@
 
   @media (min-width: $screen-lg-min) {
     padding: 10px 21px;
-    color: #fff;
   }
 }
 

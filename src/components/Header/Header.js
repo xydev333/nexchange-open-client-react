@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { I18n } from 'react-i18next';
 import ScrollToElement from 'scroll-to-element';
 
+
 import Support from './Support/Support';
 import LanguagePicker from './LanguagePicker/LanguagePicker';
 
@@ -10,15 +11,9 @@ import LanguagePicker from './LanguagePicker/LanguagePicker';
 import styles from './Header.scss';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showSupportModal: false,
-    };
-  
-    this.closeNavbar = this.closeNavbar.bind(this);
-  }
+  state = {
+    showSupportModal: false,
+  };
 
   componentDidMount() {
     /* istanbul ignore next */
@@ -37,18 +32,12 @@ class Header extends Component {
 
   closeSupportModal = () => this.setState({ showSupportModal: false });
 
-  closeNavbar = () => {
-      $('.navbar-collapse').collapse('hide');
-  }
-
-  componentDidUpdate(){
-    if(window.location.hash) {
-      ScrollToElement(`${window.location.hash}`,{
-        offset: 0,
-        ease: 'linear',
-        duration: 1000
-      });
-   }
+  scrollTo = (element) => {
+    ScrollToElement(element,{
+      offset: 0,
+      ease: 'linear',
+      duration: 1000
+    });
   }
 
   isHomeHeader = () => {
@@ -87,16 +76,15 @@ class Header extends Component {
               <div className="collapse navbar-collapse" id="navigation-index">
                 <ul className="nav navbar-nav navbar-right">
                   <li>
-                    <Link onClick={() => this.closeNavbar()} to="/#about" className={styles.link}>
-                      <a>
-                        {t('header.about')}
-                      </a>
-                    </Link>
+                    <a className={styles.link} href="/#about" onClick={() => { this.scrollTo("#about"); }} >
+                      {t('header.about')}
+                    </a>
                   </li>
 
                   <li>
-                   <Link onClick={() => this.closeNavbar()} to="/faqs" className={styles.link}>
+                   <Link to="/faqs" className={styles.link}>
                       <a
+                        className={styles.link}
                         href="#"
                         data-test="faq-btn"
                       >
@@ -119,25 +107,20 @@ class Header extends Component {
                   </li>
 
                   <li>
-                    <Link onClick={() => this.closeNavbar()} to="/#compare" className={styles.link}>
-                      <a data-test="compare-link">
-                        {t('header.compare')}
-                      </a>
-                    </Link>
+                    <a className={styles.link} href="/#compare" data-test="compare-link">
+                      {t('header.compare')}
+                    </a>
                   </li>
 
                   <li>
-                    <Link 
-                      onClick={() => { this.closeNavbar();this.setState({ showSupportModal: true });}} 
+                    <a
                       className={styles.link}
-                      to='#'>
-                      <a
-                        href="javascript:void(0)"
-                        data-test="support-btn"
-                      >
-                        {t('header.support')}
-                      </a>
-                    </Link>
+                      href="javascript:void(0)"
+                      onClick={() => this.setState({ showSupportModal: true })}
+                      data-test="support-btn"
+                    >
+                      {t('header.support')}
+                    </a>
                   </li>
 
                   <li className={styles['ico-link']}>
