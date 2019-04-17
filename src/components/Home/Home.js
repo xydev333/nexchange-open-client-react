@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { fetchCoinDetails, fetchPairs, changeOrderMode } from 'Actions';
+
 import Hero from './Hero/Hero';
 import About from './About/About';
 import Team from './Team/Team';
