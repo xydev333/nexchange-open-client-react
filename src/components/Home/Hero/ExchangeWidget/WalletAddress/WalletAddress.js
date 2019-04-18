@@ -81,14 +81,12 @@ class WalletAddress extends Component {
       this.validate(this.state.address, nextProps.selectedCoin[this.props.withdraw_coin]);
     }
 
-    if(this.props.orderMode !== 'ORDER_BOOK') {
-      let orderHistory = localStorage['orderHistory']; 
-      try {
-        //Most recent order for each address
-        this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
-      } catch (e) {
-        this.orderHistory = [];
-      }
+    let orderHistory = localStorage['orderHistory']; 
+    try {
+      //Most recent order for each address
+      this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
+    } catch (e) {
+      this.orderHistory = [];
     }
   }
 
@@ -110,24 +108,27 @@ class WalletAddress extends Component {
     this.props.button.focus();
   }
 
-  setCoin(depositCoin, receiveCoin) {
-    //Select coin
-    this.props.selectCoin({
-      ...this.props.selectedCoin,
-      deposit: depositCoin,
-      receive: receiveCoin,
-    }, this.props.pairs);
+  setCoin(depositCoin, receiveCoin) {   
+    if(!this.props.selectedCoin.selectedByUser) {
+      //Select coin
+      this.props.selectCoin({
+        ...this.props.selectedCoin,
+        deposit: depositCoin,
+        receive: receiveCoin,
+        selectedByUser: false
+      }, this.props.pairs);
 
-    //Update quote value
-    const pair = `${receiveCoin}${depositCoin}`;
-    const data = {
-      pair,
-      lastEdited: 'receive',
-    };
+      //Update quote value
+      const pair = `${receiveCoin}${depositCoin}`;
+      const data = {
+        pair,
+        lastEdited: 'receive',
+      };
 
-    data['deposit'] = receiveCoin;
-    data['receive'] = depositCoin;
-    this.props.fetchPrice(data);
+      data['deposit'] = receiveCoin;
+      data['receive'] = depositCoin;
+      this.props.fetchPrice(data);
+    }
   }
 
   render() {
@@ -147,10 +148,10 @@ class WalletAddress extends Component {
                 onBlur={this.handleBlur}
                 value={this.state.address}
                 autoComplete="off"
-                autoFocus={this.props.orderMode === 'ORDER_BOOK' ? 'false' : 'true'}
+                autoFocus={this.props.orderMode === 'ORDER_BOOK' ? false : true}
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
-              {this.state.showHistory && this.props.orderMode !== 'ORDER_BOOK' ?
+              {this.state.showHistory ?
                 <AddressHistory history={this.orderHistory} setAddress={this.setAddress} setCoin={this.setCoin} />
                 :  null}
             </form>
