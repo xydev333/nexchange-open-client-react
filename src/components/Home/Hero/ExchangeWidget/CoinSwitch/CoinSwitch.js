@@ -18,7 +18,6 @@ class CoinSwitch extends Component {
       ...this.props.selectedCoin,
       deposit,
       receive,
-      selectedByUser: true,
     });
 
     window.gtag('event', 'Switched coins', {event_category: 'Order', event_label: `${deposit} - ${receive}`});
