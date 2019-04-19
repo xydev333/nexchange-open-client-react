@@ -22,18 +22,14 @@ class OrderInitial extends Component {
   }
 
   getDepositAddressQr() {
-    if(this.props.order.deposit_address && this.props.order.deposit_address.address) {
-      return `https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=
-      ${this.props.order.deposit_address.address}`;
-    }
+    return `https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=
+			${this.props.order.deposit_address.address}`;
   }
 
   getAddressIdType(){
-    if(this.props.order.deposit_address) {
-      return this.props.order.deposit_address.payment_id ? 'Payment Id'
-        : this.props.order.deposit_address.destination_tag ? 'Destination Tag'
-          : this.props.order.deposit_address.memo ? 'Memo': null;
-    }
+    return this.props.order.deposit_address.payment_id ? 'Payment Id'
+      : this.props.order.deposit_address.destination_tag ? 'Destination Tag'
+        : this.props.order.deposit_address.memo ? 'Memo': null
   }
 
   showAddressId(){
@@ -78,13 +74,12 @@ class OrderInitial extends Component {
                 </b>
                 {this.getAddressIdType() ? this.showAddressId() : null}
               </h4>
-              { this.props.order.deposit_address
-                ? <CopyToClipboard text={this.props.order.deposit_address.address} onCopy={() => this.triggerCopyTooltip()}>
-                    <button id="copy-to-clipboard" type="button" className="btn btn-default" data-test="copy-address">
-                      {t('order.initial4')}
-                    </button>
-                  </CopyToClipboard>
-                : null }
+
+              <CopyToClipboard text={this.props.order.deposit_address.address} onCopy={() => this.triggerCopyTooltip()}>
+                <button id="copy-to-clipboard" type="button" className="btn btn-default" data-test="copy-address">
+                  {t('order.initial4')}
+                </button>
+              </CopyToClipboard>
             </div>
           </div>
         )}

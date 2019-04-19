@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { I18n } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
 import { fetchOrder } from 'Actions';
-
+import axios from 'axios';
+import config from 'Config';
 
 import styles from './DepositModal.scss';
 
@@ -20,6 +21,13 @@ class DepositModal extends PureComponent {
     };
   }
 
+  componentWillMount() {
+
+  }
+
+  componentWillUnmount() {
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.state.show !== nextProps.show) {
       this.setState({ order: nextProps.order, show: nextProps.show });
@@ -27,12 +35,11 @@ class DepositModal extends PureComponent {
   }
 
   render() {
-    const order = this.props.order;
-
-    if(this.state.loading || !order || !order.deposit_address) {
+    if(this.state.loading) {
       return (<div></div>);
     }
     
+    const order = this.props.order;
     return (
       <I18n ns="translations">
         {t => (

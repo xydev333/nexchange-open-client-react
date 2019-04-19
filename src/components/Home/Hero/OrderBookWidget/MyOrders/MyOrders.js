@@ -24,7 +24,7 @@ class MyOrders extends PureComponent {
     this.hideDetails = this.hideDetails.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     this.fetchMyOrders();
     this.interval = setInterval(() => {
         this.fetchMyOrders();
@@ -45,36 +45,33 @@ class MyOrders extends PureComponent {
   }
 
   fetchMyOrders = () => {
-    if(localStorage.orderHistory){
-        try {
-          let orderHistory = localStorage['orderHistory'];
-          orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];          
-          const limitOrderHistory = _.filter(orderHistory, { 'mode': 'LIMIT' });
-          let orders = [];
-          limitOrderHistory.forEach((order) => {
-              const url = `${config.API_BASE_URL}/limit_order/${order.id.replace(/"/g,"")}/`;
-              const request = axios.get(url);
-              request
-              .then(res => {
-                  orders.push(res.data);
-                  orders = _.sortBy(orders, function(order) {
-                    return new Date(order.created_on);
-                  }).reverse();
-                  if(orders.length === limitOrderHistory.length){
-                      const orderBook = this.props.orderBook;
-                      orderBook.myOrders = orders;
-                      this.props.changeOrderBookValue(orderBook)
-                      this.setState({ loading: false });
-                  }
-              })
-              .catch(error => {
-                  console.log(error);
-              });
-          });
-        } catch (e) {
-          this.orderHistory = [];
-        }
+    if(localStorage.limitOrderHistory){
+        const limitOrderHistory = localStorage.limitOrderHistory.split(",");
+        let orders = [];
+        limitOrderHistory.forEach((orderId) => {
+            const url = `${config.API_BASE_URL}/limit_order/${orderId.replace(/"/g,"")}/`;
+            const request = axios.get(url);
+            request
+            .then(res => {
+                orders.push(res.data);
+                orders = _.sortBy(orders, function(order) {
+                  return new Date(order.created_on);
+                }).reverse();
+                if(orders.length === limitOrderHistory.length){
+                    const orderBook = this.props.orderBook;
+                    orderBook.myOrders = orders;
+                    this.props.changeOrderBookValue(orderBook)
+                    this.setState({ loading: false });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        });
       }
+  }
+
+  componentWillUnmount() {
   }
 
   render() {
@@ -89,7 +86,7 @@ class MyOrders extends PureComponent {
                        return (<div className={`${styles['list-item']}`} key={order.unique_reference}>
                               <div className={`${styles['heading']}`}>
                                 <div className={`col-xs-8 col-sm-8 col-md-6 col-lg-8`}>
-                                  <h5>{`(${order.book_status_name[0][1]}) ${order.order_type === 1 ? 'Buy' : 'Sell'} 
+                                  <h5>{`(${order.book_status_name[0][1]}) ${order.order_type == 1 ? 'Buy' : 'Sell'} 
                                   ${order.pair.base.code} - ${order.pair.quote.code}`}</h5>
                                   <span>{new moment(order.created_on).locale(`${i18n.language}`).fromNow()}</span>
                                 </div>
@@ -116,13 +113,15 @@ class MyOrders extends PureComponent {
                                   </div>
                                   <div className={styles['field']}>
                                     <span className={styles['label']}>{`Deposit Address (${order.deposit_address.currency_code})`}</span>
-                                    <span className={styles['value']}>{`${order.deposit_address.address}`}</span>
+                                    <span className={styles['value']}>{
+                                      `${order.deposit_address.address}`}
+                                    </span>
                                   </div>
                                   <div className={styles['field']}>
                                     <span className={styles['label']}>{`Withdraw Address (${order.withdraw_address.currency_code})`}</span>
                                     <span className={styles['value']}>{`${order.withdraw_address.address}`}</span>
                                   </div>
-                                  {order.book_status_name[0][0] === 0 
+                                  {order.book_status_name[0][0] == 0 
                                   ? <span className={styles['obs']}>
                                     {`To open your limit order please send 
                                     ${order.order_type === 1 ? parseFloat(order.amount_quote) : parseFloat(order.amount_base)} 

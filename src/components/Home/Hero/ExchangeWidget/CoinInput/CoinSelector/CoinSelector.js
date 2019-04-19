@@ -23,7 +23,6 @@ class CoinSelector extends Component {
       ...this.props.selectedCoin,
       [this.props.type]: coin,
       lastSelected: this.props.type,
-      selectedByUser: true,
     }, this.props.pairs);
 
     this.setState({ isDropdownVisible: false });
@@ -40,9 +39,7 @@ class CoinSelector extends Component {
 
   handleClick = code => {
     this.selectCoin(code);
-    if(this.props.onSelect) {
-      this.props.onSelect();
-    }
+    this.props.onSelect();
   };
 
   fetchPriceInitial = props => {
