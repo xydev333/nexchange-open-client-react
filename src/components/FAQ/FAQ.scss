@@ -52,14 +52,9 @@
     padding: 40px !important;
   }
 
-  .notfound {
-    h3 {
-      margin-top: 0;
-    }
-
-    a {
-      cursor: pointer;
-    }
+  .list {
+    height: 1000px;
+    overflow: auto;
   }
   
   form {
