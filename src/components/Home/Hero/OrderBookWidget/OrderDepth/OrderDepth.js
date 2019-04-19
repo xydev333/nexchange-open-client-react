@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { I18n } from 'react-i18next';
 
 import OrderDepthItem from './OrderDepthItem/OrderDepthItem';
@@ -33,9 +31,9 @@ class OrderDepth extends PureComponent {
             <span className={``}>{`Size (${this.props.selectedCoins.receive})`}</span>
             <span className={``}>{`Price (${this.props.selectedCoins.deposit})`}</span>
           </div>
-            {sellDepth}
+            {_.isEmpty(sellDepth) ? <span>{'Currently there are no buy orders for this market..'}</span> : sellDepth}
             <div className={styles.separator}></div>
-            {buyDepth}
+            {_.isEmpty(buyDepth) ? <span>{'Currently there are no buy orders for this market..'}</span> : buyDepth}
         </div>
         )}
       </I18n>
@@ -43,10 +41,4 @@ class OrderDepth extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ }) => ({ });
-const mapDispatchToProps = dispatch => bindActionCreators({ }, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OrderDepth);
+export default OrderDepth;
