@@ -275,6 +275,7 @@ export const fetchPairs = () => dispatch => {
             receive: receiveCoin,
           },
           lastSelected: 'deposit',
+          selectedByUser: false
         })
       );
     })
@@ -384,11 +385,10 @@ export const fetchOrderBook = payload => dispatch => {
   const orderBook = payload.orderBook;
 
   if(!payload.pair){
-    dispatch({
+    return dispatch({
       type: types.ORDER_BOOK_DATA_FETCHED,
       orderBook
     });
-    return;
   }
   
   let url = `${config.API_BASE_URL}/limit_order/?`
@@ -416,7 +416,7 @@ export const fetchOrderBook = payload => dispatch => {
   });
 
 
-  getData()
+  return getData()
   .then(result => {
     if(payload.status === 'OPEN' && payload.type === "SELL"){
       orderBook.sellDepth = generateDepth(result, payload.type);
@@ -432,12 +432,13 @@ export const fetchOrderBook = payload => dispatch => {
       type: types.ORDER_BOOK_DATA_FETCHED,
       orderBook
     });
-    return;
   })    
   .catch(error => {
     /* istanbul ignore next */
     console.log(error);
+    dispatch({
+      type: types.ORDER_BOOK_DATA_FETCHED,
+      orderBook
+    });
   });
-
-  return;
 }
