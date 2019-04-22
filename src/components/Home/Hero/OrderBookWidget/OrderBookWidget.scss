@@ -23,8 +23,8 @@
   
 
   @media (min-width: $screen-md-min) {
-    height: 440px;
-    padding: 25px 55px;
+    height: 410px;
+    padding: 25px 75px;
   }
 
   .pair-selection {
@@ -59,11 +59,8 @@
   }
 
   .btn {
-    width: 100%;
-
-    @media (min-width: $screen-md-min) {
-      width: 200px;
-    }
+    width: 200px;
+    float: right;
 
     &.btn-buy {
       background-color: $green;

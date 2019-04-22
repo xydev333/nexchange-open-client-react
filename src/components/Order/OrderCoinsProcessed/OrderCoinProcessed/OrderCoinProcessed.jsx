@@ -117,9 +117,10 @@ class OrderCoinProcessed extends Component {
 
   hasAddressId() {
     return (
-      !_.isEmpty(this.state.paymentId) ||
-      !_.isEmpty(this.state.destinationTag) ||
-      !_.isEmpty(this.state.memo));
+      (this.state.paymentId != null && this.state.paymentId !== 'undefined') ||
+      (this.state.destinationTag != null && this.state.destinationTag !== 'undefined') ||
+      (this.state.memo != null && this.state.memo !== 'undefined')
+    );
   }
 
   addressIsTooLong() {
