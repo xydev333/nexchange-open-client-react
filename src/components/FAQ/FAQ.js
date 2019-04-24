@@ -123,13 +123,8 @@ class FAQ extends Component {
                     />
                   </div>
                   </form>
-                
-                {_.isEmpty(this.state.filteredQuestionsIds) 
-                ? <div className={styles.notfound}><h3>{t('faq.notfound')}</h3>
-                    <a onClick={() => this.openSupportModal(this.state.searchText)}>{t('faq.openticket')}</a>
-                  </div>
-                : <div id='faq.list' className={styles.list}>
-                  {this.showQuestion(1) ?
+                <div id='faq.list' className={styles.list}>
+                {this.showQuestion(1) ?
                   <QuestionAnswer
                   id="ques1"
                   openSupportModal={this.openSupportModal}
@@ -421,7 +416,6 @@ class FAQ extends Component {
                   }
                 /> : null}
                 </div>
-                }
                 </div>
                 <Support show={this.state.showSupportModal} onClose={this.closeSupportModal} subject={this.state.subject} />
               </div>

@@ -228,12 +228,15 @@ export const fetchPairs = () => dispatch => {
       });
 
       let depositCoin, receiveCoin;
-      const coinsFromUrlParams = () => { 
+      const coinsFromUrlParams = () => {
         return new Promise((resolve, reject) => {
           axios
             .get(`${config.API_BASE_URL}/pair/${params['pair']}/`)
             .then(res => resolve(res.data))
-            .catch((err) => {resolve(pickRandomPair());});
+            .catch( /* istanbul ignore next */ err => console.log(err))
+            .then(function(){
+              resolve(pickRandomPair());
+              });;
         });
       };
 
@@ -262,6 +265,7 @@ export const fetchPairs = () => dispatch => {
         }
       };
       await pickCoins();
+
       dispatch(
         selectCoin({
           deposit: depositCoin,
@@ -339,7 +343,7 @@ export const setUserEmail = formData => async dispatch => {
   return request
     .then(res => {
       if (!window.$crisp.get('user:email')) {
-        window.$crisp.push(['set', 'user:email', [payload.email]]);
+        window.$crisp.push(['set', 'user:email', [email]]);
       }
 
       dispatch({
@@ -351,7 +355,7 @@ export const setUserEmail = formData => async dispatch => {
         },
       });
     })
-    .catch((e) => {
+    .catch(() => {
       let errorMessage = i18n.t('generalterms.formfailed');
 
       dispatch({
@@ -385,6 +389,7 @@ export const fetchOrderBook = payload => dispatch => {
       type: types.ORDER_BOOK_DATA_FETCHED,
       orderBook
     });
+    return;
   }
   
   let url = `${config.API_BASE_URL}/limit_order/?`
@@ -395,7 +400,7 @@ export const fetchOrderBook = payload => dispatch => {
   const request = axios.get(url);
   let data = [];
   const getData = () => new Promise((resolve, reject) => {
-   return request
+    request
     .then(result => { 
       data = data.concat(result.data.results) 
       if (result.data.next != null) {
@@ -412,7 +417,7 @@ export const fetchOrderBook = payload => dispatch => {
   });
 
 
-  return getData()
+  getData()
   .then(result => {
     if(payload.status === 'OPEN' && payload.type === "SELL"){
       orderBook.sellDepth = generateDepth(result, payload.type);
@@ -428,13 +433,12 @@ export const fetchOrderBook = payload => dispatch => {
       type: types.ORDER_BOOK_DATA_FETCHED,
       orderBook
     });
+    return;
   })    
   .catch(error => {
     /* istanbul ignore next */
     console.log(error);
-    dispatch({
-      type: types.ORDER_BOOK_DATA_FETCHED,
-      orderBook
-    });
   });
+
+  return;
 }

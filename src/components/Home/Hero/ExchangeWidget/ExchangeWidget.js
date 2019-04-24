@@ -40,12 +40,6 @@ class ExchangeWidget extends Component {
     clearTimeout(this.timeout);
   }
 
-  componentDidMount() {
-    if(this.walletInputEl) {
-      this.walletInputEl.focus();
-    }
-  }
-
   placeOrder() {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
@@ -101,7 +95,6 @@ class ExchangeWidget extends Component {
         //Store order history in local storage
         let newOrder = {
             id: response.data.unique_reference,
-            mode: 'INSTANT',
             base: this.props.selectedCoin.deposit,
             amount_base: parseFloat(this.props.price.deposit),
             quote: this.props.selectedCoin.receive,
