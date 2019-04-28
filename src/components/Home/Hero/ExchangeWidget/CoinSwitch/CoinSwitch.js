@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectCoin } from 'Actions/index.js';
+import { selectCoin, fetchPrice, errorAlert } from 'Actions/index.js';
 import styles from './CoinSwitch.scss';
 
 class CoinSwitch extends Component {
@@ -14,14 +14,18 @@ class CoinSwitch extends Component {
     const deposit = this.props.selectedCoin.receive;
     const receive = this.props.selectedCoin.deposit;
 
+    const pair = `${receive}${deposit}`;
+    const data = {
+      pair
+    };
+
     this.props.selectCoin({
       ...this.props.selectedCoin,
       deposit,
       receive,
-      selectedByUser: true,
     });
 
-    window.gtag('event', 'Switched coins', {event_category: 'Order', event_label: `${deposit} - ${receive}`});
+    if (window.ga) window.ga('send', 'event', 'Order', 'switched coins');
   };
 
   handleClick = () => {
