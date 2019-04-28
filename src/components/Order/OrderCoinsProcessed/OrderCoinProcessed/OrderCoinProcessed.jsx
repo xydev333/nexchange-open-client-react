@@ -117,21 +117,21 @@ class OrderCoinProcessed extends Component {
 
   hasAddressId() {
     return (
-      !_.isEmpty(this.state.paymentId) ||
-      !_.isEmpty(this.state.destinationTag) ||
-      !_.isEmpty(this.state.memo));
+      (this.state.paymentId != null && this.state.paymentId !== 'undefined') ||
+      (this.state.destinationTag != null && this.state.destinationTag !== 'undefined') ||
+      (this.state.memo != null && this.state.memo !== 'undefined')
+    );
   }
 
   addressIsTooLong() {
     return (
-      this.state.address != null && (this.state.address.length >= 40)
+      this.state.address != null && (this.state.address.length > 40)
       );
   }
 
   renderExpandButton() {
     let renderedExandButton;
     renderedExandButton = null;
-
     if (this.addressIsTooLong() || this.hasAddressId()) {
       renderedExandButton =
         <a className={`${styles['expansion-button']}`} onClick={this.toggle.bind(this)}>
@@ -256,7 +256,7 @@ class OrderCoinProcessed extends Component {
                 </h5>
                 {this.renderAddress()}
                 {this.renderExpandButton()}
-                {!this.props.order.isLimitOrder ? <MinMax {...this.props} /> : null}
+                <MinMax {...this.props} />
               </div>
             </div>
           </div>

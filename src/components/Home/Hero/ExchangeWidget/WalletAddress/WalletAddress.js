@@ -16,14 +16,12 @@ class WalletAddress extends Component {
     super(props);
 
     this.state = { address: '', firstLoad: true , showHistory: false};
-    this.fireOnBlur = true;
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setAddress = this.setAddress.bind(this);
     this.setCoin = this.setCoin.bind(this);
-    this.dontFireOnBlur = this.dontFireOnBlur.bind(this);
   }
 
   validate = (address, receiveCoin) => {
@@ -55,7 +53,9 @@ class WalletAddress extends Component {
 
   handleChange(event) {
     const address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
-    this.setState({ address });
+    let showHistory = false;
+    if(!address) { showHistory = true; }
+    this.setState({ address, showHistory });
     this.validate(address, this.props.selectedCoin[this.props.withdraw_coin]);
   }
 
@@ -65,17 +65,10 @@ class WalletAddress extends Component {
     });
   }
 
-  dontFireOnBlur() {
-    this.fireOnBlur = false;
-  }
-
   handleBlur(event) {
-    if(this.fireOnBlur) {
-      this.setState({
-        showHistory: false
-      });
-    }
-    this.fireOnBlur = true;
+    this.setState({
+      showHistory: false
+    });
   }
 
   handleSubmit(event) {
@@ -88,17 +81,14 @@ class WalletAddress extends Component {
       this.validate(this.state.address, nextProps.selectedCoin[this.props.withdraw_coin]);
     }
 
-    try {
+    if(this.props.orderMode !== 'ORDER_BOOK') {
       let orderHistory = localStorage['orderHistory']; 
-      //Most recent order for each address
-      this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
-      if(!_.isEmpty(nextProps.wallet.address)){
-        this.orderHistory = _.filter(this.orderHistory, function(order) {
-          return order.withdraw_address.startsWith(nextProps.wallet.address); 
-        });
+      try {
+        //Most recent order for each address
+        this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
+      } catch (e) {
+        this.orderHistory = [];
       }
-    } catch (e) {
-      this.orderHistory = [];
     }
   }
 
@@ -120,29 +110,24 @@ class WalletAddress extends Component {
     this.props.button.focus();
   }
 
-  setCoin(depositCoin, receiveCoin) {   
-    if(!this.props.selectedCoin.selectedByUser &&
-      depositCoin != this.props.selectedCoin.deposit &&
-      receiveCoin != this.props.selectedCoin.receive) {
-      //Select coin
-      this.props.selectCoin({
-        ...this.props.selectedCoin,
-        deposit: depositCoin,
-        receive: receiveCoin,
-        selectedByUser: false
-      }, this.props.pairs);
+  setCoin(depositCoin, receiveCoin) {
+    //Select coin
+    this.props.selectCoin({
+      ...this.props.selectedCoin,
+      deposit: depositCoin,
+      receive: receiveCoin,
+    }, this.props.pairs);
 
-      //Update quote value
-      const pair = `${receiveCoin}${depositCoin}`;
-      const data = {
-        pair,
-        lastEdited: 'receive',
-      };
+    //Update quote value
+    const pair = `${receiveCoin}${depositCoin}`;
+    const data = {
+      pair,
+      lastEdited: 'receive',
+    };
 
-      data['deposit'] = receiveCoin;
-      data['receive'] = depositCoin;
-      this.props.fetchPrice(data);
-    }
+    data['deposit'] = receiveCoin;
+    data['receive'] = depositCoin;
+    this.props.fetchPrice(data);
   }
 
   render() {
@@ -162,16 +147,11 @@ class WalletAddress extends Component {
                 onBlur={this.handleBlur}
                 value={this.state.address}
                 autoComplete="off"
+                autoFocus={this.props.orderMode === 'ORDER_BOOK' ? 'false' : 'true'}
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
-              {this.state.showHistory ?
-                <AddressHistory 
-                  history={this.orderHistory} 
-                  setAddress={this.setAddress} 
-                  setCoin={this.setCoin} 
-                  dontFireOnBlur={this.dontFireOnBlur}
-                  fireBlur={this.handleBlur}
-                  />
+              {this.state.showHistory && this.props.orderMode !== 'ORDER_BOOK' ?
+                <AddressHistory history={this.orderHistory} setAddress={this.setAddress} setCoin={this.setCoin} />
                 :  null}
             </form>
           </div>

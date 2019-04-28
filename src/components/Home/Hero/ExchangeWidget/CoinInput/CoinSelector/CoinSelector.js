@@ -23,7 +23,6 @@ class CoinSelector extends Component {
       ...this.props.selectedCoin,
       [this.props.type]: coin,
       lastSelected: this.props.type,
-      selectedByUser: true,
     }, this.props.pairs);
 
     this.setState({ isDropdownVisible: false });
