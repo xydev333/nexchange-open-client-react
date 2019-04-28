@@ -45,16 +45,10 @@ class OrderDepthItem extends PureComponent {
   render() {  
       const item = this.props.item;
       const myOrderSize = this.getMyOrderSize(item.rate);
-
-      const color = this.props.side === 'SELL' ? '#e25656' : '#2cc5bd';
-      const percentage = (item.size * 100)/this.props.maxSize;
-      const sizeBackground =
-      `-webkit-linear-gradient(left, ${color} ${percentage}%, #fff ${percentage}%)`     
-      
       return (
       <I18n ns="translations">
         {t => (
-          <div className={`${styles.container} ${styles[this.props.side]}`} style={{background:sizeBackground}} >
+          <div className={`${styles.container} ${styles[this.props.side]}`}>
             <a onClick={() => this.setOrderBookQuantity(item.size)}
             className={`clickable ${myOrderSize ? 'bold' : '' }`}
             /* eslint max-len: ["error", { "code": 200 }] */ 

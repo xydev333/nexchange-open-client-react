@@ -256,7 +256,7 @@ class OrderCoinProcessed extends Component {
                 </h5>
                 {this.renderAddress()}
                 {this.renderExpandButton()}
-                {!this.props.order.isLimitOrder ? <MinMax {...this.props} /> : null}
+                <MinMax {...this.props} />
               </div>
             </div>
           </div>

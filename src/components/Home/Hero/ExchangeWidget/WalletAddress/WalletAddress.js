@@ -16,14 +16,12 @@ class WalletAddress extends Component {
     super(props);
 
     this.state = { address: '', firstLoad: true , showHistory: false};
-    this.fireOnBlur = true;
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setAddress = this.setAddress.bind(this);
     this.setCoin = this.setCoin.bind(this);
-    this.dontFireOnBlur = this.dontFireOnBlur.bind(this);
   }
 
   validate = (address, receiveCoin) => {
@@ -65,17 +63,10 @@ class WalletAddress extends Component {
     });
   }
 
-  dontFireOnBlur() {
-    this.fireOnBlur = false;
-  }
-
   handleBlur(event) {
-    if(this.fireOnBlur) {
-      this.setState({
-        showHistory: false
-      });
-    }
-    this.fireOnBlur = true;
+    this.setState({
+      showHistory: false
+    });
   }
 
   handleSubmit(event) {
@@ -162,16 +153,11 @@ class WalletAddress extends Component {
                 onBlur={this.handleBlur}
                 value={this.state.address}
                 autoComplete="off"
+                autoFocus={this.props.orderMode === 'ORDER_BOOK' ? false : true}
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
               {this.state.showHistory ?
-                <AddressHistory 
-                  history={this.orderHistory} 
-                  setAddress={this.setAddress} 
-                  setCoin={this.setCoin} 
-                  dontFireOnBlur={this.dontFireOnBlur}
-                  fireBlur={this.handleBlur}
-                  />
+                <AddressHistory history={this.orderHistory} setAddress={this.setAddress} setCoin={this.setCoin} />
                 :  null}
             </form>
           </div>
