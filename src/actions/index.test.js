@@ -19,6 +19,7 @@ import {
   fetchKyc,
   fetchUserEmail,
   setUserEmail,
+  changeOrderMode
 } from './index.js';
 import currency from 'Mocks/currency';
 import pair from 'Mocks/pair';
@@ -95,14 +96,17 @@ describe('actions', () => {
 
   it('selectCoin', () => {
     const payload = 'payload';
-    const expectedAction = {
+    const pairs = 'pairs';
+    const expectedActions = [{
       type: types.COIN_SELECTED,
       payload: {
         selectedCoins: payload,
+        pairs: pairs
       },
-    };
+    }];
 
-    expect(selectCoin('payload')).toEqual(expectedAction);
+    store.dispatch(selectCoin('payload','pairs'));
+    expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('setOrder', () => {
@@ -129,38 +133,6 @@ describe('actions', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
-
-  // it('fetchCoinDetails (white label)', () => {
-  //   axiosMock.onGet('https://api.nexchange.io/en/api/v1/currency/').reply(200, currency);
-
-  //   jest.mock('Config', () => ({
-  //     NAME: 'N.exchange2',
-  //     DOMAIN: 'https://n.exchange',
-  //     API_BASE_URL: 'https://api.nexchange.io/en/api/v1',
-  //     SUPPORT_EMAIL: 'support@n.exchange',
-  //     PRICE_FETCH_INTERVAL: 60000,
-  //     ORDER_DETAILS_FETCH_INTERVAL: 20000,
-  //     RECENT_ORDERS_INTERVAL: 20000,
-  //     RECENT_ORDERS_COUNT: 11,
-  //     PRICE_COMPARISON_INTERVAL: 60000,
-  //     KYC_DETAILS_FETCH_INTERVAL: 20000,
-  //     REFERRAL_CODE: 'code',
-  //   }));
-
-  //   const expectedActions = [
-  //     {
-  //       type: types.COINS_INFO,
-  //       payload: _.filter(currency, {
-  //         has_enabled_pairs: true,
-  //         is_crypto: true,
-  //       }),
-  //     },
-  //   ];
-
-  //   return store.dispatch(fetchCoinDetails()).then(() => {
-  //     expect(store.getActions()).toEqual(expectedActions);
-  //   });
-  // });
 
   it('fetchCoinDetails (test)', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/currency/').reply(200, currency);
@@ -199,6 +171,10 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/ETHBTC/?amount_base=undefined').reply(200, mockData);
     const expectedActions = [
       {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
+      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -210,11 +186,7 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      },
-      {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
+      }
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -243,6 +215,10 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/XVGBTC/').reply(200, mockData);
     const expectedActions = [
       {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
+      {
         type: types.FETCHING_PRICE,
       },
       {
@@ -257,10 +233,6 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      },
-      {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
       },
     ];
 
@@ -291,6 +263,10 @@ describe('actions', () => {
 
     const expectedActions = [
       {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
+      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -302,11 +278,7 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      },
-      {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
+      }
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -336,6 +308,10 @@ describe('actions', () => {
 
     const expectedActions = [
       {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
+      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -347,11 +323,7 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'receive',
         },
-      },
-      {
-        type: types.ERROR_ALERT,
-        payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
+      }
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -377,6 +349,10 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/ETHBTC/?amount_quote=100').reply(400, mockData);
 
     const expectedActions = [
+      {
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+        type: types.ERROR_ALERT,
+      },
       {
         type: types.PRICE_FETCHED,
         payload: {
@@ -414,6 +390,10 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/ETHBTC/?amount_quote=100').reply(400);
 
     const expectedActions = [
+      {
+        type: types.ERROR_ALERT,
+        payload: { show: false, type: 'INVALID_AMOUNT' },
+      },
       {
         type: types.PRICE_FETCHED,
         payload: {
@@ -455,6 +435,13 @@ describe('actions', () => {
     axiosMock.onGet('https://api.nexchange.io/en/api/v1/get_price/ETHBTC/?amount_base=100').reply(400, mockData);
 
     const expectedActions = [
+      {
+        type: types.ERROR_ALERT,
+        payload: {
+          show: false,
+          type: 'INVALID_AMOUNT',
+        },
+      },
       {
         type: types.PRICE_FETCHED,
         payload: {
@@ -548,10 +535,10 @@ describe('actions', () => {
       },
       {
         type: types.COIN_SELECTED,
-        payload: { selectedCoins: { deposit: 'BTC', lastSelected: 'deposit', prev: { deposit: 'BTC', receive: 'ETH' }, receive: 'ETH' } },
+        payload: { selectedCoins: { deposit: 'BTC', receive: 'ETH', lastSelected: 'deposit', prev: { deposit: 'BTC', receive: 'ETH' }, selectedByUser: false } },
       },
     ];
-
+    
     return store.dispatch(fetchPairs()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -696,5 +683,16 @@ describe('actions', () => {
     return store.dispatch(setUserEmail(payload)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
+  });
+
+  it('changeOrderMode', () => {
+    const payload = 'ORDER_BOOK';
+    const expectedAction = 
+      {
+        type: types.ORDER_MODE_CHANGE,
+        mode: 'ORDER_BOOK',
+      };
+
+    return expect(changeOrderMode(payload)).toEqual(expectedAction);
   });
 });
