@@ -5,7 +5,6 @@
     "email": "Email (required to notify you about your order)",
     "address": "address",
     "youraddress": "Enter your {{selectedCoin}} wallet address",
-    "usepreviousaddress": "Use previous address",
     "destinationtag": "Destination tag",
     "paymentid": "Payment id",
     "memo": "Memo",
