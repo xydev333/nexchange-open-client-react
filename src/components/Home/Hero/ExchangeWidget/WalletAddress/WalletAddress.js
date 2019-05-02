@@ -15,12 +15,11 @@ class WalletAddress extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { address: '', firstLoad: true , showHistory: false};
+    this.state = { address: props.wallet.address, firstLoad: true , showHistory: false};
     this.fireOnBlur = true;
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setAddress = this.setAddress.bind(this);
     this.setCoin = this.setCoin.bind(this);
@@ -60,11 +59,6 @@ class WalletAddress extends Component {
     this.validate(address, this.props.selectedCoin[this.props.withdraw_coin]);
   }
 
-  setFocus(event) {
-    event.preventDefault();
-    this.props.focusWalletAddress();
-  }
-
   handleFocus(event) {
     this.setState({
       showHistory: true
@@ -82,14 +76,6 @@ class WalletAddress extends Component {
       });
     }
     this.fireOnBlur = true;
-  }
-
-  onKeyDown(event) {
-    if(event.keyCode === 9) {
-      event.preventDefault();;
-      this.fireOnBlur = false;
-      this.addressSearchInput.focus();
-    }
   }
 
   handleSubmit(event) {
@@ -116,7 +102,7 @@ class WalletAddress extends Component {
     }
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     //Check if withdraw_address url param exists. If exists, prefill address field with that value
     const params = urlParams();
     if (params && params.hasOwnProperty('withdraw_address') && !this.props.wallet.address
@@ -174,19 +160,10 @@ class WalletAddress extends Component {
                 onChange={this.handleChange}
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur}
-                onKeyDown={this.onKeyDown}
                 value={this.state.address}
                 autoComplete="off"
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
-              {!_.isEmpty(this.orderHistory) 
-               ?  <button onClick={(e) => this.setFocus(e)} className={styles.previousAddress}>
-                    <div className="visible-xs visible-sm"><i className="fas fa-history"></i></div>
-                    <div className="visible-md visible-lg">
-                      {this.props.orderMode === 'BASIC' ? t('generalterms.usepreviousaddress') : <i className="fas fa-history"></i>}
-                    </div>
-                  </button>
-               :  null}
               {this.state.showHistory ?
                 <AddressHistory 
                   history={this.orderHistory} 
@@ -194,7 +171,6 @@ class WalletAddress extends Component {
                   setCoin={this.setCoin} 
                   dontFireOnBlur={this.dontFireOnBlur}
                   fireBlur={this.handleBlur}
-                  addressSearchInput={el => (this.addressSearchInput = el)}
                   />
                 :  null}
             </form>
