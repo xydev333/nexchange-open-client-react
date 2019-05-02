@@ -59,6 +59,11 @@ class WalletAddress extends Component {
     this.validate(address, this.props.selectedCoin[this.props.withdraw_coin]);
   }
 
+  setFocus(event) {
+    event.preventDefault();
+    this.props.focusWalletAddress();
+  }
+
   handleFocus(event) {
     this.setState({
       showHistory: true
@@ -164,6 +169,12 @@ class WalletAddress extends Component {
                 autoComplete="off"
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
+              {this.props.showPreviousAddressButton && !_.isEmpty(this.orderHistory) 
+               ?  <button onClick={(e) => this.setFocus(e)} className={styles.previousAddress}>
+                    <div className="visible-xs visible-sm"><i class="fas fa-history"></i></div>
+                    <div className="visible-md visible-lg">{t('generalterms.usepreviousaddress')}</div>
+                  </button>
+               :  null}
               {this.state.showHistory ?
                 <AddressHistory 
                   history={this.orderHistory} 

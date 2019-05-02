@@ -43,10 +43,8 @@ ShallowWrapper {
                 type="receive"
               />
               <Connect(WalletAddress)
-                focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
-                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -102,10 +100,8 @@ ShallowWrapper {
                 type="receive"
               />
               <Connect(WalletAddress)
-                focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
-                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -157,10 +153,8 @@ ShallowWrapper {
                 type="receive"
               />
               <Connect(WalletAddress)
-                focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
-                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -208,10 +202,8 @@ ShallowWrapper {
                 type="receive"
               />
               <Connect(WalletAddress)
-                focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
-                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -256,10 +248,8 @@ ShallowWrapper {
                   type="receive"
                 />,
                 <Connect(WalletAddress)
-                  focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
-                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />,
                 null,
@@ -346,10 +336,8 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "button": undefined,
-                  "focusWalletAddress": [Function],
                   "inputRef": [Function],
                   "onSubmit": [Function],
-                  "showPreviousAddressButton": true,
                   "withdraw_coin": "receive",
                 },
                 "ref": null,
@@ -475,10 +463,8 @@ ShallowWrapper {
                   type="receive"
                 />
                 <Connect(WalletAddress)
-                  focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
-                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -534,10 +520,8 @@ ShallowWrapper {
                   type="receive"
                 />
                 <Connect(WalletAddress)
-                  focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
-                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -589,10 +573,8 @@ ShallowWrapper {
                   type="receive"
                 />
                 <Connect(WalletAddress)
-                  focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
-                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -640,10 +622,8 @@ ShallowWrapper {
                   type="receive"
                 />
                 <Connect(WalletAddress)
-                  focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
-                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -688,10 +668,8 @@ ShallowWrapper {
                     type="receive"
                   />,
                   <Connect(WalletAddress)
-                    focusWalletAddress={[Function]}
                     inputRef={[Function]}
                     onSubmit={[Function]}
-                    showPreviousAddressButton={true}
                     withdraw_coin="receive"
                   />,
                   null,
@@ -778,10 +756,8 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "button": undefined,
-                    "focusWalletAddress": [Function],
                     "inputRef": [Function],
                     "onSubmit": [Function],
-                    "showPreviousAddressButton": true,
                     "withdraw_coin": "receive",
                   },
                   "ref": null,
