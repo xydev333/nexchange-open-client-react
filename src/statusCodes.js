@@ -9,10 +9,4 @@ const STATUS_CODES = {
   16: 'COMPLETED',
 };
 
-const BOOK_STATUS_CODES = {
-  0: 'NEW',
-  5: 'OPEN',
-  10: 'CLOSED',
-};
-
-export { STATUS_CODES, BOOK_STATUS_CODES };
+export default STATUS_CODES;

@@ -32,8 +32,7 @@
   }
 }
 
-.header.home,
-.header.faqs {
+.header.home {
   position: absolute;
   top: 0;
   left: 0;
@@ -52,20 +51,13 @@
     padding: 30px 15px;
   }
 
-  .link {
-    @media (min-width: $screen-sm-min) {
-      color: #fff;
-    }
-    a {
-      @media (min-width: $screen-sm-min) {
-        color: #fff;
-      }
-      @media (max-width: $screen-sm-min) {
-        color: #000;
-      }
-    }
+  .link.link.link.link {
     &:hover {
       text-decoration: underline;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      color: #fff;
     }
   }
 
@@ -103,7 +95,7 @@
   }
 }
 
-.link {
+.link.link.link.link {
   padding: 8px 0;
   font-size: 12px;
   text-transform: uppercase;
@@ -114,9 +106,9 @@
   &:visited,
   &:focus,
   &:active {
-    text-decoration: none !important;
-    background: none !important;
-    outline: none !important;
+    text-decoration: none;
+    background: none;
+    outline: none;
   }
 
   @media (min-width: $screen-sm-min) {
