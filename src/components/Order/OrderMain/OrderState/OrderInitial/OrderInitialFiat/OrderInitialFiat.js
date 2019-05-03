@@ -13,14 +13,6 @@ class OrderInitial extends Component {
     
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if(this.state.showPaymentIFrame) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   tooglePaymentIFrame(){
     this.setState({
       showPaymentIFrame: !this.state.showPaymentIFrame
