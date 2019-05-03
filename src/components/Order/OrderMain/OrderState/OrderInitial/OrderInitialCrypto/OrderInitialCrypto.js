@@ -26,32 +26,6 @@ class OrderInitial extends Component {
 			${this.props.order.deposit_address.address}`;
   }
 
-  getAddressIdType(){
-    if(this.props.order.deposit_address) {
-      return this.props.order.deposit_address.payment_id ? {label: 'Payment Id', key: 'payment_id'}
-        : this.props.order.deposit_address.destination_tag ? {label: 'Destination Tag', key: 'destination_tag'}
-          : this.props.order.deposit_address.memo ? {label: 'Memo', key: 'memo'} : null;
-    }
-  }
-
-  showAddressId(){
-    const addressType = this.getAddressIdType();
-    if(addressType){
-      return (
-        <div>
-          <br />
-          {addressType.label}
-          <br />
-          <b className={styles.address} style={{ wordWrap: 'break-word' }}>
-          {this.props.order.deposit_address[addressType.key]}
-          </b>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
   render() {
     return (
       <I18n ns="translations">
@@ -79,7 +53,6 @@ class OrderInitial extends Component {
                 <b className={styles.address} style={{ wordWrap: 'break-word' }}>
                   {this.props.order.deposit_address.address}
                 </b>
-                {this.getAddressIdType() ? this.showAddressId() : null}
               </h4>
 
               <CopyToClipboard text={this.props.order.deposit_address.address} onCopy={() => this.triggerCopyTooltip()}>
