@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { I18n } from 'react-i18next';
@@ -12,8 +11,8 @@ import CoinSelector from '../ExchangeWidget/CoinInput/CoinSelector/CoinSelector'
 import WalletAddress from '../ExchangeWidget/WalletAddress/WalletAddress';
 import OrderDepth from './OrderDepth/OrderDepth';
 import LimitOrderForm from './LimitOrderForm/LimitOrderForm';
+import DepositModal from './DepositModal/DepositModal';
 import MyOrders from './MyOrders/MyOrders';
-import OrderModeSwitch from '../OrderModeSwitch/OrderModeSwitch';
 
 import styles from './OrderBookWidget.scss';
 
@@ -24,13 +23,10 @@ class OrderBookWidget extends Component {
 
     this.state = {
       loading: true,
-      myOrdersExpanded: false
+      showDepositModal: false
     };
 
     this.placeOrder = this.placeOrder.bind(this);
-    this.focusWalletAddress = this.focusWalletAddress.bind(this);
-    this.expandMyOrders = this.expandMyOrders.bind(this);
-    this.collapseMyOrders = this.collapseMyOrders.bind(this);
   }
 
   componentDidMount(){
@@ -46,9 +42,6 @@ class OrderBookWidget extends Component {
       (this.props.selectedCoin.deposit !== prevProps.selectedCoin.deposit)) {
         clearInterval(this.interval);
         this.fetchOrderBook();
-    }
-    if(this.state.myOrdersExpanded != prevState.myOrdersExpanded) {
-      document.getElementById(`myOrders`).scrollIntoView({block: "start", behavior: "instant"});;
     }
   }
 
@@ -85,13 +78,8 @@ class OrderBookWidget extends Component {
     clearInterval(this.interval);
   }
 
-  expandMyOrders() {
-    this.setState({myOrdersExpanded: true});
-  }
-
-  collapseMyOrders() {
-    this.setState({myOrdersExpanded: false});
-  }
+  openDepositModal = () => this.setState({ showDepositModal: true });
+  closeDepositModal = () => this.setState({ showDepositModal: false });
 
   handleOrderBookOrderTypeChange(type) {
     const orderBook = this.props.orderBook;
@@ -99,13 +87,6 @@ class OrderBookWidget extends Component {
     orderBook.quantity = '';
     orderBook.limit_rate = '';
     this.props.changeOrderBookValue(orderBook);
-  }
-
-
-  focusWalletAddress() {
-    if(this.walletInputEl) {
-      this.walletInputEl.focus();
-    }
   }
 
   placeOrder() {
@@ -166,12 +147,8 @@ class OrderBookWidget extends Component {
     axios
       .post(`${config.API_BASE_URL}/limit_order/`, data)
       .then(response => {
+        
         this.props.setOrder(response.data);
-        this.setState({
-          orderRef: response.data.unique_reference,
-          orderPlaced: true,
-          loading: false,
-        });
 
 
         if (response.data.token) {
@@ -182,31 +159,17 @@ class OrderBookWidget extends Component {
 
         window.gtag('event', 'Place order', {event_category: 'Order Book', event_label: `${response.data.unique_reference}`});
 
-        //Store order history in local storage
-        let newOrder = {
-          id: response.data.unique_reference,
-          mode: 'LIMIT',
-          order_type: this.props.orderBook.order_type,
-          base: this.props.selectedCoin.deposit,
-          amount_base: parseFloat(response.data.amount_base),
-          quote: this.props.selectedCoin.receive,
-          amount_quote: parseFloat(response.data.amount_quote),
-          limit_rate: parseFloat(response.data.limit_rate),
-          deposit_address: response.data.deposit_address ? response.data.deposit_address.address : '',
-          withdraw_address: response.data.withdraw_address ? response.data.withdraw_address.address : '',
-          created_at: new Date()
-        }
-
-        let orderHistory = localStorage['orderHistory'];
-        if(!orderHistory){
-          orderHistory = [newOrder];
+        //Store limit order history in local storage
+        let limitOrderHistory = localStorage['limitOrderHistory'];
+        if(!limitOrderHistory){
+          limitOrderHistory = response.data.unique_reference;
         }
         else {
-          orderHistory = JSON.parse(orderHistory);
-          orderHistory.push(newOrder);
+          limitOrderHistory += `,${response.data.unique_reference}`;
         }
-        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+        localStorage.setItem('limitOrderHistory', limitOrderHistory);
 
+        this.setState({ showDepositModal: true })
       })
       .catch(error => {
         console.log('Error:', error);
@@ -223,42 +186,32 @@ class OrderBookWidget extends Component {
           type: 'PLACE_ORDER',
         });
 
-        this.setState({ orderPlaced: false, loading: false });
+        this.setState({ loading: false });
       });
   }
 
 
   render() {
-    if (this.state.orderPlaced) return <Redirect to={`/order/${this.state.orderRef}`} />;
-
     const order_type = this.props.orderBook.order_type;
-    const myOrdersExpanded = this.state.myOrdersExpanded;
     return (
       <I18n ns='translations'>
         {t => (
-          <div className={`container ${styles.container}`}>
+          <div className={styles.container}>
+            <div className='container'>
               <div className='row'>
                 <div className='col-xs-12'>
-                    {!myOrdersExpanded ? 
-                      <div className={styles.widget}>
-                      <OrderModeSwitch orderMode={this.props.orderMode} changeOrderMode={this.props.changeOrderMode}/>
+                  <div className={styles.widget}>
+                      <div className={`col-xs-12 ${styles['pair-selection']}`}>
+                        <CoinSelector type='receive' orderBook={true}/>
+                        <CoinSelector type='deposit' orderBook={true}/>
+                      </div>
                       <div className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
-                        <div className={`col-xs-12 ${styles['pair-selection']}`}>
-                          <CoinSelector type='deposit' orderBook={true}/>
-                          <CoinSelector type='receive' orderBook={true}/>
-                        </div>
-                        <ul className={`nav nav-tabs ${styles['tabs']}`} >
-                          <li>
-                            <a 
-                              className={`clickable ${order_type === 'BUY' ? `${styles['active']}` : ''}`} 
-                              onClick={() => this.handleOrderBookOrderTypeChange('BUY')}>Buy</a>
-                              {order_type === 'BUY' ? <div className={`${styles['arrow-down']}`}></div> : null}
+                        <ul className='nav nav-tabs'>
+                          <li className={`clickable ${order_type === 'BUY' ? 'active' : ''}`}>
+                            <a className={`${styles['nav-buy']}`} onClick={() => this.handleOrderBookOrderTypeChange('BUY')}>Buy</a>
                           </li>
-                          <li>
-                            <a 
-                              className={`clickable ${order_type === 'SELL' ? `${styles['active']}` : ''}`}
-                              onClick={() => this.handleOrderBookOrderTypeChange('SELL')}>Sell</a>
-                              {order_type === 'SELL' ? <div className={`${styles['arrow-down']}`}></div> : null}
+                          <li className={`clickable ${order_type === 'SELL' ? 'active' : ''}`}>
+                            <a className={`${styles['nav-sell']}`} onClick={() => this.handleOrderBookOrderTypeChange('SELL')}>Sell</a>
                           </li>
                         </ul>
                         <LimitOrderForm 
@@ -266,30 +219,27 @@ class OrderBookWidget extends Component {
                           quantity={this.state.quantity}
                           limit_rate={this.state.limit_rate}
                          />
-                        <WalletAddress 
-                          withdraw_coin={`${order_type === 'BUY' ? 'receive' : 'deposit'}`} 
-                          inputRef={el => (this.walletInputEl = el)} 
-                          focusWalletAddress={this.focusWalletAddress}
-                          button={this.button} />
-                        <div className='col-xs-12'>
-                          <button className={`${styles.btn} ${order_type === 'BUY' ? styles['btn-buy'] : styles['btn-sell']} 
-                          ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
-                          onClick={() => this.placeOrder()} ref={(el) => { this.button = el; }} >
-                            {order_type === 'BUY' 
-                            ? `Buy ${this.props.selectedCoin.receive} with ${this.props.selectedCoin.deposit}`
-                            : `Sell ${this.props.selectedCoin.receive} for ${this.props.selectedCoin.deposit}`
-                            }
-                          </button>
-                        </div>
+                        <WalletAddress withdraw_coin={`${order_type === 'BUY' ? 'receive' : 'deposit'}`} inputRef={el => (this.walletInputEl = el)} button={this.button} />
+                        <button className={`${styles.btn} ${order_type === 'BUY' ? styles['btn-buy'] : styles['btn-sell']} 
+                        ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
+                        onClick={() => this.placeOrder()} ref={(el) => { this.button = el; }} >
+                          {order_type === 'BUY' 
+                          ? `Buy ${this.props.selectedCoin.receive} with ${this.props.selectedCoin.deposit}`
+                          : `Sell ${this.props.selectedCoin.receive} for ${this.props.selectedCoin.deposit}`
+                          }
+                        </button>
                       </div>
                       <OrderDepth 
                         selectedCoins={this.props.selectedCoin}
                         sellDepth={this.props.orderBook.sellDepth}
                         buyDepth={this.props.orderBook.buyDepth}
-                        /> <MyOrders expanded={false} expandMyOrders={this.expandMyOrders} collapseMyOrders={this.collapseMyOrders}/></div> 
-                      : <div className={styles.widget}><MyOrders expanded={true} expandMyOrders={this.expandMyOrders} collapseMyOrders={this.collapseMyOrders}/></div> }
+                        />
+                      <MyOrders />
+                    </div>
                   </div>
               </div>
+              <DepositModal show={this.state.showDepositModal} onClose={this.closeDepositModal} />
+            </div>
           </div>
         )}
       </I18n>

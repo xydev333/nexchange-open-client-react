@@ -19,11 +19,7 @@ export class Home extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     // Detect coin change by link
-    const oldUrlParams = new URLSearchParams(prevProps.location.search);
-    const oldPairParam = oldUrlParams.get('pair');
-    const newUrlParams = new URLSearchParams(this.props.location.search);
-    const newPairParam = newUrlParams.get('pair');
-    if(newPairParam && newPairParam !== oldPairParam) {
+    if(this.props.location.search !== prevProps.location.search) {
         this.props.fetchCoinDetails();
         this.props.fetchPairs();
     }

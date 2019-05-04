@@ -3,10 +3,8 @@ import { I18n, Trans } from 'react-i18next';
 
 import ExchangeWidget from './ExchangeWidget/ExchangeWidget';
 import OrderBookWidget from './OrderBookWidget/OrderBookWidget';
-import OrderBookDisabled from './OrderBookWidget/OrderBookDisabled';
 import CoinPrices from './CoinPrices/CoinPrices';
 import ErrorAlert from './ErrorAlert/ErrorAlert';
-import Config from 'Config'; 
 
 import styles from './Hero.scss';
 
@@ -20,13 +18,12 @@ class Hero extends Component {
   }
 
   changeOrderMode() {
-    if(this.props.orderMode === 'INSTANT'){
+    if(this.props.orderMode === 'BASIC'){
       this.props.changeOrderMode('ORDER_BOOK');
-      window.gtag('event', 'Order Mode Switch', {event_category: 'Order Book', event_label: ``});
     } else if(this.props.orderMode === 'ORDER_BOOK'){
-      this.props.changeOrderMode('INSTANT');
+      this.props.changeOrderMode('BASIC');
     } else {
-      this.props.changeOrderMode('INSTANT');
+      this.props.changeOrderMode('BASIC');
     }
   }
 
@@ -51,11 +48,16 @@ class Hero extends Component {
                 </div>
 
                 <div className={styles.widget}>
-                  { this.props.orderMode === 'INSTANT'
-                    ? <ExchangeWidget {...this.props}  store={this.props.store} />
-                    : Config.ADVANCED_MODE_ENABLED ?
-                      <OrderBookWidget {...this.props}  store={this.props.store} />
-                    : <OrderBookDisabled {...this.props}/>}
+                  <div className={styles['btn-container']}>
+                    <div className={styles.btn}>
+                      <a onClick={() => this.changeOrderMode()}>
+                      { this.props.orderMode === 'ORDER_BOOK' ? `Go Simple` : `Go Pro` }
+                      </a>
+                    </div>
+                  </div>
+                  { this.props.orderMode === 'ORDER_BOOK'
+                    ? <OrderBookWidget store={this.props.store} />
+                    : <ExchangeWidget store={this.props.store} /> }
                 </div>
               </div>
             </div>

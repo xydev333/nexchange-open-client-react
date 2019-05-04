@@ -13,16 +13,6 @@ class OrderInitial extends Component {
     
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const currentPaymentURL = removeUnnecessaryURLParams(this.props.order.payment_url);
-    const nextPaymentURL = removeUnnecessaryURLParams(nextProps.order.payment_url);
-    if(this.state.showPaymentIFrame && currentPaymentURL === nextPaymentURL) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   tooglePaymentIFrame(){
     this.setState({
       showPaymentIFrame: !this.state.showPaymentIFrame
@@ -53,8 +43,7 @@ class OrderInitial extends Component {
             </h4>
 
             <label>
-              {/* eslint max-len: ["error", { "code": 200 }] */}
-              <input type="checkbox" name="checkboxTC" id="checkboxTC" value="check" style={{ width: '20px', height: '20px', cursor: 'pointer'}}
+              <input type="checkbox" name="checkboxTC" id="checkboxTC" value="check" style={{ width: '20px', height: '20px', }}
               onClick={function togglePayNowButton() {
                   let _checkoutButton = document.getElementsByName("checkoutButton")[0];
                   let _box = document.getElementsByName("checkboxTC")[0];
@@ -67,12 +56,11 @@ class OrderInitial extends Component {
                       _checkoutButton.classList.add("disabled");
                   }
               }.bind(this)}/>
-              <strong style={{paddingLeft: "7px", cursor: 'pointer'}} dangerouslySetInnerHTML={{__html: t('order.iAgreedTC')}}/>
+              <strong style={{paddingLeft: "7px"}} dangerouslySetInnerHTML={{__html: t('order.iAgreedTC')}}/>
             </label>
 
             <label>
-            {/* eslint max-len: ["error", { "code": 200 }] */}
-            <input type="checkbox" name="checkboxKYC" id="checkboxKYC" value="check" style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+            <input type="checkbox" name="checkboxKYC" id="checkboxKYC" value="check" style={{ width: '20px', height: '20px', }}
             onClick={function togglePayNowButton() {
                 let _checkoutButton = document.getElementsByName("checkoutButton")[0];
                 let _box = document.getElementsByName("checkboxTC")[0];
@@ -85,7 +73,7 @@ class OrderInitial extends Component {
                     _checkoutButton.classList.add("disabled");
                 }
             }.bind(this)}/>
-                <strong style={{paddingLeft: "7px", cursor: 'pointer'}}>{t('order.iAcknowledgeKYC')}</strong>
+                <strong style={{paddingLeft: "7px"}}>{t('order.iAcknowledgeKYC')}</strong>
             </label>
 
 
@@ -114,33 +102,5 @@ class OrderInitial extends Component {
     </div>);
     }
 };
-
-const removeUnnecessaryURLParams = (url) => {
-  url = removeURLParam(url, 'notify_url')
-  url = removeURLParam(url,'checksum');
-  url = removeURLParam(url,'time_stamp');
-  return url;
-} 
-
-const removeURLParam = (url, parameter) => {
-  //prefer to use l.search if you have a location/link object
-  var urlparts = url.split('?');   
-  if (urlparts.length >= 2) {
-
-      var prefix = encodeURIComponent(parameter) + '=';
-      var pars = urlparts[1].split(/[&;]/g);
-
-      //reverse iteration as may be destructive
-      for (var i = pars.length; i-- > 0;) {    
-          //idiom for string.startsWith
-          if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
-              pars.splice(i, 1);
-          }
-      }
-
-      return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
-  }
-  return url;
-}
 
 export default OrderInitial;

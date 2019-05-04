@@ -13,7 +13,7 @@ class OrderInitial extends Component {
 
     $('#copy-to-clipboard')
       .tooltip('hide')
-      .attr('data-original-title', i18n.t('order.copyaddress'))
+      .attr('data-original-title', i18n.t('order.copy'))
       .tooltip('show');
 
     setTimeout(() => {
@@ -30,28 +30,23 @@ class OrderInitial extends Component {
 
   getAddressIdType(){
     if(this.props.order.deposit_address) {
-      return this.props.order.deposit_address.payment_id ? {label: 'Payment Id', key: 'payment_id'}
-        : this.props.order.deposit_address.destination_tag ? {label: 'Destination Tag', key: 'destination_tag'}
-          : this.props.order.deposit_address.memo ? {label: 'Memo', key: 'memo'} : null;
+      return this.props.order.deposit_address.payment_id ? 'Payment Id'
+        : this.props.order.deposit_address.destination_tag ? 'Destination Tag'
+          : this.props.order.deposit_address.memo ? 'Memo': null;
     }
   }
 
   showAddressId(){
-    const addressType = this.getAddressIdType();
-    if(addressType){
-      return (
-        <div>
-          <br />
-          {addressType.label}
-          <br />
-          <b className={styles.address} style={{ wordWrap: 'break-word' }}>
-          {this.props.order.deposit_address[addressType.key]}
-          </b>
-        </div>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <div>
+        <br />
+        {this.getAddressIdType()}
+        <br />
+        <b className={styles.address} style={{ wordWrap: 'break-word' }}>
+        {this.props.order.deposit_address.payment_id}
+        </b>
+      </div>
+    )
   }
 
   render() {
@@ -64,13 +59,12 @@ class OrderInitial extends Component {
             </div>
 
             <div className={styles.details}>
-              { !this.props.isLimitOrder ?
               <h3>
                 {t('order.initial1')}:{' '}
                 <span className={styles.time}>
                   <b>{this.props.time}</b>
                 </span>
-              </h3> : null }
+              </h3>
 
               <h4>
                 {t('order.initial2')}{' '}
