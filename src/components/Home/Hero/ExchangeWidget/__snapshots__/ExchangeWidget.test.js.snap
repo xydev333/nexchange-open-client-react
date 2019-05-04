@@ -2,18 +2,17 @@
 
 exports[`ExchangeWidget renders correctly 1`] = `
 ShallowWrapper {
+  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <I18n
     ns="translations"
-  >
+>
     [Function]
-  </I18n>,
+</I18n>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
-    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -24,56 +23,47 @@ ShallowWrapper {
     "props": Object {
       "children": <div
         className="container"
-      >
+>
         <div
-          className="row"
+                className="row"
         >
-          <div
-            className="col-xs-12"
-          >
-            <div
-              className="widget"
-            >
-              <OrderModeSwitch />
-              <Connect(CoinInput)
-                type="deposit"
-              />
-              <Connect(CoinSwitch) />
-              <Connect(CoinInput)
-                type="receive"
-              />
-              <Connect(WalletAddress)
-                inputRef={[Function]}
-                onSubmit={[Function]}
-                withdraw_coin="receive"
-              />
-              <div
-                className="submit"
-              >
-                <p
-                  className="info"
+                <div
+                        className="col-xs-12"
                 >
-                  order.feeinfo
-                </p>
-                <button
-                  className="btn disabled btn btn-block btn-primary proceed "
-                  onClick={[Function]}
-                >
-                  exchangewidget.2
-                </button>
-                <p
-                  className="infotc"
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "order.byclickTC",
-                    }
-                  }
-                />
-              </div>
-            </div>
-          </div>
+                        <div
+                                className="widget"
+                        >
+                                <Connect(CoinInput)
+                                        onSubmit={undefined}
+                                        type="deposit"
+                                />
+                                <Connect(CoinInput)
+                                        onSubmit={undefined}
+                                        type="receive"
+                                />
+                                <Connect(WalletAddress)
+                                        inputRef={[Function]}
+                                        onSubmit={[Function]}
+                                />
+                                <div
+                                        className="submit"
+                                >
+                                        <p
+                                                className="info"
+                                        >
+                                                order.feeinfo
+                                        </p>
+                                        <button
+                                                className="btn disabled btn btn-block btn-primary proceed "
+                                                onClick={[Function]}
+                                        >
+                                                exchangewidget.2
+                                        </button>
+                                </div>
+                        </div>
+                </div>
         </div>
-      </div>,
+</div>,
       "className": "container",
     },
     "ref": null,
@@ -84,52 +74,43 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="row"
-        >
+>
           <div
-            className="col-xs-12"
+                    className="col-xs-12"
           >
-            <div
-              className="widget"
-            >
-              <OrderModeSwitch />
-              <Connect(CoinInput)
-                type="deposit"
-              />
-              <Connect(CoinSwitch) />
-              <Connect(CoinInput)
-                type="receive"
-              />
-              <Connect(WalletAddress)
-                inputRef={[Function]}
-                onSubmit={[Function]}
-                withdraw_coin="receive"
-              />
-              <div
-                className="submit"
-              >
-                <p
-                  className="info"
-                >
-                  order.feeinfo
-                </p>
-                <button
-                  className="btn disabled btn btn-block btn-primary proceed "
-                  onClick={[Function]}
-                >
-                  exchangewidget.2
-                </button>
-                <p
-                  className="infotc"
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "order.byclickTC",
-                    }
-                  }
-                />
-              </div>
-            </div>
+                    <div
+                              className="widget"
+                    >
+                              <Connect(CoinInput)
+                                        onSubmit={undefined}
+                                        type="deposit"
+                              />
+                              <Connect(CoinInput)
+                                        onSubmit={undefined}
+                                        type="receive"
+                              />
+                              <Connect(WalletAddress)
+                                        inputRef={[Function]}
+                                        onSubmit={[Function]}
+                              />
+                              <div
+                                        className="submit"
+                              >
+                                        <p
+                                                  className="info"
+                                        >
+                                                  order.feeinfo
+                                        </p>
+                                        <button
+                                                  className="btn disabled btn btn-block btn-primary proceed "
+                                                  onClick={[Function]}
+                                        >
+                                                  exchangewidget.2
+                                        </button>
+                              </div>
+                    </div>
           </div>
-        </div>,
+</div>,
         "className": "container",
       },
       "ref": null,
@@ -140,48 +121,39 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="col-xs-12"
-          >
+>
             <div
-              className="widget"
+                        className="widget"
             >
-              <OrderModeSwitch />
-              <Connect(CoinInput)
-                type="deposit"
-              />
-              <Connect(CoinSwitch) />
-              <Connect(CoinInput)
-                type="receive"
-              />
-              <Connect(WalletAddress)
-                inputRef={[Function]}
-                onSubmit={[Function]}
-                withdraw_coin="receive"
-              />
-              <div
-                className="submit"
-              >
-                <p
-                  className="info"
-                >
-                  order.feeinfo
-                </p>
-                <button
-                  className="btn disabled btn btn-block btn-primary proceed "
-                  onClick={[Function]}
-                >
-                  exchangewidget.2
-                </button>
-                <p
-                  className="infotc"
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "order.byclickTC",
-                    }
-                  }
-                />
-              </div>
+                        <Connect(CoinInput)
+                                    onSubmit={undefined}
+                                    type="deposit"
+                        />
+                        <Connect(CoinInput)
+                                    onSubmit={undefined}
+                                    type="receive"
+                        />
+                        <Connect(WalletAddress)
+                                    inputRef={[Function]}
+                                    onSubmit={[Function]}
+                        />
+                        <div
+                                    className="submit"
+                        >
+                                    <p
+                                                className="info"
+                                    >
+                                                order.feeinfo
+                                    </p>
+                                    <button
+                                                className="btn disabled btn btn-block btn-primary proceed "
+                                                onClick={[Function]}
+                                    >
+                                                exchangewidget.2
+                                    </button>
+                        </div>
             </div>
-          </div>,
+</div>,
           "className": "row",
         },
         "ref": null,
@@ -192,44 +164,35 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="widget"
-            >
-              <OrderModeSwitch />
+>
               <Connect(CoinInput)
-                type="deposit"
+                            onSubmit={undefined}
+                            type="deposit"
               />
-              <Connect(CoinSwitch) />
               <Connect(CoinInput)
-                type="receive"
+                            onSubmit={undefined}
+                            type="receive"
               />
               <Connect(WalletAddress)
-                inputRef={[Function]}
-                onSubmit={[Function]}
-                withdraw_coin="receive"
+                            inputRef={[Function]}
+                            onSubmit={[Function]}
               />
               <div
-                className="submit"
+                            className="submit"
               >
-                <p
-                  className="info"
-                >
-                  order.feeinfo
-                </p>
-                <button
-                  className="btn disabled btn btn-block btn-primary proceed "
-                  onClick={[Function]}
-                >
-                  exchangewidget.2
-                </button>
-                <p
-                  className="infotc"
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": "order.byclickTC",
-                    }
-                  }
-                />
+                            <p
+                                          className="info"
+                            >
+                                          order.feeinfo
+                            </p>
+                            <button
+                                          className="btn disabled btn btn-block btn-primary proceed "
+                                          onClick={[Function]}
+                            >
+                                          exchangewidget.2
+                            </button>
               </div>
-            </div>,
+</div>,
             "className": "col-xs-12",
           },
           "ref": null,
@@ -239,45 +202,33 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <OrderModeSwitch />,
                 <Connect(CoinInput)
+                  onSubmit={undefined}
                   type="deposit"
-                />,
-                <Connect(CoinSwitch) />,
+/>,
                 <Connect(CoinInput)
+                  onSubmit={undefined}
                   type="receive"
-                />,
+/>,
                 <Connect(WalletAddress)
                   inputRef={[Function]}
                   onSubmit={[Function]}
-                  withdraw_coin="receive"
-                />,
-                null,
-                null,
-                null,
+/>,
                 <div
                   className="submit"
-                >
+>
                   <p
-                    className="info"
+                                    className="info"
                   >
-                    order.feeinfo
+                                    order.feeinfo
                   </p>
                   <button
-                    className="btn disabled btn btn-block btn-primary proceed "
-                    onClick={[Function]}
+                                    className="btn disabled btn btn-block btn-primary proceed "
+                                    onClick={[Function]}
                   >
-                    exchangewidget.2
+                                    exchangewidget.2
                   </button>
-                  <p
-                    className="infotc"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "order.byclickTC",
-                      }
-                    }
-                  />
-                </div>,
+</div>,
               ],
               "className": "widget",
             },
@@ -288,31 +239,9 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "changeOrderMode": undefined,
-                  "orderMode": undefined,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
                   "onSubmit": undefined,
                   "type": "deposit",
-                  "walletInput": undefined,
                 },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
                 "ref": null,
                 "rendered": null,
                 "type": [Function],
@@ -324,7 +253,6 @@ ShallowWrapper {
                 "props": Object {
                   "onSubmit": undefined,
                   "type": "receive",
-                  "walletInput": undefined,
                 },
                 "ref": null,
                 "rendered": null,
@@ -335,18 +263,13 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "button": undefined,
                   "inputRef": [Function],
                   "onSubmit": [Function],
-                  "withdraw_coin": "receive",
                 },
                 "ref": null,
                 "rendered": null,
                 "type": [Function],
               },
-              null,
-              null,
-              null,
               Object {
                 "instance": null,
                 "key": undefined,
@@ -355,23 +278,15 @@ ShallowWrapper {
                   "children": Array [
                     <p
                       className="info"
-                    >
+>
                       order.feeinfo
-                    </p>,
+</p>,
                     <button
                       className="btn disabled btn btn-block btn-primary proceed "
                       onClick={[Function]}
-                    >
+>
                       exchangewidget.2
-                    </button>,
-                    <p
-                      className="infotc"
-                      dangerouslySetInnerHTML={
-                        Object {
-                          "__html": "order.byclickTC",
-                        }
-                      }
-                    />,
+</button>,
                   ],
                   "className": "submit",
                 },
@@ -401,26 +316,12 @@ ShallowWrapper {
                       "className": "btn disabled btn btn-block btn-primary proceed ",
                       "onClick": [Function],
                     },
-                    "ref": [Function],
+                    "ref": null,
                     "rendered": Array [
                       "exchangewidget.2",
                       null,
                     ],
                     "type": "button",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "className": "infotc",
-                      "dangerouslySetInnerHTML": Object {
-                        "__html": "order.byclickTC",
-                      },
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "p",
                   },
                 ],
                 "type": "div",
@@ -444,56 +345,47 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="container"
-        >
+>
           <div
-            className="row"
+                    className="row"
           >
-            <div
-              className="col-xs-12"
-            >
-              <div
-                className="widget"
-              >
-                <OrderModeSwitch />
-                <Connect(CoinInput)
-                  type="deposit"
-                />
-                <Connect(CoinSwitch) />
-                <Connect(CoinInput)
-                  type="receive"
-                />
-                <Connect(WalletAddress)
-                  inputRef={[Function]}
-                  onSubmit={[Function]}
-                  withdraw_coin="receive"
-                />
-                <div
-                  className="submit"
-                >
-                  <p
-                    className="info"
-                  >
-                    order.feeinfo
-                  </p>
-                  <button
-                    className="btn disabled btn btn-block btn-primary proceed "
-                    onClick={[Function]}
-                  >
-                    exchangewidget.2
-                  </button>
-                  <p
-                    className="infotc"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "order.byclickTC",
-                      }
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+                    <div
+                              className="col-xs-12"
+                    >
+                              <div
+                                        className="widget"
+                              >
+                                        <Connect(CoinInput)
+                                                  onSubmit={undefined}
+                                                  type="deposit"
+                                        />
+                                        <Connect(CoinInput)
+                                                  onSubmit={undefined}
+                                                  type="receive"
+                                        />
+                                        <Connect(WalletAddress)
+                                                  inputRef={[Function]}
+                                                  onSubmit={[Function]}
+                                        />
+                                        <div
+                                                  className="submit"
+                                        >
+                                                  <p
+                                                            className="info"
+                                                  >
+                                                            order.feeinfo
+                                                  </p>
+                                                  <button
+                                                            className="btn disabled btn btn-block btn-primary proceed "
+                                                            onClick={[Function]}
+                                                  >
+                                                            exchangewidget.2
+                                                  </button>
+                                        </div>
+                              </div>
+                    </div>
           </div>
-        </div>,
+</div>,
         "className": "container",
       },
       "ref": null,
@@ -504,52 +396,43 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="row"
-          >
+>
             <div
-              className="col-xs-12"
+                        className="col-xs-12"
             >
-              <div
-                className="widget"
-              >
-                <OrderModeSwitch />
-                <Connect(CoinInput)
-                  type="deposit"
-                />
-                <Connect(CoinSwitch) />
-                <Connect(CoinInput)
-                  type="receive"
-                />
-                <Connect(WalletAddress)
-                  inputRef={[Function]}
-                  onSubmit={[Function]}
-                  withdraw_coin="receive"
-                />
-                <div
-                  className="submit"
-                >
-                  <p
-                    className="info"
-                  >
-                    order.feeinfo
-                  </p>
-                  <button
-                    className="btn disabled btn btn-block btn-primary proceed "
-                    onClick={[Function]}
-                  >
-                    exchangewidget.2
-                  </button>
-                  <p
-                    className="infotc"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "order.byclickTC",
-                      }
-                    }
-                  />
-                </div>
-              </div>
+                        <div
+                                    className="widget"
+                        >
+                                    <Connect(CoinInput)
+                                                onSubmit={undefined}
+                                                type="deposit"
+                                    />
+                                    <Connect(CoinInput)
+                                                onSubmit={undefined}
+                                                type="receive"
+                                    />
+                                    <Connect(WalletAddress)
+                                                inputRef={[Function]}
+                                                onSubmit={[Function]}
+                                    />
+                                    <div
+                                                className="submit"
+                                    >
+                                                <p
+                                                            className="info"
+                                                >
+                                                            order.feeinfo
+                                                </p>
+                                                <button
+                                                            className="btn disabled btn btn-block btn-primary proceed "
+                                                            onClick={[Function]}
+                                                >
+                                                            exchangewidget.2
+                                                </button>
+                                    </div>
+                        </div>
             </div>
-          </div>,
+</div>,
           "className": "container",
         },
         "ref": null,
@@ -560,48 +443,39 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="col-xs-12"
-            >
+>
               <div
-                className="widget"
+                            className="widget"
               >
-                <OrderModeSwitch />
-                <Connect(CoinInput)
-                  type="deposit"
-                />
-                <Connect(CoinSwitch) />
-                <Connect(CoinInput)
-                  type="receive"
-                />
-                <Connect(WalletAddress)
-                  inputRef={[Function]}
-                  onSubmit={[Function]}
-                  withdraw_coin="receive"
-                />
-                <div
-                  className="submit"
-                >
-                  <p
-                    className="info"
-                  >
-                    order.feeinfo
-                  </p>
-                  <button
-                    className="btn disabled btn btn-block btn-primary proceed "
-                    onClick={[Function]}
-                  >
-                    exchangewidget.2
-                  </button>
-                  <p
-                    className="infotc"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "order.byclickTC",
-                      }
-                    }
-                  />
-                </div>
+                            <Connect(CoinInput)
+                                          onSubmit={undefined}
+                                          type="deposit"
+                            />
+                            <Connect(CoinInput)
+                                          onSubmit={undefined}
+                                          type="receive"
+                            />
+                            <Connect(WalletAddress)
+                                          inputRef={[Function]}
+                                          onSubmit={[Function]}
+                            />
+                            <div
+                                          className="submit"
+                            >
+                                          <p
+                                                        className="info"
+                                          >
+                                                        order.feeinfo
+                                          </p>
+                                          <button
+                                                        className="btn disabled btn btn-block btn-primary proceed "
+                                                        onClick={[Function]}
+                                          >
+                                                        exchangewidget.2
+                                          </button>
+                            </div>
               </div>
-            </div>,
+</div>,
             "className": "row",
           },
           "ref": null,
@@ -612,44 +486,35 @@ ShallowWrapper {
             "props": Object {
               "children": <div
                 className="widget"
-              >
-                <OrderModeSwitch />
+>
                 <Connect(CoinInput)
-                  type="deposit"
+                                onSubmit={undefined}
+                                type="deposit"
                 />
-                <Connect(CoinSwitch) />
                 <Connect(CoinInput)
-                  type="receive"
+                                onSubmit={undefined}
+                                type="receive"
                 />
                 <Connect(WalletAddress)
-                  inputRef={[Function]}
-                  onSubmit={[Function]}
-                  withdraw_coin="receive"
+                                inputRef={[Function]}
+                                onSubmit={[Function]}
                 />
                 <div
-                  className="submit"
+                                className="submit"
                 >
-                  <p
-                    className="info"
-                  >
-                    order.feeinfo
-                  </p>
-                  <button
-                    className="btn disabled btn btn-block btn-primary proceed "
-                    onClick={[Function]}
-                  >
-                    exchangewidget.2
-                  </button>
-                  <p
-                    className="infotc"
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": "order.byclickTC",
-                      }
-                    }
-                  />
+                                <p
+                                                className="info"
+                                >
+                                                order.feeinfo
+                                </p>
+                                <button
+                                                className="btn disabled btn btn-block btn-primary proceed "
+                                                onClick={[Function]}
+                                >
+                                                exchangewidget.2
+                                </button>
                 </div>
-              </div>,
+</div>,
               "className": "col-xs-12",
             },
             "ref": null,
@@ -659,45 +524,33 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <OrderModeSwitch />,
                   <Connect(CoinInput)
+                    onSubmit={undefined}
                     type="deposit"
-                  />,
-                  <Connect(CoinSwitch) />,
+/>,
                   <Connect(CoinInput)
+                    onSubmit={undefined}
                     type="receive"
-                  />,
+/>,
                   <Connect(WalletAddress)
                     inputRef={[Function]}
                     onSubmit={[Function]}
-                    withdraw_coin="receive"
-                  />,
-                  null,
-                  null,
-                  null,
+/>,
                   <div
                     className="submit"
-                  >
+>
                     <p
-                      className="info"
+                                        className="info"
                     >
-                      order.feeinfo
+                                        order.feeinfo
                     </p>
                     <button
-                      className="btn disabled btn btn-block btn-primary proceed "
-                      onClick={[Function]}
+                                        className="btn disabled btn btn-block btn-primary proceed "
+                                        onClick={[Function]}
                     >
-                      exchangewidget.2
+                                        exchangewidget.2
                     </button>
-                    <p
-                      className="infotc"
-                      dangerouslySetInnerHTML={
-                        Object {
-                          "__html": "order.byclickTC",
-                        }
-                      }
-                    />
-                  </div>,
+</div>,
                 ],
                 "className": "widget",
               },
@@ -708,31 +561,9 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "changeOrderMode": undefined,
-                    "orderMode": undefined,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
                     "onSubmit": undefined,
                     "type": "deposit",
-                    "walletInput": undefined,
                   },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
                   "ref": null,
                   "rendered": null,
                   "type": [Function],
@@ -744,7 +575,6 @@ ShallowWrapper {
                   "props": Object {
                     "onSubmit": undefined,
                     "type": "receive",
-                    "walletInput": undefined,
                   },
                   "ref": null,
                   "rendered": null,
@@ -755,18 +585,13 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "button": undefined,
                     "inputRef": [Function],
                     "onSubmit": [Function],
-                    "withdraw_coin": "receive",
                   },
                   "ref": null,
                   "rendered": null,
                   "type": [Function],
                 },
-                null,
-                null,
-                null,
                 Object {
                   "instance": null,
                   "key": undefined,
@@ -775,23 +600,15 @@ ShallowWrapper {
                     "children": Array [
                       <p
                         className="info"
-                      >
+>
                         order.feeinfo
-                      </p>,
+</p>,
                       <button
                         className="btn disabled btn btn-block btn-primary proceed "
                         onClick={[Function]}
-                      >
+>
                         exchangewidget.2
-                      </button>,
-                      <p
-                        className="infotc"
-                        dangerouslySetInnerHTML={
-                          Object {
-                            "__html": "order.byclickTC",
-                          }
-                        }
-                      />,
+</button>,
                     ],
                     "className": "submit",
                   },
@@ -821,26 +638,12 @@ ShallowWrapper {
                         "className": "btn disabled btn btn-block btn-primary proceed ",
                         "onClick": [Function],
                       },
-                      "ref": [Function],
+                      "ref": null,
                       "rendered": Array [
                         "exchangewidget.2",
                         null,
                       ],
                       "type": "button",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "className": "infotc",
-                        "dangerouslySetInnerHTML": Object {
-                          "__html": "order.byclickTC",
-                        },
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "p",
                     },
                   ],
                   "type": "div",
@@ -861,27 +664,7 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
       },
-    },
-    "context": Object {
-      "storeSubscription": undefined,
     },
   },
 }

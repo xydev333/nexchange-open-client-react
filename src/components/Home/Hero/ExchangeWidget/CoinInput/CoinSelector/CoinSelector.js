@@ -23,7 +23,6 @@ class CoinSelector extends Component {
       ...this.props.selectedCoin,
       [this.props.type]: coin,
       lastSelected: this.props.type,
-      selectedByUser: true,
     }, this.props.pairs);
 
     this.setState({ isDropdownVisible: false });
@@ -40,9 +39,7 @@ class CoinSelector extends Component {
 
   handleClick = code => {
     this.selectCoin(code);
-    if(this.props.onSelect) {
-      this.props.onSelect();
-    }
+    this.props.onSelect();
   };
 
   fetchPriceInitial = props => {
@@ -132,8 +129,7 @@ class CoinSelector extends Component {
     return (
       <div>
         <div
-          className={`selectedCoin-${type} ${styles['selected-coin']} 
-            ${this.props.orderBook ? styles[`order-book`] : ``}`}
+          className={`selectedCoin-${type} ${styles['selected-coin']}`}
           data-test="selector"
           onClick={() => this.setState({ isDropdownVisible: !this.state.isDropdownVisible })}
         >
