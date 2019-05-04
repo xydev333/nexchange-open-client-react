@@ -15,13 +15,15 @@ class WalletAddress extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { address: '', firstLoad: true , showHistory: false};
+    this.state = { address: props.wallet.address, firstLoad: true , showHistory: false};
+    this.fireOnBlur = true;
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setAddress = this.setAddress.bind(this);
     this.setCoin = this.setCoin.bind(this);
+    this.dontFireOnBlur = this.dontFireOnBlur.bind(this);
   }
 
   validate = (address, receiveCoin) => {
@@ -53,9 +55,7 @@ class WalletAddress extends Component {
 
   handleChange(event) {
     const address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
-    let showHistory = false;
-    if(!address) { showHistory = true; }
-    this.setState({ address, showHistory });
+    this.setState({ address });
     this.validate(address, this.props.selectedCoin[this.props.withdraw_coin]);
   }
 
@@ -65,10 +65,17 @@ class WalletAddress extends Component {
     });
   }
 
+  dontFireOnBlur() {
+    this.fireOnBlur = false;
+  }
+
   handleBlur(event) {
-    this.setState({
-      showHistory: false
-    });
+    if(this.fireOnBlur) {
+      this.setState({
+        showHistory: false
+      });
+    }
+    this.fireOnBlur = true;
   }
 
   handleSubmit(event) {
@@ -81,18 +88,21 @@ class WalletAddress extends Component {
       this.validate(this.state.address, nextProps.selectedCoin[this.props.withdraw_coin]);
     }
 
-    if(this.props.orderMode !== 'ORDER_BOOK') {
+    try {
       let orderHistory = localStorage['orderHistory']; 
-      try {
-        //Most recent order for each address
-        this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
-      } catch (e) {
-        this.orderHistory = [];
+      //Most recent order for each address
+      this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
+      if(!_.isEmpty(nextProps.wallet.address)){
+        this.orderHistory = _.filter(this.orderHistory, function(order) {
+          return order.withdraw_address.startsWith(nextProps.wallet.address); 
+        });
       }
+    } catch (e) {
+      this.orderHistory = [];
     }
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     //Check if withdraw_address url param exists. If exists, prefill address field with that value
     const params = urlParams();
     if (params && params.hasOwnProperty('withdraw_address') && !this.props.wallet.address
@@ -111,7 +121,9 @@ class WalletAddress extends Component {
   }
 
   setCoin(depositCoin, receiveCoin) {   
-    if(!this.props.selectedCoin.selectedByUser) {
+    if(!this.props.selectedCoin.selectedByUser &&
+      depositCoin != this.props.selectedCoin.deposit &&
+      receiveCoin != this.props.selectedCoin.receive) {
       //Select coin
       this.props.selectCoin({
         ...this.props.selectedCoin,
@@ -150,11 +162,16 @@ class WalletAddress extends Component {
                 onBlur={this.handleBlur}
                 value={this.state.address}
                 autoComplete="off"
-                autoFocus={this.props.orderMode === 'ORDER_BOOK' ? 'false' : 'true'}
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
-              {this.state.showHistory && this.props.orderMode !== 'ORDER_BOOK' ?
-                <AddressHistory history={this.orderHistory} setAddress={this.setAddress} setCoin={this.setCoin} />
+              {this.state.showHistory ?
+                <AddressHistory 
+                  history={this.orderHistory} 
+                  setAddress={this.setAddress} 
+                  setCoin={this.setCoin} 
+                  dontFireOnBlur={this.dontFireOnBlur}
+                  fireBlur={this.handleBlur}
+                  />
                 :  null}
             </form>
           </div>
