@@ -20,13 +20,13 @@ class Hero extends Component {
   }
 
   changeOrderMode() {
-    if(this.props.orderMode === 'INSTANT'){
+    if(this.props.orderMode === 'BASIC'){
       this.props.changeOrderMode('ORDER_BOOK');
       window.gtag('event', 'Order Mode Switch', {event_category: 'Order Book', event_label: ``});
     } else if(this.props.orderMode === 'ORDER_BOOK'){
-      this.props.changeOrderMode('INSTANT');
+      this.props.changeOrderMode('BASIC');
     } else {
-      this.props.changeOrderMode('INSTANT');
+      this.props.changeOrderMode('BASIC');
     }
   }
 
@@ -51,7 +51,7 @@ class Hero extends Component {
                 </div>
 
                 <div className={styles.widget}>
-                  { this.props.orderMode === 'INSTANT'
+                  { this.props.orderMode === 'BASIC'
                     ? <ExchangeWidget {...this.props}  store={this.props.store} />
                     : Config.ADVANCED_MODE_ENABLED ?
                       <OrderBookWidget {...this.props}  store={this.props.store} />

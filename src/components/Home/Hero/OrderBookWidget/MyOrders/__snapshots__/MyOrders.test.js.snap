@@ -54,53 +54,27 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": <MyOrdersCollapsed
-        myOrders={Array []}
-      />,
-      "className": "col-xs-12 col-sm-12 col-md-6 col-lg-4 wrapper",
+      "children": [Function],
+      "ns": "translations",
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "expandMyOrders": undefined,
-        "myOrders": Array [],
-      },
-      "ref": null,
-      "rendered": null,
-      "type": [Function],
-    },
-    "type": "div",
+    "rendered": [Function],
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
-        "children": <MyOrdersCollapsed
-          myOrders={Array []}
-        />,
-        "className": "col-xs-12 col-sm-12 col-md-6 col-lg-4 wrapper",
+        "children": [Function],
+        "ns": "translations",
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "expandMyOrders": undefined,
-          "myOrders": Array [],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      "type": "div",
+      "rendered": [Function],
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {

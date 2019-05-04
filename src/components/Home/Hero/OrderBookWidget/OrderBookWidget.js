@@ -24,12 +24,9 @@ class OrderBookWidget extends Component {
 
     this.state = {
       loading: true,
-      myOrdersExpanded: false
     };
 
     this.placeOrder = this.placeOrder.bind(this);
-    this.expandMyOrders = this.expandMyOrders.bind(this);
-    this.collapseMyOrders = this.collapseMyOrders.bind(this);
   }
 
   componentDidMount(){
@@ -45,9 +42,6 @@ class OrderBookWidget extends Component {
       (this.props.selectedCoin.deposit !== prevProps.selectedCoin.deposit)) {
         clearInterval(this.interval);
         this.fetchOrderBook();
-    }
-    if(this.state.myOrdersExpanded != prevState.myOrdersExpanded) {
-      document.getElementById(`myOrders`).scrollIntoView({block: "start", behavior: "instant"});;
     }
   }
 
@@ -84,13 +78,6 @@ class OrderBookWidget extends Component {
     clearInterval(this.interval);
   }
 
-  expandMyOrders() {
-    this.setState({myOrdersExpanded: true});
-  }
-
-  collapseMyOrders() {
-    this.setState({myOrdersExpanded: false});
-  }
 
   handleOrderBookOrderTypeChange(type) {
     const orderBook = this.props.orderBook;
@@ -116,14 +103,24 @@ class OrderBookWidget extends Component {
     }
 
 
+    //TO DELETE - HARDCODED
     let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
+    if(pair !== 'DOGEETH'){
+      this.props.errorAlert({
+        show: true,
+        message: `Invalid pair. The only avaialable pair for limit order testing is DOGEETH`,
+      });
+      return;
+    }
     let order_type = null;
     let refund_address = null;
     if(this.props.orderBook.order_type === 'BUY'){
       order_type = 1;
+      refund_address = '0xbb9bc244d798123fde783fcc1c72d3bb8c189413';
     }
     if(this.props.orderBook.order_type === 'SELL'){
       order_type = 0;
+      refund_address = 'DBXu2kgc3xtvCUWFcxFE3r9hEYgmuaaCyD';
     }
 
 
@@ -139,6 +136,10 @@ class OrderBookWidget extends Component {
           name: '',
           address: this.props.wallet.address
       },
+      refund_address: {
+          name: 'REFUND ADDRESS',
+          address: refund_address
+      }
     };
 
     axios
@@ -156,7 +157,7 @@ class OrderBookWidget extends Component {
           localStorage.setItem('token', response.data.token);
         }
 
-        bindCrispEmail(this.props.store);
+        // bindCrispEmail(this.props.store);
 
         window.gtag('event', 'Place order', {event_category: 'Order Book', event_label: `${response.data.unique_reference}`});
 
@@ -210,15 +211,14 @@ class OrderBookWidget extends Component {
     if (this.state.orderPlaced) return <Redirect to={`/order/${this.state.orderRef}`} />;
 
     const order_type = this.props.orderBook.order_type;
-    const myOrdersExpanded = this.state.myOrdersExpanded;
     return (
       <I18n ns='translations'>
         {t => (
-          <div className={`container ${styles.container}`}>
+          <div className={styles.container}>
+            <div className='container'>
               <div className='row'>
                 <div className='col-xs-12'>
-                    {!myOrdersExpanded ? 
-                      <div className={styles.widget}>
+                  <div className={styles.widget}>
                       <OrderModeSwitch orderMode={this.props.orderMode} changeOrderMode={this.props.changeOrderMode}/>
                       <div className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
                         <div className={`col-xs-12 ${styles['pair-selection']}`}>
@@ -260,10 +260,12 @@ class OrderBookWidget extends Component {
                         selectedCoins={this.props.selectedCoin}
                         sellDepth={this.props.orderBook.sellDepth}
                         buyDepth={this.props.orderBook.buyDepth}
-                        /> <MyOrders expanded={false} expandMyOrders={this.expandMyOrders} collapseMyOrders={this.collapseMyOrders}/></div> 
-                      : <div className={styles.widget}><MyOrders expanded={true} expandMyOrders={this.expandMyOrders} collapseMyOrders={this.collapseMyOrders}/></div> }
+                        />
+                      <MyOrders />
+                    </div>
                   </div>
               </div>
+            </div>
           </div>
         )}
       </I18n>
