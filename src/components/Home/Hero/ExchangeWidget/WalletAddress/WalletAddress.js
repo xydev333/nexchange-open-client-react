@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { errorAlert, setWallet, selectCoin, fetchPrice } from 'Actions/index.js';
 import validateWalletAddress from 'Utils/validateWalletAddress';
-import styles from './WalletAddress.scss';
 import AddressHistory from './AddressHistory/AddressHistory';
+import styles from './WalletAddress.scss';
 import { I18n } from 'react-i18next';
 import i18n from '../../../../../i18n';
 
@@ -15,15 +15,13 @@ class WalletAddress extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { address: props.wallet.address, firstLoad: true , showHistory: false};
-    this.fireOnBlur = true;
+    this.state = { address: '', firstLoad: true , showHistory: false};
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setAddress = this.setAddress.bind(this);
     this.setCoin = this.setCoin.bind(this);
-    this.dontFireOnBlur = this.dontFireOnBlur.bind(this);
   }
 
   validate = (address, receiveCoin) => {
@@ -56,7 +54,7 @@ class WalletAddress extends Component {
   handleChange(event) {
     const address = event.target.value.replace(new RegExp(/ /g, 'g'), '');
     this.setState({ address });
-    this.validate(address, this.props.selectedCoin[this.props.withdraw_coin]);
+    this.validate(address, this.props.selectedCoin.receive);
   }
 
   handleFocus(event) {
@@ -65,17 +63,10 @@ class WalletAddress extends Component {
     });
   }
 
-  dontFireOnBlur() {
-    this.fireOnBlur = false;
-  }
-
   handleBlur(event) {
-    if(this.fireOnBlur) {
-      this.setState({
-        showHistory: false
-      });
-    }
-    this.fireOnBlur = true;
+    this.setState({
+      showHistory: false
+    });
   }
 
   handleSubmit(event) {
@@ -84,29 +75,24 @@ class WalletAddress extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedCoin[this.props.withdraw_coin] !== this.props.selectedCoin[this.props.withdraw_coin]) {
-      this.validate(this.state.address, nextProps.selectedCoin[this.props.withdraw_coin]);
+    if (nextProps.selectedCoin.receive !== this.props.selectedCoin.receive) {
+      this.validate(this.state.address, nextProps.selectedCoin.receive);
     }
 
+    let orderHistory = localStorage['orderHistory'];
     try {
-      let orderHistory = localStorage['orderHistory']; 
       //Most recent order for each address
       this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
-      if(!_.isEmpty(nextProps.wallet.address)){
-        this.orderHistory = _.filter(this.orderHistory, function(order) {
-          return order.withdraw_address.startsWith(nextProps.wallet.address); 
-        });
-      }
     } catch (e) {
       this.orderHistory = [];
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(){
     //Check if withdraw_address url param exists. If exists, prefill address field with that value
     const params = urlParams();
     if (params && params.hasOwnProperty('withdraw_address') && !this.props.wallet.address
-      && this.props.selectedCoin[this.props.withdraw_coin] && this.state.firstLoad) {
+      && this.props.selectedCoin.receive && this.state.firstLoad) {
         const simulatedEvent ={target: {value: params['withdraw_address'].toString()}};
         this.handleChange(simulatedEvent);
         this.setState({firstLoad: false});
@@ -120,33 +106,28 @@ class WalletAddress extends Component {
     this.props.button.focus();
   }
 
-  setCoin(depositCoin, receiveCoin) {   
-    if(!this.props.selectedCoin.selectedByUser &&
-      depositCoin != this.props.selectedCoin.deposit &&
-      receiveCoin != this.props.selectedCoin.receive) {
-      //Select coin
-      this.props.selectCoin({
-        ...this.props.selectedCoin,
-        deposit: depositCoin,
-        receive: receiveCoin,
-        selectedByUser: false
-      }, this.props.pairs);
+  setCoin(depositCoin, receiveCoin) {
+    //Select coin
+    this.props.selectCoin({
+      ...this.props.selectedCoin,
+      ['deposit']: depositCoin,
+      ['receive']: receiveCoin,
+    }, this.props.pairs);
 
-      //Update quote value
-      const pair = `${receiveCoin}${depositCoin}`;
-      const data = {
-        pair,
-        lastEdited: 'receive',
-      };
+    //Update quote value
+    const pair = `${receiveCoin}${depositCoin}`;
+    const data = {
+      pair,
+      lastEdited: 'receive',
+    };
 
-      data['deposit'] = receiveCoin;
-      data['receive'] = depositCoin;
-      this.props.fetchPrice(data);
-    }
+    data['deposit'] = receiveCoin;
+    data['receive'] = depositCoin;
+    this.props.fetchPrice(data);
   }
 
   render() {
-    let coin = this.props.selectedCoin[this.props.withdraw_coin] ? this.props.selectedCoin[this.props.withdraw_coin] : '...';
+    let coin = this.props.selectedCoin.receive ? this.props.selectedCoin.receive : '...';
     return (
       <I18n ns="translations">
         {t => (
@@ -165,13 +146,7 @@ class WalletAddress extends Component {
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
               {this.state.showHistory ?
-                <AddressHistory 
-                  history={this.orderHistory} 
-                  setAddress={this.setAddress} 
-                  setCoin={this.setCoin} 
-                  dontFireOnBlur={this.dontFireOnBlur}
-                  fireBlur={this.handleBlur}
-                  />
+                <AddressHistory history={this.orderHistory} setAddress={this.setAddress} setCoin={this.setCoin} />
                 :  null}
             </form>
           </div>
@@ -181,7 +156,7 @@ class WalletAddress extends Component {
   }
 }
 
-const mapStateToProps = ({ orderMode, selectedCoin, wallet, pairs }) => ({ orderMode, selectedCoin, wallet, pairs });
+const mapStateToProps = ({ selectedCoin, wallet, pairs }) => ({ selectedCoin, wallet, pairs });
 const mapDispatchToProps = dispatch => bindActionCreators({ errorAlert, setWallet, selectCoin, fetchPrice }, dispatch);
 
 export default connect(

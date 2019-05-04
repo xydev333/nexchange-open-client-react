@@ -13,7 +13,7 @@ class OrderInitial extends Component {
 
     $('#copy-to-clipboard')
       .tooltip('hide')
-      .attr('data-original-title', i18n.t('order.copy'))
+      .attr('data-original-title', i18n.t('order.copyaddress'))
       .tooltip('show');
 
     setTimeout(() => {
@@ -22,31 +22,8 @@ class OrderInitial extends Component {
   }
 
   getDepositAddressQr() {
-    if(this.props.order.deposit_address && this.props.order.deposit_address.address) {
-      return `https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=
-      ${this.props.order.deposit_address.address}`;
-    }
-  }
-
-  getAddressIdType(){
-    if(this.props.order.deposit_address) {
-      return this.props.order.deposit_address.payment_id ? 'Payment Id'
-        : this.props.order.deposit_address.destination_tag ? 'Destination Tag'
-          : this.props.order.deposit_address.memo ? 'Memo': null;
-    }
-  }
-
-  showAddressId(){
-    return (
-      <div>
-        <br />
-        {this.getAddressIdType()}
-        <br />
-        <b className={styles.address} style={{ wordWrap: 'break-word' }}>
-        {this.props.order.deposit_address.payment_id}
-        </b>
-      </div>
-    )
+    return `https://chart.googleapis.com/chart?chs=250x250&chld=L|2&cht=qr&chl=
+			${this.props.order.deposit_address.address}`;
   }
 
   render() {
@@ -59,13 +36,12 @@ class OrderInitial extends Component {
             </div>
 
             <div className={styles.details}>
-              { !this.props.isLimitOrder ?
               <h3>
                 {t('order.initial1')}:{' '}
                 <span className={styles.time}>
                   <b>{this.props.time}</b>
                 </span>
-              </h3> : null }
+              </h3>
 
               <h4>
                 {t('order.initial2')}{' '}
@@ -77,15 +53,13 @@ class OrderInitial extends Component {
                 <b className={styles.address} style={{ wordWrap: 'break-word' }}>
                   {this.props.order.deposit_address.address}
                 </b>
-                {this.getAddressIdType() ? this.showAddressId() : null}
               </h4>
-              { this.props.order.deposit_address
-                ? <CopyToClipboard text={this.props.order.deposit_address.address} onCopy={() => this.triggerCopyTooltip()}>
-                    <button id="copy-to-clipboard" type="button" className="btn btn-default" data-test="copy-address">
-                      {t('order.initial4')}
-                    </button>
-                  </CopyToClipboard>
-                : null }
+
+              <CopyToClipboard text={this.props.order.deposit_address.address} onCopy={() => this.triggerCopyTooltip()}>
+                <button id="copy-to-clipboard" type="button" className="btn btn-default" data-test="copy-address">
+                  {t('order.initial4')}
+                </button>
+              </CopyToClipboard>
             </div>
           </div>
         )}
