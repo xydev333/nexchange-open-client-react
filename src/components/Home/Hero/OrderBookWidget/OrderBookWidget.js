@@ -28,6 +28,7 @@ class OrderBookWidget extends Component {
     };
 
     this.placeOrder = this.placeOrder.bind(this);
+    this.focusWalletAddress = this.focusWalletAddress.bind(this);
     this.expandMyOrders = this.expandMyOrders.bind(this);
     this.collapseMyOrders = this.collapseMyOrders.bind(this);
   }
@@ -100,6 +101,13 @@ class OrderBookWidget extends Component {
     this.props.changeOrderBookValue(orderBook);
   }
 
+
+  focusWalletAddress() {
+    if(this.walletInputEl) {
+      this.walletInputEl.focus();
+    }
+  }
+
   placeOrder() {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
@@ -116,14 +124,24 @@ class OrderBookWidget extends Component {
     }
 
 
+    //TO DELETE - HARDCODED
     let pair = `${this.props.selectedCoin.receive}${this.props.selectedCoin.deposit}`;
+    if(pair !== 'DOGEETH'){
+      this.props.errorAlert({
+        show: true,
+        message: `Invalid pair. The only avaialable pair for limit order testing is DOGEETH`,
+      });
+      return;
+    }
     let order_type = null;
     let refund_address = null;
     if(this.props.orderBook.order_type === 'BUY'){
       order_type = 1;
+      refund_address = '0xbb9bc244d798123fde783fcc1c72d3bb8c189413';
     }
     if(this.props.orderBook.order_type === 'SELL'){
       order_type = 0;
+      refund_address = 'DBXu2kgc3xtvCUWFcxFE3r9hEYgmuaaCyD';
     }
 
 
@@ -139,6 +157,10 @@ class OrderBookWidget extends Component {
           name: '',
           address: this.props.wallet.address
       },
+      refund_address: {
+          name: 'REFUND ADDRESS',
+          address: refund_address
+      }
     };
 
     axios
@@ -156,7 +178,7 @@ class OrderBookWidget extends Component {
           localStorage.setItem('token', response.data.token);
         }
 
-        bindCrispEmail(this.props.store);
+        // bindCrispEmail(this.props.store);
 
         window.gtag('event', 'Place order', {event_category: 'Order Book', event_label: `${response.data.unique_reference}`});
 
@@ -244,7 +266,11 @@ class OrderBookWidget extends Component {
                           quantity={this.state.quantity}
                           limit_rate={this.state.limit_rate}
                          />
-                        <WalletAddress withdraw_coin={`${order_type === 'BUY' ? 'receive' : 'deposit'}`} inputRef={el => (this.walletInputEl = el)} button={this.button} />
+                        <WalletAddress 
+                          withdraw_coin={`${order_type === 'BUY' ? 'receive' : 'deposit'}`} 
+                          inputRef={el => (this.walletInputEl = el)} 
+                          focusWalletAddress={this.focusWalletAddress}
+                          button={this.button} />
                         <div className='col-xs-12'>
                           <button className={`${styles.btn} ${order_type === 'BUY' ? styles['btn-buy'] : styles['btn-sell']} 
                           ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
