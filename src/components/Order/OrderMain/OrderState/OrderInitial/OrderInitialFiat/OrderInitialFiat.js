@@ -34,7 +34,7 @@ class OrderInitial extends Component {
     return (
       <div>
       {this.state.showPaymentIFrame ? 
-      <iframe src={props.order.payment_url} height={500} width={"100%"} /> :
+      <iframe title={'SafeCharge Payment'} src={props.order.payment_url} height={500} width={"100%"} /> :
       <I18n ns="translations">
       {(t) => (
         <div id="order-payment" className={`row ${styles.container}`}>
@@ -59,7 +59,6 @@ class OrderInitial extends Component {
                   let _checkoutButton = document.getElementsByName("checkoutButton")[0];
                   let _box = document.getElementsByName("checkboxTC")[0];
                   let _box_kyc = document.getElementsByName("checkboxKYC")[0];
-                  let _paymentUrl = props.order.payment_url;
                   if (_box.checked && _box_kyc.checked) {
                       this.setState({enablePayment: true});
                       _checkoutButton.classList.remove("disabled");
@@ -78,7 +77,6 @@ class OrderInitial extends Component {
                 let _checkoutButton = document.getElementsByName("checkoutButton")[0];
                 let _box = document.getElementsByName("checkboxTC")[0];
                 let _box_kyc = document.getElementsByName("checkboxKYC")[0];
-                let _paymentUrl = props.order.payment_url;
                 if (_box.checked && _box_kyc.checked) {
                     this.setState({enablePayment: true});
                     _checkoutButton.classList.remove("disabled");
@@ -125,24 +123,22 @@ const removeUnnecessaryURLParams = (url) => {
 } 
 
 const removeURLParam = (url, parameter) => {
-  if(!_.isEmpty(url) && !_.isEmpty(parameter)) {
-    //prefer to use l.search if you have a location/link object
-    var urlparts = url.split('?');   
-    if (urlparts.length >= 2) {
+  //prefer to use l.search if you have a location/link object
+  var urlparts = url.split('?');   
+  if (urlparts.length >= 2) {
 
-        var prefix = encodeURIComponent(parameter) + '=';
-        var pars = urlparts[1].split(/[&;]/g);
+      var prefix = encodeURIComponent(parameter) + '=';
+      var pars = urlparts[1].split(/[&;]/g);
 
-        //reverse iteration as may be destructive
-        for (var i = pars.length; i-- > 0;) {    
-            //idiom for string.startsWith
-            if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
-                pars.splice(i, 1);
-            }
-        }
+      //reverse iteration as may be destructive
+      for (var i = pars.length; i-- > 0;) {    
+          //idiom for string.startsWith
+          if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
+              pars.splice(i, 1);
+          }
+      }
 
-        return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
-    }
+      return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
   }
   return url;
 }
