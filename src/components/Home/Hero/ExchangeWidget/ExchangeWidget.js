@@ -11,6 +11,7 @@ import { setWallet, errorAlert, setOrder } from 'Actions/index.js';
 import { bindCrispEmail } from 'Utils/crispEmailBinding';
 
 import CoinInput from './CoinInput/CoinInput';
+import CoinSwitch from './CoinSwitch/CoinSwitch';
 import WalletAddress from './WalletAddress/WalletAddress';
 
 import styles from './ExchangeWidget.scss';
@@ -32,13 +33,14 @@ class ExchangeWidget extends Component {
     clearTimeout(this.timeout);
   }
 
+  componentDidMount() {
+    this.walletInputEl.focus();
+  }
+
   placeOrder() {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
-        window.ga('send', 'event', {
-          eventCategory: 'Order',
-          eventAction: 'Place order with empty wallet address',
-        });
+        window.gtag('event', 'Place order with empty wallet address', {event_category: 'Order', event_label: ``});
 
         this.props.errorAlert({
           show: true,
@@ -82,7 +84,27 @@ class ExchangeWidget extends Component {
 
         bindCrispEmail(this.props.store);
 
-        window.ga('send', 'event', 'Order', 'place order', response.data.unique_reference);
+        window.gtag('event', 'Place order', {event_category: 'Order', event_label: `${response.data.unique_reference}`});
+
+        //Store order history in local storage
+        let newOrder = {
+            id: response.data.unique_reference,
+            base: this.props.selectedCoin.deposit,
+            amount_base: parseFloat(this.props.price.deposit),
+            quote: this.props.selectedCoin.receive,
+            amount_quote: parseFloat(this.props.price.receive),
+            withdraw_address: this.props.wallet.address,
+            created_at: new Date()
+        }
+        let orderHistory = localStorage['orderHistory'];
+        if(!orderHistory){
+          orderHistory = [newOrder];
+        }
+        else {
+          orderHistory = JSON.parse(orderHistory);
+          orderHistory.push(newOrder);
+        }
+        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
       })
       .catch(error => {
         console.log('Error:', error);
@@ -115,15 +137,17 @@ class ExchangeWidget extends Component {
               <div className="row">
                 <div className="col-xs-12">
                   <div className={styles.widget}>
-                    <CoinInput type="deposit" onSubmit={this.showWalletAddress} />
-                    <CoinInput type="receive" onSubmit={this.showWalletAddress} />
+                    <CoinInput type="deposit" onSubmit={this.showWalletAddress} walletInput={this.walletInputEl} />
+                    <CoinSwitch />
+                    <CoinInput type="receive" onSubmit={this.showWalletAddress} walletInput={this.walletInputEl} />
 
-                    <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
+                    <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} button={this.button} />
                     <div className={styles.submit}>
                       <p className={styles.info}>{t('order.feeinfo')}</p>
 
                       {/* eslint max-len: ["error", { "code": 200 }] */}
-                      <button className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `} onClick={this.placeOrder}>
+                      <button className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
+                      onClick={this.placeOrder} ref={(el) => { this.button = el; }} >
                         {t('exchangewidget.2')}
                         {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
                       </button>
