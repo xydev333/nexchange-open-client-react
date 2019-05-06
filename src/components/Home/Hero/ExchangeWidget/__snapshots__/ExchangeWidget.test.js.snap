@@ -46,6 +46,7 @@ ShallowWrapper {
                 focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
+                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -104,6 +105,7 @@ ShallowWrapper {
                 focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
+                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -158,6 +160,7 @@ ShallowWrapper {
                 focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
+                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -208,6 +211,7 @@ ShallowWrapper {
                 focusWalletAddress={[Function]}
                 inputRef={[Function]}
                 onSubmit={[Function]}
+                showPreviousAddressButton={true}
                 withdraw_coin="receive"
               />
               <div
@@ -255,6 +259,7 @@ ShallowWrapper {
                   focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
+                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />,
                 null,
@@ -344,6 +349,7 @@ ShallowWrapper {
                   "focusWalletAddress": [Function],
                   "inputRef": [Function],
                   "onSubmit": [Function],
+                  "showPreviousAddressButton": true,
                   "withdraw_coin": "receive",
                 },
                 "ref": null,
@@ -472,6 +478,7 @@ ShallowWrapper {
                   focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
+                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -530,6 +537,7 @@ ShallowWrapper {
                   focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
+                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -584,6 +592,7 @@ ShallowWrapper {
                   focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
+                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -634,6 +643,7 @@ ShallowWrapper {
                   focusWalletAddress={[Function]}
                   inputRef={[Function]}
                   onSubmit={[Function]}
+                  showPreviousAddressButton={true}
                   withdraw_coin="receive"
                 />
                 <div
@@ -681,6 +691,7 @@ ShallowWrapper {
                     focusWalletAddress={[Function]}
                     inputRef={[Function]}
                     onSubmit={[Function]}
+                    showPreviousAddressButton={true}
                     withdraw_coin="receive"
                   />,
                   null,
@@ -770,6 +781,7 @@ ShallowWrapper {
                     "focusWalletAddress": [Function],
                     "inputRef": [Function],
                     "onSubmit": [Function],
+                    "showPreviousAddressButton": true,
                     "withdraw_coin": "receive",
                   },
                   "ref": null,

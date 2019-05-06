@@ -87,9 +87,11 @@ class WalletAddress extends Component {
 
   handlePaste(event) {
     //If user had no interaction with coin selector
-    if (!this.props.selectedCoin.selectedByUser['receive']) {
+    if (!this.props.selectedCoin.selectedByUser) {
       event.preventDefault();
       const address = event.clipboardData.getData('Text').trim();
+      const simulatedEvent = { target: { value: address } };
+      this.handleChange(simulatedEvent);
       //Get coins that match the pasted address
       const matchingCoins = getMatchingCoins(address);
       if (!_.isEmpty(matchingCoins)) {
@@ -106,8 +108,7 @@ class WalletAddress extends Component {
         }
       }
 
-      const simulatedEvent = { target: { value: address } };
-      this.handleChange(simulatedEvent);
+
     }
   }
 
@@ -127,7 +128,7 @@ class WalletAddress extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedCoin[this.props.withdraw_coin] !== this.props.selectedCoin[this.props.withdraw_coin]) {
-      this.validate(this.state.address, nextProps.selectedCoin[this.props.withdraw_coin]);
+      this.validate(nextProps.wallet.address, nextProps.selectedCoin[this.props.withdraw_coin]);
     }
 
     try {
@@ -137,11 +138,6 @@ class WalletAddress extends Component {
       if (!_.isEmpty(nextProps.wallet.address)) {
         this.orderHistory = _.filter(this.orderHistory, function (order) {
           return order.withdraw_address.startsWith(nextProps.wallet.address);
-        });
-      }
-      if(nextProps.selectedCoin.selectedByUser.receive) {
-        this.orderHistory = _.filter(this.orderHistory, function (order) {
-          return order.quote === nextProps.selectedCoin.receive;
         });
       }
     } catch (e) {
@@ -168,8 +164,7 @@ class WalletAddress extends Component {
   }
 
   setCoin(depositCoin, receiveCoin) {
-    const selectedByUser = this.props.selectedCoin.selectedByUser;
-    if (!this.props.selectedCoin.selectedByUser.receive &&
+    if (!this.props.selectedCoin.selectedByUser &&
       depositCoin != this.props.selectedCoin.deposit &&
       receiveCoin != this.props.selectedCoin.receive) {
       //Select coin
@@ -177,7 +172,7 @@ class WalletAddress extends Component {
         ...this.props.selectedCoin,
         deposit: depositCoin,
         receive: receiveCoin,
-        selectedByUser
+        selectedByUser: false
       }, this.props.pairs);
 
       //Update quote value
