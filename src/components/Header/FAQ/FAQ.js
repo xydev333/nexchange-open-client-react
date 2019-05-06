@@ -1,94 +1,20 @@
 import React, { Component } from 'react';
 import { I18n, Trans } from 'react-i18next';
 import { Modal } from 'react-bootstrap';
-import Fuse from 'fuse.js';
-import debounce from 'Utils/debounce';
-import i18n from 'Src/i18n';
-
 import QuestionAnswer from './QuestionAnswer/QuestionAnswer';
-import styles from './FAQ.scss';
-
-const FAQ_COUNT = 14;
 
 class FAQ extends Component {
-  constructor(props) {
-    super(props)
-
-    this.faqs = [];
-    this.state = {
-      show: false,
-      searchText: '',
-      filteredQuestionsIds: Array(FAQ_COUNT).fill().map((e,i)=>i+1)
-    };
-
-  }
-
-  componentDidMount() {
-
-  }
-
-  showQuestion(id) {
-    return this.state.filteredQuestionsIds.indexOf(id) != -1;
-  }
+  state = {
+    show: false,
+  };
 
   componentDidUpdate() {
     if (this.state.show !== this.props.show) {
-      //Populate local FAQ Array
-      const faqIdArray = Array(FAQ_COUNT).fill().map((e,i)=>i+1);
-      let faqs = [];
-      faqIdArray.forEach((id) => {
-        let faq =  {
-          id,
-          question: i18n.t(`faq.ques${id}`),
-          answer: i18n.t(`faq.ans${id}`)
-        }
-        faqs.push(faq);
-      });
-      this.faqs = faqs;
-
-      //Show modal
       this.setState({
         show: this.props.show,
       });
     }
   }
-
-  handleChange(event){
-    const searchText = event.target.value;
-
-    if(_.isEmpty(searchText.trim())){
-      this.setState({
-        searchText: '',
-        filteredQuestionsIds: Array(FAQ_COUNT).fill().map((e,i)=>i+1)
-      });
-      return;
-    }
-
-    const fuse = new Fuse(this.faqs, {
-      shouldSort: true,
-      threshold: 0.4,
-      minMatchCharLength: 2,
-      keys: ['question', 'answer'],
-    });
-
-    this.trackEvent(searchText);
-    const searchResult = fuse.search(searchText);
-    if(_.isEmpty(searchResult)){
-      window.gtag('event', 'FAQ not found', {event_category: 'FAQ', event_label: `${searchText}`});
-    }
-
-    const filteredQuestionsIds = _.sortBy(_.map(searchResult, 'id'));
-
-
-    this.setState({
-      searchText,
-      filteredQuestionsIds
-    });
-  }
-
-  trackEvent = debounce(faqSearched => {
-    window.gtag('event', 'FAQ searched', {event_category: 'FAQ', event_label: `${faqSearched}`});
-  }, 100);
 
   render() {
     return (
@@ -103,21 +29,7 @@ class FAQ extends Component {
               </div>
 
               <div className="modal-body">
-                <form className="form-group" onSubmit={this.handleSubmit}>
-                  <div className={`${styles.input}`}>
-                    <i className={`fas fa-search`}></i>
-                    <input
-                      type="text"
-                      className={`form-control`}
-                      id="faq-search"
-                      value={this.state.searchText}
-                      onChange={event => this.handleChange(event)}
-                      placeholder={t('faq.inputplaceholder')}
-                    />
-                  </div>
-                </form>
-                {this.showQuestion(1) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques1"
                   answer={
                     <Trans i18nKey="faq.ans1">
@@ -138,10 +50,9 @@ class FAQ extends Component {
                       </div>
                     </Trans>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(2) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques2"
                   answer={
                     <div>
@@ -157,10 +68,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(3) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques3"
                   answer={
                     <Trans i18nKey="faq.ans3">
@@ -170,10 +80,9 @@ class FAQ extends Component {
                       </p>
                     </Trans>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(4) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques4"
                   answer={
                     <Trans i18nKey="faq.ans4">
@@ -184,10 +93,9 @@ class FAQ extends Component {
                       </p>
                     </Trans>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(5) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques5"
                   answer={
                     <div>
@@ -219,10 +127,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(6) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques6"
                   answer={
                     <Trans i18nKey="faq.ans6">
@@ -233,23 +140,20 @@ class FAQ extends Component {
                       </p>
                     </Trans>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(7) ?
-                  <QuestionAnswer id="ques7" answer={<img src="/img/verification.png" alt="Verification" />} /> : null}
+                <QuestionAnswer id="ques7" answer={<img src="/img/verification.png" alt="Verification" />} />
 
-                {this.showQuestion(8) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques8"
                   answer={
                     <Trans i18nKey="faq.ans8">
                       <p>No, our solution is completely independant. We use our internal coin reserves to provide liquidity.</p>
                     </Trans>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(9) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques9"
                   answer={
                     <div>
@@ -267,10 +171,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(10) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques10"
                   answer={
                     <div>
@@ -286,10 +189,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(11) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques11"
                   answer={
                     <div>
@@ -316,10 +218,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(12) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques12"
                   answer={
                     <div>
@@ -340,10 +241,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(13) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques13"
                   answer={
                     <div>
@@ -359,10 +259,9 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
 
-                {this.showQuestion(14) ?
-                  <QuestionAnswer
+                <QuestionAnswer
                   id="ques14"
                   answer={
                     <div>
@@ -393,7 +292,7 @@ class FAQ extends Component {
                       </Trans>
                     </div>
                   }
-                /> : null}
+                />
               </div>
             </div>
           </Modal>
