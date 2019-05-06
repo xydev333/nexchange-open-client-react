@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { fetchCoinDetails, fetchPairs, changeOrderMode } from 'Actions';
+import { fetchCoinDetails, fetchPairs } from 'Actions';
+
 import Hero from './Hero/Hero';
 import About from './About/About';
 import Team from './Team/Team';
@@ -19,11 +20,7 @@ export class Home extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     // Detect coin change by link
-    const oldUrlParams = new URLSearchParams(prevProps.location.search);
-    const oldPairParam = oldUrlParams.get('pair');
-    const newUrlParams = new URLSearchParams(this.props.location.search);
-    const newPairParam = newUrlParams.get('pair');
-    if(newPairParam && newPairParam !== oldPairParam) {
+    if(this.props.location.search !== prevProps.location.search) {
         this.props.fetchCoinDetails();
         this.props.fetchPairs();
     }
@@ -45,8 +42,8 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ orderMode, coinsInfo, selectedCoin }) => ({ orderMode, coinsInfo, selectedCoin });
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoinDetails, fetchPairs, changeOrderMode }, dispatch);
+const mapStateToProps = ({ coinsInfo, selectedCoin }) => ({ coinsInfo, selectedCoin });
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoinDetails, fetchPairs}, dispatch);
 
 export default connect(
   mapStateToProps,

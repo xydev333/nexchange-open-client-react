@@ -29,13 +29,6 @@ class OrderInitial extends Component {
     });
   }
 
-  componentDidMount(){
-    const safechargeStatus = getUrlPram('ppp_status');
-    if(!_.isEmpty(safechargeStatus)) {
-      $('body').hide();
-    }
-  }
-
   componentWillUpdate() {
     const safechargeStatus = getUrlPram('ppp_status');
     if(!_.isEmpty(safechargeStatus)){
@@ -80,6 +73,7 @@ class OrderInitial extends Component {
                   let _checkoutButton = document.getElementsByName("checkoutButton")[0];
                   let _box = document.getElementsByName("checkboxTC")[0];
                   let _box_kyc = document.getElementsByName("checkboxKYC")[0];
+                  let _paymentUrl = props.order.payment_url;
                   if (_box.checked && _box_kyc.checked) {
                       this.setState({enablePayment: true});
                       _checkoutButton.classList.remove("disabled");
@@ -98,6 +92,7 @@ class OrderInitial extends Component {
                 let _checkoutButton = document.getElementsByName("checkoutButton")[0];
                 let _box = document.getElementsByName("checkboxTC")[0];
                 let _box_kyc = document.getElementsByName("checkboxKYC")[0];
+                let _paymentUrl = props.order.payment_url;
                 if (_box.checked && _box_kyc.checked) {
                     this.setState({enablePayment: true});
                     _checkoutButton.classList.remove("disabled");
@@ -112,7 +107,7 @@ class OrderInitial extends Component {
 
             <a className="btn btn-default btn-lg disabled" name="checkoutButton" data-toggle="tooltip"
               title={t('order.tooltipTC')} style={{ pointerEvents: 'auto'}} 
-              onClick={() => {props.order.payment_url && this.state.enablePayment && this.tooglePaymentIFrame()}}>
+              onClick={() => {this.state.enablePayment && this.tooglePaymentIFrame()}}>
               <i className="fas fa-credit-card" aria-hidden="true" style={{ position: 'relative', left: -13 }} />
               {t('order.fiat.status.pay')}
             </a>

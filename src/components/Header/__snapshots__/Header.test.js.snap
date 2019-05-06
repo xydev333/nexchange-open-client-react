@@ -2,18 +2,17 @@
 
 exports[`Header renders correctly 1`] = `
 ShallowWrapper {
+  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <I18n
     ns="translations"
-  >
+>
     [Function]
-  </I18n>,
+</I18n>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
-    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -24,250 +23,248 @@ ShallowWrapper {
     "props": Object {
       "children": <div
         className="container"
-      >
+>
         <div
-          className="navbar-header"
+                className="navbar-header"
         >
-          <button
-            className="navbar-toggle"
-            data-target="#navigation-index"
-            data-toggle="collapse"
-            type="button"
-          >
-            <span
-              className="sr-only"
-            >
-              Toggle navigation
-            </span>
-            <span
-              className="icon-bar"
-            />
-            <span
-              className="icon-bar"
-            />
-            <span
-              className="icon-bar"
-            />
-          </button>
-          <Link
-            replace={false}
-            to="/"
-          >
-            <div
-              className="logo-container"
-            >
-              <img
-                alt="Logo"
-                data-test="logo"
-                src="/img/logo-white.svg"
-              />
-            </div>
-          </Link>
+                <button
+                        className="navbar-toggle"
+                        data-target="#navigation-index"
+                        data-toggle="collapse"
+                        type="button"
+                >
+                        <span
+                                className="sr-only"
+                        >
+                                Toggle navigation
+                        </span>
+                        <span
+                                className="icon-bar"
+                        />
+                        <span
+                                className="icon-bar"
+                        />
+                        <span
+                                className="icon-bar"
+                        />
+                </button>
+                <Link
+                        replace={false}
+                        to="/"
+                >
+                        <div
+                                className="logo-container"
+                        >
+                                <img
+                                        alt="Logo"
+                                        data-test="logo"
+                                        src="/img/logo-white.svg"
+                                />
+                        </div>
+                </Link>
         </div>
         <div
-          className="collapse navbar-collapse"
-          id="navigation-index"
+                className="collapse navbar-collapse"
+                id="navigation-index"
         >
-          <ul
-            className="nav navbar-nav navbar-right"
-          >
-            <li>
-              <Link
-                className="link"
-                onClick={[Function]}
-                replace={false}
-                to="/#about"
-              >
-                header.about
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="link"
-                data-test="faq-btn"
-                onClick={[Function]}
-                replace={false}
-                to="/faqs"
-              >
-                header.faq
-              </Link>
-            </li>
-            <li>
-              <a
-                className="link hidden-sm"
-                data-test="api-link"
-                href="http://docs.nexchange2.apiary.io/"
-                onClick={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                header.apidocs
-              </a>
-            </li>
-            <li>
-              <Link
-                className="link"
-                data-test="compare-link"
-                onClick={[Function]}
-                replace={false}
-                to="/#compare"
-              >
-                header.compare
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="link"
-                data-test="support-btn"
-                onClick={[Function]}
-                replace={false}
-                to="#"
-              >
-                header.support
-              </Link>
-            </li>
-            <li
-              className="ico-link"
-            >
-              <a
-                className="btn btn btn-block btn-primary"
-                data-test="ico-link"
-                href="https://n.exchange/ico"
-                onClick={[Function]}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                header.ico
-              </a>
-            </li>
-            <LanguagePicker />
-            <li
-              id="social-mobile"
-            >
-              <a
-                className="social btn btn-simple btn-just-icon visible-xs"
-                href="/twitter"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-twitter"
-                />
-              </a>
-              <a
-                className="social btn btn-simple btn-just-icon visible-xs"
-                href="/fb"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-facebook-f"
-                />
-              </a>
-              <a
-                className="social btn btn-simple btn-just-icon visible-xs"
-                href="/slack"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-slack-hash"
-                />
-              </a>
-              <a
-                className="social btn btn-simple btn-just-icon visible-xs"
-                href="/telegram"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-telegram"
-                />
-              </a>
-            </li>
-            <li
-              className="visible-md visible-lg social-desktop"
-            >
-              <a
-                className="social btn btn-simple btn-just-icon"
-                data-original-title="header.twitter"
-                data-placement="bottom"
-                href="/twitter"
-                rel="tooltip"
-                target="_blank"
-                title=""
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-twitter"
-                />
-              </a>
-            </li>
-            <li
-              className="visible-md visible-lg social-desktop"
-            >
-              <a
-                className="social btn btn-simple btn-just-icon"
-                data-original-title="header.facebook"
-                data-placement="bottom"
-                href="/fb"
-                rel="tooltip"
-                target="_blank"
-                title=""
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-facebook-f"
-                />
-              </a>
-            </li>
-            <li
-              className="visible-md visible-lg social-desktop"
-            >
-              <a
-                className="social btn btn-simple btn-just-icon"
-                data-original-title="header.slack"
-                data-placement="bottom"
-                href="/slack"
-                rel="tooltip"
-                target="_blank"
-                title=""
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-slack-hash"
-                />
-              </a>
-            </li>
-            <li
-              className="visible-md visible-lg social-desktop"
-            >
-              <a
-                className="social btn btn-simple btn-just-icon"
-                data-original-title="header.telegram"
-                data-placement="bottom"
-                href="/telegram"
-                rel="tooltip"
-                target="_blank"
-                title=""
-              >
-                <i
-                  aria-hidden="true"
-                  className="fab fa-telegram"
-                />
-              </a>
-            </li>
-          </ul>
+                <ul
+                        className="nav navbar-nav navbar-right"
+                >
+                        <li>
+                                <a
+                                        className="link"
+                                        href="/#about"
+                                >
+                                        header.about
+                                </a>
+                        </li>
+                        <li>
+                                <a
+                                        className="link"
+                                        data-test="faq-btn"
+                                        href="javascript:void(0)"
+                                        onClick={[Function]}
+                                >
+                                        header.faq
+                                </a>
+                        </li>
+                        <li>
+                                <a
+                                        className="link hidden-sm"
+                                        data-test="api-link"
+                                        href="http://docs.nexchange2.apiary.io/"
+                                        onClick={[Function]}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                >
+                                        header.apidocs
+                                </a>
+                        </li>
+                        <li>
+                                <a
+                                        className="link"
+                                        data-test="compare-link"
+                                        href="/#compare"
+                                >
+                                        header.compare
+                                </a>
+                        </li>
+                        <li>
+                                <a
+                                        className="link"
+                                        data-test="support-btn"
+                                        href="javascript:void(0)"
+                                        onClick={[Function]}
+                                >
+                                        header.support
+                                </a>
+                        </li>
+                        <li
+                                className="ico-link"
+                        >
+                                <a
+                                        className="btn btn btn-block btn-primary"
+                                        data-test="ico-link"
+                                        href="https://n.exchange/ico"
+                                        onClick={[Function]}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                >
+                                        header.ico
+                                </a>
+                        </li>
+                        <LanguagePicker />
+                        <li
+                                id="social-mobile"
+                        >
+                                <a
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/twitter"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-twitter"
+                                        />
+                                </a>
+                                <a
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/fb"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-facebook-f"
+                                        />
+                                </a>
+                                <a
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/slack"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-slack-hash"
+                                        />
+                                </a>
+                                <a
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/telegram"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-telegram"
+                                        />
+                                </a>
+                        </li>
+                        <li
+                                className="visible-md visible-lg social-desktop"
+                        >
+                                <a
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.twitter"
+                                        data-placement="bottom"
+                                        href="/twitter"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-twitter"
+                                        />
+                                </a>
+                        </li>
+                        <li
+                                className="visible-md visible-lg social-desktop"
+                        >
+                                <a
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.facebook"
+                                        data-placement="bottom"
+                                        href="/fb"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-facebook-f"
+                                        />
+                                </a>
+                        </li>
+                        <li
+                                className="visible-md visible-lg social-desktop"
+                        >
+                                <a
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.slack"
+                                        data-placement="bottom"
+                                        href="/slack"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-slack-hash"
+                                        />
+                                </a>
+                        </li>
+                        <li
+                                className="visible-md visible-lg social-desktop"
+                        >
+                                <a
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.telegram"
+                                        data-placement="bottom"
+                                        href="/telegram"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
+                                >
+                                        <i
+                                                aria-hidden="true"
+                                                className="fab fa-telegram"
+                                        />
+                                </a>
+                        </li>
+                </ul>
         </div>
-        <Connect(Support)
-          onClose={[Function]}
-          show={false}
+        <FAQ
+                onClose={[Function]}
+                show={false}
         />
-      </div>,
+        <Connect(Support)
+                onClose={[Function]}
+                show={false}
+        />
+</div>,
       "className": "header home",
       "data-test": "header",
     },
@@ -280,246 +277,244 @@ ShallowWrapper {
         "children": Array [
           <div
             className="navbar-header"
-          >
+>
             <button
-              className="navbar-toggle"
-              data-target="#navigation-index"
-              data-toggle="collapse"
-              type="button"
+                        className="navbar-toggle"
+                        data-target="#navigation-index"
+                        data-toggle="collapse"
+                        type="button"
             >
-              <span
-                className="sr-only"
-              >
-                Toggle navigation
-              </span>
-              <span
-                className="icon-bar"
-              />
-              <span
-                className="icon-bar"
-              />
-              <span
-                className="icon-bar"
-              />
+                        <span
+                                    className="sr-only"
+                        >
+                                    Toggle navigation
+                        </span>
+                        <span
+                                    className="icon-bar"
+                        />
+                        <span
+                                    className="icon-bar"
+                        />
+                        <span
+                                    className="icon-bar"
+                        />
             </button>
             <Link
-              replace={false}
-              to="/"
+                        replace={false}
+                        to="/"
             >
-              <div
-                className="logo-container"
-              >
-                <img
-                  alt="Logo"
-                  data-test="logo"
-                  src="/img/logo-white.svg"
-                />
-              </div>
+                        <div
+                                    className="logo-container"
+                        >
+                                    <img
+                                                alt="Logo"
+                                                data-test="logo"
+                                                src="/img/logo-white.svg"
+                                    />
+                        </div>
             </Link>
-          </div>,
+</div>,
           <div
             className="collapse navbar-collapse"
             id="navigation-index"
-          >
+>
             <ul
-              className="nav navbar-nav navbar-right"
+                        className="nav navbar-nav navbar-right"
             >
-              <li>
-                <Link
-                  className="link"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/#about"
-                >
-                  header.about
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="link"
-                  data-test="faq-btn"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/faqs"
-                >
-                  header.faq
-                </Link>
-              </li>
-              <li>
-                <a
-                  className="link hidden-sm"
-                  data-test="api-link"
-                  href="http://docs.nexchange2.apiary.io/"
-                  onClick={[Function]}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  header.apidocs
-                </a>
-              </li>
-              <li>
-                <Link
-                  className="link"
-                  data-test="compare-link"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/#compare"
-                >
-                  header.compare
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="link"
-                  data-test="support-btn"
-                  onClick={[Function]}
-                  replace={false}
-                  to="#"
-                >
-                  header.support
-                </Link>
-              </li>
-              <li
-                className="ico-link"
-              >
-                <a
-                  className="btn btn btn-block btn-primary"
-                  data-test="ico-link"
-                  href="https://n.exchange/ico"
-                  onClick={[Function]}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  header.ico
-                </a>
-              </li>
-              <LanguagePicker />
-              <li
-                id="social-mobile"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/twitter"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-twitter"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/fb"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-facebook-f"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/slack"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-slack-hash"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/telegram"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-telegram"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.twitter"
-                  data-placement="bottom"
-                  href="/twitter"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-twitter"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.facebook"
-                  data-placement="bottom"
-                  href="/fb"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-facebook-f"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.slack"
-                  data-placement="bottom"
-                  href="/slack"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-slack-hash"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.telegram"
-                  data-placement="bottom"
-                  href="/telegram"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-telegram"
-                  />
-                </a>
-              </li>
+                        <li>
+                                    <a
+                                                className="link"
+                                                href="/#about"
+                                    >
+                                                header.about
+                                    </a>
+                        </li>
+                        <li>
+                                    <a
+                                                className="link"
+                                                data-test="faq-btn"
+                                                href="javascript:void(0)"
+                                                onClick={[Function]}
+                                    >
+                                                header.faq
+                                    </a>
+                        </li>
+                        <li>
+                                    <a
+                                                className="link hidden-sm"
+                                                data-test="api-link"
+                                                href="http://docs.nexchange2.apiary.io/"
+                                                onClick={[Function]}
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                    >
+                                                header.apidocs
+                                    </a>
+                        </li>
+                        <li>
+                                    <a
+                                                className="link"
+                                                data-test="compare-link"
+                                                href="/#compare"
+                                    >
+                                                header.compare
+                                    </a>
+                        </li>
+                        <li>
+                                    <a
+                                                className="link"
+                                                data-test="support-btn"
+                                                href="javascript:void(0)"
+                                                onClick={[Function]}
+                                    >
+                                                header.support
+                                    </a>
+                        </li>
+                        <li
+                                    className="ico-link"
+                        >
+                                    <a
+                                                className="btn btn btn-block btn-primary"
+                                                data-test="ico-link"
+                                                href="https://n.exchange/ico"
+                                                onClick={[Function]}
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                    >
+                                                header.ico
+                                    </a>
+                        </li>
+                        <LanguagePicker />
+                        <li
+                                    id="social-mobile"
+                        >
+                                    <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/twitter"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-twitter"
+                                                />
+                                    </a>
+                                    <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/fb"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-facebook-f"
+                                                />
+                                    </a>
+                                    <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/slack"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-slack-hash"
+                                                />
+                                    </a>
+                                    <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/telegram"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-telegram"
+                                                />
+                                    </a>
+                        </li>
+                        <li
+                                    className="visible-md visible-lg social-desktop"
+                        >
+                                    <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.twitter"
+                                                data-placement="bottom"
+                                                href="/twitter"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-twitter"
+                                                />
+                                    </a>
+                        </li>
+                        <li
+                                    className="visible-md visible-lg social-desktop"
+                        >
+                                    <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.facebook"
+                                                data-placement="bottom"
+                                                href="/fb"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-facebook-f"
+                                                />
+                                    </a>
+                        </li>
+                        <li
+                                    className="visible-md visible-lg social-desktop"
+                        >
+                                    <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.slack"
+                                                data-placement="bottom"
+                                                href="/slack"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-slack-hash"
+                                                />
+                                    </a>
+                        </li>
+                        <li
+                                    className="visible-md visible-lg social-desktop"
+                        >
+                                    <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.telegram"
+                                                data-placement="bottom"
+                                                href="/telegram"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                    >
+                                                <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-telegram"
+                                                />
+                                    </a>
+                        </li>
             </ul>
-          </div>,
+</div>,
+          <FAQ
+            onClose={[Function]}
+            show={false}
+/>,
           <Connect(Support)
             onClose={[Function]}
             show={false}
-          />,
+/>,
         ],
         "className": "container",
       },
@@ -536,36 +531,36 @@ ShallowWrapper {
                 data-target="#navigation-index"
                 data-toggle="collapse"
                 type="button"
-              >
+>
                 <span
-                  className="sr-only"
+                                className="sr-only"
                 >
-                  Toggle navigation
+                                Toggle navigation
                 </span>
                 <span
-                  className="icon-bar"
+                                className="icon-bar"
                 />
                 <span
-                  className="icon-bar"
+                                className="icon-bar"
                 />
                 <span
-                  className="icon-bar"
+                                className="icon-bar"
                 />
-              </button>,
+</button>,
               <Link
                 replace={false}
                 to="/"
-              >
+>
                 <div
-                  className="logo-container"
+                                className="logo-container"
                 >
-                  <img
-                    alt="Logo"
-                    data-test="logo"
-                    src="/img/logo-white.svg"
-                  />
+                                <img
+                                                alt="Logo"
+                                                data-test="logo"
+                                                src="/img/logo-white.svg"
+                                />
                 </div>
-              </Link>,
+</Link>,
             ],
             "className": "navbar-header",
           },
@@ -579,18 +574,18 @@ ShallowWrapper {
                 "children": Array [
                   <span
                     className="sr-only"
-                  >
+>
                     Toggle navigation
-                  </span>,
+</span>,
                   <span
                     className="icon-bar"
-                  />,
+/>,
                   <span
                     className="icon-bar"
-                  />,
+/>,
                   <span
                     className="icon-bar"
-                  />,
+/>,
                 ],
                 "className": "navbar-toggle",
                 "data-target": "#navigation-index",
@@ -654,13 +649,13 @@ ShallowWrapper {
               "props": Object {
                 "children": <div
                   className="logo-container"
-                >
+>
                   <img
-                    alt="Logo"
-                    data-test="logo"
-                    src="/img/logo-white.svg"
+                                    alt="Logo"
+                                    data-test="logo"
+                                    src="/img/logo-white.svg"
                   />
-                </div>,
+</div>,
                 "replace": false,
                 "to": "/",
               },
@@ -674,7 +669,7 @@ ShallowWrapper {
                     alt="Logo"
                     data-test="logo"
                     src="/img/logo-white.svg"
-                  />,
+/>,
                   "className": "logo-container",
                 },
                 "ref": null,
@@ -705,198 +700,192 @@ ShallowWrapper {
           "props": Object {
             "children": <ul
               className="nav navbar-nav navbar-right"
-            >
+>
               <li>
-                <Link
-                  className="link"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/#about"
-                >
-                  header.about
-                </Link>
+                            <a
+                                          className="link"
+                                          href="/#about"
+                            >
+                                          header.about
+                            </a>
               </li>
               <li>
-                <Link
-                  className="link"
-                  data-test="faq-btn"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/faqs"
-                >
-                  header.faq
-                </Link>
+                            <a
+                                          className="link"
+                                          data-test="faq-btn"
+                                          href="javascript:void(0)"
+                                          onClick={[Function]}
+                            >
+                                          header.faq
+                            </a>
               </li>
               <li>
-                <a
-                  className="link hidden-sm"
-                  data-test="api-link"
-                  href="http://docs.nexchange2.apiary.io/"
-                  onClick={[Function]}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  header.apidocs
-                </a>
+                            <a
+                                          className="link hidden-sm"
+                                          data-test="api-link"
+                                          href="http://docs.nexchange2.apiary.io/"
+                                          onClick={[Function]}
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                            >
+                                          header.apidocs
+                            </a>
               </li>
               <li>
-                <Link
-                  className="link"
-                  data-test="compare-link"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/#compare"
-                >
-                  header.compare
-                </Link>
+                            <a
+                                          className="link"
+                                          data-test="compare-link"
+                                          href="/#compare"
+                            >
+                                          header.compare
+                            </a>
               </li>
               <li>
-                <Link
-                  className="link"
-                  data-test="support-btn"
-                  onClick={[Function]}
-                  replace={false}
-                  to="#"
-                >
-                  header.support
-                </Link>
+                            <a
+                                          className="link"
+                                          data-test="support-btn"
+                                          href="javascript:void(0)"
+                                          onClick={[Function]}
+                            >
+                                          header.support
+                            </a>
               </li>
               <li
-                className="ico-link"
+                            className="ico-link"
               >
-                <a
-                  className="btn btn btn-block btn-primary"
-                  data-test="ico-link"
-                  href="https://n.exchange/ico"
-                  onClick={[Function]}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  header.ico
-                </a>
+                            <a
+                                          className="btn btn btn-block btn-primary"
+                                          data-test="ico-link"
+                                          href="https://n.exchange/ico"
+                                          onClick={[Function]}
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                            >
+                                          header.ico
+                            </a>
               </li>
               <LanguagePicker />
               <li
-                id="social-mobile"
+                            id="social-mobile"
               >
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/twitter"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-twitter"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/fb"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-facebook-f"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/slack"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-slack-hash"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/telegram"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-telegram"
-                  />
-                </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon visible-xs"
+                                          href="/twitter"
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-twitter"
+                                          />
+                            </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon visible-xs"
+                                          href="/fb"
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-facebook-f"
+                                          />
+                            </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon visible-xs"
+                                          href="/slack"
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-slack-hash"
+                                          />
+                            </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon visible-xs"
+                                          href="/telegram"
+                                          rel="noopener noreferrer"
+                                          target="_blank"
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-telegram"
+                                          />
+                            </a>
               </li>
               <li
-                className="visible-md visible-lg social-desktop"
+                            className="visible-md visible-lg social-desktop"
               >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.twitter"
-                  data-placement="bottom"
-                  href="/twitter"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-twitter"
-                  />
-                </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon"
+                                          data-original-title="header.twitter"
+                                          data-placement="bottom"
+                                          href="/twitter"
+                                          rel="tooltip"
+                                          target="_blank"
+                                          title=""
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-twitter"
+                                          />
+                            </a>
               </li>
               <li
-                className="visible-md visible-lg social-desktop"
+                            className="visible-md visible-lg social-desktop"
               >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.facebook"
-                  data-placement="bottom"
-                  href="/fb"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-facebook-f"
-                  />
-                </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon"
+                                          data-original-title="header.facebook"
+                                          data-placement="bottom"
+                                          href="/fb"
+                                          rel="tooltip"
+                                          target="_blank"
+                                          title=""
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-facebook-f"
+                                          />
+                            </a>
               </li>
               <li
-                className="visible-md visible-lg social-desktop"
+                            className="visible-md visible-lg social-desktop"
               >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.slack"
-                  data-placement="bottom"
-                  href="/slack"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-slack-hash"
-                  />
-                </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon"
+                                          data-original-title="header.slack"
+                                          data-placement="bottom"
+                                          href="/slack"
+                                          rel="tooltip"
+                                          target="_blank"
+                                          title=""
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-slack-hash"
+                                          />
+                            </a>
               </li>
               <li
-                className="visible-md visible-lg social-desktop"
+                            className="visible-md visible-lg social-desktop"
               >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.telegram"
-                  data-placement="bottom"
-                  href="/telegram"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-telegram"
-                  />
-                </a>
+                            <a
+                                          className="social btn btn-simple btn-just-icon"
+                                          data-original-title="header.telegram"
+                                          data-placement="bottom"
+                                          href="/telegram"
+                                          rel="tooltip"
+                                          target="_blank"
+                                          title=""
+                            >
+                                          <i
+                                                        aria-hidden="true"
+                                                        className="fab fa-telegram"
+                                          />
+                            </a>
               </li>
-            </ul>,
+</ul>,
             "className": "collapse navbar-collapse",
             "id": "navigation-index",
           },
@@ -908,195 +897,189 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <li>
-                  <Link
-                    className="link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#about"
+                  <a
+                                    className="link"
+                                    href="/#about"
                   >
-                    header.about
-                  </Link>
-                </li>,
-                <li>
-                  <Link
-                    className="link"
-                    data-test="faq-btn"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/faqs"
-                  >
-                    header.faq
-                  </Link>
-                </li>,
+                                    header.about
+                  </a>
+</li>,
                 <li>
                   <a
-                    className="link hidden-sm"
-                    data-test="api-link"
-                    href="http://docs.nexchange2.apiary.io/"
-                    onClick={[Function]}
-                    rel="noopener noreferrer"
-                    target="_blank"
+                                    className="link"
+                                    data-test="faq-btn"
+                                    href="javascript:void(0)"
+                                    onClick={[Function]}
                   >
-                    header.apidocs
+                                    header.faq
                   </a>
-                </li>,
+</li>,
                 <li>
-                  <Link
-                    className="link"
-                    data-test="compare-link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#compare"
+                  <a
+                                    className="link hidden-sm"
+                                    data-test="api-link"
+                                    href="http://docs.nexchange2.apiary.io/"
+                                    onClick={[Function]}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                   >
-                    header.compare
-                  </Link>
-                </li>,
+                                    header.apidocs
+                  </a>
+</li>,
                 <li>
-                  <Link
-                    className="link"
-                    data-test="support-btn"
-                    onClick={[Function]}
-                    replace={false}
-                    to="#"
+                  <a
+                                    className="link"
+                                    data-test="compare-link"
+                                    href="/#compare"
                   >
-                    header.support
-                  </Link>
-                </li>,
+                                    header.compare
+                  </a>
+</li>,
+                <li>
+                  <a
+                                    className="link"
+                                    data-test="support-btn"
+                                    href="javascript:void(0)"
+                                    onClick={[Function]}
+                  >
+                                    header.support
+                  </a>
+</li>,
                 <li
                   className="ico-link"
-                >
+>
                   <a
-                    className="btn btn btn-block btn-primary"
-                    data-test="ico-link"
-                    href="https://n.exchange/ico"
-                    onClick={[Function]}
-                    rel="noopener noreferrer"
-                    target="_blank"
+                                    className="btn btn btn-block btn-primary"
+                                    data-test="ico-link"
+                                    href="https://n.exchange/ico"
+                                    onClick={[Function]}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                   >
-                    header.ico
+                                    header.ico
                   </a>
-                </li>,
+</li>,
                 <LanguagePicker />,
                 <li
                   id="social-mobile"
-                >
+>
                   <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/twitter"
-                    rel="noopener noreferrer"
-                    target="_blank"
+                                    className="social btn btn-simple btn-just-icon visible-xs"
+                                    href="/twitter"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-twitter"
+                                    />
                   </a>
                   <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/fb"
-                    rel="noopener noreferrer"
-                    target="_blank"
+                                    className="social btn btn-simple btn-just-icon visible-xs"
+                                    href="/fb"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-facebook-f"
+                                    />
                   </a>
                   <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/slack"
-                    rel="noopener noreferrer"
-                    target="_blank"
+                                    className="social btn btn-simple btn-just-icon visible-xs"
+                                    href="/slack"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-slack-hash"
+                                    />
                   </a>
                   <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/telegram"
-                    rel="noopener noreferrer"
-                    target="_blank"
+                                    className="social btn btn-simple btn-just-icon visible-xs"
+                                    href="/telegram"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-telegram"
+                                    />
                   </a>
-                </li>,
+</li>,
                 <li
                   className="visible-md visible-lg social-desktop"
-                >
+>
                   <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.twitter"
-                    data-placement="bottom"
-                    href="/twitter"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
+                                    className="social btn btn-simple btn-just-icon"
+                                    data-original-title="header.twitter"
+                                    data-placement="bottom"
+                                    href="/twitter"
+                                    rel="tooltip"
+                                    target="_blank"
+                                    title=""
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-twitter"
+                                    />
                   </a>
-                </li>,
+</li>,
                 <li
                   className="visible-md visible-lg social-desktop"
-                >
+>
                   <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.facebook"
-                    data-placement="bottom"
-                    href="/fb"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
+                                    className="social btn btn-simple btn-just-icon"
+                                    data-original-title="header.facebook"
+                                    data-placement="bottom"
+                                    href="/fb"
+                                    rel="tooltip"
+                                    target="_blank"
+                                    title=""
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-facebook-f"
+                                    />
                   </a>
-                </li>,
+</li>,
                 <li
                   className="visible-md visible-lg social-desktop"
-                >
+>
                   <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.slack"
-                    data-placement="bottom"
-                    href="/slack"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
+                                    className="social btn btn-simple btn-just-icon"
+                                    data-original-title="header.slack"
+                                    data-placement="bottom"
+                                    href="/slack"
+                                    rel="tooltip"
+                                    target="_blank"
+                                    title=""
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-slack-hash"
+                                    />
                   </a>
-                </li>,
+</li>,
                 <li
                   className="visible-md visible-lg social-desktop"
-                >
+>
                   <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.telegram"
-                    data-placement="bottom"
-                    href="/telegram"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
+                                    className="social btn btn-simple btn-just-icon"
+                                    data-original-title="header.telegram"
+                                    data-placement="bottom"
+                                    href="/telegram"
+                                    rel="tooltip"
+                                    target="_blank"
+                                    title=""
                   >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
-                    />
+                                    <i
+                                                      aria-hidden="true"
+                                                      className="fab fa-telegram"
+                                    />
                   </a>
-                </li>,
+</li>,
               ],
               "className": "nav navbar-nav navbar-right",
             },
@@ -1107,30 +1090,26 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <Link
+                  "children": <a
                     className="link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#about"
-                  >
+                    href="/#about"
+>
                     header.about
-                  </Link>,
+</a>,
                 },
                 "ref": null,
                 "rendered": Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
                     "children": "header.about",
                     "className": "link",
-                    "onClick": [Function],
-                    "replace": false,
-                    "to": "/#about",
+                    "href": "/#about",
                   },
                   "ref": null,
                   "rendered": "header.about",
-                  "type": [Function],
+                  "type": "a",
                 },
                 "type": "li",
               },
@@ -1139,32 +1118,30 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <Link
+                  "children": <a
                     className="link"
                     data-test="faq-btn"
+                    href="javascript:void(0)"
                     onClick={[Function]}
-                    replace={false}
-                    to="/faqs"
-                  >
+>
                     header.faq
-                  </Link>,
+</a>,
                 },
                 "ref": null,
                 "rendered": Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
                     "children": "header.faq",
                     "className": "link",
                     "data-test": "faq-btn",
+                    "href": "javascript:void(0)",
                     "onClick": [Function],
-                    "replace": false,
-                    "to": "/faqs",
                   },
                   "ref": null,
                   "rendered": "header.faq",
-                  "type": [Function],
+                  "type": "a",
                 },
                 "type": "li",
               },
@@ -1180,9 +1157,9 @@ ShallowWrapper {
                     onClick={[Function]}
                     rel="noopener noreferrer"
                     target="_blank"
-                  >
+>
                     header.apidocs
-                  </a>,
+</a>,
                 },
                 "ref": null,
                 "rendered": Object {
@@ -1209,32 +1186,28 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <Link
+                  "children": <a
                     className="link"
                     data-test="compare-link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#compare"
-                  >
+                    href="/#compare"
+>
                     header.compare
-                  </Link>,
+</a>,
                 },
                 "ref": null,
                 "rendered": Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
                     "children": "header.compare",
                     "className": "link",
                     "data-test": "compare-link",
-                    "onClick": [Function],
-                    "replace": false,
-                    "to": "/#compare",
+                    "href": "/#compare",
                   },
                   "ref": null,
                   "rendered": "header.compare",
-                  "type": [Function],
+                  "type": "a",
                 },
                 "type": "li",
               },
@@ -1243,32 +1216,30 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <Link
+                  "children": <a
                     className="link"
                     data-test="support-btn"
+                    href="javascript:void(0)"
                     onClick={[Function]}
-                    replace={false}
-                    to="#"
-                  >
+>
                     header.support
-                  </Link>,
+</a>,
                 },
                 "ref": null,
                 "rendered": Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
                     "children": "header.support",
                     "className": "link",
                     "data-test": "support-btn",
+                    "href": "javascript:void(0)",
                     "onClick": [Function],
-                    "replace": false,
-                    "to": "#",
                   },
                   "ref": null,
                   "rendered": "header.support",
-                  "type": [Function],
+                  "type": "a",
                 },
                 "type": "li",
               },
@@ -1284,9 +1255,9 @@ ShallowWrapper {
                     onClick={[Function]}
                     rel="noopener noreferrer"
                     target="_blank"
-                  >
+>
                     header.ico
-                  </a>,
+</a>,
                   "className": "ico-link",
                 },
                 "ref": null,
@@ -1329,45 +1300,45 @@ ShallowWrapper {
                       href="/twitter"
                       rel="noopener noreferrer"
                       target="_blank"
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-twitter"
+                                            aria-hidden="true"
+                                            className="fab fa-twitter"
                       />
-                    </a>,
+</a>,
                     <a
                       className="social btn btn-simple btn-just-icon visible-xs"
                       href="/fb"
                       rel="noopener noreferrer"
                       target="_blank"
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-facebook-f"
+                                            aria-hidden="true"
+                                            className="fab fa-facebook-f"
                       />
-                    </a>,
+</a>,
                     <a
                       className="social btn btn-simple btn-just-icon visible-xs"
                       href="/slack"
                       rel="noopener noreferrer"
                       target="_blank"
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-slack-hash"
+                                            aria-hidden="true"
+                                            className="fab fa-slack-hash"
                       />
-                    </a>,
+</a>,
                     <a
                       className="social btn btn-simple btn-just-icon visible-xs"
                       href="/telegram"
                       rel="noopener noreferrer"
                       target="_blank"
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-telegram"
+                                            aria-hidden="true"
+                                            className="fab fa-telegram"
                       />
-                    </a>,
+</a>,
                   ],
                   "id": "social-mobile",
                 },
@@ -1381,7 +1352,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-twitter"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon visible-xs",
                       "href": "/twitter",
                       "rel": "noopener noreferrer",
@@ -1410,7 +1381,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-facebook-f"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon visible-xs",
                       "href": "/fb",
                       "rel": "noopener noreferrer",
@@ -1439,7 +1410,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-slack-hash"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon visible-xs",
                       "href": "/slack",
                       "rel": "noopener noreferrer",
@@ -1468,7 +1439,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-telegram"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon visible-xs",
                       "href": "/telegram",
                       "rel": "noopener noreferrer",
@@ -1505,12 +1476,12 @@ ShallowWrapper {
                     rel="tooltip"
                     target="_blank"
                     title=""
-                  >
+>
                     <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
+                                        aria-hidden="true"
+                                        className="fab fa-twitter"
                     />
-                  </a>,
+</a>,
                   "className": "visible-md visible-lg social-desktop",
                 },
                 "ref": null,
@@ -1522,7 +1493,7 @@ ShallowWrapper {
                     "children": <i
                       aria-hidden="true"
                       className="fab fa-twitter"
-                    />,
+/>,
                     "className": "social btn btn-simple btn-just-icon",
                     "data-original-title": "header.twitter",
                     "data-placement": "bottom",
@@ -1561,12 +1532,12 @@ ShallowWrapper {
                     rel="tooltip"
                     target="_blank"
                     title=""
-                  >
+>
                     <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
+                                        aria-hidden="true"
+                                        className="fab fa-facebook-f"
                     />
-                  </a>,
+</a>,
                   "className": "visible-md visible-lg social-desktop",
                 },
                 "ref": null,
@@ -1578,7 +1549,7 @@ ShallowWrapper {
                     "children": <i
                       aria-hidden="true"
                       className="fab fa-facebook-f"
-                    />,
+/>,
                     "className": "social btn btn-simple btn-just-icon",
                     "data-original-title": "header.facebook",
                     "data-placement": "bottom",
@@ -1617,12 +1588,12 @@ ShallowWrapper {
                     rel="tooltip"
                     target="_blank"
                     title=""
-                  >
+>
                     <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
+                                        aria-hidden="true"
+                                        className="fab fa-slack-hash"
                     />
-                  </a>,
+</a>,
                   "className": "visible-md visible-lg social-desktop",
                 },
                 "ref": null,
@@ -1634,7 +1605,7 @@ ShallowWrapper {
                     "children": <i
                       aria-hidden="true"
                       className="fab fa-slack-hash"
-                    />,
+/>,
                     "className": "social btn btn-simple btn-just-icon",
                     "data-original-title": "header.slack",
                     "data-placement": "bottom",
@@ -1673,12 +1644,12 @@ ShallowWrapper {
                     rel="tooltip"
                     target="_blank"
                     title=""
-                  >
+>
                     <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
+                                        aria-hidden="true"
+                                        className="fab fa-telegram"
                     />
-                  </a>,
+</a>,
                   "className": "visible-md visible-lg social-desktop",
                 },
                 "ref": null,
@@ -1690,7 +1661,7 @@ ShallowWrapper {
                     "children": <i
                       aria-hidden="true"
                       className="fab fa-telegram"
-                    />,
+/>,
                     "className": "social btn btn-simple btn-just-icon",
                     "data-original-title": "header.telegram",
                     "data-placement": "bottom",
@@ -1733,6 +1704,18 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "onClose": [Function],
+            "show": false,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
       ],
       "type": "div",
     },
@@ -1746,250 +1729,248 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="container"
-        >
+>
           <div
-            className="navbar-header"
+                    className="navbar-header"
           >
-            <button
-              className="navbar-toggle"
-              data-target="#navigation-index"
-              data-toggle="collapse"
-              type="button"
-            >
-              <span
-                className="sr-only"
-              >
-                Toggle navigation
-              </span>
-              <span
-                className="icon-bar"
-              />
-              <span
-                className="icon-bar"
-              />
-              <span
-                className="icon-bar"
-              />
-            </button>
-            <Link
-              replace={false}
-              to="/"
-            >
-              <div
-                className="logo-container"
-              >
-                <img
-                  alt="Logo"
-                  data-test="logo"
-                  src="/img/logo-white.svg"
-                />
-              </div>
-            </Link>
+                    <button
+                              className="navbar-toggle"
+                              data-target="#navigation-index"
+                              data-toggle="collapse"
+                              type="button"
+                    >
+                              <span
+                                        className="sr-only"
+                              >
+                                        Toggle navigation
+                              </span>
+                              <span
+                                        className="icon-bar"
+                              />
+                              <span
+                                        className="icon-bar"
+                              />
+                              <span
+                                        className="icon-bar"
+                              />
+                    </button>
+                    <Link
+                              replace={false}
+                              to="/"
+                    >
+                              <div
+                                        className="logo-container"
+                              >
+                                        <img
+                                                  alt="Logo"
+                                                  data-test="logo"
+                                                  src="/img/logo-white.svg"
+                                        />
+                              </div>
+                    </Link>
           </div>
           <div
-            className="collapse navbar-collapse"
-            id="navigation-index"
+                    className="collapse navbar-collapse"
+                    id="navigation-index"
           >
-            <ul
-              className="nav navbar-nav navbar-right"
-            >
-              <li>
-                <Link
-                  className="link"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/#about"
-                >
-                  header.about
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="link"
-                  data-test="faq-btn"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/faqs"
-                >
-                  header.faq
-                </Link>
-              </li>
-              <li>
-                <a
-                  className="link hidden-sm"
-                  data-test="api-link"
-                  href="http://docs.nexchange2.apiary.io/"
-                  onClick={[Function]}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  header.apidocs
-                </a>
-              </li>
-              <li>
-                <Link
-                  className="link"
-                  data-test="compare-link"
-                  onClick={[Function]}
-                  replace={false}
-                  to="/#compare"
-                >
-                  header.compare
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="link"
-                  data-test="support-btn"
-                  onClick={[Function]}
-                  replace={false}
-                  to="#"
-                >
-                  header.support
-                </Link>
-              </li>
-              <li
-                className="ico-link"
-              >
-                <a
-                  className="btn btn btn-block btn-primary"
-                  data-test="ico-link"
-                  href="https://n.exchange/ico"
-                  onClick={[Function]}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  header.ico
-                </a>
-              </li>
-              <LanguagePicker />
-              <li
-                id="social-mobile"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/twitter"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-twitter"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/fb"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-facebook-f"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/slack"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-slack-hash"
-                  />
-                </a>
-                <a
-                  className="social btn btn-simple btn-just-icon visible-xs"
-                  href="/telegram"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-telegram"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.twitter"
-                  data-placement="bottom"
-                  href="/twitter"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-twitter"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.facebook"
-                  data-placement="bottom"
-                  href="/fb"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-facebook-f"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.slack"
-                  data-placement="bottom"
-                  href="/slack"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-slack-hash"
-                  />
-                </a>
-              </li>
-              <li
-                className="visible-md visible-lg social-desktop"
-              >
-                <a
-                  className="social btn btn-simple btn-just-icon"
-                  data-original-title="header.telegram"
-                  data-placement="bottom"
-                  href="/telegram"
-                  rel="tooltip"
-                  target="_blank"
-                  title=""
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fab fa-telegram"
-                  />
-                </a>
-              </li>
-            </ul>
+                    <ul
+                              className="nav navbar-nav navbar-right"
+                    >
+                              <li>
+                                        <a
+                                                  className="link"
+                                                  href="/#about"
+                                        >
+                                                  header.about
+                                        </a>
+                              </li>
+                              <li>
+                                        <a
+                                                  className="link"
+                                                  data-test="faq-btn"
+                                                  href="javascript:void(0)"
+                                                  onClick={[Function]}
+                                        >
+                                                  header.faq
+                                        </a>
+                              </li>
+                              <li>
+                                        <a
+                                                  className="link hidden-sm"
+                                                  data-test="api-link"
+                                                  href="http://docs.nexchange2.apiary.io/"
+                                                  onClick={[Function]}
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                        >
+                                                  header.apidocs
+                                        </a>
+                              </li>
+                              <li>
+                                        <a
+                                                  className="link"
+                                                  data-test="compare-link"
+                                                  href="/#compare"
+                                        >
+                                                  header.compare
+                                        </a>
+                              </li>
+                              <li>
+                                        <a
+                                                  className="link"
+                                                  data-test="support-btn"
+                                                  href="javascript:void(0)"
+                                                  onClick={[Function]}
+                                        >
+                                                  header.support
+                                        </a>
+                              </li>
+                              <li
+                                        className="ico-link"
+                              >
+                                        <a
+                                                  className="btn btn btn-block btn-primary"
+                                                  data-test="ico-link"
+                                                  href="https://n.exchange/ico"
+                                                  onClick={[Function]}
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                        >
+                                                  header.ico
+                                        </a>
+                              </li>
+                              <LanguagePicker />
+                              <li
+                                        id="social-mobile"
+                              >
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon visible-xs"
+                                                  href="/twitter"
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-twitter"
+                                                  />
+                                        </a>
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon visible-xs"
+                                                  href="/fb"
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-facebook-f"
+                                                  />
+                                        </a>
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon visible-xs"
+                                                  href="/slack"
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-slack-hash"
+                                                  />
+                                        </a>
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon visible-xs"
+                                                  href="/telegram"
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-telegram"
+                                                  />
+                                        </a>
+                              </li>
+                              <li
+                                        className="visible-md visible-lg social-desktop"
+                              >
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon"
+                                                  data-original-title="header.twitter"
+                                                  data-placement="bottom"
+                                                  href="/twitter"
+                                                  rel="tooltip"
+                                                  target="_blank"
+                                                  title=""
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-twitter"
+                                                  />
+                                        </a>
+                              </li>
+                              <li
+                                        className="visible-md visible-lg social-desktop"
+                              >
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon"
+                                                  data-original-title="header.facebook"
+                                                  data-placement="bottom"
+                                                  href="/fb"
+                                                  rel="tooltip"
+                                                  target="_blank"
+                                                  title=""
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-facebook-f"
+                                                  />
+                                        </a>
+                              </li>
+                              <li
+                                        className="visible-md visible-lg social-desktop"
+                              >
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon"
+                                                  data-original-title="header.slack"
+                                                  data-placement="bottom"
+                                                  href="/slack"
+                                                  rel="tooltip"
+                                                  target="_blank"
+                                                  title=""
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-slack-hash"
+                                                  />
+                                        </a>
+                              </li>
+                              <li
+                                        className="visible-md visible-lg social-desktop"
+                              >
+                                        <a
+                                                  className="social btn btn-simple btn-just-icon"
+                                                  data-original-title="header.telegram"
+                                                  data-placement="bottom"
+                                                  href="/telegram"
+                                                  rel="tooltip"
+                                                  target="_blank"
+                                                  title=""
+                                        >
+                                                  <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-telegram"
+                                                  />
+                                        </a>
+                              </li>
+                    </ul>
           </div>
-          <Connect(Support)
-            onClose={[Function]}
-            show={false}
+          <FAQ
+                    onClose={[Function]}
+                    show={false}
           />
-        </div>,
+          <Connect(Support)
+                    onClose={[Function]}
+                    show={false}
+          />
+</div>,
         "className": "header home",
         "data-test": "header",
       },
@@ -2002,246 +1983,244 @@ ShallowWrapper {
           "children": Array [
             <div
               className="navbar-header"
-            >
+>
               <button
-                className="navbar-toggle"
-                data-target="#navigation-index"
-                data-toggle="collapse"
-                type="button"
+                            className="navbar-toggle"
+                            data-target="#navigation-index"
+                            data-toggle="collapse"
+                            type="button"
               >
-                <span
-                  className="sr-only"
-                >
-                  Toggle navigation
-                </span>
-                <span
-                  className="icon-bar"
-                />
-                <span
-                  className="icon-bar"
-                />
-                <span
-                  className="icon-bar"
-                />
+                            <span
+                                          className="sr-only"
+                            >
+                                          Toggle navigation
+                            </span>
+                            <span
+                                          className="icon-bar"
+                            />
+                            <span
+                                          className="icon-bar"
+                            />
+                            <span
+                                          className="icon-bar"
+                            />
               </button>
               <Link
-                replace={false}
-                to="/"
+                            replace={false}
+                            to="/"
               >
-                <div
-                  className="logo-container"
-                >
-                  <img
-                    alt="Logo"
-                    data-test="logo"
-                    src="/img/logo-white.svg"
-                  />
-                </div>
+                            <div
+                                          className="logo-container"
+                            >
+                                          <img
+                                                        alt="Logo"
+                                                        data-test="logo"
+                                                        src="/img/logo-white.svg"
+                                          />
+                            </div>
               </Link>
-            </div>,
+</div>,
             <div
               className="collapse navbar-collapse"
               id="navigation-index"
-            >
+>
               <ul
-                className="nav navbar-nav navbar-right"
+                            className="nav navbar-nav navbar-right"
               >
-                <li>
-                  <Link
-                    className="link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#about"
-                  >
-                    header.about
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="link"
-                    data-test="faq-btn"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/faqs"
-                  >
-                    header.faq
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    className="link hidden-sm"
-                    data-test="api-link"
-                    href="http://docs.nexchange2.apiary.io/"
-                    onClick={[Function]}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    header.apidocs
-                  </a>
-                </li>
-                <li>
-                  <Link
-                    className="link"
-                    data-test="compare-link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#compare"
-                  >
-                    header.compare
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="link"
-                    data-test="support-btn"
-                    onClick={[Function]}
-                    replace={false}
-                    to="#"
-                  >
-                    header.support
-                  </Link>
-                </li>
-                <li
-                  className="ico-link"
-                >
-                  <a
-                    className="btn btn btn-block btn-primary"
-                    data-test="ico-link"
-                    href="https://n.exchange/ico"
-                    onClick={[Function]}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    header.ico
-                  </a>
-                </li>
-                <LanguagePicker />
-                <li
-                  id="social-mobile"
-                >
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/twitter"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
-                    />
-                  </a>
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/fb"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
-                    />
-                  </a>
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/slack"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
-                    />
-                  </a>
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/telegram"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
-                    />
-                  </a>
-                </li>
-                <li
-                  className="visible-md visible-lg social-desktop"
-                >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.twitter"
-                    data-placement="bottom"
-                    href="/twitter"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
-                    />
-                  </a>
-                </li>
-                <li
-                  className="visible-md visible-lg social-desktop"
-                >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.facebook"
-                    data-placement="bottom"
-                    href="/fb"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
-                    />
-                  </a>
-                </li>
-                <li
-                  className="visible-md visible-lg social-desktop"
-                >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.slack"
-                    data-placement="bottom"
-                    href="/slack"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
-                    />
-                  </a>
-                </li>
-                <li
-                  className="visible-md visible-lg social-desktop"
-                >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.telegram"
-                    data-placement="bottom"
-                    href="/telegram"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
-                    />
-                  </a>
-                </li>
+                            <li>
+                                          <a
+                                                        className="link"
+                                                        href="/#about"
+                                          >
+                                                        header.about
+                                          </a>
+                            </li>
+                            <li>
+                                          <a
+                                                        className="link"
+                                                        data-test="faq-btn"
+                                                        href="javascript:void(0)"
+                                                        onClick={[Function]}
+                                          >
+                                                        header.faq
+                                          </a>
+                            </li>
+                            <li>
+                                          <a
+                                                        className="link hidden-sm"
+                                                        data-test="api-link"
+                                                        href="http://docs.nexchange2.apiary.io/"
+                                                        onClick={[Function]}
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                          >
+                                                        header.apidocs
+                                          </a>
+                            </li>
+                            <li>
+                                          <a
+                                                        className="link"
+                                                        data-test="compare-link"
+                                                        href="/#compare"
+                                          >
+                                                        header.compare
+                                          </a>
+                            </li>
+                            <li>
+                                          <a
+                                                        className="link"
+                                                        data-test="support-btn"
+                                                        href="javascript:void(0)"
+                                                        onClick={[Function]}
+                                          >
+                                                        header.support
+                                          </a>
+                            </li>
+                            <li
+                                          className="ico-link"
+                            >
+                                          <a
+                                                        className="btn btn btn-block btn-primary"
+                                                        data-test="ico-link"
+                                                        href="https://n.exchange/ico"
+                                                        onClick={[Function]}
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                          >
+                                                        header.ico
+                                          </a>
+                            </li>
+                            <LanguagePicker />
+                            <li
+                                          id="social-mobile"
+                            >
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                                        href="/twitter"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-twitter"
+                                                        />
+                                          </a>
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                                        href="/fb"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-facebook-f"
+                                                        />
+                                          </a>
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                                        href="/slack"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-slack-hash"
+                                                        />
+                                          </a>
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                                        href="/telegram"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-telegram"
+                                                        />
+                                          </a>
+                            </li>
+                            <li
+                                          className="visible-md visible-lg social-desktop"
+                            >
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon"
+                                                        data-original-title="header.twitter"
+                                                        data-placement="bottom"
+                                                        href="/twitter"
+                                                        rel="tooltip"
+                                                        target="_blank"
+                                                        title=""
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-twitter"
+                                                        />
+                                          </a>
+                            </li>
+                            <li
+                                          className="visible-md visible-lg social-desktop"
+                            >
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon"
+                                                        data-original-title="header.facebook"
+                                                        data-placement="bottom"
+                                                        href="/fb"
+                                                        rel="tooltip"
+                                                        target="_blank"
+                                                        title=""
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-facebook-f"
+                                                        />
+                                          </a>
+                            </li>
+                            <li
+                                          className="visible-md visible-lg social-desktop"
+                            >
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon"
+                                                        data-original-title="header.slack"
+                                                        data-placement="bottom"
+                                                        href="/slack"
+                                                        rel="tooltip"
+                                                        target="_blank"
+                                                        title=""
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-slack-hash"
+                                                        />
+                                          </a>
+                            </li>
+                            <li
+                                          className="visible-md visible-lg social-desktop"
+                            >
+                                          <a
+                                                        className="social btn btn-simple btn-just-icon"
+                                                        data-original-title="header.telegram"
+                                                        data-placement="bottom"
+                                                        href="/telegram"
+                                                        rel="tooltip"
+                                                        target="_blank"
+                                                        title=""
+                                          >
+                                                        <i
+                                                                      aria-hidden="true"
+                                                                      className="fab fa-telegram"
+                                                        />
+                                          </a>
+                            </li>
               </ul>
-            </div>,
+</div>,
+            <FAQ
+              onClose={[Function]}
+              show={false}
+/>,
             <Connect(Support)
               onClose={[Function]}
               show={false}
-            />,
+/>,
           ],
           "className": "container",
         },
@@ -2258,36 +2237,36 @@ ShallowWrapper {
                   data-target="#navigation-index"
                   data-toggle="collapse"
                   type="button"
-                >
+>
                   <span
-                    className="sr-only"
+                                    className="sr-only"
                   >
-                    Toggle navigation
+                                    Toggle navigation
                   </span>
                   <span
-                    className="icon-bar"
+                                    className="icon-bar"
                   />
                   <span
-                    className="icon-bar"
+                                    className="icon-bar"
                   />
                   <span
-                    className="icon-bar"
+                                    className="icon-bar"
                   />
-                </button>,
+</button>,
                 <Link
                   replace={false}
                   to="/"
-                >
+>
                   <div
-                    className="logo-container"
+                                    className="logo-container"
                   >
-                    <img
-                      alt="Logo"
-                      data-test="logo"
-                      src="/img/logo-white.svg"
-                    />
+                                    <img
+                                                      alt="Logo"
+                                                      data-test="logo"
+                                                      src="/img/logo-white.svg"
+                                    />
                   </div>
-                </Link>,
+</Link>,
               ],
               "className": "navbar-header",
             },
@@ -2301,18 +2280,18 @@ ShallowWrapper {
                   "children": Array [
                     <span
                       className="sr-only"
-                    >
+>
                       Toggle navigation
-                    </span>,
+</span>,
                     <span
                       className="icon-bar"
-                    />,
+/>,
                     <span
                       className="icon-bar"
-                    />,
+/>,
                     <span
                       className="icon-bar"
-                    />,
+/>,
                   ],
                   "className": "navbar-toggle",
                   "data-target": "#navigation-index",
@@ -2376,13 +2355,13 @@ ShallowWrapper {
                 "props": Object {
                   "children": <div
                     className="logo-container"
-                  >
+>
                     <img
-                      alt="Logo"
-                      data-test="logo"
-                      src="/img/logo-white.svg"
+                                        alt="Logo"
+                                        data-test="logo"
+                                        src="/img/logo-white.svg"
                     />
-                  </div>,
+</div>,
                   "replace": false,
                   "to": "/",
                 },
@@ -2396,7 +2375,7 @@ ShallowWrapper {
                       alt="Logo"
                       data-test="logo"
                       src="/img/logo-white.svg"
-                    />,
+/>,
                     "className": "logo-container",
                   },
                   "ref": null,
@@ -2427,198 +2406,192 @@ ShallowWrapper {
             "props": Object {
               "children": <ul
                 className="nav navbar-nav navbar-right"
-              >
+>
                 <li>
-                  <Link
-                    className="link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#about"
-                  >
-                    header.about
-                  </Link>
+                                <a
+                                                className="link"
+                                                href="/#about"
+                                >
+                                                header.about
+                                </a>
                 </li>
                 <li>
-                  <Link
-                    className="link"
-                    data-test="faq-btn"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/faqs"
-                  >
-                    header.faq
-                  </Link>
+                                <a
+                                                className="link"
+                                                data-test="faq-btn"
+                                                href="javascript:void(0)"
+                                                onClick={[Function]}
+                                >
+                                                header.faq
+                                </a>
                 </li>
                 <li>
-                  <a
-                    className="link hidden-sm"
-                    data-test="api-link"
-                    href="http://docs.nexchange2.apiary.io/"
-                    onClick={[Function]}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    header.apidocs
-                  </a>
+                                <a
+                                                className="link hidden-sm"
+                                                data-test="api-link"
+                                                href="http://docs.nexchange2.apiary.io/"
+                                                onClick={[Function]}
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                >
+                                                header.apidocs
+                                </a>
                 </li>
                 <li>
-                  <Link
-                    className="link"
-                    data-test="compare-link"
-                    onClick={[Function]}
-                    replace={false}
-                    to="/#compare"
-                  >
-                    header.compare
-                  </Link>
+                                <a
+                                                className="link"
+                                                data-test="compare-link"
+                                                href="/#compare"
+                                >
+                                                header.compare
+                                </a>
                 </li>
                 <li>
-                  <Link
-                    className="link"
-                    data-test="support-btn"
-                    onClick={[Function]}
-                    replace={false}
-                    to="#"
-                  >
-                    header.support
-                  </Link>
+                                <a
+                                                className="link"
+                                                data-test="support-btn"
+                                                href="javascript:void(0)"
+                                                onClick={[Function]}
+                                >
+                                                header.support
+                                </a>
                 </li>
                 <li
-                  className="ico-link"
+                                className="ico-link"
                 >
-                  <a
-                    className="btn btn btn-block btn-primary"
-                    data-test="ico-link"
-                    href="https://n.exchange/ico"
-                    onClick={[Function]}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    header.ico
-                  </a>
+                                <a
+                                                className="btn btn btn-block btn-primary"
+                                                data-test="ico-link"
+                                                href="https://n.exchange/ico"
+                                                onClick={[Function]}
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                >
+                                                header.ico
+                                </a>
                 </li>
                 <LanguagePicker />
                 <li
-                  id="social-mobile"
+                                id="social-mobile"
                 >
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/twitter"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
-                    />
-                  </a>
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/fb"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
-                    />
-                  </a>
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/slack"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
-                    />
-                  </a>
-                  <a
-                    className="social btn btn-simple btn-just-icon visible-xs"
-                    href="/telegram"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
-                    />
-                  </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/twitter"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-twitter"
+                                                />
+                                </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/fb"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-facebook-f"
+                                                />
+                                </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/slack"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-slack-hash"
+                                                />
+                                </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon visible-xs"
+                                                href="/telegram"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-telegram"
+                                                />
+                                </a>
                 </li>
                 <li
-                  className="visible-md visible-lg social-desktop"
+                                className="visible-md visible-lg social-desktop"
                 >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.twitter"
-                    data-placement="bottom"
-                    href="/twitter"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-twitter"
-                    />
-                  </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.twitter"
+                                                data-placement="bottom"
+                                                href="/twitter"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-twitter"
+                                                />
+                                </a>
                 </li>
                 <li
-                  className="visible-md visible-lg social-desktop"
+                                className="visible-md visible-lg social-desktop"
                 >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.facebook"
-                    data-placement="bottom"
-                    href="/fb"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-facebook-f"
-                    />
-                  </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.facebook"
+                                                data-placement="bottom"
+                                                href="/fb"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-facebook-f"
+                                                />
+                                </a>
                 </li>
                 <li
-                  className="visible-md visible-lg social-desktop"
+                                className="visible-md visible-lg social-desktop"
                 >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.slack"
-                    data-placement="bottom"
-                    href="/slack"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-slack-hash"
-                    />
-                  </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.slack"
+                                                data-placement="bottom"
+                                                href="/slack"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-slack-hash"
+                                                />
+                                </a>
                 </li>
                 <li
-                  className="visible-md visible-lg social-desktop"
+                                className="visible-md visible-lg social-desktop"
                 >
-                  <a
-                    className="social btn btn-simple btn-just-icon"
-                    data-original-title="header.telegram"
-                    data-placement="bottom"
-                    href="/telegram"
-                    rel="tooltip"
-                    target="_blank"
-                    title=""
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fab fa-telegram"
-                    />
-                  </a>
+                                <a
+                                                className="social btn btn-simple btn-just-icon"
+                                                data-original-title="header.telegram"
+                                                data-placement="bottom"
+                                                href="/telegram"
+                                                rel="tooltip"
+                                                target="_blank"
+                                                title=""
+                                >
+                                                <i
+                                                                aria-hidden="true"
+                                                                className="fab fa-telegram"
+                                                />
+                                </a>
                 </li>
-              </ul>,
+</ul>,
               "className": "collapse navbar-collapse",
               "id": "navigation-index",
             },
@@ -2630,195 +2603,189 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <li>
-                    <Link
-                      className="link"
-                      onClick={[Function]}
-                      replace={false}
-                      to="/#about"
+                    <a
+                                        className="link"
+                                        href="/#about"
                     >
-                      header.about
-                    </Link>
-                  </li>,
-                  <li>
-                    <Link
-                      className="link"
-                      data-test="faq-btn"
-                      onClick={[Function]}
-                      replace={false}
-                      to="/faqs"
-                    >
-                      header.faq
-                    </Link>
-                  </li>,
+                                        header.about
+                    </a>
+</li>,
                   <li>
                     <a
-                      className="link hidden-sm"
-                      data-test="api-link"
-                      href="http://docs.nexchange2.apiary.io/"
-                      onClick={[Function]}
-                      rel="noopener noreferrer"
-                      target="_blank"
+                                        className="link"
+                                        data-test="faq-btn"
+                                        href="javascript:void(0)"
+                                        onClick={[Function]}
                     >
-                      header.apidocs
+                                        header.faq
                     </a>
-                  </li>,
+</li>,
                   <li>
-                    <Link
-                      className="link"
-                      data-test="compare-link"
-                      onClick={[Function]}
-                      replace={false}
-                      to="/#compare"
+                    <a
+                                        className="link hidden-sm"
+                                        data-test="api-link"
+                                        href="http://docs.nexchange2.apiary.io/"
+                                        onClick={[Function]}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
                     >
-                      header.compare
-                    </Link>
-                  </li>,
+                                        header.apidocs
+                    </a>
+</li>,
                   <li>
-                    <Link
-                      className="link"
-                      data-test="support-btn"
-                      onClick={[Function]}
-                      replace={false}
-                      to="#"
+                    <a
+                                        className="link"
+                                        data-test="compare-link"
+                                        href="/#compare"
                     >
-                      header.support
-                    </Link>
-                  </li>,
+                                        header.compare
+                    </a>
+</li>,
+                  <li>
+                    <a
+                                        className="link"
+                                        data-test="support-btn"
+                                        href="javascript:void(0)"
+                                        onClick={[Function]}
+                    >
+                                        header.support
+                    </a>
+</li>,
                   <li
                     className="ico-link"
-                  >
+>
                     <a
-                      className="btn btn btn-block btn-primary"
-                      data-test="ico-link"
-                      href="https://n.exchange/ico"
-                      onClick={[Function]}
-                      rel="noopener noreferrer"
-                      target="_blank"
+                                        className="btn btn btn-block btn-primary"
+                                        data-test="ico-link"
+                                        href="https://n.exchange/ico"
+                                        onClick={[Function]}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
                     >
-                      header.ico
+                                        header.ico
                     </a>
-                  </li>,
+</li>,
                   <LanguagePicker />,
                   <li
                     id="social-mobile"
-                  >
+>
                     <a
-                      className="social btn btn-simple btn-just-icon visible-xs"
-                      href="/twitter"
-                      rel="noopener noreferrer"
-                      target="_blank"
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/twitter"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-twitter"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-twitter"
+                                        />
                     </a>
                     <a
-                      className="social btn btn-simple btn-just-icon visible-xs"
-                      href="/fb"
-                      rel="noopener noreferrer"
-                      target="_blank"
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/fb"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-facebook-f"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-facebook-f"
+                                        />
                     </a>
                     <a
-                      className="social btn btn-simple btn-just-icon visible-xs"
-                      href="/slack"
-                      rel="noopener noreferrer"
-                      target="_blank"
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/slack"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-slack-hash"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-slack-hash"
+                                        />
                     </a>
                     <a
-                      className="social btn btn-simple btn-just-icon visible-xs"
-                      href="/telegram"
-                      rel="noopener noreferrer"
-                      target="_blank"
+                                        className="social btn btn-simple btn-just-icon visible-xs"
+                                        href="/telegram"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-telegram"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-telegram"
+                                        />
                     </a>
-                  </li>,
+</li>,
                   <li
                     className="visible-md visible-lg social-desktop"
-                  >
+>
                     <a
-                      className="social btn btn-simple btn-just-icon"
-                      data-original-title="header.twitter"
-                      data-placement="bottom"
-                      href="/twitter"
-                      rel="tooltip"
-                      target="_blank"
-                      title=""
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.twitter"
+                                        data-placement="bottom"
+                                        href="/twitter"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-twitter"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-twitter"
+                                        />
                     </a>
-                  </li>,
+</li>,
                   <li
                     className="visible-md visible-lg social-desktop"
-                  >
+>
                     <a
-                      className="social btn btn-simple btn-just-icon"
-                      data-original-title="header.facebook"
-                      data-placement="bottom"
-                      href="/fb"
-                      rel="tooltip"
-                      target="_blank"
-                      title=""
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.facebook"
+                                        data-placement="bottom"
+                                        href="/fb"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-facebook-f"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-facebook-f"
+                                        />
                     </a>
-                  </li>,
+</li>,
                   <li
                     className="visible-md visible-lg social-desktop"
-                  >
+>
                     <a
-                      className="social btn btn-simple btn-just-icon"
-                      data-original-title="header.slack"
-                      data-placement="bottom"
-                      href="/slack"
-                      rel="tooltip"
-                      target="_blank"
-                      title=""
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.slack"
+                                        data-placement="bottom"
+                                        href="/slack"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-slack-hash"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-slack-hash"
+                                        />
                     </a>
-                  </li>,
+</li>,
                   <li
                     className="visible-md visible-lg social-desktop"
-                  >
+>
                     <a
-                      className="social btn btn-simple btn-just-icon"
-                      data-original-title="header.telegram"
-                      data-placement="bottom"
-                      href="/telegram"
-                      rel="tooltip"
-                      target="_blank"
-                      title=""
+                                        className="social btn btn-simple btn-just-icon"
+                                        data-original-title="header.telegram"
+                                        data-placement="bottom"
+                                        href="/telegram"
+                                        rel="tooltip"
+                                        target="_blank"
+                                        title=""
                     >
-                      <i
-                        aria-hidden="true"
-                        className="fab fa-telegram"
-                      />
+                                        <i
+                                                            aria-hidden="true"
+                                                            className="fab fa-telegram"
+                                        />
                     </a>
-                  </li>,
+</li>,
                 ],
                 "className": "nav navbar-nav navbar-right",
               },
@@ -2829,30 +2796,26 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <Link
+                    "children": <a
                       className="link"
-                      onClick={[Function]}
-                      replace={false}
-                      to="/#about"
-                    >
+                      href="/#about"
+>
                       header.about
-                    </Link>,
+</a>,
                   },
                   "ref": null,
                   "rendered": Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "host",
                     "props": Object {
                       "children": "header.about",
                       "className": "link",
-                      "onClick": [Function],
-                      "replace": false,
-                      "to": "/#about",
+                      "href": "/#about",
                     },
                     "ref": null,
                     "rendered": "header.about",
-                    "type": [Function],
+                    "type": "a",
                   },
                   "type": "li",
                 },
@@ -2861,32 +2824,30 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <Link
+                    "children": <a
                       className="link"
                       data-test="faq-btn"
+                      href="javascript:void(0)"
                       onClick={[Function]}
-                      replace={false}
-                      to="/faqs"
-                    >
+>
                       header.faq
-                    </Link>,
+</a>,
                   },
                   "ref": null,
                   "rendered": Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "host",
                     "props": Object {
                       "children": "header.faq",
                       "className": "link",
                       "data-test": "faq-btn",
+                      "href": "javascript:void(0)",
                       "onClick": [Function],
-                      "replace": false,
-                      "to": "/faqs",
                     },
                     "ref": null,
                     "rendered": "header.faq",
-                    "type": [Function],
+                    "type": "a",
                   },
                   "type": "li",
                 },
@@ -2902,9 +2863,9 @@ ShallowWrapper {
                       onClick={[Function]}
                       rel="noopener noreferrer"
                       target="_blank"
-                    >
+>
                       header.apidocs
-                    </a>,
+</a>,
                   },
                   "ref": null,
                   "rendered": Object {
@@ -2931,32 +2892,28 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <Link
+                    "children": <a
                       className="link"
                       data-test="compare-link"
-                      onClick={[Function]}
-                      replace={false}
-                      to="/#compare"
-                    >
+                      href="/#compare"
+>
                       header.compare
-                    </Link>,
+</a>,
                   },
                   "ref": null,
                   "rendered": Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "host",
                     "props": Object {
                       "children": "header.compare",
                       "className": "link",
                       "data-test": "compare-link",
-                      "onClick": [Function],
-                      "replace": false,
-                      "to": "/#compare",
+                      "href": "/#compare",
                     },
                     "ref": null,
                     "rendered": "header.compare",
-                    "type": [Function],
+                    "type": "a",
                   },
                   "type": "li",
                 },
@@ -2965,32 +2922,30 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <Link
+                    "children": <a
                       className="link"
                       data-test="support-btn"
+                      href="javascript:void(0)"
                       onClick={[Function]}
-                      replace={false}
-                      to="#"
-                    >
+>
                       header.support
-                    </Link>,
+</a>,
                   },
                   "ref": null,
                   "rendered": Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "host",
                     "props": Object {
                       "children": "header.support",
                       "className": "link",
                       "data-test": "support-btn",
+                      "href": "javascript:void(0)",
                       "onClick": [Function],
-                      "replace": false,
-                      "to": "#",
                     },
                     "ref": null,
                     "rendered": "header.support",
-                    "type": [Function],
+                    "type": "a",
                   },
                   "type": "li",
                 },
@@ -3006,9 +2961,9 @@ ShallowWrapper {
                       onClick={[Function]}
                       rel="noopener noreferrer"
                       target="_blank"
-                    >
+>
                       header.ico
-                    </a>,
+</a>,
                     "className": "ico-link",
                   },
                   "ref": null,
@@ -3051,45 +3006,45 @@ ShallowWrapper {
                         href="/twitter"
                         rel="noopener noreferrer"
                         target="_blank"
-                      >
+>
                         <i
-                          aria-hidden="true"
-                          className="fab fa-twitter"
+                                                aria-hidden="true"
+                                                className="fab fa-twitter"
                         />
-                      </a>,
+</a>,
                       <a
                         className="social btn btn-simple btn-just-icon visible-xs"
                         href="/fb"
                         rel="noopener noreferrer"
                         target="_blank"
-                      >
+>
                         <i
-                          aria-hidden="true"
-                          className="fab fa-facebook-f"
+                                                aria-hidden="true"
+                                                className="fab fa-facebook-f"
                         />
-                      </a>,
+</a>,
                       <a
                         className="social btn btn-simple btn-just-icon visible-xs"
                         href="/slack"
                         rel="noopener noreferrer"
                         target="_blank"
-                      >
+>
                         <i
-                          aria-hidden="true"
-                          className="fab fa-slack-hash"
+                                                aria-hidden="true"
+                                                className="fab fa-slack-hash"
                         />
-                      </a>,
+</a>,
                       <a
                         className="social btn btn-simple btn-just-icon visible-xs"
                         href="/telegram"
                         rel="noopener noreferrer"
                         target="_blank"
-                      >
+>
                         <i
-                          aria-hidden="true"
-                          className="fab fa-telegram"
+                                                aria-hidden="true"
+                                                className="fab fa-telegram"
                         />
-                      </a>,
+</a>,
                     ],
                     "id": "social-mobile",
                   },
@@ -3103,7 +3058,7 @@ ShallowWrapper {
                         "children": <i
                           aria-hidden="true"
                           className="fab fa-twitter"
-                        />,
+/>,
                         "className": "social btn btn-simple btn-just-icon visible-xs",
                         "href": "/twitter",
                         "rel": "noopener noreferrer",
@@ -3132,7 +3087,7 @@ ShallowWrapper {
                         "children": <i
                           aria-hidden="true"
                           className="fab fa-facebook-f"
-                        />,
+/>,
                         "className": "social btn btn-simple btn-just-icon visible-xs",
                         "href": "/fb",
                         "rel": "noopener noreferrer",
@@ -3161,7 +3116,7 @@ ShallowWrapper {
                         "children": <i
                           aria-hidden="true"
                           className="fab fa-slack-hash"
-                        />,
+/>,
                         "className": "social btn btn-simple btn-just-icon visible-xs",
                         "href": "/slack",
                         "rel": "noopener noreferrer",
@@ -3190,7 +3145,7 @@ ShallowWrapper {
                         "children": <i
                           aria-hidden="true"
                           className="fab fa-telegram"
-                        />,
+/>,
                         "className": "social btn btn-simple btn-just-icon visible-xs",
                         "href": "/telegram",
                         "rel": "noopener noreferrer",
@@ -3227,12 +3182,12 @@ ShallowWrapper {
                       rel="tooltip"
                       target="_blank"
                       title=""
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-twitter"
+                                            aria-hidden="true"
+                                            className="fab fa-twitter"
                       />
-                    </a>,
+</a>,
                     "className": "visible-md visible-lg social-desktop",
                   },
                   "ref": null,
@@ -3244,7 +3199,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-twitter"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon",
                       "data-original-title": "header.twitter",
                       "data-placement": "bottom",
@@ -3283,12 +3238,12 @@ ShallowWrapper {
                       rel="tooltip"
                       target="_blank"
                       title=""
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-facebook-f"
+                                            aria-hidden="true"
+                                            className="fab fa-facebook-f"
                       />
-                    </a>,
+</a>,
                     "className": "visible-md visible-lg social-desktop",
                   },
                   "ref": null,
@@ -3300,7 +3255,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-facebook-f"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon",
                       "data-original-title": "header.facebook",
                       "data-placement": "bottom",
@@ -3339,12 +3294,12 @@ ShallowWrapper {
                       rel="tooltip"
                       target="_blank"
                       title=""
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-slack-hash"
+                                            aria-hidden="true"
+                                            className="fab fa-slack-hash"
                       />
-                    </a>,
+</a>,
                     "className": "visible-md visible-lg social-desktop",
                   },
                   "ref": null,
@@ -3356,7 +3311,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-slack-hash"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon",
                       "data-original-title": "header.slack",
                       "data-placement": "bottom",
@@ -3395,12 +3350,12 @@ ShallowWrapper {
                       rel="tooltip"
                       target="_blank"
                       title=""
-                    >
+>
                       <i
-                        aria-hidden="true"
-                        className="fab fa-telegram"
+                                            aria-hidden="true"
+                                            className="fab fa-telegram"
                       />
-                    </a>,
+</a>,
                     "className": "visible-md visible-lg social-desktop",
                   },
                   "ref": null,
@@ -3412,7 +3367,7 @@ ShallowWrapper {
                       "children": <i
                         aria-hidden="true"
                         className="fab fa-telegram"
-                      />,
+/>,
                       "className": "social btn btn-simple btn-just-icon",
                       "data-original-title": "header.telegram",
                       "data-placement": "bottom",
@@ -3455,6 +3410,18 @@ ShallowWrapper {
             "rendered": null,
             "type": [Function],
           },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "onClose": [Function],
+              "show": false,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
         ],
         "type": "div",
       },
@@ -3465,26 +3432,8 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
       },
     },
-    "context": Object {},
   },
 }
 `;
