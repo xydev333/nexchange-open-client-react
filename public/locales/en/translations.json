@@ -122,7 +122,6 @@
     "presale": "Pre-sale starts in"
   },
   "faq": {
-    "inputplaceholder": "Search by keyword",
     "ques1": "Who are you?",
     "ques2": "What do you do?",
     "ques3": "What is your fee?",
@@ -210,7 +209,6 @@
     "copy": "Wallet adress copied!",
     "reference": "Order Reference",
     "api": "See your order details on our API",
-    "repeat": "Repeat order",
     "blockchain": "See your order details on blockchain",
     "processing": "Processing withdrawal...",
     "released": "Funds released, awaiting confirmations",
@@ -241,7 +239,7 @@
     "status3": "3. All done",
     "status31": "We got the funds and now have transferred our funds to you.",
     "success1": "Order success",
-    "success2": "Order again!",
+    "success2": "Make another order!",
     "pay": "Pay",
     "deposit": "Deposit",
     "receive": "Receive",
@@ -419,7 +417,5 @@
     "try": "Try",
     "novalid": "is no valid",
     "providevalid": "Please put valid"
-  },
-  "viewmore": "view more",
-  "to": "to"
+  }
 }

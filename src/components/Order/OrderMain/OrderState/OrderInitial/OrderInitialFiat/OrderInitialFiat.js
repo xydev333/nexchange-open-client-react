@@ -29,17 +29,15 @@ class OrderInitial extends Component {
     });
   }
 
-  componentWillUpdate() {
+  componentWillMount() {
     const safechargeStatus = getUrlPram('ppp_status');
-    if(!_.isEmpty(safechargeStatus)){
-      $('body').replaceWith(`<div class="loader-container"><div class="loader"></div></div>`);
-      if(this.props.order && this.props.order.payment_url) {
-        if(safechargeStatus === 'OK'){
-          $('body').replaceWith(`<div class="loader-container"><div class="loader"></div></div>`);
-        } else {
-          $('html').replaceWith(`<iframe title='SafeCharge Payment' src=${this.props.order.payment_url} height=500 width='100%' />`);
-        } 
-      }
+    console.log(this); 
+    if(this.props.order && this.props.order.payment_url && !_.isEmpty(safechargeStatus)) {
+      if(safechargeStatus === 'OK'){
+        $('body').replaceWith(`<div class="loader-container"><div class="loader"></div></div>`);
+      } else {
+        $('html').replaceWith(`<iframe title='SafeCharge Payment' src=${this.props.order.payment_url} height=500 width='100%' />`);
+      } 
     }
   }
 
@@ -49,7 +47,7 @@ class OrderInitial extends Component {
     return (
       <div>
       {this.state.showPaymentIFrame ? 
-      <iframe src={props.order.payment_url} height={500} width={"100%"} scrolling="no"/> :
+      <iframe src={props.order.payment_url} height={500} width={"100%"} /> :
       <I18n ns="translations">
       {(t) => (
         <div id="order-payment" className={`row ${styles.container}`}>

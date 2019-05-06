@@ -11,7 +11,9 @@ import kyc from '../__mocks__/kyc';
 import OrderMain from '../components/Order/OrderMain/OrderMain';
 
 import '../css/index.scss';
-
+import '../css/order.scss';
+import '../css/order-crypto.scss';
+import '../css/order-fiat.scss';
 
 import STATUS_CODES from '../statusCodes';
 
