@@ -82,7 +82,6 @@ class AddressHistory extends Component {
                 <i className={`fas fa-search`} aria-hidden="true" />
                 <input
                   type="text"
-                  ref={this.props.addressSearchInput}
                   placeholder={t('generalterms.search')}
                   onChange={(e) => this.handleChange(e)}
                   onMouseDown={() => this.props.dontFireOnBlur()}

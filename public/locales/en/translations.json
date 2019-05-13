@@ -5,7 +5,6 @@
     "email": "Email (required to notify you about your order)",
     "address": "address",
     "youraddress": "Enter your {{selectedCoin}} wallet address",
-    "usepreviousaddress": "Use previous address",
     "destinationtag": "Destination tag",
     "paymentid": "Payment id",
     "memo": "Memo",
@@ -30,6 +29,10 @@
   "hero": {
     "1": "Exchange Cryptocurrencies",
     "2": "<0>Simple. <1>Secure</1>. Transparent.</0>"
+  },
+  "ordermodeswitch": {
+    "simple": "Simple",
+    "advanced": "Advanced"
   },
   "exchangewidget": {
     "1": "GET STARTED",
@@ -391,9 +394,7 @@
     "11":
       "We will revert any trade by the request of the customer according to the current market rate, provided the opposite trade direction is supported at the time the refund is requested.",
     "12":
-      "Otherwise, no refunds are possible and it is the sole responsibility of the user to make sure that he controls the wallet the address of which he uses to receive funds from N.EXCHANGE.",
-    "13":
-      "On any case of a refund after more than a day after the purchase had been made, an administrative fee of 5% will be retained by n.exchange."
+      "Otherwise, no refunds are possible and it is the sole responsibility of the user to make sure that he controls the wallet the address of which he uses to receive funds from N.EXCHANGE."
   },
   "loading": "Loading",
   "privacy": {
