@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectCoin } from 'Actions/index.js';
+import { selectCoin, fetchPrice, errorAlert } from 'Actions/index.js';
 import styles from './CoinSwitch.scss';
 
 class CoinSwitch extends Component {
@@ -14,14 +14,18 @@ class CoinSwitch extends Component {
     const deposit = this.props.selectedCoin.receive;
     const receive = this.props.selectedCoin.deposit;
 
+    const pair = `${receive}${deposit}`;
+    const data = {
+      pair
+    };
+
     this.props.selectCoin({
       ...this.props.selectedCoin,
       deposit,
       receive,
-      selectedByUser: true,
     });
 
-    window.gtag('event', 'Switched coins', {event_category: 'Order', event_label: `${deposit} - ${receive}`});
+    if (window.ga) window.ga('send', 'event', 'Order', 'switched coins');
   };
 
   handleClick = () => {
@@ -29,18 +33,20 @@ class CoinSwitch extends Component {
   };
 
   render() {
-    let showSwitchButton = false;
+    let switchButtonEnabled = false;
     const nextDeposit = this.props.selectedCoin.receive;
     const nextReceive = this.props.selectedCoin.deposit;
 
     if(this.props.pairs && this.props.pairs[nextDeposit] && this.props.pairs[nextDeposit][nextReceive]){
-      showSwitchButton = true;
+      switchButtonEnabled = true;
     }
 
     return (
       <div className={`col-xs-12 col-sm-1 ${styles.container}`}>
-        { showSwitchButton ? <span className={`clickable ${styles.icon}`} onClick={this.handleClick}></span>
-        : null }
+      <span 
+        className={`${styles.icon} ${!switchButtonEnabled ? styles['icon-disabled'] : ''}`} 
+        onClick={switchButtonEnabled ? this.handleClick : null}>
+      </span>
       </div>
     );
   }
