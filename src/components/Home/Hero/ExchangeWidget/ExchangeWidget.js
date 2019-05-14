@@ -7,12 +7,15 @@ import i18n from 'Src/i18n';
 import axios from 'axios';
 import config from 'Config';
 
-import { setWallet, errorAlert, setOrder } from 'Actions/index.js';
+import { setWallet, errorAlert, setOrder, setDestinationTag, setPaymentId, setMemo } from 'Actions/index.js';
 import { bindCrispEmail } from 'Utils/crispEmailBinding';
 
 import CoinInput from './CoinInput/CoinInput';
 import CoinSwitch from './CoinSwitch/CoinSwitch';
 import WalletAddress from './WalletAddress/WalletAddress';
+import DestinationTag from './WalletAddress/DestinationTag';
+import PaymentId from './WalletAddress/PaymentId';
+import Memo from './WalletAddress/Memo';
 
 import styles from './ExchangeWidget.scss';
 
@@ -27,19 +30,25 @@ class ExchangeWidget extends Component {
 
     this.placeOrder = this.placeOrder.bind(this);
     this.focusWalletAddress = this.focusWalletAddress.bind(this);
+    this.focusDestinationTag = this.focusDestinationTag.bind(this);
+    this.focusPaymentId = this.focusPaymentId.bind(this);
+    this.focusMemo = this.focusMemo.bind(this);
   }
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
+  componentDidMount() {
+    if(this.walletInputEl) {
+      this.walletInputEl.focus();
+    }
+  }
+
   placeOrder() {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
-        window.ga('send', 'event', {
-          eventCategory: 'Order',
-          eventAction: 'Place order with empty wallet address',
-        });
+        window.gtag('event', 'Place order with empty wallet address', {event_category: 'Order', event_label: ``});
 
         this.props.errorAlert({
           show: true,
@@ -47,7 +56,7 @@ class ExchangeWidget extends Component {
         });
       }
 
-      this.walletInputEl.focus();
+      this.focusWalletAddress();
       return;
     }
 
@@ -61,6 +70,9 @@ class ExchangeWidget extends Component {
       withdraw_address: {
         address: this.props.wallet.address,
         name: '',
+        payment_id: this.props.paymentId.paymentId,
+        destinationTag: this.props.destinationTag.destinationTag,
+        memo: this.props.memo.memo,
       },
     };
 
@@ -83,7 +95,27 @@ class ExchangeWidget extends Component {
 
         bindCrispEmail(this.props.store);
 
-        window.ga('send', 'event', 'Order', 'place order', response.data.unique_reference);
+        window.gtag('event', 'Place order', {event_category: 'Order', event_label: `${response.data.unique_reference}`});
+
+        //Store order history in local storage
+        let newOrder = {
+            id: response.data.unique_reference,
+            base: this.props.selectedCoin.deposit,
+            amount_base: parseFloat(this.props.price.deposit),
+            quote: this.props.selectedCoin.receive,
+            amount_quote: parseFloat(this.props.price.receive),
+            withdraw_address: this.props.wallet.address,
+            created_at: new Date()
+        }
+        let orderHistory = localStorage['orderHistory'];
+        if(!orderHistory){
+          orderHistory = [newOrder];
+        }
+        else {
+          orderHistory = JSON.parse(orderHistory);
+          orderHistory.push(newOrder);
+        }
+        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
       })
       .catch(error => {
         console.log('Error:', error);
@@ -102,7 +134,21 @@ class ExchangeWidget extends Component {
   }
 
   focusWalletAddress() {
-    this.walletInputEl.focus();
+    if(this.walletInputEl) {
+      this.walletInputEl.focus();
+    }
+  }
+
+  focusDestinationTag() {
+    this.destinationTagInputEl.focus();
+  }
+
+  focusPaymentId() {
+    this.paymentIdInputEl.focus();
+  }
+
+  focusMemo() {
+    this.memoInputEl.focus();
   }
 
   render() {
@@ -116,16 +162,20 @@ class ExchangeWidget extends Component {
               <div className="row">
                 <div className="col-xs-12">
                   <div className={styles.widget}>
-                    <CoinInput type="deposit" onSubmit={this.showWalletAddress} />
+                    <CoinInput type="deposit" onSubmit={this.showWalletAddress} walletInput={this.walletInputEl} />
                     <CoinSwitch />
-                    <CoinInput type="receive" onSubmit={this.showWalletAddress} />
+                    <CoinInput type="receive" onSubmit={this.showWalletAddress} walletInput={this.walletInputEl} />
 
-                    <WalletAddress onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} />
+                    <WalletAddress withdraw_coin="receive" onSubmit={this.placeOrder} inputRef={el => (this.walletInputEl = el)} button={this.button} />
+                    { this.props.selectedCoin.receive === 'XRP' ? <DestinationTag onSubmit={this.placeOrder} inputRef={el => (this.destinationTagInputEl = el)} />  : null }
+                    { this.props.selectedCoin.receive === 'XMR' ? <PaymentId onSubmit={this.placeOrder} inputRef={el => (this.paymentIdInputEl = el)} /> : null }
+                    { this.props.selectedCoin.receive === 'XLM' ? <Memo onSubmit={this.placeOrder} inputRef={el => (this.memoInputEl = el)} /> : null }
                     <div className={styles.submit}>
                       <p className={styles.info}>{t('order.feeinfo')}</p>
 
                       {/* eslint max-len: ["error", { "code": 200 }] */}
-                      <button className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `} onClick={this.placeOrder}>
+                      <button className={`${styles.btn} ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
+                      onClick={this.placeOrder} ref={(el) => { this.button = el; }} >
                         {t('exchangewidget.2')}
                         {this.state.loading ? <i className="fab fa-spinner fa-spin" style={{ marginLeft: '10px' }} /> : null}
                       </button>
@@ -142,8 +192,8 @@ class ExchangeWidget extends Component {
   }
 }
 
-const mapStateToProps = ({ selectedCoin, price, error, wallet }) => ({ selectedCoin, price, error, wallet });
-const mapDispatchToProps = dispatch => bindActionCreators({ setWallet, setOrder, errorAlert }, dispatch);
+const mapStateToProps = ({ selectedCoin, price, error, wallet, destinationTag, paymentId, memo }) => ({ selectedCoin, price, error, wallet, destinationTag, paymentId, memo });
+const mapDispatchToProps = dispatch => bindActionCreators({ setWallet, setOrder, errorAlert, setDestinationTag, setPaymentId, setMemo }, dispatch);
 
 export default connect(
   mapStateToProps,

@@ -23,10 +23,10 @@ class CoinSelector extends Component {
       ...this.props.selectedCoin,
       [this.props.type]: coin,
       lastSelected: this.props.type,
-    });
+    }, this.props.pairs);
 
     this.setState({ isDropdownVisible: false });
-    if (window.ga) window.ga('send', 'event', 'Order', 'select coin');
+    window.gtag('event', 'Select coin', {event_category: 'Order', event_label: `${this.props.type} - ${coin}`});
   };
 
   calculateDepositAmount = coin => {
@@ -39,7 +39,9 @@ class CoinSelector extends Component {
 
   handleClick = code => {
     this.selectCoin(code);
-    this.props.onSelect();
+    if(this.props.onSelect) {
+      this.props.onSelect();
+    }
   };
 
   fetchPriceInitial = props => {
@@ -91,7 +93,7 @@ class CoinSelector extends Component {
           .join(', ');
 
         this.props.errorAlert({
-          message: `${this.props.t('error.invalidpair')} 
+          message: `${this.props.t('error.invalidpair')}
         ${nextReceiveCoin} ${this.props.t('error.with')} ${nextDepositCoin}. ${this.props.t('error.try')} ${validPairs}.`,
           show: true,
           type: 'INVALID_PAIR',
@@ -129,7 +131,8 @@ class CoinSelector extends Component {
     return (
       <div>
         <div
-          className={`selectedCoin-${type} ${styles['selected-coin']}`}
+          className={`selectedCoin-${type} ${styles['selected-coin']} 
+            ${this.props.orderBook ? styles[`order-book`] : ``}`}
           data-test="selector"
           onClick={() => this.setState({ isDropdownVisible: !this.state.isDropdownVisible })}
         >
