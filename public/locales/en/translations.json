@@ -30,12 +30,21 @@
     "1": "Exchange Cryptocurrencies",
     "2": "<0>Simple. <1>Secure</1>. Transparent.</0>"
   },
+  "ordermodeswitch": {
+    "simple": "Simple",
+    "advanced": "Advanced"
+  },
   "exchangewidget": {
     "1": "GET STARTED",
     "2": "*Confirm & Place Order",
     "3": "Current fee is 0.5%",
     "min": "Min amount",
     "max": "Max amount"
+  },
+  "orderbookwidget": {
+    "disabledmessage1": "n.exchange will soon feature the first multi-chain non custodial order book!",
+    "disabledmessage2": "This unique technology will allow you to leverage limit orders and other advanced trading instruments while keeping the safety and simplicity you are familiar with.",
+    "disabledmessage3": "- Stay tuned"
   },
   "recentorders": {
     "1": "Recent Orders",
@@ -248,6 +257,12 @@
       "Your order is on the blockchain, we are now waiting for the required number of confirmations before you can receive your funds.",
     "status3": "3. All done",
     "status31": "We got the funds and now have transferred our funds to you.",
+    "bookstatus1": "1. Awaiting deposit",
+    "bookstatus11": "In this step we are waiting for your deposit.",
+    "bookstatus2": "2. Awaiting to be filled",
+    "bookstatus21": "We received your funds and your order is on open and wating to be filled",
+    "bookstatus3": "3. Order filled",
+    "bookstatus31": "Your order was filled and the funds have been transfered to you",
     "success1": "Order success",
     "success2": "Order again!",
     "pay": "Pay",
