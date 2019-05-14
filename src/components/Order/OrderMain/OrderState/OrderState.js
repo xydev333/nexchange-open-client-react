@@ -44,14 +44,7 @@ const OrderState = props => {
   } else {
     switch (BOOK_STATUS_CODES[props.order.book_status_name[0][0]]) {
       case 'NEW':
-        switch (STATUS_CODES[props.order.status_name[0][0]]) {
-          case 'PAID_UNCONFIRMED':
-            return props.isFiat ? <OrderPaymentFiat {...props} /> : <OrderPaymentCrypto {...props} />;
-          case 'PAID':
-            return props.isFiat ? <OrderPaidFiat {...props} /> : <OrderPaidCrypto {...props} />;
-          default:
-            return <OrderInitial {...props} />;
-        }
+        return <OrderInitial {...props} />;
       case 'OPEN':
         return null;
       case 'CLOSED':

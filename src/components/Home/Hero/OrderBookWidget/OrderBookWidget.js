@@ -49,8 +49,8 @@ class OrderBookWidget extends Component {
       const pricesFetched = nextProps.price.pair === `${nextProps.selectedCoin.receive}${nextProps.selectedCoin.deposit}` && (nextProps.price.receive > 0 && nextProps.price.deposit > 0);
       const orderBook = nextProps.orderBook;
       if((nullQuantityAndLimitPrice || pairChange) && pricesFetched) {
-        orderBook.quantity = nextProps.price.min_amount_base;
-        orderBook.limit_rate =  ((nextProps.price.deposit / nextProps.price.receive)).toFixed(9);
+        orderBook.quantity = 1;
+        orderBook.limit_rate = parseFloat((nextProps.price.deposit / nextProps.price.receive).toFixed(9));
       } else if (pairChange && ! pricesFetched) {
         orderBook.quantity = 0;
         orderBook.limit_rate = 0;
@@ -180,7 +180,7 @@ class OrderBookWidget extends Component {
           localStorage.setItem('token', response.data.token);
         }
 
-        // bindCrispEmail(this.props.store);
+        bindCrispEmail(this.props.store);
 
         window.gtag('event', 'Place order', {event_category: 'Order Book', event_label: `${response.data.unique_reference}`});
 
@@ -200,17 +200,13 @@ class OrderBookWidget extends Component {
         }
 
         let orderHistory = localStorage['orderHistory'];
-        console.log(newOrder, newOrder);
-        console.log(orderHistory);
         if(!orderHistory){
           orderHistory = [newOrder];
         }
         else {
           orderHistory = JSON.parse(orderHistory);
-          console.log("push");
           orderHistory.push(newOrder);
         }
-        console.log(orderHistory);
         localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
 
       })
