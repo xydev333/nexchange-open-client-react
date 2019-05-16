@@ -44,13 +44,12 @@ class ExchangeWidget extends Component {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
         window.gtag('event', 'Place order with empty wallet address', {event_category: 'Order', event_label: ``});
-
-        this.props.errorAlert({
-          show: true,
-          message: `${i18n.t('error.providevalid')} ${this.props.selectedCoin.receive} ${i18n.t('generalterms.address')}.`,
-        });
       }
 
+      this.props.errorAlert({
+        show: true,
+        message: `${i18n.t('error.providevalid')} ${this.props.selectedCoin.receive} ${i18n.t('generalterms.address')}.`,
+      });
       this.focusWalletAddress();
       return;
     }
@@ -66,11 +65,12 @@ class ExchangeWidget extends Component {
         address: this.props.wallet.address,
         name: '',
         payment_id: this.props.paymentId.paymentId,
-        destinationTag: this.props.destinationTag.destinationTag,
+        destination_tag: this.props.destinationTag.destinationTag,
         memo: this.props.memo.memo,
       },
     };
 
+    
     if (this.props.price.lastEdited === 'receive') data['amount_base'] = parseFloat(this.props.price.receive);
     else if (this.props.price.lastEdited === 'deposit') data['amount_quote'] = parseFloat(this.props.price.deposit);
 
