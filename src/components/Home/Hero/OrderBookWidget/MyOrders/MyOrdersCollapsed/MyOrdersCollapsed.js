@@ -1,7 +1,6 @@
 import React from 'react';
 import { I18n } from 'react-i18next';
 import arrow from 'Img/arrow-right-2.svg';
-import { Link } from 'react-router-dom';
 
 import styles from './MyOrdersCollapsed.scss';
 
@@ -11,7 +10,7 @@ const MyOrdersCollapsed = props => {
     <div className={styles.orders}>
       {props.myOrders.slice(0, 5).map((order) => {
         return (
-          <Link to={`/order/${order.unique_reference}`} key={order.unique_reference} className={styles.order}>
+          <div key={order.unique_reference} className={styles.order}>
             <div className={styles.coin}>
                 <i className={`${styles.icon} coin-icon cc ${order.pair.base.code}`} />
                 <span className={`${styles.code} hidden-xs hidden-ms hidden-sm`}>{order.pair.base.code}</span>
@@ -23,11 +22,10 @@ const MyOrdersCollapsed = props => {
                 <span className={`${styles.code} hidden-xs hidden-ms hidden-sm`}>{order.pair.quote.code}</span>
                 <span className={styles.amount}>{parseFloat(order.amount_quote).toFixed(5)}</span>
               </div>
-          </Link>);
+          </div>);
       })}
     </div>
-    <div className={`${styles.viewAll}`} 
-         onClick={() => props.shouldRedirect ? props.goToMyOrders() : props.expandMyOrders()}>
+    <div className={`${styles.viewAll}`} onClick={() => props.expandMyOrders()}>
       <a>View All My Orders</a>
     </div>
   </div>;
