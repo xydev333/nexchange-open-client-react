@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
@@ -67,27 +66,16 @@ class MyOrders extends PureComponent {
   }
 
   render() {
-    if(this.state.redirect) {
-      return <Redirect push to="/?advanced=true&myorders=true" />;
-    }
-    
-    if(this.props.expanded) {
+      if(this.props.expanded) {
         return (
           <div className={`col-xs-12 ${styles.wrapper}`}> 
-            <MyOrdersExpanded 
-              myOrders={this.props.orderBook.myOrders} 
-              collapseMyOrders={this.props.collapseMyOrders}/>
+            <MyOrdersExpanded myOrders={this.props.orderBook.myOrders} collapseMyOrders={this.props.collapseMyOrders}/>
           </div>
         );
       } else {
         return (
           <div className={`col-xs-12 col-sm-12 col-md-6 col-lg-4 ${styles.wrapper}`}> 
-            <MyOrdersCollapsed 
-              myOrders={this.props.orderBook.myOrders} 
-              expandMyOrders={this.props.expandMyOrders} 
-              goToMyOrders={() => this.setState({redirect: true})}
-              shouldRedirect = {this.props.shouldRedirect}
-              />
+            <MyOrdersCollapsed myOrders={this.props.orderBook.myOrders} expandMyOrders={this.props.expandMyOrders}/>
           </div>
         );
       }   

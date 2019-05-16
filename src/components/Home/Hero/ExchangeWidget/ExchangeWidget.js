@@ -66,12 +66,11 @@ class ExchangeWidget extends Component {
         address: this.props.wallet.address,
         name: '',
         payment_id: this.props.paymentId.paymentId,
-        destination_tag: this.props.destinationTag.destinationTag,
+        destinationTag: this.props.destinationTag.destinationTag,
         memo: this.props.memo.memo,
       },
     };
 
-    
     if (this.props.price.lastEdited === 'receive') data['amount_base'] = parseFloat(this.props.price.receive);
     else if (this.props.price.lastEdited === 'deposit') data['amount_quote'] = parseFloat(this.props.price.deposit);
 

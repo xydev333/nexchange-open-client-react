@@ -63,7 +63,9 @@ class WalletAddress extends Component {
 
   setFocus(event) {
     event.preventDefault();
+    this.fireOnBlur = false;
     this.props.focusWalletAddress();
+    this.fireOnBlur = true;
   }
 
   handleFocus(event) {
@@ -90,8 +92,6 @@ class WalletAddress extends Component {
     if (!this.props.selectedCoin.selectedByUser['receive']) {
       event.preventDefault();
       const address = event.clipboardData.getData('Text').trim();
-      const simulatedEvent = { target: { value: address } };
-      this.handleChange(simulatedEvent);
       //Get coins that match the pasted address
       const matchingCoins = getMatchingCoins(address);
       if (!_.isEmpty(matchingCoins)) {
@@ -108,7 +108,8 @@ class WalletAddress extends Component {
         }
       }
 
-
+      const simulatedEvent = { target: { value: address } };
+      this.handleChange(simulatedEvent);
     }
   }
 
@@ -128,18 +129,19 @@ class WalletAddress extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedCoin[this.props.withdraw_coin] !== this.props.selectedCoin[this.props.withdraw_coin]) {
-      this.validate(nextProps.wallet.address, nextProps.selectedCoin[this.props.withdraw_coin]);
+      this.validate(this.state.address, nextProps.selectedCoin[this.props.withdraw_coin]);
+    }
+
+    if (!this.props.wallet.valid && nextProps.wallet.valid) {
+      this.setState({
+        showHistory: false
+      });
     }
 
     try {
       let orderHistory = localStorage['orderHistory'];
       //Most recent order for each address
       this.orderHistory = orderHistory ? _.uniqBy(JSON.parse(orderHistory).reverse(), 'withdraw_address') : [];
-      if (!_.isEmpty(nextProps.wallet.address)) {
-        this.orderHistory = _.filter(this.orderHistory, function (order) {
-          return order.withdraw_address.startsWith(nextProps.wallet.address);
-        });
-      }
       if(nextProps.selectedCoin.selectedByUser.receive) {
         this.orderHistory = _.filter(this.orderHistory, function (order) {
           return order.quote === nextProps.selectedCoin.receive;
@@ -216,7 +218,7 @@ class WalletAddress extends Component {
                 placeholder={t('generalterms.youraddress', { selectedCoin: coin })}
               />
               {!_.isEmpty(this.orderHistory) 
-               ?  <button onClick={(e) => this.setFocus(e)} className={styles.previousAddress}>
+               ?  <button onMouseDown={(e) => this.setFocus(e)} className={styles.previousAddress}>
                     <div className="visible-xs visible-sm"><i className="fas fa-history"></i></div>
                     <div className="visible-md visible-lg">
                       <span>
