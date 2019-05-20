@@ -71,13 +71,11 @@ class LimitOrderForm extends PureComponent {
                   value={this.state.quantity}
                   onChange={event => this.handleQuantityChange(event)}
                   autoComplete="off"
-                  placeholder={t('orderbookwidget.quantitycoin', {coin: this.props.selectedCoin.receive})}              
+                  placeholder={`Quantity (${this.props.selectedCoin.receive})`}              
                 />
                 {this.props.quantity > 0
-                ? <span className={styles['input-label']}>
-                  {t('orderbookwidget.quantitycoin', {coin: this.props.selectedCoin.receive})}
-                  </span> 
-                : null}
+                  ? <span className={styles['input-label']}>{`Quantity (${this.props.selectedCoin.receive})`}</span> 
+                  : null}
               </div>
               <div className={'relative'}>
                 <input
@@ -87,25 +85,23 @@ class LimitOrderForm extends PureComponent {
                   value={this.state.limit_rate}
                   onChange={event => this.handleLimitRateChange(event)}
                   autoComplete="off"
-                  placeholder={t('orderbookwidget.limitpricecoin', {coin: this.props.selectedCoin.deposit})}              
+                  placeholder={`Limit Rate (${this.props.selectedCoin.deposit})`}              
                 />
                 {this.props.limit_rate > 0
-                ? <span className={styles['input-label']}>
-                  {t('orderbookwidget.limitpricecoin', {coin: this.props.selectedCoin.deposit})}
-                  </span> 
-                : null}
+                  ? <span className={styles['input-label']}>{`Limit Price (${this.props.selectedCoin.deposit})`}</span> 
+                  : null}
               </div>
               <div className={styles['values-preview-container']}>
               {this.state.quantity && this.state.limit_rate ?
                 <div className={styles['values-preview']}>
                   <span>
-                    {`${t('order.deposit')}: `}
+                    {`Deposit: `}
                     {this.props.orderBook.order_type === 'BUY' 
                     ?`${(parseFloat((this.state.quantity)*parseFloat(this.state.limit_rate)))} ${this.props.selectedCoin.deposit}` 
                     : `${parseFloat(this.state.quantity)} ${this.props.selectedCoin.receive}`}
                   </span>
                   <span>
-                  {`${t('order.receive')}: `}
+                    {`Receive: `}
                     {this.props.orderBook.order_type === 'BUY' 
                     ?`${parseFloat(this.state.quantity)} ${this.props.selectedCoin.receive}` 
                     : `${parseFloat((this.state.quantity*this.state.limit_rate))} ${this.props.selectedCoin.deposit}`}

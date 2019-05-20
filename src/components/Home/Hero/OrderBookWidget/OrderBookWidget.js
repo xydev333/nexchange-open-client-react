@@ -139,12 +139,12 @@ class OrderBookWidget extends Component {
     if (!this.props.wallet.valid) {
       if (this.props.selectedCoin.receive && this.props.wallet.address === '') {
         window.gtag('event', 'Place order with empty wallet address', {event_category: 'Order Book', event_label: ``});
-      }
 
-      this.props.errorAlert({
-        show: true,
-        message: `${i18n.t('error.providevalid')} ${this.props.selectedCoin.receive} ${i18n.t('generalterms.address')}.`,
-      });
+        this.props.errorAlert({
+          show: true,
+          message: `${i18n.t('error.providevalid')} ${this.props.selectedCoin.receive} ${i18n.t('generalterms.address')}.`,
+        });
+      }
 
       this.walletInputEl.focus();
       return;
@@ -262,13 +262,13 @@ class OrderBookWidget extends Component {
                           <li>
                             <a 
                               className={`clickable ${order_type === 'BUY' ? `${styles['active']}` : ''}`} 
-                              onClick={() => this.handleOrderBookOrderTypeChange('BUY')}>{t('orderbookwidget.buy')}</a>
+                              onClick={() => this.handleOrderBookOrderTypeChange('BUY')}>Buy</a>
                               {order_type === 'BUY' ? <div className={`${styles['arrow-down']}`}></div> : null}
                           </li>
                           <li>
                             <a 
                               className={`clickable ${order_type === 'SELL' ? `${styles['active']}` : ''}`}
-                              onClick={() => this.handleOrderBookOrderTypeChange('SELL')}>{t('orderbookwidget.sell')}</a>
+                              onClick={() => this.handleOrderBookOrderTypeChange('SELL')}>Sell</a>
                               {order_type === 'SELL' ? <div className={`${styles['arrow-down']}`}></div> : null}
                           </li>
                         </ul>
@@ -287,8 +287,8 @@ class OrderBookWidget extends Component {
                           ${this.props.wallet.valid && !this.state.loading ? null : 'disabled'} btn btn-block btn-primary proceed `}
                           onClick={() => this.placeOrder()} ref={(el) => { this.button = el; }} >
                             {order_type === 'BUY' 
-                            ? `${t('orderbookwidget.buy')} ${this.props.selectedCoin.receive} ${t('orderbookwidget.with')} ${this.props.selectedCoin.deposit}`
-                            : `${t('orderbookwidget.sell')} ${this.props.selectedCoin.receive} ${t('orderbookwidget.for')} ${this.props.selectedCoin.deposit}`
+                            ? `Buy ${this.props.selectedCoin.receive} with ${this.props.selectedCoin.deposit}`
+                            : `Sell ${this.props.selectedCoin.receive} for ${this.props.selectedCoin.deposit}`
                             }
                           </button>
                         </div>

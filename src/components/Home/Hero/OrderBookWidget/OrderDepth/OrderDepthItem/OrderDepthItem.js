@@ -17,13 +17,13 @@ class OrderDepthItem extends PureComponent {
 
   setOrderBookQuantity(quantity) {
     const orderBook = this.props.orderBook;
-    orderBook.quantity = quantity.toFixed(9);
+    orderBook.quantity = quantity;
     this.props.changeOrderBookValue(orderBook);
   }
 
   setOrderBookLimitRate(limit_rate) {
     const orderBook = this.props.orderBook;
-    orderBook.limit_rate = limit_rate.toFixed(9);
+    orderBook.limit_rate = limit_rate;
     this.props.changeOrderBookValue(orderBook);
   }
 

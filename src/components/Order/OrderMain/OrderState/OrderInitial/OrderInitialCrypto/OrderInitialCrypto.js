@@ -75,9 +75,7 @@ class OrderInitial extends Component {
               <h4>
                 {t('order.initial2')}{' '}
                 <b>
-                  {!(this.props.order.isLimitOrder && this.props.order.order_type === 0)
-                  ? `${this.props.order.amount_quote} ${this.props.order.pair.quote.code}`
-                  : `${this.props.order.amount_base} ${this.props.order.pair.base.code}`}
+                  {this.props.order.amount_quote} {this.props.order.pair.quote.code}
                 </b>{' '}
                 {t('order.initial3')}
                 <br />

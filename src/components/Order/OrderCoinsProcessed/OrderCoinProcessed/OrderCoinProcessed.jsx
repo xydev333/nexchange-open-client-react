@@ -51,26 +51,23 @@ class OrderCoinProcessed extends Component {
   };
 
   prepareState = props => {
-    const isReverse = props.order.isLimitOrder && props.order.order_type === 0;
-    if ((!isReverse && props.type === 'Deposit') || (isReverse && props.type === 'Receive')) {
-      const addressField = !isReverse ? 'deposit_address' : 'withdraw_address';
+    if (props.type === 'Deposit') {
       this.setState({
         coin: props.order.pair.quote.code,
         oppositeCoin: props.order.pair.base.code,
         amount: parseFloat(props.order.amount_quote),
-        address: props.order[addressField] ? props.order[addressField].address : '',
+        address: props.order.deposit_address ? props.order.deposit_address.address : '',
         paymentId: props.order.deposit_address ? props.order.deposit_address.payment_id : '',
         destinationTag: props.order.deposit_address ? props.order.deposit_address.destination_tag : '',
         memo: props.order.deposit_address ? props.order.deposit_address.memo : '',
         order: props.order,
       });
-    } else if ((!isReverse && props.type === 'Receive') || (isReverse && props.type === 'Deposit')) {
-      const addressField = !isReverse ? 'withdraw_address' : 'deposit_address';
+    } else if (props.type === 'Receive') {
       this.setState({
         coin: props.order.pair.base.code,
         oppositeCoin: props.order.pair.quote.code,
         amount: parseFloat(props.order.amount_base),
-        address: props.order[addressField] ? props.order[addressField].address : '',
+        address: props.order.withdraw_address ? props.order.withdraw_address.address : '',
         paymentId: props.order.withdraw_address ? props.order.withdraw_address.payment_id : '',
         destinationTag: props.order.withdraw_address ? props.order.withdraw_address.destination_tag : '',
         memo: props.order.withdraw_address ? props.order.withdraw_address.memo : '',
@@ -230,10 +227,14 @@ class OrderCoinProcessed extends Component {
   }
 
   render() {
+    const order = this.props.order;
+    /* eslint max-len: ['error', { 'code': 200 }] */
+    const pullRight = (!order.isLimitOrder && this.props.type === 'Receive') || (order.isLimitOrder && order.order_type === 0 && this.props.type === 'Deposit');
+    const pullLeft = order.isLimitOrder && order.order_type === 0 && this.props.type === 'Receive';    
     return (
       <I18n ns="translations">
         {t => (
-          <div className={`col-xs-12 col-sm-6 ${styles['col-sm-6']} ${this.props.type === 'Receive' ? styles['pull-right-md'] : ''}`}>
+          <div className={`col-xs-12 col-sm-6 ${styles['col-sm-6']} ${pullRight ? styles['pull-right-md'] : ''} ${pullLeft ? styles['pull-left-md'] : ''}`}>
             <div
               className={`${styles.box} box ${this.props.type === 'Deposit' && isFiatOrder(this.props.order) ? 'fiat' : ''} ${
                 !isFiatOrder(this.props.order) || this.props.type === 'Receive' ? styles['crypto'] : ''
@@ -249,16 +250,13 @@ class OrderCoinProcessed extends Component {
                   <b>
                     {this.state.amount} {this.state.coin}
                   </b>
-                  {!this.props.order.isLimitOrder
-                  ?<i
+                  <i
                     className="fa fa-question-circle"
                     data-toggle="tooltip"
                     data-placement="top"
                     style={{ marginLeft: 8 }}
                     data-original-title={this.renderRates()}
-                    />
-                  : null
-                  }
+                  />
                 </h5>
                 {this.renderAddress()}
                 {this.renderExpandButton()}
