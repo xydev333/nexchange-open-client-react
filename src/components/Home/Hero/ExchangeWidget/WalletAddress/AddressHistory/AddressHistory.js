@@ -47,7 +47,6 @@ class AddressHistory extends Component {
   }
 
   clear(){
-    this.props.dontFireOnBlur();
     this.setState({
       searchValue: ''
     }); 
@@ -92,7 +91,7 @@ class AddressHistory extends Component {
                 />
                 <i
                   className={`material-icons ${this.state.searchValue ? cx(styles.clear, styles.active) : styles.clear}`}
-                  onMouseDown={() => this.clear()}
+                  onClick={() => this.clear()}
                 >
                   clear
                 </i>

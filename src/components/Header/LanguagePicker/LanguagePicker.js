@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './LanguagePicker.scss';
 
 class LanguagePicker extends Component {
-  supportedLanguages = ['en', 'de', 'ru'];
+  supportedLanguages = ['de', 'en', 'ru'];
 
   array_move(arr, old_index, new_index) {
     if (new_index >= arr.length) {
@@ -21,16 +21,14 @@ class LanguagePicker extends Component {
 
   sortedSupportedLanguages() {
     const selectedLanguage = I18n.language || window.localStorage.i18nextLng;
-    let selectedLngPosition = this.supportedLanguages.indexOf(selectedLanguage);
-    if(selectedLngPosition < 0) {
-      selectedLngPosition = 0;
-    }
+    const selectedLngPosition = this.supportedLanguages.indexOf(selectedLanguage);
 
     return this.array_move(this.supportedLanguages, selectedLngPosition, 0);
   }
 
   render = () => {
     const languages = this.sortedSupportedLanguages();
+
     return (
       <ul className={styles.languagepicker}>
         {languages.map(lng => (
