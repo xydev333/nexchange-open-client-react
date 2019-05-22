@@ -58,7 +58,16 @@ class Header extends Component {
     return false;
   }
 
+  hideHeader = () => {
+    if (window.location.pathname === '/signin' || window.location.pathname === '/signup') {
+      return true;
+    }
+    return false;
+  }
+
   render() {
+    const hideHeader = this.hideHeader();
+    if(hideHeader) return null;
     const isHomeHeader = this.isHomeHeader();
     return (
       <I18n ns="translations">
@@ -112,7 +121,7 @@ class Header extends Component {
                   </li>
 
                   <li>
-                    <Link onClick={() => this.closeNavbar()} to="/#compare" className={styles.link} data-test="compare-link">
+                    <Link onClick={() => this.closeNavbar()} to="/#compare" className={`${styles.link} hidden-sm`} data-test="compare-link">
                         {t('header.compare')}
                     </Link>
                   </li>
