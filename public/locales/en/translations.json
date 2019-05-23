@@ -64,19 +64,6 @@
     "nomyorders": "No order history...",
     "viewallmyorders": "View all my orders"
   },
-  "accounts": {
-    "signup": "Sign Up",
-    "signin": "Sign In",
-    "signinwithfacebook": "Sign In With Facebook",
-    "signupwithfacebook": "Sign Up With Facebook",
-    "username": "Username",
-    "email": "Email",
-    "password": "Password",
-    "repeatpassword": "Repeat Password",
-    "forgotpassword1": "Forgot your password?",
-    "forgotpassword2": "If you want to reset your password, please enter your email address",
-    "resetpassword": "Reset Password"
-  },
   "recentorders": {
     "1": "Recent Orders",
     "2": "Click to view on API",
@@ -463,10 +450,7 @@
   "error": {
     "warning": "Warning",
     "loading": "Sorry, there was a problem loading the page :(",
-    "notfound1": "Oops! Something went wrong...",
-    "notfound21": "The page you are looking for isn't available. Try to search again, or use the",
-    "notfound22": "Go Back",
-    "notfound23": "button bellow.",
+    "notfound": "Page not found :(",
     "invalidpair": "You cannot buy",
     "nousedeposit": "You cannot use",
     "nousedeposit2": "as deposit coin. Please try another one.",
