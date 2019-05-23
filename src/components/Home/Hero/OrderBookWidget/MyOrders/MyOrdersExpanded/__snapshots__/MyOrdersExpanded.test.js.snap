@@ -37,19 +37,15 @@ ShallowWrapper {
           </i>
         </button>,
         <div
-          className="heading"
+          className="col-xs-12 heading"
         >
           <h2>
-            orderbookwidget.myorders
+            My Orders
           </h2>
         </div>,
-        <div
-          className="no-history"
-        >
-          <p>
-            No order history...
-          </p>
-        </div>,
+        <p>
+          No order history...
+        </p>,
       ],
       "className": "container",
       "id": "myOrders",
@@ -93,9 +89,9 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <h2>
-            orderbookwidget.myorders
+            My Orders
           </h2>,
-          "className": "heading",
+          "className": "col-xs-12 heading",
         },
         "ref": null,
         "rendered": Object {
@@ -103,10 +99,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "orderbookwidget.myorders",
+            "children": "My Orders",
           },
           "ref": null,
-          "rendered": "orderbookwidget.myorders",
+          "rendered": "My Orders",
           "type": "h2",
         },
         "type": "div",
@@ -116,24 +112,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <p>
-            No order history...
-          </p>,
-          "className": "no-history",
+          "children": "No order history...",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "No order history...",
-          },
-          "ref": null,
-          "rendered": "No order history...",
-          "type": "p",
-        },
-        "type": "div",
+        "rendered": "No order history...",
+        "type": "p",
       },
     ],
     "type": "div",
@@ -159,19 +142,15 @@ ShallowWrapper {
             </i>
           </button>,
           <div
-            className="heading"
+            className="col-xs-12 heading"
           >
             <h2>
-              orderbookwidget.myorders
+              My Orders
             </h2>
           </div>,
-          <div
-            className="no-history"
-          >
-            <p>
-              No order history...
-            </p>
-          </div>,
+          <p>
+            No order history...
+          </p>,
         ],
         "className": "container",
         "id": "myOrders",
@@ -215,9 +194,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <h2>
-              orderbookwidget.myorders
+              My Orders
             </h2>,
-            "className": "heading",
+            "className": "col-xs-12 heading",
           },
           "ref": null,
           "rendered": Object {
@@ -225,10 +204,10 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "orderbookwidget.myorders",
+              "children": "My Orders",
             },
             "ref": null,
-            "rendered": "orderbookwidget.myorders",
+            "rendered": "My Orders",
             "type": "h2",
           },
           "type": "div",
@@ -238,24 +217,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <p>
-              No order history...
-            </p>,
-            "className": "no-history",
+            "children": "No order history...",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "No order history...",
-            },
-            "ref": null,
-            "rendered": "No order history...",
-            "type": "p",
-          },
-          "type": "div",
+          "rendered": "No order history...",
+          "type": "p",
         },
       ],
       "type": "div",

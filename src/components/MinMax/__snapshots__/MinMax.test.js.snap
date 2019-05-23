@@ -24,26 +24,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax home",
@@ -56,32 +50,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -91,32 +71,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -131,26 +97,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax home",
@@ -163,32 +123,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -198,32 +144,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
@@ -283,26 +215,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax ",
@@ -315,32 +241,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -350,32 +262,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -390,26 +288,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax ",
@@ -422,32 +314,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -457,32 +335,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
@@ -691,26 +555,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax ",
@@ -723,32 +581,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -758,32 +602,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -798,26 +628,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax ",
@@ -830,32 +654,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -865,32 +675,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
@@ -950,26 +746,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className="error"
+          className="error "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax home",
@@ -982,32 +772,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -1017,32 +793,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "error",
+          "className": "error ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -1057,26 +819,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className="error"
+            className="error "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax home",
@@ -1089,32 +845,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -1124,32 +866,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "error",
+            "className": "error ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
@@ -1209,26 +937,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className="error"
+          className="error "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax ",
@@ -1241,32 +963,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -1276,32 +984,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "error",
+          "className": "error ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -1316,26 +1010,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className="error"
+            className="error "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax ",
@@ -1348,32 +1036,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -1383,32 +1057,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "error",
+            "className": "error ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
@@ -1468,26 +1128,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className="error"
+          className="error "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax home",
@@ -1500,32 +1154,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "error",
+          "className": "error ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -1535,32 +1175,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -1575,26 +1201,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className="error"
+            className="error "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax home",
@@ -1607,32 +1227,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "error",
+            "className": "error ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -1642,32 +1248,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
@@ -1727,26 +1319,20 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <p
-          className="error"
+          className="error "
+          onClick={[Function]}
         >
-          exchangewidget.min: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            1
-          </span>
+          exchangewidget.min
+          : 
+          1
         </p>,
         <p
-          className=""
+          className=" "
+          onClick={[Function]}
         >
-          exchangewidget.max: 
-          <span
-            className="bold "
-            onClick={[Function]}
-          >
-            2
-          </span>
+          exchangewidget.max
+          : 
+          2
         </p>,
       ],
       "className": "minmax ",
@@ -1759,32 +1345,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.min: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>,
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
-          "className": "error",
+          "className": "error ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.min: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 1,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 1,
-            "type": "span",
-          },
+          "exchangewidget.min",
+          ": ",
+          1,
         ],
         "type": "p",
       },
@@ -1794,32 +1366,18 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            "exchangewidget.max: ",
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>,
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
-          "className": "",
+          "className": " ",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Array [
-          "exchangewidget.max: ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": 2,
-              "className": "bold ",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": 2,
-            "type": "span",
-          },
+          "exchangewidget.max",
+          ": ",
+          2,
         ],
         "type": "p",
       },
@@ -1834,26 +1392,20 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <p
-            className="error"
+            className="error "
+            onClick={[Function]}
           >
-            exchangewidget.min: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              1
-            </span>
+            exchangewidget.min
+            : 
+            1
           </p>,
           <p
-            className=""
+            className=" "
+            onClick={[Function]}
           >
-            exchangewidget.max: 
-            <span
-              className="bold "
-              onClick={[Function]}
-            >
-              2
-            </span>
+            exchangewidget.max
+            : 
+            2
           </p>,
         ],
         "className": "minmax ",
@@ -1866,32 +1418,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.min: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                1
-              </span>,
+              "exchangewidget.min",
+              ": ",
+              1,
             ],
-            "className": "error",
+            "className": "error ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.min: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 1,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 1,
-              "type": "span",
-            },
+            "exchangewidget.min",
+            ": ",
+            1,
           ],
           "type": "p",
         },
@@ -1901,32 +1439,18 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              "exchangewidget.max: ",
-              <span
-                className="bold "
-                onClick={[Function]}
-              >
-                2
-              </span>,
+              "exchangewidget.max",
+              ": ",
+              2,
             ],
-            "className": "",
+            "className": " ",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Array [
-            "exchangewidget.max: ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": 2,
-                "className": "bold ",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": 2,
-              "type": "span",
-            },
+            "exchangewidget.max",
+            ": ",
+            2,
           ],
           "type": "p",
         },
