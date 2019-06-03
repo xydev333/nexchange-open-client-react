@@ -25,7 +25,6 @@ class OrderOpen extends Component {
                 deposit: order.pair.quote.code,
                 receive: order.pair.base.code,
                 selectedByUser: false,
-                orderByAddress: false,
               }, this.props.pairs);
         }
     }
