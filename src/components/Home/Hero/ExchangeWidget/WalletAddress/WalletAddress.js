@@ -139,11 +139,6 @@ class WalletAddress extends Component {
       });
     }
 
-    if(nextProps.wallet.address !== this.props.wallet.address) {
-      const simulatedEvent = { target: { value: nextProps.wallet.address } };
-      this.handleChange(simulatedEvent);
-    }
-
     try {
       let orderHistory = localStorage['orderHistory'];
       //Most recent order for each address
