@@ -84,7 +84,6 @@ class OrderReferrals extends Component {
                     className={styles.link}
                     href={`https://facebook.com/sharer.php?u=${this.state.link}`}
                     target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => {
                       window.gtag('event', 'Social click', {event_category: 'Referrals', event_label: `Facebook`});
                     }}
@@ -95,7 +94,6 @@ class OrderReferrals extends Component {
                     className={styles.link}
                     href={`https://twitter.com/intent/tweet?url=${this.state.link}&text=${t('referral.twitter')}`}
                     target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => {
                       window.gtag('event', 'Social click', {event_category: 'Referrals', event_label: `Twitter`});
                     }}
@@ -106,7 +104,6 @@ class OrderReferrals extends Component {
                     className={styles.link}
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=${this.state.link}`}
                     target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => {
                       window.gtag('event', 'Social click', {event_category: 'Referrals', event_label: `LinkedIn`});
                     }}

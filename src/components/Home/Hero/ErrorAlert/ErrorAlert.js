@@ -9,9 +9,7 @@ const ErrorAlert = props => {
 	<I18n ns="translations">
 	{(t) => (
     <Sticky enabled={true} top={0} bottomBoundary={1200}>
-      <div 
-        id="error-alert" 
-        className={props.error.show ? `${styles.alert} alert alert-warning` : `${styles.alert} alert alert-warning hidden`}>
+      <div className={props.error.show ? `${styles.alert} alert alert-warning` : `${styles.alert} alert alert-warning hidden`}>
         <div className="container">
           <div className="alert-icon">
             <i className="material-icons">error_outline</i>

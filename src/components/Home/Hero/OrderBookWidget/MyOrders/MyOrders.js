@@ -22,7 +22,7 @@ class MyOrders extends PureComponent {
     this.fetchMyOrders = this.fetchMyOrders.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount() {5
     this.fetchMyOrders();
     this.interval = setInterval(() => {
         this.fetchMyOrders();
