@@ -52,26 +52,13 @@ class Header extends Component {
   }
 
   isHomeHeader = () => {
-    if (window.location.pathname === '/' 
-        || window.location.pathname.indexOf('/faqs') != -1
-        || window.location.pathname === '/not-found') {
-      return true;
-    }
-    return false;
-  }
-
-  hideHeader = () => {
-    if (window.location.pathname === '/signin' 
-        || window.location.pathname === '/signup'
-        || window.location.pathname === '/forgot-password') {
+    if (window.location.pathname === '/' || window.location.pathname.indexOf('/faqs') !== -1) {
       return true;
     }
     return false;
   }
 
   render() {
-    const hideHeader = this.hideHeader();
-    if(hideHeader) return null;
     const isHomeHeader = this.isHomeHeader();
     return (
       <I18n ns="translations">
@@ -113,7 +100,7 @@ class Header extends Component {
 
                   <li>
                     <a
-                      className={`${styles.link} hidden-sm hidden-md`}
+                      className={`${styles.link} hidden-sm`}
                       href="http://docs.nexchange2.apiary.io/"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -124,11 +111,11 @@ class Header extends Component {
                     </a>
                   </li>
 
-                  {/* <li>
-                    <Link onClick={() => this.closeNavbar()} to="/#compare" className={`${styles.link} hidden-sm`} data-test="compare-link">
+                  <li>
+                    <Link onClick={() => this.closeNavbar()} to="/#compare" className={styles.link} data-test="compare-link">
                         {t('header.compare')}
                     </Link>
-                  </li> */}
+                  </li>
 
                   <li>
                     <Link 
@@ -137,17 +124,6 @@ class Header extends Component {
                       to='#'
                       data-test="support-btn">
                         {t('header.support')}
-                    </Link>
-                  </li>
-
-                  <li>
-                   <Link onClick={() => this.closeNavbar()} to="/signin" className={styles.link}>
-                        {t('accounts.signin')}
-                    </Link>
-                  </li>
-                  <li>
-                   <Link onClick={() => this.closeNavbar()} to="/signup" className={`${styles.link} ${styles.main}`}>
-                        {t('accounts.signup')}
                     </Link>
                   </li>
 
@@ -213,10 +189,9 @@ class Header extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.social} btn btn-simple btn-just-icon`}
-                      rel="tooltip"
-                      title=""
+                      title={t('header.twitter')}
+                      data-toggle="tooltip" 
                       data-placement="bottom"
-                      data-original-title={t('header.twitter')}
                     >
                       <i className="fab fa-twitter" aria-hidden="true" />
                     </a>
@@ -228,10 +203,9 @@ class Header extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.social} btn btn-simple btn-just-icon`}
-                      rel="tooltip"
-                      title=""
+                      title={t('header.facebook')}
+                      data-toggle="tooltip" 
                       data-placement="bottom"
-                      data-original-title={t('header.facebook')}
                     >
                       <i className="fab fa-facebook-f" aria-hidden="true" />
                     </a>
@@ -243,10 +217,9 @@ class Header extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.social} btn btn-simple btn-just-icon`}
-                      rel="tooltip"
-                      title=""
+                      title={t('header.slack')}
+                      data-toggle="tooltip" 
                       data-placement="bottom"
-                      data-original-title={t('header.slack')}
                     >
                       <i className="fab fa-slack-hash" aria-hidden="true" />
                     </a>
@@ -258,10 +231,9 @@ class Header extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.social} btn btn-simple btn-just-icon`}
-                      rel="tooltip"
-                      title=""
+                      title={t('header.telegram')}
+                      data-toggle="tooltip" 
                       data-placement="bottom"
-                      data-original-title={t('header.telegram')}
                     >
                       <i className="fab fa-telegram" aria-hidden="true" />
                     </a>

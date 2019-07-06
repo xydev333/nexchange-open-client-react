@@ -64,20 +64,10 @@
     "nomyorders": "No order history...",
     "viewallmyorders": "View all my orders"
   },
-  "accounts": {
-    "signup": "Sign Up",
-    "signupheader": "White-labelling and B2B solutions",
-    "signin": "Sign In",
-    "signinheader": "Your trustful partner for crypto exchange",
-    "signinwithfacebook": "Sign In With Facebook",
-    "signupwithfacebook": "Sign Up With Facebook",
-    "username": "Username",
-    "email": "Email",
-    "password": "Password",
-    "repeatpassword": "Repeat Password",
-    "forgotpassword1": "Forgot your password?",
-    "forgotpassword2": "If you want to reset your password, please enter your email address",
-    "resetpassword": "Reset Password"
+  "integrations": {
+    "error" : {
+      "metamask": "Metamask extension could not be accessed. Please ensure that it is enabled and it's not locked" 
+    }
   },
   "recentorders": {
     "1": "Recent Orders",
@@ -465,10 +455,7 @@
   "error": {
     "warning": "Warning",
     "loading": "Sorry, there was a problem loading the page :(",
-    "notfound1": "Oops! Something went wrong...",
-    "notfound21": "The page you are looking for isn't available. Try to search again, or use the",
-    "notfound22": "Go Back",
-    "notfound23": "button bellow.",
+    "notfound": "Page not found :(",
     "invalidpair": "You cannot buy",
     "nousedeposit": "You cannot use",
     "nousedeposit2": "as deposit coin. Please try another one.",
@@ -478,5 +465,9 @@
     "providevalid": "Please put valid"
   },
   "viewmore": "view more",
-  "to": "to"
+  "to": "to",
+  "pnl": {
+    "profit": "Profit",
+    "loss": "Loss"
+  }
 }
