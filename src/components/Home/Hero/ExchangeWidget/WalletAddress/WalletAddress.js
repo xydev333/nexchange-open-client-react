@@ -109,6 +109,8 @@ class WalletAddress extends Component {
           this.setCoin('EUR', matchingCoins[0]);
         }
       }
+
+
     }
   }
 
@@ -184,8 +186,7 @@ class WalletAddress extends Component {
         ...this.props.selectedCoin,
         deposit: depositCoin,
         receive: receiveCoin,
-        selectedByUser,
-        orderByAddress: true
+        selectedByUser
       }, this.props.pairs);
 
       //Update quote value

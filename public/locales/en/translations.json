@@ -465,9 +465,5 @@
     "providevalid": "Please put valid"
   },
   "viewmore": "view more",
-  "to": "to",
-  "pnl": {
-    "profit": "Profit",
-    "loss": "Loss"
-  }
+  "to": "to"
 }

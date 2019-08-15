@@ -12,7 +12,6 @@ const initialState = {
     deposit: false,
     receive: false,
   },
-  orderByAddress: false
 };
 
 export default (state = initialState, action) => {
