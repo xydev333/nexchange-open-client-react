@@ -1,11 +1,4 @@
 {
-  "PerExchangePairHEAD": {
-    "title": "Instant Exchange Sell {{depositCoinFullName}} ({{depositCoinSymbol}}) to Buy {{receiveCoinFullName}} ({{receiveCoinSymbol}})",
-    "meta_description": "Best exchange rate for {{depositCoinFullName}} ({{depositCoinSymbol}}) to {{receiveCoinFullName}} ({{receiveCoinSymbol}}). N.exchange provides instant exchange without KYC or Registration."
-  },
-  "PerExchangePairBODY": {
-    "H1": "{{depositCoinFullName}} ({{depositCoinSymbol}}) to {{receiveCoinFullName}} ({{receiveCoinSymbol}}) Instant Exchange"
-  },
   "generalterms": {
     "formsucess": "Your form has been successfully submitted. We'll get back to you shortly!",
     "formfailed": "Something went wrong during the form submission, please try again later.",
