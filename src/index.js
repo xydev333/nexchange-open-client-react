@@ -8,7 +8,7 @@ import './i18n';
 
 import Referrals from 'Components/Referrals/Referrals';
 import Header from 'Components/Header/Header';
-import Footer from 'Components/Footer/Footer';
+import Footer from 'Components/FooterNext/Footer';
 import NotFound from 'Components/NotFound/NotFound';
 import FAQ from 'Components/FAQ/FAQ';
 
@@ -18,7 +18,6 @@ import TermsConditions from 'Components/TermsConditions/TermsConditions';
 import Privacy from 'Components/Privacy/Privacy';
 import SignIn from 'Components/Accounts/SignIn/SignIn';
 import SignUp from 'Components/Accounts/SignUp/SignUp';
-import WhiteLabelSEO from 'Pages/WhiteLabelSEO';
 
 import setAuthToken from 'Utils/setAuthToken';
 import crispEmailBinding from 'Utils/crispEmailBinding';
@@ -59,7 +58,6 @@ ReactDOM.render(
           <Route exact path="/signup" component={SignUp} /> 
           <Route exact path="/faqs/:id?" component={FAQ} />
           <Route exact path="/not-found" component={NotFound} />
-          <Route exact path="/whitelabel/" component={WhiteLabelSEO} />
           <Route component={NotFoundRedirect} />
         </Switch>
 
