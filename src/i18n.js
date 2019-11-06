@@ -18,9 +18,6 @@ i18n
 
       interpolation: {
         escapeValue: false,
-        format: (value, format, lng) => {
-          if (format === 'big usd') return '$' + parseFloat(value).toFixed(0)
-        }
       },
       detection: {
         lookupQuerystring: "lang",
