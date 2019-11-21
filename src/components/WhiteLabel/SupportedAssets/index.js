@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { NavLink } from 'react-router-dom'
 
-import Bounce from 'Components/misc/reveal'
+import Bounce from 'react-reveal/Bounce'
 
 export const SupportedAssets = (props) => {
   const [assets] = useState(ASSETS)
