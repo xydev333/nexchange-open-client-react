@@ -2,7 +2,6 @@ import React from 'react'
 import Marked from 'react-markdown'
 import styled from '@emotion/styled'
 
-import Bounce from 'Components/misc/reveal'
 import { TagLink, TagNavLink } from 'Components/misc/TagLink' 
 
 export const TopicsList = (props) => {
@@ -29,7 +28,7 @@ const TopicCard = ({ title, content, art, btn}) => {
         <img src={art} alt={title} />
       </div>
       <section>
-        {btn ? <div>{btn}</div> : null}
+        <div>{btn ? btn : null}</div>
         <h3>{title}</h3>
         <Marked source={content} />
       </section>

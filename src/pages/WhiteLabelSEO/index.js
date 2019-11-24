@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
+
 import { graphql } from 'react-apollo'
 
 import VideoCard from 'Components/WhiteLabel/VideoCard/'
