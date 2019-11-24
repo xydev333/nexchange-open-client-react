@@ -25,20 +25,22 @@ const PriceTable = (props) => {
         </thead>
         <tbody>
           {forder && forder.length && forder.map(f => (
-            <tr key={`feature-${f}`}>
+            <tr>
               <th className='feature'>{t(`whitelabel.features.${f}`)}</th>
-              {plans.map(({[f]: feature, name}) => (<td key={`feat-${f}-${name}`}>
-                {((feature || typeof feature === 'number') &&
-                  t(`whitelabel.values.${f}`, {value: feature}))
+              {plans.map(({[f]: feature, name}) => (
+                ((feature || typeof feature === 'number') &&
+                  <td>{t(`whitelabel.values.${f}`, {value: feature})}</td>)
                 ||
-                (!feature && name === 'community' && "N/A")
+                (!feature && name === 'community' &&
+                  <td>N/A</td>)
                 ||
-                (!feature && "&nbsp;")}
-              </td>))}
+                (!feature && 
+                  <td>&nbsp;</td>)
+              ))}
             </tr>
           ))}
           <tr className='pt'>
-            <th colSpan={plans.length + 1}><strong>Payment Terms</strong></th>
+            <th colspan={plans.length + 1}><strong>Payment Terms</strong></th>
           </tr>
           <tr>
             <th>
@@ -47,15 +49,17 @@ const PriceTable = (props) => {
               <small>* 50% upfront, 50% upon delivery!</small>
             </th>
             {plans.map((plan) => (
-              <td key={`plan-${plan.name}`}>{t(`whitelabel.values.total`, {value: (plan.monthly * 12) + plan.setup})}</td>
+              <td>{t(`whitelabel.values.total`, {value: (plan.monthly * 12) + plan.setup})}</td>
             ))}
           </tr>
           <tr>
-            <th />
+            <th>
+              Order Now
+            </th>
             {plans
               .map((plan) => ({...plan, glink: t(`whitelabel.pricing.orderNowLink.${plan.name}`)}))
               .map((plan) => (
-                <td key={`plankl-${plan.name}`}>
+                <td>
                   <TagLink
                     target='_blank'
                     href={t(`whitelabel.pricing.orderNowLink.${plan.name}.link`)}>
@@ -118,7 +122,7 @@ const tableStyle = `
     -moz-box-shadow: 0px 0px 3px 0px rgba(204, 204, 204, 0.4);
     box-shadow: 0px 0px 3px 0px rgba(204, 204, 204, 0.4);
 
-    td:first-of-type {
+    td:first-child {
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
     }
