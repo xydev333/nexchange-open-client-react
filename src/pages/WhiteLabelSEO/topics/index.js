@@ -1,4 +1,5 @@
 import React from 'react'
+import Bounce from 'react-reveal/Bounce'
 import Marked from 'react-markdown'
 import styled from '@emotion/styled'
 
@@ -25,12 +26,16 @@ const TopicCard = ({ title, content, art, btn}) => {
   return (
     <StyledTopic>
       <div className='art'>
-        <img src={art} alt={title} />
+        <Bounce bottom>
+          <img src={art} alt={title} />
+        </Bounce>
       </div>
       <section>
-        <div>{btn ? btn : null}</div>
-        <h3>{title}</h3>
-        <Marked source={content} />
+        <Bounce bottom>
+          {btn ? btn : null}
+          <h3>{title}</h3>
+          <Marked source={content} />
+        </Bounce>
       </section>
     </StyledTopic>
   )
@@ -46,7 +51,7 @@ const StyledTopic = styled.article`
   grid-template-rows: auto;
 
   @media screen and (min-width: 960px) {
-    &:nth-of-type(even) {
+    &:nth-child(even) {
       grid-template-areas: 
         "content art";
     }
