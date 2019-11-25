@@ -12,4 +12,18 @@ services:
             - "80:80"
             - "443:443"
         restart: always
-        
+    react-client:
+        image: onitsoft/nexchange-open-client-react
+        volumes:
+            - /nexchange/root/nexchange:/deploy/app/build
+    ico-page:
+        image: onitsoft/ico-landing-page
+        volumes:
+            - /nexchange/root/ico:/deploy/app/build
+    fed-proxy:
+        image: onitsoft/nexchange-fed-proxy
+        volumes:
+            - /nexchange/root:/deploy
+        ports:
+            - "3000:3000"
+            
