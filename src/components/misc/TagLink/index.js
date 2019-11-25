@@ -10,13 +10,12 @@ const TagLink = styled.a`
   min-width: 96px;
   min-height: 18px;
   line-height: 18px;
-  font-size: 11px;
+  font-size: 10px;
   text-align: center;
-  padding: 2px 6px 1px;
+  padding: 1px 6px 0;
   text-decoration: none;
-  transition: all 80ms ease-out;
   &:hover {
-    color: #222;
+    color: #000;
     text-decoration: none;
   }
 `
