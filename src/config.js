@@ -12,8 +12,7 @@ const config = {
   REFERRAL_CODE: null,
   KYC_DETAILS_FETCH_INTERVAL: 20000,
   ADVANCED_MODE_ENABLED: true,
-  GRAPHCMS_API: 'https://api-euwest.graphcms.com/v1/ck2olkts50bo501i0h3ej7d1f/master',
-  INTERCOM_APP_ID: 'a3zrft9d'
+  GRAPHCMS_API: 'https://api-euwest.graphcms.com/v1/ck2olkts50bo501i0h3ej7d1f/master'
 };
 
 export default config;
