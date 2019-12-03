@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './i18n';
 
-import setAuthToken from 'Utils/setAuthToken';
+// import setAuthToken from 'Utils/setAuthToken';
 import crispEmailBinding from 'Utils/crispEmailBinding';
 
 import ToTop from 'Components/misc/ToTop'
@@ -15,7 +15,8 @@ import reducers from './reducers';
 
 import { BreakpointProvider, defaultQuery } from 'Components/misc/breakpoint'
 
-import GraphCMSProvider from './graphcms'
+import GraphCMSProvider from './services/graphcms'
+import Intercom from './services/intercom'
 import './css/index.scss';
 
 window.$ = window.jQuery = require('jquery');
@@ -29,7 +30,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 const store = createStore(reducers, enhancer);
 
-setAuthToken();
+// setAuthToken();
 crispEmailBinding(store);
 require('Utils/bindGa');
 
@@ -80,6 +81,7 @@ ReactDOM.render((
               </Switch>
 
               <Footer />
+              <Intercom />
             </ToTop>
           </Suspense>
         </BrowserRouter>
