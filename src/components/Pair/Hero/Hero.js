@@ -51,22 +51,18 @@ class Hero extends Component {
           <React.Fragment>
             <Helmet>
               <title>
-                {t('PerExchangePairHEAD.title', {
-                  receiveCoinFullName: baseCurrency && baseCurrency.name &&
-                    capitalize(baseCurrency.name),
-                  depositCoinSymbol: this.props.selectedCoin.deposit.toUpperCase(),
-                  depositCoinFullName: quoteCurrency && quoteCurrency.name &&
-                    capitalize(quoteCurrency.name),
-                  receiveCoinSymbol: this.props.selectedCoin.receive.toUpperCase()
-                })}
+              {t('PerExchangePairHEAD.title', {
+                receiveCoinFullName: baseCurrency && baseCurrency.name,
+                depositCoinSymbol: this.props.selectedCoin.deposit,
+                depositCoinFullName: quoteCurrency && quoteCurrency.name,
+                receiveCoinSymbol: this.props.selectedCoin.receive
+              })}
               </title>
               <meta name="description" content={t('PerExchangePairHEAD.meta_description', {
-                  receiveCoinFullName: baseCurrency && baseCurrency.name &&
-                    capitalize(baseCurrency.name),
-                  depositCoinSymbol: this.props.selectedCoin.deposit.toUpperCase(),
-                  depositCoinFullName: quoteCurrency && quoteCurrency.name &&
-                    capitalize(quoteCurrency.name),
-                receiveCoinSymbol: this.props.selectedCoin.receive.toUpperCase()
+                receiveCoinFullName: baseCurrency && baseCurrency.name,
+                depositCoinSymbol: this.props.selectedCoin.deposit,
+                depositCoinFullName: quoteCurrency && quoteCurrency.name,
+                receiveCoinSymbol: this.props.selectedCoin.receive
               })}/>
             </Helmet>
             <div className={styles.hero}>
@@ -77,12 +73,10 @@ class Hero extends Component {
                   <div className="col-xs-12">
                     <div className={styles.brand}>
                       <h1>{t('PerExchangePairBODY.H1', {
-                        receiveCoinFullName: baseCurrency && baseCurrency.name &&
-                          capitalize(baseCurrency.name),
-                        depositCoinSymbol: this.props.selectedCoin.deposit.toUpperCase(),
-                        depositCoinFullName: quoteCurrency && quoteCurrency.name &&
-                          capitalize(quoteCurrency.name),
-                        receiveCoinSymbol: this.props.selectedCoin.receive.toUpperCase()
+                        receiveCoinFullName: baseCurrency && baseCurrency.name,
+                        depositCoinSymbol: this.props.selectedCoin.deposit,
+                        depositCoinFullName: quoteCurrency && quoteCurrency.name,
+                        receiveCoinSymbol: this.props.selectedCoin.receive
                       })}
                       </h1>
                       <Trans i18nKey="hero.2">
@@ -111,7 +105,5 @@ class Hero extends Component {
     );
   }
 }
-
-const capitalize = str => `${str[0].toUpperCase()}${str.substr(1)}`
 
 export default Hero;
