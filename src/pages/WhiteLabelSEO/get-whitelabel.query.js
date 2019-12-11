@@ -28,7 +28,6 @@ export const GET_WHITELABEL = gql`
         }
       }
       faq (orderBy: sort_ASC) {
-        id
         title
         content
         link
