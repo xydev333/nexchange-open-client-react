@@ -36,10 +36,11 @@ const Pair = (props) => {
     <StyledPairPage>
       <Hero {...props} selectedCoin={selectedCoin} {...{baseCurrency, quoteCurrency}} />
       <div className='container'>
-        <h2>Price Chart for {pair.toUpperCase()}</h2>
+        <h1>Price Chart for {pair}</h1>
         <PriceChart pair={pair}/>
       </div>
       <RecentOrders {...props} pair={pair} />
+      <hr />
       <Articles baseName={`coin-${base.toLowerCase()}`} quoteName={`coin-${quote.toLowerCase()}`} quote={quote} base={base} />
       {/* TODO Referral Program Widget */}
       {/* TODO API Access Widget */}
@@ -49,10 +50,6 @@ const Pair = (props) => {
 
 const StyledPairPage = styled.div`
   margin-bottom: 8rem;
-  > .container {
-    margin-top: 8rem;
-    margin-bottom: 8rem;
-  }
 `
 
 

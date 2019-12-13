@@ -27,7 +27,7 @@ export default MajorCard
 const StyledCard = styled.article`
   display: grid;
   grid-column-gap: 10rem;
-  grid-row-gap: 6rem;
+  grid-row-gap: 2rem;
   grid-template-areas: 
     "title"
     "content";

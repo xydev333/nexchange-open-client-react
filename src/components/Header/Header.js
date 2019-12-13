@@ -18,7 +18,6 @@ const Header = props => {
     const { pathname } = location
 
     if (pathname === '/' 
-        || pathname.indexOf('/instant-white-label') !== -1
         || pathname.indexOf('/faqs') !== -1
         || pathname === '/not-found') {
       return true;
@@ -35,12 +34,11 @@ const Header = props => {
     }
     return false
   }, [location]);
+  if (isHideHeader) return null
 
 
   const closeNavbar = useCallback(() => { setShowNavbar(false) }, [setShowNavbar])
   const hideSupport = useCallback(() => { setShowSupportModal(false) }, [setShowSupportModal])
-  
-  if (isHideHeader) return null
   
   return (
     <HeaderStuff {...{ closeNavbar, isHomeHeader, setShowSupportModal, showSupportModal, hideSupport }} />
