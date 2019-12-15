@@ -119,11 +119,6 @@ export const SignUp = (props) => {
                 </div>
               </Link>
               <div className={`col-xs-8 col-offset-xs-2`}>
-                <div className='alert alert-info' role='alert'>
-                  <strong>{t('accounts.registerationOptionalTitle')}</strong>
-                  <Marked>{t('accounts.registerationOptional')}</Marked>
-                </div>
-                <br />
                 <form className="form-group" onSubmit={onSubmit}>
                   <>
                     <div className={`${styles['input-container']} ${myError('username')}`}>
@@ -202,7 +197,7 @@ export const SignUp = (props) => {
                     }</button>
                   </form>
                 <div className={styles.separator}></div>
-                <Link to="/signin" className={styles['not-registered']}>
+                <Link to="/login" className={styles['not-registered']}>
                   <button className={`${styles.button} ${styles.secondary}`}>{t('accounts.signin')}</button>
                 </Link>
                 <button 
@@ -230,7 +225,6 @@ export const SignUp = (props) => {
 }
 
 const StyledSignup = styled.div`
-  padding: 0 15px;
   .ief {
     &.error {
       border: 1px solid #e41749;
