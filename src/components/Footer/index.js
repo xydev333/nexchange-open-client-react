@@ -8,8 +8,8 @@ const Footer = (props) => {
   const { location } = props
   const { pathname } = location
   const hideFooter = useMemo(() => (
-    pathname === '/login'
-    || pathname === '/register'
+    pathname === '/signin'
+    || pathname === '/signup'
     || pathname === '/not-found'
   ), [location])
 
