@@ -8,11 +8,11 @@ import axios from 'axios';
 import config from 'Config';
 
 import { setWallet, errorAlert, setOrder, setDestinationTag, setPaymentId, setMemo } from 'Actions/index.js';
+import { bindCrispEmail } from 'Utils/crispEmailBinding';
 
 import CoinInput from './CoinInput/CoinInput';
 import CoinSwitch from './CoinSwitch/CoinSwitch';
 import WalletAddress from './WalletAddress/WalletAddress';
-import OrderModeSwitch from '../OrderModeSwitch/OrderModeSwitch';
 import DestinationTag from './WalletAddress/DestinationTag';
 import PaymentId from './WalletAddress/PaymentId';
 import Memo from './WalletAddress/Memo';
@@ -88,6 +88,8 @@ class ExchangeWidget extends Component {
           localStorage.setItem('token', response.data.token);
         }
 
+        bindCrispEmail(this.props.store);
+
         window.gtag('event', 'Place order', {event_category: 'Order', event_label: `${response.data.unique_reference}`});
 
         //Store order history in local storage
@@ -156,14 +158,13 @@ class ExchangeWidget extends Component {
               <div className="row">
                 <div className="col-xs-12">
                   <div className={styles.widget}>
-                    <OrderModeSwitch orderMode={this.props.orderMode} changeOrderMode={this.props.changeOrderMode}/>
                     <CoinInput type="deposit" onSubmit={this.showWalletAddress} walletInput={this.walletInputEl} />
                     <CoinSwitch />
                     <CoinInput type="receive" onSubmit={this.showWalletAddress} walletInput={this.walletInputEl} />
 
                     <WalletAddress 
                       withdraw_coin="receive" 
-                      onSubmit={() => ({})}
+                      onSubmit={this.placeOrder} 
                       inputRef={el => (this.walletInputEl = el)} 
                       button={this.button} 
                       focusWalletAddress={this.focusWalletAddress}/>
