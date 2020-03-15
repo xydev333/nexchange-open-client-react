@@ -2,118 +2,157 @@ import React, { useMemo, useState } from 'react';
 
 import { I18n } from 'react-i18next';
 import { NavLink as Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { showSupportModal } from 'Actions';
 
 
-import styled from '@emotion/styled'
-import moment from 'moment'
+import styled from '@emotion/styled';
 
+const COMPLIANCE = ['mastercard', 'visa'];
+const COMPLIANCE2 = [
+  { img: 'bestchange', url: 'https://bestchange.com', name: 'bestchange' },
+  { img: 'okchanger', url: 'https://okchanger.com', name: 'okchanger' },
+  { img: 'kurs', url: 'https://kurs.expert', name: 'kurs' },
+  { img: 'exchangesumo', url: 'https://exchangesumo.com/', name: 'exchangesumo' },
+  { img: 'emon', url: 'http://e-mon.ru/', name: 'emon' },
+  { img: 'allchange', url: 'https://allchange.org/', name: 'allchange' },
+  { img: 'bestcurs', url: 'https://bestcurs.org/', name: 'bestcurs' },
+];
 
-const COMPLIANCE = [
-  'mastercard',
-  'visa'
-]
- const COMPLIANCE2 =[
+const Footer = props => {
+  const { location } = props;
+  const { pathname } = location;
+  const lang = I18n.language || window.localStorage.i18nextLng || 'en';
 
-  {img:'bestchange', url: "https://bestchange.com" , name: 'bestchange'},
-  {img: 'okchanger', url: "https://okchanger.com" , name: 'okchanger'},
-  {img: 'kurs', url: "https://kurs.expert" , name: 'kurs'},
-  {img:'exchangesumo', url: 'https://exchangesumo.com/', name: 'exchangesumo'},
-  {img:'emon', url: 'http://e-mon.ru/', name: 'emon'},
-  {img:'allchange', url: 'https://allchange.org/', name: 'allchange'},
-  {img:'bestcurs', url: 'https://bestcurs.org/', name: 'bestcurs'} 
+  const hideFooter = useMemo(() => {
+    const routes = ['signin', 'signup', 'forgot-password'];
 
-]
+    // Comment: Matches - /lang/route, /lang/route/
+    const shouldHide = routes.map(route => new RegExp(`^/${lang}/${route}(/?)$`).test(pathname));
 
+    if (shouldHide.includes(true)) {
+      return true;
+    }
+    return false;
+  }, [location]);
 
-
-
-const Footer = (props) => {
-  const { location } = props
-  const { pathname } = location
-  const hideFooter = useMemo(() => (
-    pathname === '/signin'
-    || pathname === '/signup'
-    || pathname === '/not-found'
-  ), [location])
-
-  if (hideFooter) return null
+  if (hideFooter) return null;
 
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col-md-12'>
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
           <I18n ns="translations">
-            {(t) => (
+            {t => (
               <StyledFooter>
-                <section className='logo'>
-                  <Link to='/'><img src="/img/logo.svg" alt="N.exchange Logo" /></Link>
+                <section className="logo">
+                  <Link to="/">
+                    <img src="/img/logo.svg" alt="N.exchange Logo" />
+                  </Link>
                 </section>
-                <section className='links'>
-                  <main className=''>
+                <section className="links">
+                  <main className="">
                     <section>
                       <h4>{t('header.resources')}</h4>
                       <ul>
-                        <li><Link to='/instant-white-label'><strong>{t('header.whitelabel')}</strong></Link></li>
-                        <li><a href='https://nexchange2.docs.apiary.io/'>{t('header.apidocumentation')}</a></li>
-                        <li><a href='/#support'>{t('header.support')}</a></li>
+                        <li>
+                          <Link to={`${lang}/instant-white-label`}>
+                            <strong>{t('header.whitelabel')}</strong>
+                          </Link>
+                        </li>
+                        <li>
+                          <a href="https://nexchange2.docs.apiary.io/">{t('header.apidocumentation')}</a>
+                        </li>
+                        <li>
+                          <Link
+                            onClick={() => {
+                              props.showSupportModal(true);
+                            }}
+                            to="#"
+                          >
+                            {t('header.support')}
+                          </Link>
+                        </li>
                       </ul>
                     </section>
                     <section>
                       <h4>{t('header.about')}</h4>
                       <ul>
-                        <li><a href='/#about'>{t('header.about')}</a></li>
-                        <li><Link to='/faqs'>{t('header.faq')}</Link></li>
-                        <li><span /></li>
+                        <li>
+                          <Link to={`/${lang}#about`}>{t('header.about')}</Link>
+                        </li>
+                        <li>
+                          <Link to={`/${lang}/faqs`}>{t('header.faq')}</Link>
+                        </li>
+                        <li>
+                          <span />
+                        </li>
                       </ul>
                     </section>
                     <section>
                       <h4>{t('footer.popular-pairs')}</h4>
-                      <PopularPairs />
+                      <PopularPairs lang={lang} />
                     </section>
                     <section>
                       <h4>{t('header.social')}</h4>
                       <ul>
-                        <li><a href='/twitter' target='_blank' rel='noopener noreferrer'>{t('header.twitter')}</a></li>
-                        <li><a href='/fb' target='_blank' rel='noopener noreferrer'>{t('header.facebook')}</a></li>
-                        <li><a href='/slack' target='_blank' rel='noopener noreferrer'>{t('header.slack')}</a></li>
-                        <li><a href='/telegram' target='_blank' rel='noopener noreferrer'>{t('header.telegram')}</a></li>
+                        <li>
+                          <a href="/twitter" target="_blank" rel="noopener noreferrer">
+                            {t('header.twitter')}
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/fb" target="_blank" rel="noopener noreferrer">
+                            {t('header.facebook')}
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/slack" target="_blank" rel="noopener noreferrer">
+                            {t('header.slack')}
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/telegram" target="_blank" rel="noopener noreferrer">
+                            {t('header.telegram')}
+                          </a>
+                        </li>
                       </ul>
                     </section>
-
-
                   </main>
                   <aside>
-                    <div className='compliance'>{COMPLIANCE.map(e => (
-                      <img src={`/img/compliance/${e}.svg`} alt='e' className={e} />
-                    ))}</div>
-                    
-                  
-                    <div className='compliance2'>{COMPLIANCE2.map(e => (
-                     <a href={`${e.url}`} target='_blank' rel='noopener noreferrer'>
-                      <img src={`/img/compliance/${e.img}.svg`} alt={`${e.name}`} className={`${e.name}`} /> 
-                     </a>
-                    ))}</div>  
+                    <div className="compliance">
+                      {COMPLIANCE.map(e => (
+                        <img src={`/img/compliance/${e}.svg`} alt="e" className={e} key={e} />
+                      ))}
+                    </div>
 
+                    <div className="compliance2">
+                      {COMPLIANCE2.map(e => (
+                        <a href={`${e.url}`} target="_blank" rel="noopener noreferrer" key={e.name}>
+                          <img src={`/img/compliance/${e.img}.svg`} alt={`${e.name}`} className={`${e.name}`} />
+                        </a>
+                      ))}
+                    </div>
 
-
-
-                    <p><CopyrightNotice /> — <RegisteredCompany /></p>
                     <p>
-                      <Link to='/terms-and-conditions'>{t('header.terms-and-conditions')}</Link>
+                      <CopyrightNotice /> — <RegisteredCompany />
+                    </p>
+                    <p>
+                      <Link to="/terms-and-conditions">{t('header.terms-and-conditions')}</Link>
                       <span> — </span>
-                      <Link to='/privacy'>{t('header.privacy-policy')}</Link>
+                      <Link to="/privacy">{t('header.privacy-policy')}</Link>
                     </p>
                   </aside>
                 </section>
               </StyledFooter>
             )}
           </I18n>
-          
-          </div>
         </div>
       </div>
-  )
-}
+    </div>
+  );
+};
 /*
 ETH to BTC
 BTC to ETH
@@ -129,29 +168,29 @@ const defaultPairs = [
   ['usdt', 'btc'],
   ['btc', 'xmr'],
   ['btc', 'usdt'],
-]
-const PopularPairs = (props) => {
-  const [pairs] = useState(defaultPairs)
+];
+const PopularPairs = ({ lang }) => {
+  const [pairs] = useState(defaultPairs);
   return (
     <ul>
       {pairs.map(([quote, base], index) => (
-        <li key={`pair-${index}`}>
-          <Link to={`/convert/${quote}-to-${base}`}>{quote.toUpperCase()} to {base.toUpperCase()}</Link>
+        <li key={`${quote}-to-${base}`}>
+          <Link to={`/${lang}/convert/${quote}-to-${base}`}>
+            {quote.toUpperCase()} to {base.toUpperCase()}
+          </Link>
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 
-const CopyrightNotice = (props) => (
-  <>All rights reserved, YOA LTD 2016-{moment(Date.now()).format('YYYY')} — England & Wales</>
-)
+const CopyrightNotice = () => <>All rights reserved, YOA LTD 2016-{new Date().getFullYear()} — England & Wales</>;
 
-const RegisteredCompany = (props) => (
+const RegisteredCompany = props => (
   <a href="https://beta.companieshouse.gov.uk/company/10009845" rel="noopener noreferrer" target="_blank">
     registered company No. 10009845
   </a>
-)
+);
 
 const StyledFooter = styled.footer`
   > section {
@@ -277,6 +316,10 @@ const StyledFooter = styled.footer`
       }
     }
   }
-`
+`;
 
-export default withRouter(Footer);
+
+const mapStateToProps = ({ supportModal }) => ({ supportModal });
+const mapDispatchToProps = dispatch => bindActionCreators({ showSupportModal }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Footer));
