@@ -13,7 +13,6 @@ import {
   selectCoin,
   fetchCoinDetails,
   fetchPrice,
-  showSupportModal,
   setOrder,
   fetchPairs,
   fetchOrder,
@@ -113,16 +112,6 @@ describe('actions', () => {
 
     store.dispatch(selectCoin('payload','pairs'));
     expect(store.getActions()).toEqual(expectedActions);
-  });
-
-  it('showSupportModal', () => {
-    const payload = 'payload';
-    const expectedAction = {
-      type: types.SHOW_SUPPORT_MODAL,
-      payload,
-    };
-
-    expect(showSupportModal('payload')).toEqual(expectedAction);
   });
 
   it('setOrder', () => {

@@ -2,40 +2,17 @@ import React, { useMemo, useState } from 'react';
 
 import { I18n } from 'react-i18next';
 import { NavLink as Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { showSupportModal } from 'Actions';
-
 
 import styled from '@emotion/styled';
+import moment from 'moment';
 
-const COMPLIANCE = ['mastercard', 'visa'];
-const COMPLIANCE2 = [
-  { img: 'bestchange', url: 'https://bestchange.com', name: 'bestchange' },
-  { img: 'okchanger', url: 'https://okchanger.com', name: 'okchanger' },
-  { img: 'kurs', url: 'https://kurs.expert', name: 'kurs' },
-  { img: 'exchangesumo', url: 'https://exchangesumo.com/', name: 'exchangesumo' },
-  { img: 'emon', url: 'http://e-mon.ru/', name: 'emon' },
-  { img: 'allchange', url: 'https://allchange.org/', name: 'allchange' },
-  { img: 'bestcurs', url: 'https://bestcurs.org/', name: 'bestcurs' },
-];
+const paymentGateways = ['mastercard', 'visa'];
+const aggregators = ['bestchange', 'okchanger', 'kurs', 'exchangesumo', 'emon', 'allchange', 'bestcurs'];
 
 const Footer = props => {
   const { location } = props;
   const { pathname } = location;
-  const lang = I18n.language || window.localStorage.i18nextLng || 'en';
-
-  const hideFooter = useMemo(() => {
-    const routes = ['signin', 'signup', 'forgot-password'];
-
-    // Comment: Matches - /lang/route, /lang/route/
-    const shouldHide = routes.map(route => new RegExp(`^/${lang}/${route}(/?)$`).test(pathname));
-
-    if (shouldHide.includes(true)) {
-      return true;
-    }
-    return false;
-  }, [location]);
+  const hideFooter = useMemo(() => pathname === '/signin' || pathname === '/signup' || pathname === '/not-found', [location]);
 
   if (hideFooter) return null;
 
@@ -57,7 +34,7 @@ const Footer = props => {
                       <h4>{t('header.resources')}</h4>
                       <ul>
                         <li>
-                          <Link to={`${lang}/instant-white-label`}>
+                          <Link to="/instant-white-label">
                             <strong>{t('header.whitelabel')}</strong>
                           </Link>
                         </li>
@@ -65,14 +42,7 @@ const Footer = props => {
                           <a href="https://nexchange2.docs.apiary.io/">{t('header.apidocumentation')}</a>
                         </li>
                         <li>
-                          <Link
-                            onClick={() => {
-                              props.showSupportModal(true);
-                            }}
-                            to="#"
-                          >
-                            {t('header.support')}
-                          </Link>
+                          <a href="/#support">{t('header.support')}</a>
                         </li>
                       </ul>
                     </section>
@@ -80,10 +50,10 @@ const Footer = props => {
                       <h4>{t('header.about')}</h4>
                       <ul>
                         <li>
-                          <Link to={`/${lang}#about`}>{t('header.about')}</Link>
+                          <a href="/#about">{t('header.about')}</a>
                         </li>
                         <li>
-                          <Link to={`/${lang}/faqs`}>{t('header.faq')}</Link>
+                          <Link to="/faqs">{t('header.faq')}</Link>
                         </li>
                         <li>
                           <span />
@@ -92,7 +62,7 @@ const Footer = props => {
                     </section>
                     <section>
                       <h4>{t('footer.popular-pairs')}</h4>
-                      <PopularPairs lang={lang} />
+                      <PopularPairs />
                     </section>
                     <section>
                       <h4>{t('header.social')}</h4>
@@ -122,15 +92,15 @@ const Footer = props => {
                   </main>
                   <aside>
                     <div className="compliance">
-                      {COMPLIANCE.map(e => (
+                      {paymentGateways.map(e => (
                         <img src={`/img/compliance/${e}.svg`} alt="e" className={e} key={e} />
                       ))}
                     </div>
 
                     <div className="compliance2">
-                      {COMPLIANCE2.map(e => (
-                        <a href={`${e.url}`} target="_blank" rel="noopener noreferrer" key={e.name}>
-                          <img src={`/img/compliance/${e.img}.svg`} alt={`${e.name}`} className={`${e.name}`} />
+                      {aggregators.map(e => (
+                        <a href={t(`footer.aggregators.${e}.url`)} target="_blank" rel="noopener noreferrer" key={e}>
+                          <img src={`/img/compliance/${e}.svg`} alt={t(`footer.aggregators.${e}.name`)} className={e} />
                         </a>
                       ))}
                     </div>
@@ -169,13 +139,13 @@ const defaultPairs = [
   ['btc', 'xmr'],
   ['btc', 'usdt'],
 ];
-const PopularPairs = ({ lang }) => {
+const PopularPairs = props => {
   const [pairs] = useState(defaultPairs);
   return (
     <ul>
       {pairs.map(([quote, base], index) => (
         <li key={`${quote}-to-${base}`}>
-          <Link to={`/${lang}/convert/${quote}-to-${base}`}>
+          <Link to={`/convert/${quote}-to-${base}`}>
             {quote.toUpperCase()} to {base.toUpperCase()}
           </Link>
         </li>
@@ -184,7 +154,7 @@ const PopularPairs = ({ lang }) => {
   );
 };
 
-const CopyrightNotice = () => <>All rights reserved, YOA LTD 2016-{new Date().getFullYear()} — England & Wales</>;
+const CopyrightNotice = props => <>All rights reserved, YOA LTD 2016-{moment(Date.now()).format('YYYY')} — England & Wales</>;
 
 const RegisteredCompany = props => (
   <a href="https://beta.companieshouse.gov.uk/company/10009845" rel="noopener noreferrer" target="_blank">
@@ -318,8 +288,4 @@ const StyledFooter = styled.footer`
   }
 `;
 
-
-const mapStateToProps = ({ supportModal }) => ({ supportModal });
-const mapDispatchToProps = dispatch => bindActionCreators({ showSupportModal }, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Footer));
+export default withRouter(Footer);

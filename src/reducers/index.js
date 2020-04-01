@@ -14,7 +14,6 @@ import EmailReducer from './reducer_email';
 import OrderModeReducer from './reducer_order_mode';
 import OrderBookReducer from './reducer_order_book';
 import AuthReducer from './reducer_auth';
-import showSupportModal from './reducer_support_modal';
 
 const rootReducer = combineReducers({
   error: ErrorReducer,
@@ -31,8 +30,7 @@ const rootReducer = combineReducers({
   email: EmailReducer,
   orderMode: OrderModeReducer,
   orderBook: OrderBookReducer,
-  auth: AuthReducer,
-  supportModal: showSupportModal
+  auth: AuthReducer
 });
 
 export default rootReducer;
