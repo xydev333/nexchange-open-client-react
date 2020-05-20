@@ -29,6 +29,7 @@ describe('OrderCoinsProcessed', () => {
 
     wrapShallow = shallow(<OrderCoinsProcessed order={order} />);
     const pairOrder = `${order.pair.base.code}${order.pair.quote.code}`;
+    // axiosMock.onGet(`https://api.nexchange.io/en/api/v1/get_price/${pairOrder}/`).reply(200, mockDataOrder);
     axiosMock.onGet(`${config.API_BASE_URL}/get_price/${pairOrder}/`).reply(200, mockDataOrder);
   });
 
