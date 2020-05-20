@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { I18n } from 'react-i18next';
-import classNames from 'classnames';
 import debounce from 'Utils/debounce';
 import { fetchPrice } from 'Actions/index.js';
 import CoinSelector from './CoinSelector/CoinSelector';
@@ -13,7 +12,6 @@ class CoinInput extends PureComponent {
   state = {
     value: '...',
     fetching: this.props.price.fetching,
-    inputClass: undefined,
   };
 
   handleFocus = event => {
@@ -37,23 +35,11 @@ class CoinInput extends PureComponent {
     this.setState({ value });
     this.fetchAmounts(value);
 
-    // Add error class to input if less than min or more than max
-    const { min_amount_base, max_amount_base, min_amount_quote, max_amount_quote } = this.props.price;
-    if (this.props.type === 'deposit') {
-      parseFloat(value) < min_amount_quote || parseFloat(value) > max_amount_quote
-        ? this.setState({ inputClass: 'error' })
-        : this.setState({ inputClass: undefined });
-    } else if (this.props.type === 'receive') {
-      parseFloat(value) < min_amount_base || parseFloat(value) > max_amount_base
-        ? this.setState({ inputClass: 'error' })
-        : this.setState({ inputClass: undefined });
-    }
-
-    window.gtag('event', 'Change amount', { event_category: 'Order', event_label: `` });
+    window.gtag('event', 'Change amount', {event_category: 'Order', event_label: ``});
   };
 
   setValue = value => {
-    const simulatedEvent = { target: { value: value.toString() } };
+    const simulatedEvent ={target: {value: value.toString()}};
     this.handleChange(simulatedEvent);
   };
 
@@ -89,10 +75,12 @@ class CoinInput extends PureComponent {
       this.setState({ fetching: nextProps.price.fetching });
     }
 
-    const updatedAmount = nextProps.price[this.props.type];
-
-    if ((updatedAmount && updatedAmount !== '...') || nextProps.lastEdited === this.props.type) {
-      if (updatedAmount !== this.state.value) this.setState({ value: updatedAmount });
+    if (nextProps.lastEdited !== nextProps.type || !this.state.value || this.state.value === '...') {
+      if (nextProps.type === 'receive') {
+        this.setState({ value: nextProps.price.receive });
+      } else if (nextProps.type === 'deposit') {
+        this.setState({ value: nextProps.price.deposit });
+      }
     }
   };
 
@@ -107,7 +95,7 @@ class CoinInput extends PureComponent {
               </label>
               <input
                 type="text"
-                className={classNames('form-control', styles.input, this.state.inputClass)}
+                className={`form-control ${styles.input}`}
                 id={`coin-input-${this.props.type}`}
                 name={this.props.type}
                 onChange={this.handleChange}
@@ -139,4 +127,7 @@ class CoinInput extends PureComponent {
 const mapStateToProps = ({ selectedCoin, price }) => ({ selectedCoin, price, lastEdited: selectedCoin.lastSelected });
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchPrice }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoinInput);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoinInput);
