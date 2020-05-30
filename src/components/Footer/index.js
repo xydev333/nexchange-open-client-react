@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showSupportModal } from 'Actions';
 
+
 import styled from '@emotion/styled';
 
 const paymentGateways = ['mastercard', 'visa'];
@@ -54,11 +55,6 @@ const Footer = props => {
                           </Link>
                         </li>
                         <li>
-                          <a href="https://forms.gle/4huiErgdSrXie5VD6" target="_blank" rel="noopener noreferrer">
-                            {t('header.listcoin')}
-                          </a>
-                        </li>
-                        <li>
                           <a href="https://nexchange2.docs.apiary.io/">{t('header.apidocumentation')}</a>
                         </li>
                         <li>
@@ -77,9 +73,7 @@ const Footer = props => {
                       <h4>{t('header.about')}</h4>
                       <ul>
                         <li>
-                          <HashLink smooth to={`/${lang}#about`}>
-                            {t('header.about')}
-                          </HashLink>
+                          <HashLink smooth to={`/${lang}#about`}>{t('header.about')}</HashLink>
                         </li>
                         <li>
                           <Link to={`/${lang}/faqs`}>{t('header.faq')}</Link>
@@ -316,6 +310,7 @@ const StyledFooter = styled.footer`
     }
   }
 `;
+
 
 const mapStateToProps = ({ supportModal }) => ({ supportModal });
 const mapDispatchToProps = dispatch => bindActionCreators({ showSupportModal }, dispatch);
