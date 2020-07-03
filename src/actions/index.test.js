@@ -21,7 +21,7 @@ import {
   fetchUserEmail,
   setUserEmail,
   changeOrderMode,
-  changeOrderBookValue,
+  changeOrderBookValue
 } from './index.js';
 import currency from 'Mocks/currency';
 import pair from 'Mocks/pair';
@@ -29,9 +29,9 @@ import order from 'Mocks/order';
 import kyc from 'Mocks/kyc.js';
 import preparePairs from '../utils/preparePairs';
 
-import config from '../config';
+import config from '../config'
 
-const { API_BASE_URL } = config;
+const { API_BASE_URL } = config
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -103,17 +103,15 @@ describe('actions', () => {
   it('selectCoin', () => {
     const payload = 'payload';
     const pairs = 'pairs';
-    const expectedActions = [
-      {
-        type: types.COIN_SELECTED,
-        payload: {
-          selectedCoins: payload,
-          pairs: pairs,
-        },
+    const expectedActions = [{
+      type: types.COIN_SELECTED,
+      payload: {
+        selectedCoins: payload,
+        pairs: pairs
       },
-    ];
+    }];
 
-    store.dispatch(selectCoin('payload', 'pairs'));
+    store.dispatch(selectCoin('payload','pairs'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -204,7 +202,7 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      },
+      }
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -285,9 +283,6 @@ describe('actions', () => {
         payload: { show: false, type: 'INVALID_AMOUNT' },
       },
       {
-        type: types.FETCHING_PRICE,
-      },
-      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -299,7 +294,7 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'deposit',
         },
-      },
+      }
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -333,9 +328,6 @@ describe('actions', () => {
         payload: { show: false, type: 'INVALID_AMOUNT' },
       },
       {
-        type: types.FETCHING_PRICE,
-      },
-      {
         type: types.PRICE_FETCHED,
         payload: {
           pair: 'ETHBTC',
@@ -347,7 +339,7 @@ describe('actions', () => {
           max_amount_base: mockData.max_amount_base,
           lastEdited: 'receive',
         },
-      },
+      }
     ];
 
     return store.dispatch(fetchPrice(payload)).then(() => {
@@ -376,9 +368,6 @@ describe('actions', () => {
       {
         payload: { show: false, type: 'INVALID_AMOUNT' },
         type: types.ERROR_ALERT,
-      },
-      {
-        type: types.FETCHING_PRICE,
       },
       {
         type: types.PRICE_FETCHED,
@@ -420,9 +409,6 @@ describe('actions', () => {
       {
         type: types.ERROR_ALERT,
         payload: { show: false, type: 'INVALID_AMOUNT' },
-      },
-      {
-        type: types.FETCHING_PRICE,
       },
       {
         type: types.PRICE_FETCHED,
@@ -471,9 +457,6 @@ describe('actions', () => {
           show: false,
           type: 'INVALID_AMOUNT',
         },
-      },
-      {
-        type: types.FETCHING_PRICE,
       },
       {
         type: types.PRICE_FETCHED,
@@ -568,21 +551,13 @@ describe('actions', () => {
       },
       {
         type: types.COIN_SELECTED,
-        payload: {
-          selectedCoins: {
-            deposit: 'BTC',
-            receive: 'ETH',
-            lastSelected: 'deposit',
-            prev: { deposit: 'BTC', receive: 'ETH' },
-            selectedByUser: {
-              deposit: false,
-              receive: false,
-            },
-          },
-        },
+        payload: { selectedCoins: { deposit: 'BTC', receive: 'ETH', lastSelected: 'deposit', prev: { deposit: 'BTC', receive: 'ETH' }, selectedByUser: {
+          deposit: false,
+          receive: false,
+        } } },
       },
     ];
-
+    
     return store.dispatch(fetchPairs()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
@@ -685,7 +660,9 @@ describe('actions', () => {
     window.$crisp.get = jest.fn();
     window.$crisp.push = jest.fn();
 
-    axiosMock.onPut(API_BASE_URL + '/users/me/', { email: payload }).reply(200, { username: 'Anonymous18878', email: 'email@email.com' });
+    axiosMock
+      .onPut(API_BASE_URL + '/users/me/', { email: payload })
+      .reply(200, { username: 'Anonymous18878', email: 'email@email.com' });
     localStorage.setItem('token', 'some token');
 
     const expectedActions = [
@@ -727,19 +704,21 @@ describe('actions', () => {
     });
   });
 
+
   //Order Book
   it('changeOrderMode', () => {
     const payload = 'ORDER_BOOK';
-    const expectedAction = {
-      type: types.ORDER_MODE_CHANGE,
-      mode: 'ORDER_BOOK',
-    };
+    const expectedAction = 
+      {
+        type: types.ORDER_MODE_CHANGE,
+        mode: 'ORDER_BOOK',
+      };
 
     return expect(changeOrderMode(payload)).toEqual(expectedAction);
   });
 
   it('changeOrderBookValue (order_type)', () => {
-    const payload = {
+    const payload = {    
       order_type: 'SELL',
       quantity: '',
       limit_rate: '',
@@ -748,10 +727,11 @@ describe('actions', () => {
       history: [],
       myOrders: [],
     };
-    const expectedAction = {
-      type: types.ORDER_BOOK_VALUE_CHANGE,
-      orderBook: payload,
-    };
+    const expectedAction = 
+      {
+        type: types.ORDER_BOOK_VALUE_CHANGE,
+        orderBook: payload,
+      };
 
     return expect(changeOrderBookValue(payload)).toEqual(expectedAction);
   });

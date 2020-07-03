@@ -100,7 +100,7 @@
   },
   "exchangewidget": {
     "1": "GET STARTED",
-    "2": "*Confirm & Place Order",
+    "2": "Buy Now!",
     "3": "Current fee is 0.5%",
     "min": "Min amount",
     "max": "Max amount"
@@ -142,7 +142,7 @@
     "forgotpassword2": "If you want to reset your password, please enter your email address",
     "resetpassword": "Reset Password",
     "resetPasswordBody": "Enter your new password",
-    "registerationOptionalTitle": "Registration is Optional!",
+    "registerationOptionalTitle": "Registeration is Optional!",
     "registerationOptional": "Please be advised that registration isn't required to use n.exchange",
     "register": {
       "successTitle": "Registration Successful",
@@ -257,6 +257,14 @@
         "name": "okchanger",
         "url": "https://okchanger.com"
       },
+      "kurs": {
+        "name": "ratesguru",
+        "url": "https://rates.guru/"
+      },
+      "exchangesumo": {
+        "name": "exchangesumo",
+        "url": "https://exchangesumo.com/"
+      },
       "emon": {
         "name": "emon",
         "url": "http://e-mon.ru/"
@@ -264,6 +272,10 @@
       "allchange": {
         "name": "allchange",
         "url": "https://allchange.org/"
+      },
+      "bestcurs": {
+        "name": "bestcurs",
+        "url": "https://bestcurs.org/"
       }
     }
   },

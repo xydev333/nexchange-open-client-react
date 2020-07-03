@@ -3,10 +3,9 @@ import * as types from 'Actions/types';
 
 describe('wallet reducer', () => {
   const initialState = {
-    userAddress: {},
+    address: '',
     valid: false,
     show: false,
-    forced: false,
   };
 
   it('should return the initial state', () => {
@@ -14,12 +13,17 @@ describe('wallet reducer', () => {
   });
 
   it('should handle SET_WALLET', () => {
-    const payload = { address: 'address' };
+    const payload = {
+      address: 'address',
+      valid: false,
+      show: true,
+    };
+
     const action = {
       type: types.SET_WALLET,
       payload,
     };
 
-    expect(reducer(initialState, action)).toEqual({ forced: false, show: false, userAddress: { address: 'address' }, valid: false });
+    expect(reducer(initialState, action)).toEqual(payload);
   });
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 
 import { graphql } from 'react-apollo';
@@ -23,19 +23,53 @@ const youtubeOptions = {
     mute: 1,
   },
 };
+const StyledYoutube = styled(YouTube)`
+  @media (min-width: 1280px) {
+    ${props =>
+      !props.videoInViewport && {
+        position: 'fixed !important',
+        height: '16rem',
+        width: '24rem',
+        top: 'initial !important',
+        bottom: '2rem !important',
+        left: '2rem !important',
+      }}
+  }
+`;
 
-const WhiteLabelSEO = ({ data }) => {
+const WhiteLabelSEO = ({ data, ...props }) => {
   const { pages } = data;
   const { title, videoId, topics, faq, main, createdAt, updatedAt } = (pages && pages[0]) || {};
+  const [videoInViewport, setVideoInViewport] = useState(true);
+
+  const scrollListener = () => {
+    if (window.pageYOffset > window.screen.height && videoInViewport) {
+      setVideoInViewport(false);
+      return;
+    }
+    if (window.pageYOffset < window.screen.height && !videoInViewport) {
+      setVideoInViewport(true);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollListener);
+
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    };
+  }, [scrollListener]);
 
   return (
     <StyledWhitelabel>
       <VideoCard
         title={title}
         content={
-          <YouTube
+          <StyledYoutube
             id="whitelabel-video"
             videoId={videoId}
+            videoInViewport={videoInViewport}
             opts={youtubeOptions}
             onPlay={() => {
               window.gtag('event', 'Whitelabel Video', { event_category: 'interaction', event_label: `Video Start` });
@@ -96,9 +130,9 @@ const plans = [
   },
   {
     name: 'crypto',
-    setup: 2500,
+    // setup: 2500,
     monthly: 195,
-    duration: 12,
+    // duration: 12,
     devhours: 1,
     hourprice: 100,
     coinlist: 5000,
@@ -107,9 +141,9 @@ const plans = [
   },
   {
     name: 'fiat',
-    setup: 5000,
+    // setup: 5000,
     monthly: 375,
-    duration: 12,
+    // duration: 12,
     devhours: 2,
     hourprice: 100,
     coinlist: 5000,
@@ -118,9 +152,9 @@ const plans = [
   },
   {
     name: 'ieo',
-    setup: 9800,
+    // setup: 9800,
     monthly: 750,
-    duration: 12,
+    // duration: 12,
     devhours: 4,
     hourprice: 100,
     coinlist: 0,

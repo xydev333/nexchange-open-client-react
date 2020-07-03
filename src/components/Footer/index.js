@@ -10,7 +10,7 @@ import { showSupportModal } from 'Actions';
 import styled from '@emotion/styled';
 
 const paymentGateways = ['mastercard', 'visa'];
-const aggregators = ['bestchange', 'okchanger', 'emon', 'allchange'];
+const aggregators = ['bestchange', 'okchanger', 'kurs', 'exchangesumo', 'emon', 'allchange', 'bestcurs'];
 
 const Footer = props => {
   const { location } = props;
@@ -38,13 +38,13 @@ const Footer = props => {
           <I18n ns="translations">
             {t => (
               <StyledFooter>
+                <section className="logo">
+                  <Link to="/">
+                    <img src="/img/logo.svg" alt="N.exchange Logo" />
+                  </Link>
+                </section>
                 <section className="links">
                   <main className="">
-                    <section className="logo">
-                      <Link to="/">
-                        <img src="/img/logo.svg" alt="N.exchange Logo" />
-                      </Link>
-                    </section>
                     <section>
                       <h4>{t('header.resources')}</h4>
                       <ul>
@@ -194,6 +194,17 @@ const RegisteredCompany = props => (
 const StyledFooter = styled.footer`
   > section {
     padding: 12px 0;
+    &.logo {
+      @media screen and (max-width: 960px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        margin: 0 2rem;
+        width: 180px;
+      }
+    }
     h4 {
       text-transform: uppercase;
       font-weight: bold;
@@ -217,16 +228,12 @@ const StyledFooter = styled.footer`
       flex-direction: column;
       > main {
         display: flex;
-        justify-content: center;
         @media screen and (max-width: 640px) {
           flex-direction: column;
         }
         > section {
           width: 180px;
           padding: 0 2rem;
-          &.logo {
-            width: 24rem;
-          }
           @media screen and (max-width: 640px) {
             width: 100%;
             &:not(:last-child) {
@@ -279,8 +286,10 @@ const StyledFooter = styled.footer`
           img {
             max-width: 60px;
             display: inline-block;
-            margin: 0 1rem;
-            
+            margin-right: 2rem;
+            &:not(:last-child) {
+              margin-right: 1rem;
+            }
 
             &.kurs {
               max-height: 23px;
