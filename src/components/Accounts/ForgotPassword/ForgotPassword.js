@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react';
-import Cookies from 'js-cookie';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import RequestReset from './request';
-import NewPassword from './reset';
 
-const resetToken = Cookies.get('resetToken');
+import RequestReset from './request'
+import NewPassword from './reset'
 
-const ForgotPassword = () => {
-  useEffect(() => {
-    return () => {
-      Cookies.remove('resetToken');
-    };
-  }, []);
+const ForgotPassword = (props) => {
+  return (
+    <Switch>
+      <Route path='/:lang(en|de|ru)/forgot-password' exact component={RequestReset} />
+      <Route path='/:lang(en|de|ru)/forgot-password/:resetToken?' exact component={NewPassword} />
+    </Switch>
+  );
+}
 
-  if (resetToken) return <NewPassword resetToken={resetToken} />;
-
-  return <RequestReset />;
-};
-
-export default ForgotPassword;
+export default ForgotPassword
