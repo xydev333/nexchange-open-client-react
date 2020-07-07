@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as types from './types';
-import Cookies from 'js-cookie';
+import _ from 'lodash';
 import config from 'Config';
 import urlParams from 'Utils/urlParams';
 import serialize from 'Utils/serialize';
@@ -55,21 +55,17 @@ export const fetchCoinDetails = () => dispatch => {
       let coins;
 
       if (params && params.hasOwnProperty('test')) {
-        coins = response.data.filter(elem => {
-          const { has_enabled_pairs_for_test } = elem;
-          return has_enabled_pairs_for_test === true;
+        coins = _.filter(response.data, {
+          has_enabled_pairs_for_test: true,
         });
       } else if (isWhiteLabel) {
-        coins = response.data.filter(elem => {
-          const { has_enabled_pairs, is_crypto } = elem;
-          if (has_enabled_pairs && is_crypto) return elem;
-
-          return null;
+        coins = _.filter(response.data, {
+          has_enabled_pairs: true,
+          is_crypto: true,
         });
       } else {
-        coins = response.data.filter(elem => {
-          const { has_enabled_pairs } = elem;
-          return has_enabled_pairs === true;
+        coins = _.filter(response.data, {
+          has_enabled_pairs: true,
         });
       }
 
@@ -606,7 +602,6 @@ export const resetPassword = (hash, password) => dispatch => {
         type: types.AUTH_PASSWORD_RESET_SUCCESS,
         payload: data,
       });
-      Cookies.remove('resetToken');
     })
     .catch(err => {
       dispatch({
