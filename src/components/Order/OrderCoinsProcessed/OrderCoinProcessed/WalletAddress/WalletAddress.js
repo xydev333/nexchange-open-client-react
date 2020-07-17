@@ -98,20 +98,17 @@ const PrevAddress = styled.div`
   }
   > div {
     margin-top: 2.5rem;
-    max-height: 22rem;
-    overflow-y: auto;
   }
 `;
 
 const SingleAddress = styled.div`
-  padding: 0 0 0.5rem 0.5rem;
+  padding: 0 0 1rem 0.5rem;
   color: #000000;
   font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   border-bottom: 1px solid #e0e5ea;
   cursor: pointer;
-  margin-bottom: 2rem;
 `;
 
 const Button = styled.div`
@@ -124,10 +121,6 @@ const Button = styled.div`
     border: none;
     background: none;
     margin-top: 2rem;
-
-    @media (min-width: 769px) {
-      visibility: hidden;
-    }
   }
 
   #submit_address {
@@ -149,7 +142,6 @@ const Button = styled.div`
     }
   }
 `;
-
 const CloseButton = styled.button`
   position: absolute;
   top: 1.5rem;
@@ -171,21 +163,13 @@ const WalletAddress = ({ coin, showModal, hideModal, setAddress, coinsInfo, orde
         .join(' ')
     : null;
 
-  const enterPressed = e => {
-    if (e.keyCode === 13 && showModal === true) {
-      handleSubmitWalletAddress();
-    }
-  };
-
   useEffect(() => {
     if (showModal) {
       document.querySelector('#walletAddressModal').classList.add('show');
       document.querySelector('body').style.overflowY = 'hidden';
-      window.addEventListener('keyup', enterPressed);
     } else {
       document.querySelector('#walletAddressModal').classList.remove('show');
       document.querySelector('body').style.overflowY = 'auto';
-      window.removeEventListener('keyup', enterPressed);
     }
 
     return () => {
@@ -199,8 +183,8 @@ const WalletAddress = ({ coin, showModal, hideModal, setAddress, coinsInfo, orde
     if (orderHistory) {
       const addresses = [];
 
-      orderHistory.forEach(({ quote, withdraw_address }) => {
-        if (quote === coin && withdraw_address) {
+      orderHistory.forEach(({ base, withdraw_address }) => {
+        if (base === coin) {
           if (!addresses.includes(withdraw_address)) addresses.push(withdraw_address);
         }
         setPrevAddresses(addresses);
@@ -241,19 +225,12 @@ const WalletAddress = ({ coin, showModal, hideModal, setAddress, coinsInfo, orde
         )
         .then(res => {
           setAddress(walletAddress.address);
-
-          // set withdraw address in order history
-          const orderHistory = JSON.parse(window.localStorage.orderHistory);
-          const orderIndex = orderHistory.findIndex(e => e.id === unique_reference);
-          orderHistory[orderIndex].withdraw_address = walletAddress.address;
-          window.localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
-
           hideModal();
         })
         .catch(err => {
           const { data } = err.response;
 
-          const invalidAddressRegex = new RegExp(`has invalid characters`);
+          const invalidAddressRegex = new RegExp(`has invalid characters for a valid address`);
 
           // address is invalid
           if (invalidAddressRegex.test(data.non_field_errors?.[0])) setAddressValid(false);
@@ -312,7 +289,7 @@ const WalletAddress = ({ coin, showModal, hideModal, setAddress, coinsInfo, orde
             Close this window
           </button>
           <button type="button" id="submit_address" onClick={handleSubmitWalletAddress}>
-            Submit address
+            Submit
           </button>
         </Button>
       </Content>

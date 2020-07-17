@@ -12,6 +12,7 @@ import { errorAlert, setOrder } from 'Actions/index.js';
 
 import CoinInput from './CoinInput/CoinInput';
 import CoinSwitch from './CoinSwitch/CoinSwitch';
+import Integrations from '../Integrations/Integrations';
 
 import styles from './ExchangeWidget.scss';
 
@@ -137,6 +138,7 @@ class ExchangeWidget extends Component {
                         dangerouslySetInnerHTML={{ __html: t('order.byclickTC', { buttonName: t('exchangewidget.2') }) }}
                       />
                     </div>
+                    <Integrations />
                   </div>
                 </div>
               </div>
