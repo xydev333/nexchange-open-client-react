@@ -1,4 +1,5 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,6 +10,7 @@ import orderExpired from '../__mocks__/orderExpired';
 import Order from '../components/Order/Order';
 
 import '../css/index.scss';
+
 
 window.$ = window.jQuery = require('jquery');
 require('../js/bootstrap.min.js');
@@ -37,20 +39,10 @@ const match = {
   },
 };
 
-export default {
-  title: 'Order states full (crypto)',
-
-  decorators: [
-    story => (
-      <Provider store={store}>
-        <BrowserRouter initialEntries={['/order/asdasd']}>{story()}</BrowserRouter>
-      </Provider>
-    ),
-  ],
-};
-
-export const Initial11 = () => <Order match={match} />;
-
-Initial11.story = {
-  name: 'initial (11)',
-};
+storiesOf('Order states full (crypto)', module)
+  .addDecorator(story => (
+    <Provider store={store}>
+      <BrowserRouter initialEntries={['/order/asdasd']}>{story()}</BrowserRouter>
+    </Provider>
+  ))
+  .add('initial (11)', () => <Order match={match} />);
