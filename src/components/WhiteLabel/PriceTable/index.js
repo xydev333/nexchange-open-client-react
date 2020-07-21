@@ -18,33 +18,32 @@ const PriceTable = props => {
         <PriceContainer>
           <h2>Pricing</h2>
           <StyledTable>
-            <table>
-              <thead>
-                <tr>
-                  <th className="plans">Plans</th>
-                  {plans.map(({ name }) => (
-                    <th key={`plan-${name}`} className={`p p-${name}`}>
-                      {t(`whitelabel.plans.${name}`)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {forder &&
-                  forder.length &&
-                  forder.map(f => (
-                    <tr key={`feature-${f}`}>
-                      <th className={classNames('feature', f === 'coinlist' && 'coinlist')}>{t(`whitelabel.features.${f}`)}</th>
-                      {plans.map(({ [f]: feature, name }) => (
-                        <td key={`feat-${f}-${name}`}>
-                          {((feature || typeof feature === 'number') && t(`whitelabel.values.${f}`, { value: feature })) ||
-                            (!feature && name === 'community' && 'N/A') ||
-                            (!feature && '&nbsp;')}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                {/* <tr className="pt">
+            <thead>
+              <tr>
+                <th className="plans">Plans</th>
+                {plans.map(({ name }) => (
+                  <th key={`plan-${name}`} className={`p p-${name}`}>
+                    {t(`whitelabel.plans.${name}`)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {forder &&
+                forder.length &&
+                forder.map(f => (
+                  <tr key={`feature-${f}`}>
+                    <th className={classNames('feature', f === 'coinlist' && 'coinlist')}>{t(`whitelabel.features.${f}`)}</th>
+                    {plans.map(({ [f]: feature, name }) => (
+                      <td key={`feat-${f}-${name}`}>
+                        {((feature || typeof feature === 'number') && t(`whitelabel.values.${f}`, { value: feature })) ||
+                          (!feature && name === 'community' && 'N/A') ||
+                          (!feature && '&nbsp;')}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              {/* <tr className="pt">
                 <th colSpan={plans.length + 1}>
                   <strong>Payment Terms</strong>
                 </th>
@@ -59,20 +58,19 @@ const PriceTable = props => {
                   <td key={`plan-${plan.name}`}>{t(`whitelabel.values.total`, { value: plan.monthly * 12 + plan.setup })}</td>
                 ))}
               </tr> */}
-                <tr>
-                  <th />
-                  {plans
-                    .map(plan => ({ ...plan, glink: t(`whitelabel.pricing.orderNowLink.${plan.name}`) }))
-                    .map(plan => (
-                      <td key={`plankl-${plan.name}`}>
-                        <TagLink href={t(`whitelabel.pricing.orderNowLink.${plan.name}.link`)} target="_blank" rel="noopener noreferrer">
-                          {t(`whitelabel.pricing.orderNowLink.${plan.name}.text`)}
-                        </TagLink>
-                      </td>
-                    ))}
-                </tr>
-              </tbody>
-            </table>
+              <tr>
+                <th />
+                {plans
+                  .map(plan => ({ ...plan, glink: t(`whitelabel.pricing.orderNowLink.${plan.name}`) }))
+                  .map(plan => (
+                    <td key={`plankl-${plan.name}`}>
+                      <TagLink href={t(`whitelabel.pricing.orderNowLink.${plan.name}.link`)} target="_blank" rel="noopener noreferrer">
+                        {t(`whitelabel.pricing.orderNowLink.${plan.name}.text`)}
+                      </TagLink>
+                    </td>
+                  ))}
+              </tr>
+            </tbody>
           </StyledTable>
         </PriceContainer>
       )}
@@ -169,45 +167,41 @@ const tableStyle = `
   }
 `;
 
-const StyledTable = styled.div`
-  overflow-y: auto;
-
-  table {
-    width: 100%;
-    max-width: 780px;
-    margin: 0 auto;
-    ${tableStyle}
-    > thead {
-      > tr {
-        > th {
-          &:first-of-type {
-            padding-left: 2rem;
-          }
-          &.plans {
-            text-align: left;
-          }
-          &.p {
-            min-width: 110px;
-            max-width: 180px;
-            &-community {
-            }
+const StyledTable = styled.table`
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  ${tableStyle}
+  > thead {
+    > tr {
+      > th {
+        &:first-of-type {
+          padding-left: 2rem;
+        }
+        &.plans {
+          text-align: left;
+        }
+        &.p {
+          min-width: 110px;
+          max-width: 180px;
+          &-community {
           }
         }
       }
     }
-    > tbody {
-      > tr {
-        > th {
-          text-align: left;
-          &:first-of-type {
-            padding-left: 2rem;
-          }
+  }
+  > tbody {
+    > tr {
+      > th {
+        text-align: left;
+        &:first-of-type {
+          padding-left: 2rem;
         }
-        > td {
-          > span {
-            font-size: 3rem;
-            color: green;
-          }
+      }
+      > td {
+        > span {
+          font-size: 3rem;
+          color: green;
         }
       }
     }
