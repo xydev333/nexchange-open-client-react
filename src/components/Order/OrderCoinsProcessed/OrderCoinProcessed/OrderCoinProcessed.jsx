@@ -4,17 +4,14 @@ import copy from 'clipboard-copy';
 import isFiatOrder from 'Utils/isFiatOrder';
 import styles from './OrderCoinProcessed.scss';
 import i18n from 'Src/i18n';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import MinMax from 'Components/MinMax/MinMax';
 import WalletAddress from './WalletAddress/WalletAddress';
-
-import { showWalletAddressModal } from 'Actions';
 
 class OrderCoinProcessed extends Component {
   constructor(props) {
     super(props);
-    this.state = { order: this.props.order, hiddenAddress: true };
+    this.state = { order: this.props.order, hiddenAddress: true, showWalletAddressModal: false };
+    this.setModalState = this.setModalState.bind(this);
     this.setAddress = this.setAddress.bind(this);
   }
 
@@ -157,6 +154,10 @@ class OrderCoinProcessed extends Component {
     return renderedExandButton;
   }
 
+  setModalState(givenState) {
+    this.setState({ showWalletAddressModal: givenState });
+  }
+
   setAddress(address) {
     this.setState({ address });
   }
@@ -189,7 +190,7 @@ class OrderCoinProcessed extends Component {
                 this.state.address ? (
                   <h6>{this.state.address}</h6>
                 ) : (
-                  <a onClick={() => this.props.showWalletAddressModal(true)}>
+                  <a onClick={() => this.setState({ showWalletAddressModal: true })}>
                     <i className="fa fa-pencil-alt" /> &nbsp;
                     {`Set your ${this.state.coin} wallet address`}
                   </a>
@@ -197,7 +198,14 @@ class OrderCoinProcessed extends Component {
               ) : (
                 <h6>{this.state.address}</h6>
               )}
-              {this.props.type === 'Receive' ? <WalletAddress coin={this.state.coin} setAddress={this.setAddress} /> : null}
+              {this.props.type === 'Receive' ? (
+                <WalletAddress
+                  coin={this.state.coin}
+                  modalState={this.state.showWalletAddressModal}
+                  setModalState={this.setModalState}
+                  setAddress={this.setAddress}
+                />
+              ) : null}
             </div>
             <div className={styles.copybuttonright}>
               {this.props.type === 'Deposit' && !isFiatOrder(this.props.order) && (
@@ -295,7 +303,4 @@ class OrderCoinProcessed extends Component {
   }
 }
 
-const mapStateToProps = ({ wallet }) => ({ wallet });
-const mapDispatchToProps = dispatch => bindActionCreators({ showWalletAddressModal }, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderCoinProcessed);
+export default OrderCoinProcessed;
