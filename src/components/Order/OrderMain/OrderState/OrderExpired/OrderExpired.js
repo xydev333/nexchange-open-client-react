@@ -3,6 +3,7 @@ import OrderAlert from '../OrderIcons/OrderAlert/OrderAlert';
 import { I18n } from 'react-i18next';
 import styles from '../OrderState.scss';
 
+
 class OrderExpired extends Component {
   componentDidMount() {
     $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
@@ -13,7 +14,7 @@ class OrderExpired extends Component {
 
     return (
       <I18n ns="translations">
-        {(t, { lng }) => (
+        {t => (
           <div className={styles.container}>
             <OrderAlert />
             <h2 className={styles.title}>{t('order.expired1')}</h2>
@@ -32,18 +33,13 @@ class OrderExpired extends Component {
             </h4>
 
             {props.order && (
-              <a
-                href={`/${lng}?pair=${props.order.pair.name}&amount_quote=${props.order.amount_quote}${
-                  props.order.withdraw_address ? `&withdraw_address=${props.order.withdraw_address.address}` : ''
-                }`}
-                className={`btn ${styles.btn}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {console.log(props.order)}
+              <a href={`/?pair=${props.order.pair.name}&amount_quote=${props.order.amount_quote}`+
+              `&withdraw_address=${props.order.withdraw_address.address}`}
+              className={`btn ${styles.btn}`} target="_blank" rel="noopener noreferrer">
                 {t('order.repeat')}
-              </a>
-            )}
+              </a>)
+            }
+
           </div>
         )}
       </I18n>

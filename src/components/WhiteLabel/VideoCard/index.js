@@ -83,7 +83,7 @@ const VideoCard = props => {
           </div>
 
           <Ellipses />
-          <Support show={showSupportModal} onClose={() => setShowSupportModal(false)} subject="Whitelabel Enquiry" />
+          <Support show={showSupportModal} onClose={() => setShowSupportModal(false)} />
         </StyledContainer>
       )}
     </I18n>

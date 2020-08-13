@@ -1,8 +1,7 @@
 import React from 'react';
-import { I18n, Trans } from 'react-i18next';
-
-import OrderLinks from '../OrderLinks/OrderLinks';
 import config from 'Config';
+import OrderLinks from '../OrderLinks/OrderLinks';
+import { I18n, Trans } from 'react-i18next';
 
 const OrderRefunded = props => (
   <I18n ns="translations">
