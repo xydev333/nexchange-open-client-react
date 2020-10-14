@@ -7,7 +7,6 @@ describe('wallet reducer', () => {
     valid: false,
     show: false,
     forced: false,
-    success: false,
   };
 
   it('should return the initial state', () => {
@@ -21,12 +20,6 @@ describe('wallet reducer', () => {
       payload,
     };
 
-    expect(reducer(initialState, action)).toEqual({
-      forced: false,
-      show: false,
-      success: false,
-      userAddress: { address: 'address' },
-      valid: false,
-    });
+    expect(reducer(initialState, action)).toEqual({ forced: false, show: false, userAddress: { address: 'address' }, valid: false });
   });
 });
