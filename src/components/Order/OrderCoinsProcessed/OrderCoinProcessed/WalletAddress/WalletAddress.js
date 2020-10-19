@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import config from 'Config';
-import { setWallet, setWalletSuccess, showWalletAddressModal, forceWalletAddressModal } from 'Actions';
+import { setWallet, showWalletAddressModal, forceWalletAddressModal } from 'Actions';
 
 const Container = styled.div`
   position: fixed;
@@ -162,17 +162,7 @@ const CloseButton = styled.button`
   background: none;
 `;
 
-const WalletAddress = ({
-  coin,
-  setWallet,
-  setWalletSuccess,
-  showWalletAddressModal,
-  forceWalletAddressModal,
-  coinsInfo,
-  order,
-  kyc,
-  wallet,
-}) => {
+const WalletAddress = ({ coin, setWallet, showWalletAddressModal, forceWalletAddressModal, setAddress, coinsInfo, order, kyc, wallet }) => {
   const [prevAddresses, setPrevAddresses] = useState([]);
   const [addressError, setAddressError] = useState();
   const { unique_reference, withdraw_address, status_name, deposit_address } = order;
@@ -272,7 +262,7 @@ const WalletAddress = ({
           }
         )
         .then(res => {
-          setWalletSuccess(true);
+          setAddress(wallet.userAddress.address);
 
           // set withdraw address in order history
           const orderHistory = JSON.parse(window.localStorage.orderHistory);
@@ -354,7 +344,6 @@ const WalletAddress = ({
 };
 
 const mapStateToProps = ({ coinsInfo, order, kyc, wallet }) => ({ coinsInfo, order, kyc, wallet });
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ setWallet, setWalletSuccess, showWalletAddressModal, forceWalletAddressModal }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ setWallet, showWalletAddressModal, forceWalletAddressModal }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletAddress);
